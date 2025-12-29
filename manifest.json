@@ -1,0 +1,22 @@
+{
+  "name": "每天与主同行",
+  "short_name": "每日同行",
+  "description": "每日灵修，带表格数据的每日计划",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#4A90E2",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/4A90E2/ffffff?text=Bible",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512/4A90E2/ffffff?text=Bible",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
