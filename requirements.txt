@@ -1,0 +1,5 @@
+# No external dependencies required for the basic static server.
+# Add any project dependencies here, one per line, for example:
+# Flask==2.2.5
+pdfplumber==0.7.6
+
