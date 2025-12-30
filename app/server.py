@@ -13,6 +13,8 @@ Usage:
 from __future__ import annotations
 
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+import os
+import argparse
 
 
 def run_server(port: int = 8000) -> None:
@@ -34,4 +36,9 @@ def run_server(port: int = 8000) -> None:
 
 
 if __name__ == "__main__":
-    run_server()
+    # prefer explicit CLI arg, then PORT env var, then default
+    parser = argparse.ArgumentParser(description="Run simple static HTTP server")
+    parser.add_argument("--port", "-p", type=int, help="port to bind to")
+    args = parser.parse_args()
+    port = args.port if args.port is not None else int(os.environ.get("PORT", 8000))
+    run_server(port=port)
