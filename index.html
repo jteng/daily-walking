@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>每天与主同行</title>
-    <link rel="manifest" href="manifest.json">
+    <!-- versioned manifest to bust cache when we update the app -->
+    <link rel="manifest" href="manifest.json?v=3">
     <meta name="theme-color" content="#4A90E2">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://via.placeholder.com/192/4A90E2/ffffff?text=Bible">
+    <link rel="apple-touch-icon" href="./icons/icon.svg">
     
     <style>
         :root { --primary: #4A90E2; --bg: #f5f7fa; --text: #333; }
@@ -29,6 +31,7 @@
 <body>
 
 <header>
+    <div id="date-display" style="font-size: 0.8em; opacity: 0.8;">第一周</div>
     <h1 id="app-title"   style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px;">
         <input id="jump-date" type="date" aria-label="跳转到日期" style="padding:6px 8px; border-radius:6px; border: none; max-width:150px;" />
@@ -124,6 +127,12 @@
         }catch(e){ /* ignore */ }
     }
 
+    // DOM helpers to avoid runtime errors when an element is missing
+    function el(id){ return document.getElementById(id); }
+    function setText(id, txt){ const e = el(id); if(e) e.innerText = txt; else console.warn('Missing element:', id); }
+    function setHTML(id, html){ const e = el(id); if(e) e.innerHTML = html; else console.warn('Missing element:', id); }
+    function setDisabled(id, v){ const e = el(id); if(e) e.disabled = v; else console.warn('Missing element:', id); }
+
     // Jump handler: read the date input, compute index, clamp and navigate
     function handleJump(){
         const el = document.getElementById('jump-date');
@@ -152,14 +161,15 @@
     });
 
     function renderDay() {
+        try {
         if (!bibleData || bibleData.length === 0) {
-            document.getElementById('day-title').innerText = '未找到数据';
-            document.getElementById('devotional-content').innerText = '请先运行提取器生成 bibleData.json，然后刷新页面。';
-            document.getElementById('reflection').innerText = '';
-            document.getElementById('scripture').innerText = '';
-            document.getElementById('key-verse').innerText = '';
-            document.getElementById('prev-btn').disabled = true;
-            document.getElementById('next-btn').disabled = true;
+            setText('day-title', '未找到数据');
+            setText('devotional-content', '请先运行提取器生成 bibleData.json，然后刷新页面。');
+            setText('reflection', '');
+            setText('scripture', '');
+            setText('key-verse', '');
+            setDisabled('prev-btn', true);
+            setDisabled('next-btn', true);
             return;
         }
 
@@ -171,31 +181,37 @@
         // day label
         const dayLabel = `第 ${data.day || (currentDayIndex+1)} 天`;
         const dayDateLabel = chineseMonthDayFromIndex(currentDayIndex);
-        const dayNumEl = document.getElementById('day-num-text');
-        if(dayNumEl) dayNumEl.innerText = dayLabel;
-        const dayDateEl = document.getElementById('day-date');
-        if(dayDateEl) dayDateEl.innerText = dayDateLabel;
+        setText('day-num-text', dayLabel);
+        setText('day-date', dayDateLabel);
         // Show week number calculated from the current day assuming week = 7 days
         const weekNum = Math.floor(currentDayIndex / 7) + 1;
-        document.getElementById('date-display').innerText = `第 ${weekNum} 周`;
-        document.getElementById('scripture').innerText = data.scripture || '';
-        document.getElementById('day-title').innerText = data.title || '';
+        setText('date-display', `第 ${weekNum} 周`);
+        setText('scripture', data.scripture || '');
+        setText('day-title', data.title || '');
 
         // allow HTML in content if present (tables), otherwise plain text
-        const contentEl = document.getElementById('devotional-content');
-        if (data.content && /<\/?(table|tr|td|th|div|p)/i.test(data.content)) {
-            contentEl.innerHTML = data.content;
+        const contentEl = el('devotional-content');
+        if (contentEl) {
+            if (data.content && /<\/?(table|tr|td|th|div|p)/i.test(data.content)) {
+                contentEl.innerHTML = data.content;
+            } else {
+                contentEl.innerText = data.content || '';
+            }
         } else {
-            contentEl.innerText = data.content || '';
+            console.warn('Missing element: devotional-content');
         }
 
-        const reflEl = document.getElementById('reflection');
-        reflEl.innerText = data.reflection || '';
+        setText('reflection', data.reflection || '');
+        setText('key-verse', data.verse || '');
 
-        document.getElementById('key-verse').innerText = data.verse || '';
-
-        document.getElementById('prev-btn').disabled = currentDayIndex === 0;
-        document.getElementById('next-btn').disabled = currentDayIndex === bibleData.length - 1;
+        setDisabled('prev-btn', currentDayIndex === 0);
+        setDisabled('next-btn', currentDayIndex === bibleData.length - 1);
+        } catch (err) {
+            console.error('renderDay failed:', err);
+            // diagnostic: list key elements and their presence
+            const ids = ['date-display','day-num-text','day-date','scripture','day-title','devotional-content','reflection','key-verse','prev-btn','next-btn'];
+            ids.forEach(id => console.warn(id, !!document.getElementById(id)));
+        }
 
         localStorage.setItem('savedDay', currentDayIndex);
         window.scrollTo(0,0);
@@ -230,8 +246,12 @@
 
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
+        // version string appended to service worker URL to force reload when we change the file
+        const APP_SW_VERSION = 'v3';
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js');
+            navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
+              .then(reg => console.log('sw registered:', reg.scope))
+              .catch(err => console.warn('sw registration failed:', err));
         });
     }
 </script>
