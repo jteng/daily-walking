@@ -15,7 +15,7 @@ from __future__ import annotations
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
 
-def run_server(port: int = 8001) -> None:
+def run_server(port: int = 8000) -> None:
     """Run a simple HTTP server serving the current working directory.
 
     Args:
