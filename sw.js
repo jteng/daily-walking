@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wwg-v2';
+const CACHE_NAME = 'wwg-v3';
 const OFFLINE_URLS = [
   '/',
   '/index.html',
