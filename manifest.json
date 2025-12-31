@@ -1,7 +1,7 @@
 {
-  "name": "每天与主同行",
-  "short_name": "每日同行",
-  "description": "每日灵修，带表格数据的每日计划",
+  "name": "每天与主同行 - 苏颖智",
+  "short_name": "与主同行",
+  "description": "《每天与主同行》灵修读物 - 苏颖智 著",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
