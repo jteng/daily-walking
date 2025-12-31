@@ -259,7 +259,8 @@ def extract_data(pdf_path, output_path):
                                      continue
                                  
                                  if current_entry:
-                                     current_entry['content'] += ("\n" + line) if current_entry['content'] else line
+                                     # Use space instead of newline to avoid literal \n in content
+                                     current_entry['content'] += (" " + line) if current_entry['content'] else line
                                      
                     elif item['type'] == 'table':
                         data = item['data']
@@ -300,7 +301,8 @@ def extract_data(pdf_path, output_path):
                                 html += "</tr>"
                             html += "</table>"
                             if current_entry:
-                                current_entry['content'] += "\n\n" + html
+                                # Add space before table
+                                current_entry['content'] += " " + html
 
     if current_entry:
         entries.append(current_entry)
