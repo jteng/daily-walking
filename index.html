@@ -93,6 +93,22 @@
             transition: opacity 0.2s;
         }
         
+        /* Mobile-specific improvements */
+        @media (max-width: 768px) {
+            .verse-tooltip {
+                max-width: 90vw;
+                font-size: 1em;
+                padding: 16px 20px;
+                border-width: 3px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+                left: 5vw !important;
+                right: 5vw !important;
+                top: 50% !important;
+                transform: translateY(-50%);
+                width: auto;
+            }
+        }
+        
         .verse-tooltip.show {
             opacity: 1;
         }
