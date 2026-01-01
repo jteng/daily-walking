@@ -213,8 +213,8 @@ def parse_verse_reference(ref_str):
         #  but if needed we'd check if segment starts with a book name)
         
         # Check for Chapter change
-        # Look for "章" or "篇"
-        chapter_match = re.search(r'([零一二三四五六七八九十百\d]+)[章篇]', segment)
+        # Look for "章" or "篇" - include 廿 and 卅 for numbers like 廿六 (26)
+        chapter_match = re.search(r'([零一二三四五六七八九十百廿卅\d]+)[章篇]', segment)
         
         verses_to_parse = segment
         
