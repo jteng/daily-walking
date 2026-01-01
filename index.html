@@ -66,31 +66,67 @@
         @media (max-width: 420px) {
             #devotional-content th, #devotional-content td { padding: 6px; font-size: 0.9em; }
         }
+        
+        /* Verse reference hover styles */
+        .verse-ref {
+            cursor: help;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: var(--primary);
+            color: inherit;
+            position: relative;
+        }
+        
+        .verse-tooltip {
+            position: fixed;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            max-width: 320px;
+            z-index: 2000;
+            font-size: 0.9em;
+            line-height: 1.6;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .verse-tooltip.show {
+            opacity: 1;
+        }
+        
+        .verse-tooltip-ref {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95em;
+            pointer-events: none;
+        }
+        
+        .verse-tooltip * {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div id="date-display" style="font-size: 0.8em; opacity: 0.8;">第一周</div>
-    <h1 id="app-title"   style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center;">
-        <select id="jump-week" aria-label="选择周" style="padding:6px 8px; border-radius:6px; border: 1px solid #ddd; background: white; font-size: 14px;">
+        <!-- Chapter selector -->
+        <select id="jump-chapter" aria-label="选择章节" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:200px;">
+            <option value="">选择章节...</option>
             <!-- Populated dynamically -->
         </select>
-        <select id="jump-day" aria-label="选择日" style="padding:6px 8px; border-radius:6px; border: 1px solid #ddd; background: white; font-size: 14px;">
-            <option value="1">第1日</option>
-            <option value="2">第2日</option>
-            <option value="3">第3日</option>
-            <option value="4">第4日</option>
-            <option value="5">第5日</option>
-            <option value="6">第6日</option>
-        </select>
-        <button id="jump-btn" style="padding:6px 10px; border-radius:6px;">跳转</button>
     </div>
 </header>
 
 <div class="container">
     <div class="card" id="content-card">
+        <div style="color: #666; font-size: 0.85em; margin-bottom: 8px;" id="week-day-info"></div>
         <span class="scripture-ref" id="scripture"></span>
         <h2 id="day-title">载入中...</h2>
         <div id="devotional-content"></div>
@@ -106,10 +142,6 @@
 
     <div class="nav-bar">
     <button onclick="changeDay(-1)" id="prev-btn">前一天</button>
-    <div class="day-indicator" id="day-num">
-        <div id="day-num-text">第 1 天</div>
-        <div id="day-date" style="font-size:0.8em; opacity:0.9;">一月一日</div>
-    </div>
     <button onclick="changeDay(1)" id="next-btn">后一天</button>
 </div>
 
@@ -118,6 +150,237 @@
 </footer>
 
 <script>
+    let tooltipElement = null;
+    
+    function createTooltip() {
+        if (!tooltipElement) {
+            tooltipElement = document.createElement('div');
+            tooltipElement.className = 'verse-tooltip';
+            document.body.appendChild(tooltipElement);
+        }
+        return tooltipElement;
+    }
+    
+    function hideVerseTooltip() {
+        if (tooltipElement) {
+            tooltipElement.classList.remove('show');
+        }
+    }
+    
+    // Bible XML data
+    let bibleXML = null;
+    
+    // Load Bible XML for verse tooltips
+    async function loadBibleXML() {
+        if (bibleXML) return bibleXML;
+        
+        try {
+            const response = await fetch('ChineseSimplifiedBible.xml');
+            const text = await response.text();
+            const parser = new DOMParser();
+            bibleXML = parser.parseFromString(text, 'text/xml');
+            return bibleXML;
+        } catch (err) {
+            console.warn('Failed to load Bible XML:', err);
+            return null;
+        }
+    }
+    
+    // Map Chinese book abbreviations to book numbers (1-66)
+    function getBookNumber(chineseAbbr) {
+        const bookMap = {
+            '创': 1, '出': 2, '利': 3, '民': 4, '申': 5,
+            '书': 6, '士': 7, '得': 8, '撒上': 9, '撒下': 10,
+            '王上': 11, '王下': 12, '代上': 13, '代下': 14, '拉': 15,
+            '尼': 16, '斯': 17, '伯': 18, '诗': 19, '箴': 20,
+            '传': 21, '歌': 22, '赛': 23, '耶': 24, '哀': 25,
+            '结': 26, '但': 27, '何': 28, '珥': 29, '摩': 30,
+            '俄': 31, '拿': 32, '弥': 33, '鸿': 34, '哈': 35,
+            '番': 36, '该': 37, '亚': 38, '玛': 39,
+            '太': 40, '可': 41, '路': 42, '约': 43, '徒': 44,
+            '罗': 45, '林前': 46, '林后': 47, '加': 48, '弗': 49,
+            '腓': 50, '西': 51, '帖前': 52, '帖后': 53, '提前': 54,
+            '提后': 55, '多': 56, '门': 57, '来': 58, '雅': 59,
+            '彼前': 60, '彼后': 61, '约一': 62, '约二': 63, '约三': 64,
+            '犹': 65, '启': 66
+        };
+        return bookMap[chineseAbbr] || null;
+    }
+    
+    // Get verse text from XML
+    async function getVerseText(bookAbbr, chapter, verseRange) {
+        const xml = await loadBibleXML();
+        if (!xml) {
+            console.warn('XML not loaded');
+            return null;
+        }
+        
+        const bookNum = getBookNumber(bookAbbr);
+        if (!bookNum) {
+            console.warn(`Unknown book: ${bookAbbr}`);
+            return null;
+        }
+        
+        try {
+            const bookNode = xml.querySelector(`book[number="${bookNum}"]`);
+            if (!bookNode) {
+                console.warn(`Book not found: ${bookAbbr} (${bookNum})`);
+                return null;
+            }
+            
+            const chapterNode = bookNode.querySelector(`chapter[number="${chapter}"]`);
+            if (!chapterNode) {
+                console.warn(`Chapter not found: ${bookAbbr} ${chapter}`);
+                return null;
+            }
+            
+            // Handle verse ranges like "1-2"
+            if (verseRange.includes('-')) {
+                const [start, end] = verseRange.split('-').map(v => parseInt(v));
+                let verses = [];
+                for (let i = start; i <= end; i++) {
+                    const verseNode = chapterNode.querySelector(`verse[number="${i}"]`);
+                    if (verseNode) {
+                        verses.push(verseNode.textContent.trim());
+                    }
+                }
+                const result = verses.join(' ');
+                console.log(`✓ ${bookAbbr}${chapter}:${verseRange} = ${result.substring(0, 30)}...`);
+                return result;
+            } else {
+                const verseNode = chapterNode.querySelector(`verse[number="${verseRange}"]`);
+                if (!verseNode) {
+                    console.warn(`Verse not found: ${bookAbbr} ${chapter}:${verseRange}`);
+                    return null;
+                }
+                const result = verseNode.textContent.trim();
+                console.log(`✓ ${bookAbbr}${chapter}:${verseRange} = ${result.substring(0, 30)}...`);
+                return result;
+            }
+        } catch (err) {
+            console.warn('Error fetching verse:', bookAbbr, chapter, verseRange, err);
+            return null;
+        }
+    }
+    
+    // Add verse references to content (now works for all days since content is normalized)
+    async function enhanceVerseReferences() {
+        const contentEl = document.getElementById('devotional-content');
+        if (!contentEl) return;
+        
+        // Pattern to match verse references with optional prefix
+        // Use explicit list of valid book abbreviations
+        const bookNames = '创|出|利|民|申|书|士|得|撒上|撒下|王上|王下|代上|代下|拉|尼|斯|伯|诗|箴|传|歌|赛|耶|哀|结|但|何|珥|摩|俄|拿|弥|鸿|哈|番|该|亚|玛|太|可|路|约|徒|罗|林前|林后|加|弗|腓|西|帖前|帖后|提前|提后|多|门|来|雅|彼前|彼后|约一|约二|约三|犹|启';
+        const pattern = new RegExp(`([（(]?参)?(${bookNames})(\\d+):(\\d+(?:-\\d+)?)`, 'g');
+        
+        const matches = [];
+        let match;
+        const originalHTML = contentEl.innerHTML;
+        
+        // Skip if already processed (has verse-ref spans)
+        if (originalHTML.includes('class="verse-ref"')) {
+            console.log('Verses already enhanced, skipping');
+            return;
+        }
+        
+        while ((match = pattern.exec(originalHTML)) !== null) {
+            const prefix = match[1] || '';
+            const book = match[2];
+            const chapter = match[3];
+            const verse = match[4];
+            const ref = `${book}${chapter}:${verse}`;
+            
+            matches.push({
+                index: match.index,
+                length: match[0].length,
+                fullMatch: match[0],
+                prefix: prefix,
+                ref: ref,
+                book: book,
+                chapter: chapter,
+                verse: verse
+            });
+        }
+        
+        console.log(`Found ${matches.length} verse references`);
+        
+        // Fetch verse text for all unique references
+        const verseTexts = new Map();
+        for (const m of matches) {
+            if (!verseTexts.has(m.ref)) {
+                const verseText = await getVerseText(m.book, m.chapter, m.verse);
+                if (verseText) {
+                    verseTexts.set(m.ref, verseText);
+                }
+            }
+        }
+        
+        console.log(`Fetched ${verseTexts.size} unique verses`);
+        
+        // Replace matches from end to start to avoid index shifting
+        matches.sort((a, b) => b.index - a.index);
+        
+        let newHTML = originalHTML;
+        for (const m of matches) {
+            const verseText = verseTexts.get(m.ref);
+            if (verseText) {
+                const escapedVerse = verseText.replace(/"/g, '&quot;');
+                const replacement = `${m.prefix}<span class="verse-ref" data-ref="${m.ref}" data-verse="${escapedVerse}">${m.ref}</span>`;
+                
+                // Replace by position (from end to start, so indices don't shift)
+                newHTML = newHTML.substring(0, m.index) + replacement + newHTML.substring(m.index + m.length);
+            }
+        }
+        
+        contentEl.innerHTML = newHTML;
+        
+        // Add event listeners
+        contentEl.querySelectorAll('.verse-ref').forEach(span => {
+            span.addEventListener('mouseenter', showVerseTooltipFromData);
+            span.addEventListener('mouseleave', hideVerseTooltip);
+            span.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                showVerseTooltipFromData({target: e.target, clientX: e.touches[0].clientX, clientY: e.touches[0].clientY});
+                setTimeout(hideVerseTooltip, 3000);
+            });
+        });
+        
+        console.log('Verse enhancement complete');
+    }
+    
+    // Show tooltip using data attribute
+    function showVerseTooltipFromData(event) {
+        const ref = event.target.dataset.ref;
+        const verseText = event.target.dataset.verse;
+        
+        console.log('Tooltip triggered:', ref, verseText ? 'has text' : 'no text');
+        
+        if (!verseText) return;
+        
+        const tooltip = createTooltip();
+        tooltip.innerHTML = `<span class="verse-tooltip-ref">${ref}</span>${verseText}`;
+        tooltip.classList.add('show');
+        
+        const x = event.clientX;
+        const y = event.clientY;
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        let left = x + 10;
+        let top = y + 10;
+        
+        if (left + tooltipRect.width > window.innerWidth) {
+            left = x - tooltipRect.width - 10;
+        }
+        if (top + tooltipRect.height > window.innerHeight) {
+            top = y - tooltipRect.height - 10;
+        }
+        
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+        
+        console.log('Tooltip positioned at:', left, top);
+    }
+
     // Load data from bibleData.json (generated by extractor). Falls back to a
     // friendly message if the file is missing or parsing fails.
     let bibleData = [];
@@ -158,27 +421,96 @@
     }
 
     const PLAN_START_DATE = getStartDate();
+    
+    // Chapter index for Bible chapter navigation
+    const chapterIndex = [];
+    
+    // Get canonical Bible book order (1-66)
+    function getBookOrder(abbr) {
+        const bookOrder = {
+            // Old Testament (1-39)
+            '创': 1, '出': 2, '利': 3, '民': 4, '申': 5,
+            '书': 6, '士': 7, '得': 8, '撒上': 9, '撒下': 10,
+            '王上': 11, '王下': 12, '代上': 13, '代下': 14, '拉': 15,
+            '尼': 16, '斯': 17, '伯': 18, '诗': 19, '箴': 20,
+            '传': 21, '歌': 22, '赛': 23, '耶': 24, '哀': 25,
+            '结': 26, '但': 27, '何': 28, '珥': 29, '摩': 30,
+            '俄': 31, '拿': 32, '弥': 33, '鸿': 34, '哈': 35,
+            '番': 36, '该': 37, '亚': 38, '玛': 39,
+            // New Testament (40-66)
+            '太': 40, '可': 41, '路': 42, '约': 43, '徒': 44,
+            '罗': 45, '林前': 46, '林后': 47, '加': 48, '弗': 49,
+            '腓': 50, '西': 51, '帖前': 52, '帖后': 53, '提前': 54,
+            '提后': 55, '多': 56, '门': 57, '来': 58, '雅': 59,
+            '彼前': 60, '彼后': 61, '约一': 62, '约二': 63, '约三': 64,
+            '犹': 65, '启': 66
+        };
+        return bookOrder[abbr] || 999;
+    }
+    
+    // Map abbreviations to full book names
+    function getFullBookName(abbr) {
+        const bookNames = {
+            '创': '创世记', '出': '出埃及记', '利': '利未记',
+            '民': '民数记', '申': '申命记', '书': '约书亚记',
+            '士': '士师记', '得': '路得记', '撒上': '撒母耳记上',
+            '撒下': '撒母耳记下', '王上': '列王纪上', '王下': '列王纪下',
+            '代上': '历代志上', '代下': '历代志下', '拉': '以斯拉记',
+            '尼': '尼希米记', '斯': '以斯帖记', '伯': '约伯记',
+            '诗': '诗篇', '箴': '箴言', '传': '传道书', '歌': '雅歌',
+            '赛': '以赛亚书', '耶': '耶利米书', '哀': '耶利米哀歌',
+            '结': '以西结书', '但': '但以理书', '何': '何西阿书',
+            '珥': '约珥书', '摩': '阿摩司书', '俄': '俄巴底亚书',
+            '拿': '约拿书', '弥': '弥迦书', '鸿': '那鸿书',
+            '哈': '哈巴谷书', '番': '西番雅书', '该': '哈该书',
+            '亚': '撒迦利亚书', '玛': '玛拉基书',
+            '太': '马太福音', '可': '马可福音', '路': '路加福音',
+            '约': '约翰福音', '徒': '使徒行传', '罗': '罗马书',
+            '林前': '哥林多前书', '林后': '哥林多后书', '加': '加拉太书',
+            '弗': '以弗所书', '腓': '腓立比书', '西': '歌罗西书',
+            '帖前': '帖撒罗尼迦前书', '帖后': '帖撒罗尼迦后书',
+            '提前': '提摩太前书', '提后': '提摩太后书', '多': '提多书',
+            '门': '腓利门书', '来': '希伯来书', '雅': '雅各书',
+            '彼前': '彼得前书', '彼后': '彼得后书', '约一': '约翰一书',
+            '约二': '约翰二书', '约三': '约翰三书', '犹': '犹大书',
+            '启': '启示录'
+        };
+        return bookNames[abbr] || abbr;
+    }
+    
+    // Build chapter index from data
+    function buildChapterIndex() {
+        if (!bibleData || bibleData.length === 0) return;
+        
+        bibleData.forEach((entry, idx) => {
+            const scripture = entry.scripture || '';
+            // Extract book name (everything before numbers/章/篇)
+            const match = scripture.match(/^([^一二三四五六七八九十廿卅\d]+)/);
+            if (match) {
+                const book = match[1].trim();
+                const chapterPart = scripture.substring(book.length).trim();
+                
+                chapterIndex.push({
+                    index: idx,
+                    book: book,
+                    bookFull: getFullBookName(book),
+                    bookOrder: getBookOrder(book),
+                    chapterPart: chapterPart,
+                    scripture: scripture,
+                    dayLabel: entry.day_label
+                });
+            }
+        });
+        
+        // Sort by book order
+        chapterIndex.sort((a, b) => {
+            if (a.bookOrder !== b.bookOrder) {
+                return a.bookOrder - b.bookOrder;
+            }
+            return a.index - b.index;
+        });
+    }
 
-    // helpers to render Chinese month/day like "一月一日"
-    const CN_DIGITS = ['零','一','二','三','四','五','六','七','八','九'];
-    function numToChinese(n){
-        if(n <= 10) return n === 10 ? '十' : CN_DIGITS[n];
-        if(n < 20) return '十' + (n % 10 === 0 ? '' : CN_DIGITS[n % 10]);
-        const tens = Math.floor(n / 10);
-        const ones = n % 10;
-        return CN_DIGITS[tens] + '十' + (ones === 0 ? '' : CN_DIGITS[ones]);
-    }
-    function chineseMonthDayFromIndex(dayIndex){
-        // For 6-day plan: every 7th calendar day is a rest day
-        // Data index 0 = start date, 1 = start+1 day, ..., 5 = start+5 days, 6 = start+7 days (skip day 6), etc.
-        // Formula: calendarDay = dayIndex + floor(dayIndex / 6)
-        const d = new Date(PLAN_START_DATE.getTime());
-        const calendarOffset = dayIndex + Math.floor(dayIndex / 6);
-        d.setDate(d.getDate() + calendarOffset);
-        const month = d.getMonth() + 1;
-        const day = d.getDate();
-        return `${numToChinese(month)}月${numToChinese(day)}日`;
-    }
 
     // DOM helpers to avoid runtime errors when an element is missing
     function el(id){ return document.getElementById(id); }
@@ -187,69 +519,38 @@
     function setDisabled(id, v){ const e = el(id); if(e) e.disabled = v; else console.warn('Missing element:', id); }
 
 
-    // Populate week dropdown based on data length
-    function populateWeekDropdown() {
-        const weekSelect = document.getElementById('jump-week');
-        if (!weekSelect || !bibleData || bibleData.length === 0) return;
+    // Populate chapter dropdown based on chapter index
+    function populateChapterDropdown() {
+        const chapterSelect = document.getElementById('jump-chapter');
+        if (!chapterSelect || chapterIndex.length === 0) return;
         
-        const totalWeeks = Math.ceil(bibleData.length / 6);
-        weekSelect.innerHTML = '';
+        chapterSelect.innerHTML = '<option value="">选择章节...</option>';
         
-        for (let i = 1; i <= totalWeeks; i++) {
+        chapterIndex.forEach(item => {
             const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第${i}周`;
-            weekSelect.appendChild(option);
-        }
+            option.value = item.index;
+            option.textContent = `${item.bookFull} ${item.chapterPart}`;
+            chapterSelect.appendChild(option);
+        });
     }
 
-    // Update selects to match current day
-    function setJumpSelectsToCurrent() {
-        const week = Math.floor(currentDayIndex / 6) + 1;
-        const day = (currentDayIndex % 6) + 1;
-        
-        const weekEl = document.getElementById('jump-week');
-        const dayEl = document.getElementById('jump-day');
-        
-        if (weekEl) weekEl.value = week;
-        if (dayEl) dayEl.value = day;
-    }
-
-    // Jump handler: read week/day selects and navigate
-    function handleJump() {
-        const weekEl = document.getElementById('jump-week');
-        const dayEl = document.getElementById('jump-day');
-        
-        if (!weekEl || !dayEl) return;
-        
-        const week = parseInt(weekEl.value, 10);
-        const day = parseInt(dayEl.value, 10);
-        
-        if (isNaN(week) || isNaN(day)) return;
-        
-        // Convert week/day to index: (week-1)*6 + (day-1)
-        let idx = (week - 1) * 6 + (day - 1);
-        
-        // Clamp to available data
-        if (Array.isArray(bibleData) && bibleData.length > 0) {
-            if (idx < 0) idx = 0;
-            if (idx >= bibleData.length) idx = bibleData.length - 1;
-        }
-        
-        currentDayIndex = idx;
-        localStorage.setItem('savedDay', currentDayIndex);
-        renderDay();
-    }
-
-    // Wire up jump controls after DOM is ready
+    // Wire up chapter selector after DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
-        const jb = document.getElementById('jump-btn');
-        const jw = document.getElementById('jump-week');
-        const jd = document.getElementById('jump-day');
+        const jchapter = document.getElementById('jump-chapter');
         
-        if (jb) jb.addEventListener('click', handleJump);
-        if (jw) jw.addEventListener('change', handleJump);
-        if (jd) jd.addEventListener('change', handleJump);
+        // Chapter selector: jump and reset
+        if (jchapter) {
+            jchapter.addEventListener('change', () => {
+                const idx = parseInt(jchapter.value, 10);
+                if (!isNaN(idx) && idx >= 0) {
+                    currentDayIndex = idx;
+                    localStorage.setItem('savedDay', currentDayIndex);
+                    renderDay();
+                    // Reset chapter selector for next use
+                    jchapter.value = '';
+                }
+            });
+        }
     });
 
     function renderDay() {
@@ -270,17 +571,12 @@
         if (currentDayIndex >= bibleData.length) currentDayIndex = bibleData.length - 1;
 
         const data = bibleData[currentDayIndex];
-        // day label
-        const dayLabel = `第 ${data.day || (currentDayIndex+1)} 天`;
-        const dayDateLabel = chineseMonthDayFromIndex(currentDayIndex);
-        setText('day-num-text', dayLabel);
-        setText('day-date', dayDateLabel);
-        // Show week number from data if available, fallback to index calc (legacy behavior)
-        let weekNum = data.week;
-        if (!weekNum) {
-             weekNum = Math.floor(currentDayIndex / 7) + 1;
-        }
-        setText('date-display', `第 ${weekNum} 周`);
+        
+        // Display week and day number for debugging
+        const weekNum = Math.floor(currentDayIndex / 6) + 1;
+        const dayNum = (currentDayIndex % 6) + 1;
+        setText('week-day-info', `第${weekNum}周 第${dayNum}日 (索引: ${currentDayIndex})`);
+        
         setText('scripture', data.scripture || '');
         setText('day-title', data.title || '');
 
@@ -323,8 +619,9 @@
 
         localStorage.setItem('savedDay', currentDayIndex);
         window.scrollTo(0,0);
-        // Keep the week/day selects in sync with the currently shown day
-        setJumpSelectsToCurrent();
+        
+        // Add verse tooltips for Week 1 Day 1
+        setTimeout(enhanceVerseReferences, 100);
     }
 
     function changeDay(step) {
@@ -348,7 +645,8 @@
             else if (Array.isArray(json.data)) bibleData = json.data;
             else bibleData = json;
             
-            populateWeekDropdown();
+            buildChapterIndex();
+            populateChapterDropdown();
             renderDay();
         })
         .catch(err => {
