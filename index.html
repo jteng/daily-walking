@@ -73,8 +73,18 @@
 <header>
     <div id="date-display" style="font-size: 0.8em; opacity: 0.8;">第一周</div>
     <h1 id="app-title"   style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
-    <div style="margin-top:8px; display:flex; justify-content:center; gap:8px;">
-        <input id="jump-date" type="date" aria-label="跳转到日期" style="padding:6px 8px; border-radius:6px; border: none; max-width:150px;" />
+    <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center;">
+        <select id="jump-week" aria-label="选择周" style="padding:6px 8px; border-radius:6px; border: 1px solid #ddd; background: white; font-size: 14px;">
+            <!-- Populated dynamically -->
+        </select>
+        <select id="jump-day" aria-label="选择日" style="padding:6px 8px; border-radius:6px; border: 1px solid #ddd; background: white; font-size: 14px;">
+            <option value="1">第1日</option>
+            <option value="2">第2日</option>
+            <option value="3">第3日</option>
+            <option value="4">第4日</option>
+            <option value="5">第5日</option>
+            <option value="6">第6日</option>
+        </select>
         <button id="jump-btn" style="padding:6px 10px; border-radius:6px;">跳转</button>
     </div>
 </header>
@@ -170,69 +180,76 @@
         return `${numToChinese(month)}月${numToChinese(day)}日`;
     }
 
-    // return day index relative to the plan start date
-    // Inverse of chineseMonthDayFromIndex: convert calendar date to data index
-    function dateToDayIndex(dateObj){
-        const msPerDay = 24 * 60 * 60 * 1000;
-        const calendarDiff = Math.floor((new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()).getTime() -
-                                 new Date(PLAN_START_DATE.getFullYear(), PLAN_START_DATE.getMonth(), PLAN_START_DATE.getDate()).getTime()) / msPerDay);
-        if (calendarDiff < 0) return 0;
-        
-        // For 6-day plan: subtract rest days to get data index
-        // Every 7th calendar day is a rest day, so: dataIndex = calendarDay - floor(calendarDay / 7)
-        const dataIndex = calendarDiff - Math.floor(calendarDiff / 7);
-        return dataIndex >= 0 ? dataIndex : 0;
-    }
-
-    // format a dayIndex into YYYY-MM-DD relative to the plan start date
-    function isoDateFromIndex(dayIndex){
-        const d = new Date(PLAN_START_DATE.getTime());
-        const calendarOffset = dayIndex + Math.floor(dayIndex / 6);
-        d.setDate(d.getDate() + calendarOffset);
-        const mm = String(d.getMonth() + 1).padStart(2, '0');
-        const dd = String(d.getDate()).padStart(2, '0');
-        return `${d.getFullYear()}-${mm}-${dd}`;
-    }
-
-    function setJumpInputToCurrent(){
-        const el = document.getElementById('jump-date');
-        if(!el) return;
-        try{
-            el.value = isoDateFromIndex(currentDayIndex);
-        }catch(e){ /* ignore */ }
-    }
-
     // DOM helpers to avoid runtime errors when an element is missing
     function el(id){ return document.getElementById(id); }
     function setText(id, txt){ const e = el(id); if(e) e.innerText = txt; else console.warn('Missing element:', id); }
     function setHTML(id, html){ const e = el(id); if(e) e.innerHTML = html; else console.warn('Missing element:', id); }
     function setDisabled(id, v){ const e = el(id); if(e) e.disabled = v; else console.warn('Missing element:', id); }
 
-    // Jump handler: read the date input, compute index, clamp and navigate
-    function handleJump(){
-        const el = document.getElementById('jump-date');
-        if(!el || !el.value) return;
-        const parts = el.value.split('-');
-        if(parts.length !== 3) return;
-        const y = parseInt(parts[0],10), m = parseInt(parts[1],10)-1, d = parseInt(parts[2],10);
-        const sel = new Date(y,m,d);
-        let idx = dateToDayIndex(sel);
-        // clamp to available data once loaded
-        if(Array.isArray(bibleData) && bibleData.length > 0){
-            if(idx < 0) idx = 0;
-            if(idx >= bibleData.length) idx = bibleData.length - 1;
+
+    // Populate week dropdown based on data length
+    function populateWeekDropdown() {
+        const weekSelect = document.getElementById('jump-week');
+        if (!weekSelect || !bibleData || bibleData.length === 0) return;
+        
+        const totalWeeks = Math.ceil(bibleData.length / 6);
+        weekSelect.innerHTML = '';
+        
+        for (let i = 1; i <= totalWeeks; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第${i}周`;
+            weekSelect.appendChild(option);
         }
+    }
+
+    // Update selects to match current day
+    function setJumpSelectsToCurrent() {
+        const week = Math.floor(currentDayIndex / 6) + 1;
+        const day = (currentDayIndex % 6) + 1;
+        
+        const weekEl = document.getElementById('jump-week');
+        const dayEl = document.getElementById('jump-day');
+        
+        if (weekEl) weekEl.value = week;
+        if (dayEl) dayEl.value = day;
+    }
+
+    // Jump handler: read week/day selects and navigate
+    function handleJump() {
+        const weekEl = document.getElementById('jump-week');
+        const dayEl = document.getElementById('jump-day');
+        
+        if (!weekEl || !dayEl) return;
+        
+        const week = parseInt(weekEl.value, 10);
+        const day = parseInt(dayEl.value, 10);
+        
+        if (isNaN(week) || isNaN(day)) return;
+        
+        // Convert week/day to index: (week-1)*6 + (day-1)
+        let idx = (week - 1) * 6 + (day - 1);
+        
+        // Clamp to available data
+        if (Array.isArray(bibleData) && bibleData.length > 0) {
+            if (idx < 0) idx = 0;
+            if (idx >= bibleData.length) idx = bibleData.length - 1;
+        }
+        
         currentDayIndex = idx;
         localStorage.setItem('savedDay', currentDayIndex);
         renderDay();
     }
 
-    // wire up jump controls after DOM is ready
-    document.addEventListener('DOMContentLoaded', ()=>{
+    // Wire up jump controls after DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
         const jb = document.getElementById('jump-btn');
-        const jd = document.getElementById('jump-date');
-        if(jb) jb.addEventListener('click', handleJump);
-        if(jd) jd.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') handleJump(); });
+        const jw = document.getElementById('jump-week');
+        const jd = document.getElementById('jump-day');
+        
+        if (jb) jb.addEventListener('click', handleJump);
+        if (jw) jw.addEventListener('change', handleJump);
+        if (jd) jd.addEventListener('change', handleJump);
     });
 
     function renderDay() {
@@ -306,8 +323,8 @@
 
         localStorage.setItem('savedDay', currentDayIndex);
         window.scrollTo(0,0);
-        // keep the date input in sync with the currently shown day
-        setJumpInputToCurrent();
+        // Keep the week/day selects in sync with the currently shown day
+        setJumpSelectsToCurrent();
     }
 
     function changeDay(step) {
@@ -330,6 +347,8 @@
             if (Array.isArray(json)) bibleData = json;
             else if (Array.isArray(json.data)) bibleData = json.data;
             else bibleData = json;
+            
+            populateWeekDropdown();
             renderDay();
         })
         .catch(err => {
