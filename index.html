@@ -1125,8 +1125,8 @@ window.Reader = Reader;
         localStorage.setItem('savedDay', currentDayIndex);
         window.scrollTo(0,0);
         
-        // Add verse tooltips for Week 1 Day 1
-        setTimeout(enhanceVerseReferences, 100);
+        // Add verse tooltips immediately (no delay for better mobile responsiveness)
+        enhanceVerseReferences();
     }
 
     function adjustDay(step) {
