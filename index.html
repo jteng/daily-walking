@@ -596,10 +596,11 @@
         setText('scripture', data.scripture || '');
         setText('day-title', data.title || '');
 
-        // allow HTML in content if present (tables), otherwise plain text
+        // allow HTML in content if present (tables, lists, paragraphs), otherwise plain text
         const contentEl = el('devotional-content');
         if (contentEl) {
-            if (data.content && /\<\/?(table|tr|td|th|div|p)/i.test(data.content)) {
+            // Check for common HTML tags to decide whether to render as HTML
+            if (data.content && /\<\/?(table|tr|td|th|div|p|ol|ul|li|dl|dt|dd|blockquote|br|b|i|strong|em|h[1-6])/i.test(data.content)) {
                 contentEl.innerHTML = data.content;
             } else {
                 contentEl.innerText = data.content || '';
