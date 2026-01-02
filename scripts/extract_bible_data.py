@@ -284,7 +284,12 @@ def extract_data(pdf_path, output_path):
                                  for row in data:
                                     new_rows_html += "<tr>"
                                     for cell in row:
-                                        cell_text = str(cell).replace('\n', '<br>') if cell else ""
+                                        cell_text = str(cell).replace('\n', ' ') if cell else ""
+                                        # Check for verse pattern in table cells
+                                        if cell and current_entry and not current_entry.get('verse'):
+                                            vm = verse_pattern.search(str(cell))
+                                            if vm:
+                                                current_entry['verse'] = vm.group(1).strip()
                                         new_rows_html += f"<td>{cell_text}</td>"
                                     new_rows_html += "</tr>"
                                  
@@ -296,7 +301,12 @@ def extract_data(pdf_path, output_path):
                             for row in data:
                                 html += "<tr>"
                                 for cell in row:
-                                    cell_text = str(cell).replace('\n', '<br>') if cell else ""
+                                    cell_text = str(cell).replace('\n', ' ') if cell else ""
+                                    # Check for verse pattern in table cells
+                                    if cell and current_entry and not current_entry.get('verse'):
+                                        vm = verse_pattern.search(str(cell))
+                                        if vm:
+                                            current_entry['verse'] = vm.group(1).strip()
                                     html += f"<td>{cell_text}</td>"
                                 html += "</tr>"
                             html += "</table>"
