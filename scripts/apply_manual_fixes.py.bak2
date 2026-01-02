@@ -77,6 +77,70 @@ def fix_entry_17(content):
     return content
 
 
+def apply_manual_fixes(data):
+    """Apply all manual formatting fixes to the data."""
+    fixes_applied = 0
+    
+    # Fix entry 12 - Angel of the Lord section
+    if len(data) > 12:
+        original = data[12]['content']
+        fixed = fix_angel_of_the_lord(original)
+        if fixed != original:
+            data[12]['content'] = fixed
+            fixes_applied += 1
+            print(f"✓ Fixed entry 12: Angel of the Lord section")
+    
+    # Fix entry 17 - Golden verse and Names of Jehovah
+    if len(data) > 17:
+        original = data[17]['content']
+        fixed = fix_entry_17(original)
+        if fixed != original:
+            data[17]['content'] = fixed
+            fixes_applied += 1
+            print(f"✓ Fixed entry 17: Golden verse and Names of Jehovah section")
+    
+    # Note: Scripture reference spacing is handled by normalize_verse_refs.py
+    # No need for manual spacing fixes here
+    
+    # Add more manual fixes here as needed
+    
+    return fixes_applied
+
+
+def main():
+    """Main function to apply manual fixes."""
+    data_file = Path('bibleData.json')
+    
+    if not data_file.exists():
+        print(f'Error: {data_file} not found')
+        return 1
+    
+    # Load data
+    print('Loading bibleData.json...')
+    with open(data_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    print(f'Applying manual formatting fixes to {len(data)} entries...')
+    
+    # Apply fixes
+    fixes_applied = apply_manual_fixes(data)
+    
+    if fixes_applied > 0:
+        # Save updated data
+        with open(data_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        
+        print(f'\n✓ Applied {fixes_applied} manual fix(es)')
+    else:
+        print('\nNo manual fixes needed (already applied or not found)')
+    
+    return 0
+
+
+if __name__ == '__main__':
+    exit(main())
+
+
 def fix_entry_13(content):
     """Fix the Joseph/Christ comparison table in entry 13."""
     import re
@@ -134,85 +198,5 @@ def fix_entry_240(content):
     
     return re.sub(pattern, unwrapped, content, flags=re.DOTALL)
 
-
-def apply_manual_fixes(data):
-    """Apply all manual formatting fixes to the data."""
-    fixes_applied = 0
-    
-    # Fix entry 12 - Angel of the Lord section
-    if len(data) > 12:
-        original = data[12]['content']
-        fixed = fix_angel_of_the_lord(original)
-        if fixed != original:
-            data[12]['content'] = fixed
-            fixes_applied += 1
-            print(f"✓ Fixed entry 12: Angel of the Lord section")
-    
-    # Fix entry 17 - Golden verse and Names of Jehovah
-    if len(data) > 17:
-        original = data[17]['content']
-        fixed = fix_entry_17(original)
-        if fixed != original:
-            data[17]['content'] = fixed
-            fixes_applied += 1
-            print(f"✓ Fixed entry 17: Golden verse and Names of Jehovah section")
-    
-    # Note: Scripture reference spacing is handled by normalize_verse_refs.py
-    # No need for manual spacing fixes here
-    
-    # Fix entry 13 - Joseph/Christ comparison table
-    if len(data) > 13:
-        original = data[13]["content"]
-        fixed = fix_entry_13(original)
-        if fixed != original:
-            data[13]["content"] = fixed
-            fixes_applied += 1
-            print(f"✓ Fixed entry 13: Joseph/Christ comparison table")
-    
-    # Fix entry 240 - Remove spurious table wrapper
-    if len(data) > 240:
-        original = data[240]["content"]
-        fixed = fix_entry_240(original)
-        if fixed != original:
-            data[240]["content"] = fixed
-            fixes_applied += 1
-            print(f"✓ Fixed entry 240: Removed spurious table wrapper")
-    
-    # Add more manual fixes here as needed
-    
-    return fixes_applied
-
-
-def main():
-    """Main function to apply manual fixes."""
-    data_file = Path('bibleData.json')
-    
-    if not data_file.exists():
-        print(f'Error: {data_file} not found')
-        return 1
-    
-    # Load data
-    print('Loading bibleData.json...')
-    with open(data_file, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    
-    print(f'Applying manual formatting fixes to {len(data)} entries...')
-    
-    # Apply fixes
-    fixes_applied = apply_manual_fixes(data)
-    
-    if fixes_applied > 0:
-        # Save updated data
-        with open(data_file, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        
-        print(f'\n✓ Applied {fixes_applied} manual fix(es)')
-    else:
-        print('\nNo manual fixes needed (already applied or not found)')
-    
-    return 0
-
-
-if __name__ == '__main__':
-    exit(main())
-
+# Update the apply_manual_fixes function to include index 13 and 240 fixes
+# This will be inserted manually after the existing fixes
