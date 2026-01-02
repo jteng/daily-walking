@@ -208,11 +208,11 @@
             /* Mobile tooltip refinements */
             .verse-tooltip {
                 max-width: 90vw !important;
-                left: 50% !important;
-                transform: translateX(-50%);
-                top: auto; 
-                bottom: 20px; /* Show at bottom on mobile? Or absolute pos? */
-                /* Revert to absolute pos logic from JS script, but ensure max-width */
+                width: max-content; /* Shrink to fit content */
+                /* Remove forced centering hacks, let JS position it */
+                transform: none !important;
+                left: auto !important; 
+                pointer-events: auto; /* Allow clicking inside? */
             }
         }
         
@@ -791,15 +791,26 @@ window.Reader = Reader;
         
         contentEl.innerHTML = newHTML;
         
-        // Add event listeners
+        // Add event listeners (use 'click' which works on both desktop and mobile)
         contentEl.querySelectorAll('.verse-ref').forEach(span => {
             span.addEventListener('mouseenter', showVerseTooltipFromData);
             span.addEventListener('mouseleave', hideVerseTooltip);
-            span.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                showVerseTooltipFromData({target: e.target, clientX: e.touches[0].clientX, clientY: e.touches[0].clientY});
-                setTimeout(hideVerseTooltip, 3000);
+            span.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                e.stopPropagation(); // Prevent closing immediately
+                showVerseTooltipFromData(e);
+                
+                // Auto-close after 5 seconds
+                if (window.tooltipTimer) clearTimeout(window.tooltipTimer);
+                window.tooltipTimer = setTimeout(hideVerseTooltip, 5000);
             });
+        });
+        
+        // Close tooltip when clicking anywhere else
+        document.addEventListener('click', (e) => {
+             if (!e.target.closest('.verse-ref') && !e.target.closest('.verse-tooltip')) {
+                 hideVerseTooltip();
+             }
         });
         
         console.log('Verse enhancement complete');
@@ -822,14 +833,38 @@ window.Reader = Reader;
         const y = event.clientY;
         const tooltipRect = tooltip.getBoundingClientRect();
         
-        let left = x + 10;
-        let top = y + 10;
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+        const padding = 10;
         
-        if (left + tooltipRect.width > window.innerWidth) {
-            left = x - tooltipRect.width - 10;
+        // Horizontal: Attempt to center on click, but clamp to screen edges
+        let left = x - (tooltipRect.width / 2);
+        
+        // Clamp Horizontal
+        if (left < padding) left = padding;
+        if (left + tooltipRect.width > screenW - padding) {
+            left = screenW - tooltipRect.width - padding;
         }
-        if (top + tooltipRect.height > window.innerHeight) {
-            top = y - tooltipRect.height - 10;
+        
+        // Vertical: Prefer bottom, flip to top if insufficient space
+        // Check space below
+        const spaceBelow = screenH - y;
+        const spaceAbove = y;
+        
+        let top;
+        // If enough space below (allow 20px gap) OR not enough space above either
+        if (spaceBelow > tooltipRect.height + 20 || spaceBelow > spaceAbove) {
+            top = y + 20;
+        } else {
+            // Place above
+            top = y - tooltipRect.height - 20;
+        }
+        
+        // Final Vertical Clamp (ensure it never goes off screen)
+        // Reserve 80px at top for header if possible
+        if (top < 80) top = 80;
+        if (top + tooltipRect.height > screenH - padding) {
+             top = screenH - tooltipRect.height - padding;
         }
         
         tooltip.style.left = left + 'px';
