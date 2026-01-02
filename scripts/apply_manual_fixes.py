@@ -135,6 +135,47 @@ def fix_entry_240(content):
     return re.sub(pattern, unwrapped, content, flags=re.DOTALL)
 
 
+def fix_entry_21(content):
+    """Fix the merged tables in entry 21."""
+    import re
+    
+    # Pattern: find the entire broken table
+    pattern = r'<table>.*?</table>'
+    
+    match = re.search(pattern, content, re.DOTALL)
+    if not match:
+        return content
+    
+    # Replace with properly structured content
+    fixed_content = '''<table>
+<tr><td>第十一章</td><td>第十二章</td><td></td><td></td></tr>
+<tr><td>最后一灾的预告</td><td>最后一灾的发生</td><td></td><td></td></tr>
+<tr><td>第十灾的临近</td><td>逾越节 1-28</td><td>灾害执行 29-36</td><td>出埃及 37-51</td></tr>
+</table>
+
+<p>以色列人的方法是守节期：</p>
+
+<ol>
+<li>逾越节（一月十四日）：记念神因羔羊之血，没有击杀以色列人的长子。这节日与除酵节同期进行，这两个名称很多时可交替使用。</li>
+<li>初熟节（一月十六日）：记念神带领以色列人出埃及。</li>
+</ol>
+
+<table>
+<tr><td>经文</td><td>神迹</td><td>为期</td><td>结果（法老的态度）</td><td>针对神祇</td></tr>
+<tr><td>七 14-25</td><td><ol>
+<li>水变血之灾</li>
+<li>蛙灾</li>
+<li>虱灾</li>
+<li>蝇灾</li>
+<li>畜疫之灾</li>
+<li>疮灾</li>
+<li>雹灾</li>
+</ol></td><td>一天</td><td>「依你们所说的，…」（出12:31-32）</td><td>法老：众神之神</td></tr>
+</table>'''
+    
+    return re.sub(pattern, fixed_content, content, flags=re.DOTALL)
+
+
 def apply_manual_fixes(data):
     """Apply all manual formatting fixes to the data."""
     fixes_applied = 0
@@ -177,6 +218,15 @@ def apply_manual_fixes(data):
             data[240]["content"] = fixed
             fixes_applied += 1
             print(f"✓ Fixed entry 240: Removed spurious table wrapper")
+    
+    # Fix entry 21 - Split merged tables
+    if len(data) > 21:
+        original = data[21]['content']
+        fixed = fix_entry_21(original)
+        if fixed != original:
+            data[21]['content'] = fixed
+            fixes_applied += 1
+            print(f"✓ Fixed entry 21: Split merged tables")
     
     # Add more manual fixes here as needed
     
