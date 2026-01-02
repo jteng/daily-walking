@@ -48,7 +48,7 @@ def fix_entry_17(content):
     # We need to extract it and place it before the table
     
     # Pattern to find the table with the problematic content
-    pattern = r'<tr><td>金句：.*?</td>'
+    pattern = r'(<tr><td>金句： 创世记四十八章廿一节.*?耶和华洛斐.*?的意思。</p>\s*<p>出埃及记)'
     
     match = re.search(pattern, content, re.DOTALL)
     if not match:
