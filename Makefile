@@ -37,6 +37,10 @@ publish: venv ## Prepare data for publishing (extract → normalize → fix tabl
 	.venv/bin/python scripts/normalize_verse_refs.py
 	@echo "✓ Normalization complete"
 	@echo ""
+	@echo "📖 Step 2.5/6: Fixing scripture fields..."
+	.venv/bin/python scripts/fix_scripture_fields.py
+	@echo "✓ Scripture fields fixed"
+	@echo ""
 	@echo "🔧 Step 3/6: Fixing table splits..."
 	.venv/bin/python scripts/fix_table_splits.py
 	@echo "✓ Table fixes complete"
