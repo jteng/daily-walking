@@ -1,4 +1,4 @@
-.PHONY: help venv install run extract populate-verses clean
+.PHONY: help venv install run extract populate-verses clean publish
 
 help: ## Show this help message with available targets
 	@grep -E '^[a-zA-Z0-9_\-]+:.*?##' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "} {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -27,6 +27,33 @@ format-llm: venv ## Format all entries using local LLM (requires Ollama running)
 
 format-heuristic: venv ## Format all entries using heuristic rules (fast, no LLM required)
 	.venv/bin/python scripts/apply_formatting.py
+
+publish: venv ## Prepare data for publishing (extract → normalize → fix tables → format → manual fixes → populate verses)
+	@echo "📚 Step 1/6: Extracting data from PDF..."
+	.venv/bin/python scripts/extract_bible_data.py
+	@echo "✓ Extraction complete"
+	@echo ""
+	@echo "🔢 Step 2/6: Normalizing verse references..."
+	.venv/bin/python scripts/normalize_verse_refs.py
+	@echo "✓ Normalization complete"
+	@echo ""
+	@echo "🔧 Step 3/6: Fixing table splits..."
+	.venv/bin/python scripts/fix_table_splits.py
+	@echo "✓ Table fixes complete"
+	@echo ""
+	@echo "✨ Step 4/6: Formatting content (heuristic)..."
+	.venv/bin/python scripts/apply_formatting.py
+	@echo "✓ Formatting complete"
+	@echo ""
+	@echo "�️  Step 5/6: Applying manual fixes..."
+	.venv/bin/python scripts/apply_manual_fixes.py
+	@echo "✓ Manual fixes complete"
+	@echo ""
+	@echo "�📖 Step 6/6: Populating verse text..."
+	.venv/bin/python scripts/add_verse_text_v2.py
+	@echo "✓ Verse population complete"
+	@echo ""
+	@echo "✅ Data preparation complete! Run 'make run' to start the server."
 
 clean: ## Remove common build/test artifacts
 	rm -rf __pycache__ .pytest_cache build dist *.egg-info
