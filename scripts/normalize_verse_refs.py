@@ -89,7 +89,21 @@ def normalize_verse_references(content):
         
         return f'{prefix}{normalized_ref}'
     
-    return re.sub(pattern, replace_func, content)
+    content = re.sub(pattern, replace_func, content)
+    
+    # Handle single-chapter books: 犹14-15 → 犹1:14-15
+    single_chapter_books = ['俄', '门', '约二', '约三', '犹']
+    single_chapter_pattern = '|'.join(single_chapter_books)
+    single_ref_pattern = rf'({single_chapter_pattern})(\d+(?:-\d+)?)'
+    
+    def add_chapter_one(match):
+        book = match.group(1)
+        verses = match.group(2)
+        return f'{book}1:{verses}'
+    
+    content = re.sub(single_ref_pattern, add_chapter_one, content)
+    
+    return content
 
 def main():
     """Main function to normalize bibleData.json."""
@@ -112,16 +126,69 @@ def main():
     for i, entry in enumerate(data):
         if 'content' in entry and entry['content']:
             original = entry['content']
+            
+            # Extract book from scripture field for context
+            scripture_book = None
+            if 'scripture' in entry and entry['scripture']:
+                book_pattern = '|'.join(BOOK_NAMES)
+                match = re.match(rf'^({book_pattern})', entry['scripture'])
+                if match:
+                    scripture_book = match.group(1)
+            
+            # If we have scripture context, normalize standalone chapter references first
+            if scripture_book:
+                # Pattern for standalone chapter references like （一 10） or （九15）
+                # Also handles continuation references like （十二 2，十 三 16，十五4-5）
+                standalone_pattern = r'（([一二三四五六七八九十零廿卅\s，、]+?)(\d+(?:-\d+)?(?:[，、]\s*[一二三四五六七八九十零廿卅\s]*\d+(?:-\d+)?)*)）'
+                
+                def replace_with_context(match):
+                    chinese_parts = match.group(1)
+                    verses_part = match.group(2)
+                    
+                    # Split by commas to handle multiple references
+                    full_text = chinese_parts + verses_part
+                    parts = re.split(r'[，、]\s*', full_text)
+                    
+                    normalized_parts = []
+                    for part in parts:
+                        part = part.strip()
+                        if not part:
+                            continue
+                        
+                        # Try to match Chinese chapter + verse
+                        ref_match = re.match(r'([一二三四五六七八九十零廿卅\s]*?)(\d+(?:-\d+)?)', part)
+                        if ref_match:
+                            chinese_chapter = ref_match.group(1).replace(' ', '').strip()
+                            verse = ref_match.group(2)
+                            
+                            if chinese_chapter:
+                                # Has chapter number
+                                arabic_chapter = chinese_to_arabic(chinese_chapter)
+                                normalized_parts.append(f'{scripture_book}{arabic_chapter}:{verse}')
+                            elif normalized_parts:
+                                # No chapter, just verse - use last chapter
+                                normalized_parts.append(verse)
+                            else:
+                                # First reference with no chapter - skip
+                                continue
+                    
+                    if normalized_parts:
+                        return f'（{"，".join(normalized_parts)}）'
+                    return match.group(0)
+                
+                original = re.sub(standalone_pattern, replace_with_context, original)
+            
+            # Then apply normal normalization
             normalized = normalize_verse_references(original)
             
-            if original != normalized:
+            if original != normalized or entry['content'] != normalized:
                 entry['content'] = normalized
                 normalized_count += 1
                 
                 if normalized_count <= 3:  # Show first 3 examples
                     print(f'\nEntry {i} ({entry.get("day_label", "?")}):')
                     # Find what changed
-                    for line_orig, line_norm in zip(original.split('\n'), normalized.split('\n')):
+                    for line_orig, line_norm in zip(entry['content'].split('\n'), normalized.split('\n')):
                         if line_orig != line_norm:
                             print(f'  Before: {line_orig[:80]}...')
                             print(f'  After:  {line_norm[:80]}...')
