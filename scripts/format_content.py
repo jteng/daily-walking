@@ -19,17 +19,75 @@ def format_content(content):
     3. Detect sequential events and create bullet lists
     4. Add paragraph breaks after every 2-3 sentences
     5. Bold section headers (text ending with ：)
+    6. Detect numbered lists and format as <ol>
     """
+    
+    # First, detect and format numbered lists (even if content has some HTML)
+    # Pattern: 1.text 2.text 3.text (consecutive numbered items)
+    # This works across paragraph boundaries
+    numbered_list_pattern = r'(\d+)\.\s*([^。\n<]+(?:。)?)'
+    matches = list(re.finditer(numbered_list_pattern, content))
+    
+    content_modified = False
+    if len(matches) >= 3:  # Require at least 3 items for a list
+        # Find the longest consecutive sequence starting from 1
+        # (there might be multiple numbered lists in the content)
+        best_sequence = []
+        current_sequence = []
+        expected_num = 1
+        
+        for m in matches:
+            num = int(m.group(1))
+            if num == expected_num:
+                current_sequence.append(m)
+                expected_num += 1
+            elif num == 1:
+                # Start of a new sequence
+                if len(current_sequence) > len(best_sequence):
+                    best_sequence = current_sequence
+                current_sequence = [m]
+                expected_num = 2
+            else:
+                # Sequence broken
+                if len(current_sequence) > len(best_sequence):
+                    best_sequence = current_sequence
+                current_sequence = []
+                expected_num = 1
+        
+        # Check final sequence
+        if len(current_sequence) > len(best_sequence):
+            best_sequence = current_sequence
+        
+        if len(best_sequence) >= 3:
+            # Found a numbered list with at least 3 items
+            list_items = []
+            for m in best_sequence:
+                item_text = m.group(2).strip()
+                # Remove trailing period if present
+                if item_text.endswith('。'):
+                    item_text = item_text[:-1]
+                list_items.append(item_text)
+            
+            # Find the span of text containing all list items
+            first_match_start = best_sequence[0].start()
+            last_match_end = best_sequence[-1].end()
+            
+            # Build the formatted list
+            formatted_list = '<ol>\n' + '\n'.join([f'<li>{item}</li>' for item in list_items]) + '\n</ol>'
+            
+            # Replace in content
+            content = content[:first_match_start] + formatted_list + content[last_match_end:]
+            content_modified = True
+    
+    # If we modified the content (added numbered list), return it
+    if content_modified:
+        return content
+    
+    formatted = content
     
     # Skip if content already has HTML formatting
     if '<p>' in content or '<ul>' in content or '<blockquote>' in content:
         return content
-    
-    # Skip if content is very short (likely already well-formatted)
-    if len(content) < 200:
-        return content
-    
-    formatted = content
     
     # 1. Wrap quotes in blockquotes
     # Pattern: text says: 「quote」
