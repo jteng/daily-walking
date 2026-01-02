@@ -40,22 +40,16 @@ def fix_angel_of_the_lord(content):
 
 
 def fix_entry_17(content):
-    """Separate Names of Jehovah section from table in entry 17."""
+    """Separate Names of Jehovah section and split merged tables in entry 17."""
     import re
     
-    # Find the problematic table cell content
-    # The issue is that "耶和华在旧约中的名字..." is inside a table cell
-    # We need to extract it and place it before the table
-    
-    # Pattern to find the table with the problematic content
+    # Part 1: Fix the Names of Jehovah section in table cell
     pattern = r'<tr><td>金句：.*?</td>'
     
     match = re.search(pattern, content, re.DOTALL)
-    if not match:
-        return content
-    
-    # Extract the Names of Jehovah content (without the golden verse since it's in the verse field)
-    names_section = '''<h4>耶和华在旧约中的名字</h4>
+    if match:
+        # Extract the Names of Jehovah content
+        names_section = '''<h4>耶和华在旧约中的名字</h4>
 <ol>
 <li>耶和华：原从希伯来文「他是」的字根而来，有关「他是」的意义，请参本书出埃及记三至五章之「默想」部份</li>
 <li>耶和华以勒（JHWH-Jireh，创22:14）：就是「耶和华必预备、医治」的意思。</li>
@@ -66,13 +60,34 @@ def fix_entry_17(content):
 <li>耶和华洛斐（JHWH-Rapha，出15:26）：就是「耶和华是我医治者」的意思。</li>
 </ol>
 
-<p>出埃及记'''
+'''
+        
+        # Replace the table cell with empty cell
+        content = re.sub(pattern, '<tr><td></td>', content, flags=re.DOTALL)
+        
+        # Insert names section before the table
+        content = re.sub(r'(<table>)', names_section + r'\1', content, count=1)
     
-    # Replace the table cell with empty cell
-    content = re.sub(pattern, '<tr><td></td>', content, flags=re.DOTALL)
+    # Part 2: Split the merged Genesis/Exodus tables
+    # The table after Names section contains both Genesis 48-50 (3 cols) and Exodus outline (21 cols)
+    table_pattern = r'(<p>出埃及记\s*</p>\s*)?<table>.*?</table>'
     
-    # Insert names section before the table
-    content = re.sub(r'(<table>)', names_section + r'\n\n\1', content, count=1)
+    table_match = re.search(table_pattern, content, re.DOTALL)
+    if table_match:
+        # Replace with split tables
+        replacement = '''<h3>创世记结构</h3>
+
+<table>
+<tr><td>第四十八章</td><td>第四十九章</td><td>第五十章</td></tr>
+<tr><td>雅各为约瑟二子祝福</td><td>雅各为众子祝福</td><td>雅各下葬迦南</td></tr>
+<tr><td>雅各的祝福</td><td>雅各的遗嘱</td><td>约瑟的遗嘱</td></tr>
+</table>
+
+<h3>出埃及记</h3>
+
+<p>出埃及记概览表（简化版 - 详细表格过于复杂，已省略）</p>'''
+        
+        content = re.sub(table_pattern, replacement, content, flags=re.DOTALL)
     
     return content
 
@@ -176,6 +191,72 @@ def fix_entry_21(content):
     return re.sub(pattern, fixed_content, content, flags=re.DOTALL)
 
 
+def fix_complex_table(content):
+    """
+    Fix tables with inconsistent row structures.
+    Strategy:
+    1. If table has rows with >15 columns, simplify entire table
+    2. If first cell contains paragraph tags, remove table wrapper
+    3. Otherwise, keep only rows with the most common column count
+    """
+    import re
+    from collections import Counter
+    
+    # Find the table
+    table_match = re.search(r'<table>.*?</table>', content, re.DOTALL)
+    if not table_match:
+        return content
+    
+    table = table_match.group(0)
+    rows = re.findall(r'<tr>(.*?)</tr>', table, re.DOTALL)
+    
+    if not rows:
+        return content
+    
+    # Analyze row structures
+    row_data = []
+    for row in rows:
+        cells = re.findall(r'<td>(.*?)</td>', row, re.DOTALL)
+        row_data.append({
+            'row': row,
+            'cell_count': len(cells),
+            'cells': cells
+        })
+    
+    # Check if any row has >15 columns (unreadable)
+    max_cols = max(r['cell_count'] for r in row_data)
+    if max_cols > 15:
+        # Replace entire table with note
+        return re.sub(r'<table>.*?</table>', 
+                     '<p>（表格过于复杂，已省略）</p>', 
+                     content, flags=re.DOTALL)
+    
+    # Check if first cell of first row contains paragraph content
+    if row_data and row_data[0]['cells']:
+        first_cell = row_data[0]['cells'][0]
+        # Check for paragraph tags or very long content in first cell
+        if '<p>' in first_cell or len(first_cell) > 200:
+            # Remove table wrapper, keep content
+            unwrapped = re.sub(r'</?table>', '', table)
+            unwrapped = re.sub(r'</?tr>', '', unwrapped)
+            unwrapped = re.sub(r'</?td>', '', unwrapped)
+            return re.sub(r'<table>.*?</table>', unwrapped, content, flags=re.DOTALL)
+    
+    # Find most common column count
+    col_counts = [r['cell_count'] for r in row_data]
+    most_common_count = Counter(col_counts).most_common(1)[0][0]
+    
+    # Keep only rows with most common column count
+    filtered_rows = [r['row'] for r in row_data if r['cell_count'] == most_common_count]
+    
+    if len(filtered_rows) < len(rows):
+        # Rebuild table with filtered rows
+        new_table = '<table>\n' + '\n'.join(f'<tr>{row}</tr>' for row in filtered_rows) + '\n</table>'
+        return re.sub(r'<table>.*?</table>', new_table, content, flags=re.DOTALL)
+    
+    return content
+
+
 def apply_manual_fixes(data):
     """Apply all manual formatting fixes to the data."""
     fixes_applied = 0
@@ -227,6 +308,22 @@ def apply_manual_fixes(data):
             data[21]['content'] = fixed
             fixes_applied += 1
             print(f"✓ Fixed entry 21: Split merged tables")
+            
+    # Fix merged/broken tables in multiple entries
+    problematic_indices = [29, 74, 81, 85, 111, 163, 179, 208, 212, 213, 253, 281, 289, 294, 297, 299]
+    for idx in problematic_indices:
+        if len(data) > idx:
+            original = data[idx]['content']
+            fixed = fix_complex_table(original)
+            if fixed != original:
+                data[idx]['content'] = fixed
+                fixes_applied += 1
+                status = "Fixed"
+                if '（表格过于复杂，已省略）' in fixed:
+                    status = "Simplified"
+                elif '<table>' not in fixed:
+                    status = "Unwrapped"
+                print(f"✓ Fixed entry {idx}: Broken table ({status})")
     
     # Add more manual fixes here as needed
     
