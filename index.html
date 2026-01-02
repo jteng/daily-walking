@@ -19,16 +19,225 @@
         :root { --primary: #4A90E2; --bg: #f5f7fa; --text: #333; }
         body { font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; }
         header { background: var(--primary); color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .container { padding: 20px; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+        :root {
+            --primary: #2c9aff;
+            --text: #333;
+            --bg: #f5f5f7;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        
+        /* Reader UI */
+        .reader-container {
+            width: 100%;
+            overflow: hidden; /* Hide the other panel */
+            position: relative;
+        }
+        
+        .reader-track {
+            display: flex;
+            width: 200%; /* Two panels wide */
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateX(0); /* Start at Bible Panel (0) or Devotional (-50%)? */
+            /* We want Bible First (0%), then Devotional (-50%) */
+        }
+        
+        .reader-panel {
+            width: 50%;
+            flex-shrink: 0;
+            padding: 20px;
+            /* Allow individual panels to handle their content flow */
+        }
+
+        /* Classic Mode overrides */
+        .mode-classic .reader-track {
+            display: block;
+            width: 100%;
+            transform: none !important; 
+        }
+        .mode-classic #bible-panel {
+            display: none;
+        }
+        .mode-classic #devotional-panel {
+            width: 100%;
+            display: block;
+            padding: 10px;
+        }
+        .mode-classic .reader-nav {
+            display: none;
+        }
+
+        .panel-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            min-height: 80vh; /* Visual consistency */
+        }
+
+        .container {
+            /* Legacy container style if needed, but we override padding on panel */
+            max-width: 100%; 
+            margin: 0;
+            padding: 0;
+        }
+
+        /* header style removed to use the one defined at top */
+        
+        /* Navigation Dots */
+        .reader-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 0;
+            background: transparent;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .nav-dot.active {
+            background: var(--primary);
+        }
+
+        /* Existing Styles adapted */
+        #content {
+            /* No longer used as main wrapper, but might still target id */
+            margin-top: 0; 
+        }
+
+        #scripture-ref {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        h2 { margin-top: 0; }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: opacity 0.2s;
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        button:hover:not(:disabled) {
+            opacity: 0.9;
+        }
+
+        /* Bible Text Styles */
+        #full-scripture-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        .bible-chapter {
+            margin-bottom: 24px;
+        }
+        .bible-chapter h3 {
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        .bible-verse {
+            margin-bottom: 4px;
+        }
+        .verse-num {
+            font-size: 0.8em;
+            color: #999;
+            vertical-align: super;
+            margin-right: 4px;
+        }
+
+        /* Tooltip Styles (Keep transparent/overlay) */
+        .verse-tooltip {
+            position: fixed;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-width: 300px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .reader-panel { padding: 10px; }
+            .panel-content { padding: 16px; }
+            
+            /* Mobile tooltip refinements */
+            .verse-tooltip {
+                max-width: 90vw !important;
+                left: 50% !important;
+                transform: translateX(-50%);
+                top: auto; 
+                bottom: 20px; /* Show at bottom on mobile? Or absolute pos? */
+                /* Revert to absolute pos logic from JS script, but ensure max-width */
+            }
+        }
+        
+        .verse-tooltip.show {
+            opacity: 1;
+        }
+        
+        .verse-tooltip-ref {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95em;
+            pointer-events: none;
+        }
+        
+        .verse-tooltip * {
+            pointer-events: none;
+        }
+        /* Existing styles that are still relevant or not fully overridden */
         .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
         .scripture-ref { font-weight: bold; color: var(--primary); font-size: 1.1em; display: block; margin-bottom: 10px; }
         h2 { margin: 0 0 15px 0; font-size: 1.4em; }
         .section-title { font-weight: bold; border-left: 4px solid var(--primary); padding-left: 10px; margin: 25px 0 10px 0; }
         .verse-box { background: #eef5ff; border-radius: 8px; padding: 15px; font-style: italic; color: #444; margin-top: 20px; border: 1px dashed var(--primary); }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        button { border: none; background: var(--primary); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; cursor: pointer; transition: opacity 0.2s; }
-        button:disabled { background: #ccc; }
-        .day-indicator { color: var(--text); line-height: 36px; font-weight: bold; }
         .commentary-box {
             background-color: #f9fafb;
             border-left: 4px solid var(--primary);
@@ -77,54 +286,6 @@
             position: relative;
         }
         
-        .verse-tooltip {
-            position: fixed;
-            background: white;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
-            padding: 12px 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            max-width: 320px;
-            z-index: 2000;
-            font-size: 0.9em;
-            line-height: 1.6;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        
-        /* Mobile-specific improvements */
-        @media (max-width: 768px) {
-            .verse-tooltip {
-                max-width: 90vw;
-                font-size: 1em;
-                padding: 16px 20px;
-                border-width: 3px;
-                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-                left: 5vw !important;
-                right: 5vw !important;
-                top: 50% !important;
-                transform: translateY(-50%);
-                width: auto;
-            }
-        }
-        
-        .verse-tooltip.show {
-            opacity: 1;
-        }
-        
-        .verse-tooltip-ref {
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 8px;
-            display: block;
-            font-size: 0.95em;
-            pointer-events: none;
-        }
-        
-        .verse-tooltip * {
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
@@ -133,38 +294,316 @@
     <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center;">
         <!-- Chapter selector -->
-        <select id="jump-chapter" aria-label="选择章节" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:200px;">
+        <select id="jump-chapter" aria-label="选择章节" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:160px;">
             <option value="">选择章节...</option>
             <!-- Populated dynamically -->
         </select>
+        
+        <!-- Mode Toggle -->
+        <button id="mode-toggle" onclick="Reader.toggleMode()" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">📖</button>
+    </div>
+    <div id="week-day-info" style="font-size:12px; color:#666; margin-top:4px;"></div>
+    
+    <!-- Reader Navigation Dots (outside panels) -->
+    <div class="reader-nav" id="reader-nav">
+        <div class="nav-dot active" data-panel="0" onclick="Reader.goToPanel(0)"></div>
+        <div class="nav-dot" data-panel="1" onclick="Reader.goToPanel(1)"></div>
     </div>
 </header>
+<div id="loading" style="text-align:center; padding:20px; display:none;">加载中...</div>
 
-<div class="container">
-    <div class="card" id="content-card">
-        <div style="color: #666; font-size: 0.85em; margin-bottom: 8px;" id="week-day-info"></div>
-        <span class="scripture-ref" id="scripture"></span>
-        <h2 id="day-title">载入中...</h2>
-        <div id="devotional-content"></div>
+<div class="reader-container">
+    <div class="reader-track" id="reader-track">
         
-
-        
-        <div class="verse-box">
-            <strong>今日金句：</strong><br>
-            <span id="key-verse"></span>
+        <!-- PANEL 1: BIBLE TEXT -->
+        <div class="reader-panel" id="bible-panel">
+            <div class="panel-content">
+                <h2 style="color:var(--primary);">今日经文</h2>
+                <div id="full-scripture-content">
+                    <p style="color:#666;" id="bible-debug">Initializing UI...</p>
+                </div>
+            </div>
         </div>
+
+        <!-- PANEL 2: DEVOTIONAL -->
+        <div class="reader-panel" id="devotional-panel">
+            <div class="panel-content" id="content">
+                <div id="scripture"></div>
+                <h2 id="day-title"></h2>
+                <div id="devotional-content"></div>
+                <div id="key-verse"></div>
+                
+                <div class="nav-buttons">
+                    <button id="prev-btn" onclick="adjustDay(-1)">上一日</button>
+                    <button id="next-btn" onclick="adjustDay(1)">下一日</button>
+                </div>
+
+                <footer style="text-align: center; padding: 20px 20px 0 20px; color: #666; font-size: 0.85em; line-height: 1.6; border-top: 1px dashed #eee; margin-top: 30px;">
+                    内容来源：《每天与主同行》· 苏颖智 著
+                </footer>
+            </div>
+        </div>
+        
     </div>
 </div>
 
-    <div class="nav-bar">
-    <button onclick="changeDay(-1)" id="prev-btn">前一天</button>
-    <button onclick="changeDay(1)" id="next-btn">后一天</button>
-</div>
 
-<footer style="text-align: center; padding: 20px 20px 100px 20px; color: #666; font-size: 0.85em; line-height: 1.6;">
-    内容来源：《每天与主同行》· 苏颖智 著
-</footer>
+<script>
+/**
+ * Swipeable Bible Reader Logic
+ * Handles scripture parsing, XML fetching, and Swipe UI management.
+ */
+const Reader = {
+    // Book abbreviation map (Chinese -> ID 1-66)
+    bookMap: {
+        '创': 1, '出': 2, '利': 3, '民': 4, '申': 5,
+        '书': 6, '士': 7, '得': 8, '撒上': 9, '撒下': 10,
+        '王上': 11, '王下': 12, '代上': 13, '代下': 14, '拉': 15,
+        '尼': 16, '斯': 17, '伯': 18, '诗': 19, '箴': 20,
+        '传': 21, '歌': 22, '赛': 23, '耶': 24, '哀': 25,
+        '结': 26, '但': 27, '何': 28, '珥': 29, '摩': 30,
+        '俄': 31, '拿': 32, '弥': 33, '鸿': 34, '哈': 35,
+        '番': 36, '该': 37, '亚': 38, '玛': 39,
+        '太': 40, '可': 41, '路': 42, '约': 43, '徒': 44,
+        '罗': 45, '林前': 46, '林后': 47, '加': 48, '弗': 49,
+        '腓': 50, '西': 51, '帖前': 52, '帖后': 53, '提前': 54,
+        '提后': 55, '多': 56, '门': 57, '来': 58, '雅': 59,
+        '彼前': 60, '彼后': 61, '约一': 62, '约二': 63, '约三': 64,
+        '犹': 65, '启': 66
+    },
 
+    // Convert Chinese number string to Integer
+    chineseToArabic: function(cnNum) {
+        if (!cnNum) return 0;
+        const map = {
+            '零': 0, '一': 1, '二': 2, '三': 3, '四': 4, 
+            '五': 5, '六': 6, '七': 7, '八': 8, '九': 9,
+            '十': 10, '廿': 20, '卅': 30, '百': 100
+        };
+        
+        let result = 0;
+        let temp = 0; 
+        
+        if (cnNum.startsWith('百')) return 100 + this.chineseToArabic(cnNum.substring(1));
+        
+        // Handle 廿, 卅 special chars
+        if (cnNum.startsWith('廿')) cnNum = "二十" + cnNum.substring(1);
+        if (cnNum.startsWith('卅')) cnNum = "三十" + cnNum.substring(1);
+
+        let total = 0;
+        // Check for hundred
+        if (cnNum.indexOf('百') > -1) {
+            let parts = cnNum.split('百');
+            let hundreds = map[parts[0]] || 1; 
+            total += hundreds * 100;
+            cnNum = parts[1];
+            if (!cnNum) return total;
+        }
+        
+        // Handle 十
+        if (cnNum.indexOf('十') > -1) {
+            let parts = cnNum.split('十');
+            let tens = parts[0] ? map[parts[0]] : 1; 
+            total += tens * 10;
+            cnNum = parts[1];
+        }
+        
+        if (cnNum) {
+            total += map[cnNum] || 0;
+        }
+        
+        return total;
+    },
+
+    /**
+     * Parse scripture string into object
+     * @param {string} scripture e.g. "创一至二章", "创48:21", "诗102"
+     * @returns {object|null} { bookId: number, startChapter: number, endChapter: number }
+     */
+    parseScripture: function(scripture) {
+        if (!scripture) return null;
+        
+        // 1. Identify Book
+        const books = Object.keys(this.bookMap).sort((a, b) => b.length - a.length);
+        let bookAbbr = null;
+        let remaining = scripture;
+        
+        for (const book of books) {
+            if (scripture.startsWith(book)) {
+                bookAbbr = book;
+                remaining = scripture.substring(book.length).trim();
+                break;
+            }
+        }
+        
+        if (!bookAbbr) return null; 
+        const bookId = this.bookMap[bookAbbr];
+        
+        // 2. Parse Chapter/Range
+        let startChap = 1;
+        let endChap = 1;
+        
+        // Case A: Arabic Numbers
+        if (/^\d/.test(remaining)) {
+            const match = remaining.match(/^(\d+)(?:[:\.]\d+)?(?:-(\d+)(?:[:\.]\d+)?)?/);
+            if (match) {
+                startChap = parseInt(match[1]);
+                if (match[2]) {
+                    endChap = parseInt(match[2]);
+                } else {
+                    endChap = startChap;
+                }
+            }
+        } 
+        // Case B: Chinese Numbers
+        else {
+            remaining = remaining.replace(/[章篇]/g, '');
+            const parts = remaining.split('至');
+            startChap = this.chineseToArabic(parts[0].trim());
+            
+            if (parts.length > 1) {
+                endChap = this.chineseToArabic(parts[1].trim());
+            } else {
+                endChap = startChap;
+            }
+        }
+        
+        return {
+            bookId: bookId,
+            bookName: bookAbbr,
+            startChapter: startChap,
+            endChapter: endChap
+        };
+    },
+
+    // Initialization
+    init: function() {
+        this.track = document.getElementById('reader-track');
+        this.dots = document.querySelectorAll('.nav-dot');
+        this.currentPanel = 0; 
+        
+        // Load saved mode
+        this.mode = localStorage.getItem('readerMode') || 'swipe';
+        if (this.mode === 'classic') {
+            document.body.classList.add('mode-classic');
+            document.getElementById('mode-toggle').innerText = '📑'; // Icon for Classic
+        } else {
+            document.getElementById('mode-toggle').innerText = '📖'; // Icon for Swipe
+        }
+
+        // Touch handling
+        let startX = 0;
+        const threshold = 50;
+        const container = document.querySelector('.reader-container');
+        
+        if (container) {
+            container.addEventListener('touchstart', (e) => {
+                if (this.mode === 'classic') return; // Disable swipe in classic mode
+                startX = e.touches[0].clientX;
+            }, {passive: true});
+            
+            container.addEventListener('touchend', (e) => {
+                if (this.mode === 'classic') return; // Disable swipe in classic mode
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        this.goToPanel(Math.min(this.currentPanel + 1, 1));
+                    } else {
+                        this.goToPanel(Math.max(this.currentPanel - 1, 0));
+                    }
+                }
+            }, {passive: true});
+        }
+        
+        // Explicitly load bible XML if not already loaded to ensure readyness
+        if (window.loadBibleXML) window.loadBibleXML();
+    },
+    
+    // Toggle Mode
+    toggleMode: function() {
+        if (this.mode === 'swipe') {
+            this.mode = 'classic';
+            document.body.classList.add('mode-classic');
+            document.getElementById('mode-toggle').innerText = '📑';
+            // In classic mode, we just see devotional (panel 1 in DOM, effectively)
+        } else {
+            this.mode = 'swipe';
+            document.body.classList.remove('mode-classic');
+            document.getElementById('mode-toggle').innerText = '📖';
+            // Switch back to Bible Panel (0) by default when returning to swipe mode
+            this.goToPanel(0);
+        }
+        localStorage.setItem('readerMode', this.mode);
+    },
+    
+    // Switch panels
+    goToPanel: function(index) {
+        if (!this.track) this.init();
+        this.currentPanel = index;
+        const translate = index * -50;
+        if (this.track) this.track.style.transform = `translateX(${translate}%)`;
+        
+        this.dots.forEach((dot, i) => {
+            if (i === index) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    },
+    
+    // Render Bible Text
+    renderBible: async function(scriptureStr) {
+        const container = document.getElementById('full-scripture-content');
+        if (!container) return;
+        
+        container.innerHTML = '<div style="color:#666; padding:20px; text-align:center;">加载中...</div>';
+        
+        const parsed = this.parseScripture(scriptureStr);
+        if (!parsed) {
+            container.innerHTML = `<div style="padding:20px; color:#666;">无法解析经文: ${scriptureStr}</div>`;
+            return;
+        }
+        
+        const xml = await window.loadBibleXML(); 
+        if (!xml) {
+            container.innerHTML = '<div style="color:red;">无法加载圣经数据XML</div>';
+            return;
+        }
+        
+        let html = '';
+        const bookNode = xml.querySelector(`book[number="${parsed.bookId}"]`);
+        
+        if (!bookNode) {
+            container.innerHTML = `<div style="color:red;">未找到书卷 ID: ${parsed.bookId} (${parsed.bookName})</div>`;
+            return;
+        }
+        
+        for (let c = parsed.startChapter; c <= parsed.endChapter; c++) {
+            const chapterNode = bookNode.querySelector(`chapter[number="${c}"]`);
+            if (chapterNode) {
+                html += `<div class="bible-chapter">
+                    <h3>${parsed.bookName} 第${c}章</h3>`;
+                
+                const verses = chapterNode.querySelectorAll('verse');
+                verses.forEach(v => {
+                    const num = v.getAttribute('number');
+                    const text = v.textContent;
+                    html += `<div class="bible-verse">
+                        <span class="verse-num">${num}</span>${text}
+                    </div>`;
+                });
+                
+                html += `</div>`;
+            } else {
+                 html += `<div style="color:#999; margin:10px 0;">(未找到第${c}章)</div>`;
+            }
+        }
+        
+        container.innerHTML = html || '<div>未找到经文内容</div>';
+    }
+};
+
+// Expose to window
+window.Reader = Reader;
+</script>
 <script>
     let tooltipElement = null;
     
@@ -201,6 +640,8 @@
             return null;
         }
     }
+    // Expose to window for Reader module
+    window.loadBibleXML = loadBibleXML;
     
     // Map Chinese book abbreviations to book numbers (1-66)
     function getBookNumber(chineseAbbr) {
@@ -605,28 +1046,40 @@
             } else {
                 contentEl.innerText = data.content || '';
             }
-        } else {
-            console.warn('Missing element: devotional-content');
         }
 
         // Display verse text if available, otherwise just show the reference
         const verseEl = el('key-verse');
         if (verseEl) {
+            let verseHtml = '';
             if (data.verse_parts && data.verse_parts.length > 0) {
                 // Display each verse part with its individual reference
-                const partsHtml = data.verse_parts.map(part => 
+                verseHtml = data.verse_parts.map(part => 
                     `<div style="margin-bottom: 12px;"><strong>${part.reference}</strong><br>${part.text}</div>`
                 ).join('');
-                verseEl.innerHTML = partsHtml;
             } else if (data.verse_text) {
-                verseEl.innerText = `${data.verse}\n\n${data.verse_text}`;
+                verseHtml = `<strong>${data.verse}</strong><br>${data.verse_text}`;
             } else {
-                verseEl.innerText = data.verse || '';
+                verseHtml = data.verse || '';
+            }
+            
+            // Wrap in styled box with label
+            if (verseHtml) {
+                verseEl.innerHTML = `<div class="verse-box" style="margin-top:0; margin-bottom:20px;">
+                    <strong style="color:var(--primary); display:block; margin-bottom:8px;">今日金句：</strong>
+                    ${verseHtml}
+                </div>`;
+            } else {
+                verseEl.innerHTML = '';
             }
         }
 
         setDisabled('prev-btn', currentDayIndex === 0);
         setDisabled('next-btn', currentDayIndex === bibleData.length - 1);
+        if (window.Reader) {
+            window.Reader.goToPanel(0);
+            window.Reader.renderBible(data.scripture);
+        }
         } catch (err) {
             console.error('renderDay failed:', err);
             // diagnostic: list key elements and their presence
@@ -641,7 +1094,7 @@
         setTimeout(enhanceVerseReferences, 100);
     }
 
-    function changeDay(step) {
+    function adjustDay(step) {
         // For 6-day reading plan: data indices are continuous (0,1,2,3,4,5,6,7...)
         // but calendar dates skip every 7th day (Jan 1,2,3,4,5,6,8,9,10,11,12,13,15...)
         // So we just increment/decrement the data index normally
@@ -649,33 +1102,57 @@
         renderDay();
     }
 
-    // Fetch bibleData.json from the same directory
-    fetch('bibleData.json', { cache: 'no-store' })
-        .then(r => {
-            if (!r.ok) throw new Error('网络错误：' + r.status);
-            return r.json();
-        })
-        .then(json => {
-            // some extractors put the days array at the top-level; accept either
-            // an array or an object with a top-level array.
-            if (Array.isArray(json)) bibleData = json;
-            else if (Array.isArray(json.data)) bibleData = json.data;
-            else bibleData = json;
-            
-            buildChapterIndex();
-            populateChapterDropdown();
-            renderDay();
-        })
-        .catch(err => {
-            console.warn('无法加载 bibleData.json:', err);
-            bibleData = [];
-            renderDay();
-        });
+    // Wire up chapter selector and fetch data after DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        const jchapter = document.getElementById('jump-chapter');
+        
+        // Chapter selector: jump and reset
+        if (jchapter) {
+            jchapter.addEventListener('change', () => {
+                const idx = parseInt(jchapter.value, 10);
+                if (!isNaN(idx) && idx >= 0) {
+                    currentDayIndex = idx;
+                    renderDay();
+                    // Reset dropdown after selection so it can be reused
+                    jchapter.value = "";
+                }
+            });
+        }
+        
+        // Fetch bibleData.json from the same directory
+        fetch('bibleData.json', { cache: 'no-store' })
+            .then(r => {
+                if (!r.ok) throw new Error('网络错误：' + r.status);
+                return r.json();
+            })
+            .then(json => {
+                // some extractors put the days array at the top-level; accept either
+                // an array or an object with a top-level array.
+                if (Array.isArray(json)) bibleData = json;
+                else if (Array.isArray(json.data)) bibleData = json.data;
+                else bibleData = json;
+                
+                buildChapterIndex();
+                populateChapterDropdown();
+                
+                // Initialize Reader
+                if (window.Reader) window.Reader.init();
+                
+                renderDay();
+            })
+            .catch(err => {
+                console.warn('无法加载 bibleData.json:', err);
+                const debugEl = document.getElementById('full-scripture-content');
+                if (debugEl) debugEl.innerHTML = '<p style="color:red">无法加载数据: ' + err.message + '</p>';
+                bibleData = [];
+                renderDay();
+            });
+    });
 
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v9';
+        const APP_SW_VERSION = 'v10'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
