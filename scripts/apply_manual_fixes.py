@@ -96,6 +96,9 @@ def apply_manual_fixes(data):
             fixes_applied += 1
             print(f"✓ Fixed entry 17: Golden verse and Names of Jehovah section")
     
+    # Note: Scripture reference spacing is handled by normalize_verse_refs.py
+    # No need for manual spacing fixes here
+    
     # Add more manual fixes here as needed
     
     return fixes_applied

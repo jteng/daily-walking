@@ -72,7 +72,8 @@ def normalize_verse_references(content):
     
     # Build pattern with explicit book names only
     book_pattern = '|'.join(BOOK_NAMES)
-    # Pattern: optional prefix + book name + chinese chapter + space + verse
+    # Pattern: optional prefix + book name + chinese chapter + optional space + verse
+    # Made space optional to handle both "卅一 45" and "卅一45" formats
     pattern = rf'([（(]?参)?({book_pattern})([一二三四五六七八九十零廿卅]+)\s*(\d+(?:-\d+)?)'
     
     def replace_func(match):
@@ -84,11 +85,47 @@ def normalize_verse_references(content):
         # Convert Chinese chapter to Arabic
         arabic_chapter = chinese_to_arabic(chinese_chapter)
         
-        # Build normalized reference
+        # Build normalized reference with colon
         normalized_ref = f'{book}{arabic_chapter}:{verse}'
         
         return f'{prefix}{normalized_ref}'
     
+    content = re.sub(pattern, replace_func, content)
+    
+    # Handle abbreviated references in lists like （创28:18-22，卅一45，卅五14等）
+    # where subsequent references omit the book name
+    list_pattern = r'（([^）]+)）'
+    
+    def expand_abbreviated_refs(match):
+        list_content = match.group(1)
+        
+        # Find the first book name in the list
+        book_match = None
+        for book in BOOK_NAMES:
+            if book in list_content:
+                book_match = book
+                break
+        
+        if not book_match:
+            return match.group(0)  # No book found, return unchanged
+        
+        # Pattern for Chinese chapter + Arabic verse without book name
+        # e.g., "卅一45" or "卅一 45" (with optional space)
+        abbrev_pattern = r'([，、]\s*)([一二三四五六七八九十零廿卅]+)\s*(\d+(?:-\d+)?)'
+        
+        def add_book_name(m):
+            separator = m.group(1)
+            chinese_chapter = m.group(2)
+            verse = m.group(3)
+            # Add the book name before the Chinese chapter
+            return f'{separator}{book_match}{chinese_chapter}{verse}'
+        
+        expanded = re.sub(abbrev_pattern, add_book_name, list_content)
+        return f'（{expanded}）'
+    
+    content = re.sub(list_pattern, expand_abbreviated_refs, content)
+    
+    # Re-run the main normalization pattern to catch newly expanded references
     content = re.sub(pattern, replace_func, content)
     
     # Handle single-chapter books: 犹14-15 → 犹1:14-15
