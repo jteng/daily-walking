@@ -79,13 +79,10 @@ def format_content(content):
             content = content[:first_match_start] + formatted_list + content[last_match_end:]
             content_modified = True
     
-    # If we modified the content (added numbered list), return it
-    if content_modified:
-        return content
-    
+    # Continue with formatting even if we added a numbered list
     formatted = content
     
-    # Skip if content already has HTML formatting
+    # Skip if content already has paragraph tags (but allow <ol> since we just added it)
     if '<p>' in content or '<ul>' in content or '<blockquote>' in content:
         return content
     
