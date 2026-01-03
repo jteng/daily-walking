@@ -70,6 +70,11 @@ def fix_entry_17(content):
     
     # Part 2: Split the merged Genesis/Exodus tables
     # The table after Names section contains both Genesis 48-50 (3 cols) and Exodus outline (21 cols)
+    
+    # Check if already fixed
+    if '<h3>创世记结构</h3>' in content:
+        return content
+        
     table_pattern = r'(<p>出埃及记\s*</p>\s*)?<table>.*?</table>'
     
     table_match = re.search(table_pattern, content, re.DOTALL)
@@ -154,6 +159,11 @@ def fix_entry_21(content):
     """Fix the merged tables in entry 21."""
     import re
     
+    
+    # Check if already fixed to avoid duplication
+    if '<p>以色列人的方法是守节期：</p>' in content:
+        return content
+        
     # Pattern: find the entire broken table
     pattern = r'<table>.*?</table>'
     
