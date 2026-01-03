@@ -539,6 +539,10 @@ const Reader = {
     // Switch panels
     goToPanel: function(index) {
         if (!this.track) this.init();
+        
+        // Scroll to top when switching panels
+        window.scrollTo(0, 0);
+        
         this.currentPanel = index;
         const translate = index * -50;
         if (this.track) this.track.style.transform = `translateX(${translate}%)`;
