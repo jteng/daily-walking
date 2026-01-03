@@ -804,9 +804,24 @@ window.Reader = Reader;
                 e.stopPropagation(); // Prevent closing immediately
                 showVerseTooltipFromData(e);
                 
-                // Auto-close after 5 seconds
-                if (window.tooltipTimer) clearTimeout(window.tooltipTimer);
-                window.tooltipTimer = setTimeout(hideVerseTooltip, 5000);
+                // No auto-close timer - let user read at their own pace
+                // But add scroll listener to close when scrolling starts
+                
+                // Remove existing scroll listener if any (to prevent duplicates)
+                if (window.tooltipScrollListener) {
+                    window.removeEventListener('scroll', window.tooltipScrollListener);
+                }
+                
+                // Create new scroll listener
+                window.tooltipScrollListener = function() {
+                    hideVerseTooltip();
+                    window.removeEventListener('scroll', window.tooltipScrollListener);
+                };
+                
+                // Add listener with small delay to prevent immediate trigger on touch
+                setTimeout(() => {
+                    window.addEventListener('scroll', window.tooltipScrollListener, {passive: true});
+                }, 100);
             });
         });
         
