@@ -490,7 +490,7 @@ const Reader = {
         this.currentPanel = 0; 
         
         // Load saved mode
-        this.mode = localStorage.getItem('readerMode') || 'swipe';
+        this.mode = localStorage.getItem('readerMode') || 'classic';
         if (this.mode === 'classic') {
             document.body.classList.add('mode-classic');
             document.getElementById('mode-toggle').innerText = '📑'; // Icon for Classic
