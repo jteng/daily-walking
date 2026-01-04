@@ -156,22 +156,10 @@ def fix_entry_240(content):
 
 
 def fix_entry_21(content):
-    """Fix the merged tables in entry 21."""
+    """Fix the merged tables in entry 21 and handle potential duplication."""
     import re
     
-    
-    # Check if already fixed to avoid duplication
-    if '<p>以色列人的方法是守节期：</p>' in content:
-        return content
-        
-    # Pattern: find the entire broken table
-    pattern = r'<table>.*?</table>'
-    
-    match = re.search(pattern, content, re.DOTALL)
-    if not match:
-        return content
-    
-    # Replace with properly structured content
+    # Define the correct fixed content
     fixed_content = '''<table>
 <tr><td>第十一章</td><td>第十二章</td><td></td><td></td></tr>
 <tr><td>最后一灾的预告</td><td>最后一灾的发生</td><td></td><td></td></tr>
@@ -197,6 +185,30 @@ def fix_entry_21(content):
 <li>雹灾</li>
 </ol></td><td>一天</td><td>「依你们所说的，…」（出12:31-32）</td><td>法老：众神之神</td></tr>
 </table>'''
+
+    # Check for duplication (e.g. if '第十一章' appears more than once)
+    # or if we need to apply the fix
+    if content.count('第十一章') > 1:
+        print("    - Fixing duplication in entry 21...")
+        # Aggressive cleanup: Find everything from the FIRST table start to the LAST table end
+        # This consumes all duplicates
+        pattern = r'<table>.*</table>'
+        # DOTALL is essential to span lines
+        # This matches from first <table> to the VERY LAST </table> in the string (greedy)
+        return re.sub(pattern, fixed_content, content, flags=re.DOTALL)
+
+    # Normal fix check
+    if '<p>以色列人的方法是守节期：</p>' in content and content.count('第十一章') == 1:
+        return content
+        
+    # Pattern: find the broken table (typically just one if not duplicated yet)
+    pattern = r'<table>.*?</table>'
+    
+    match = re.search(pattern, content, re.DOTALL)
+    if not match:
+        return content
+    
+    return re.sub(pattern, fixed_content, content, flags=re.DOTALL)
     
     return re.sub(pattern, fixed_content, content, flags=re.DOTALL)
 
