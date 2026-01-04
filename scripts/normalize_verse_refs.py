@@ -72,60 +72,23 @@ def normalize_verse_references(content):
     
     # Build pattern with explicit book names only
     book_pattern = '|'.join(BOOK_NAMES)
-    # Pattern: optional prefix + book name + optional space + chinese chapter (with optional internal space) + optional space + verse
-    # Handles: "卅一 45", "来 十二 16", "创廿 八 18"
-    pattern = rf'([（(]?参)?({book_pattern})\s*((?:[一二三四五六七八九十零廿卅]\s*)+)\s*(\d+(?:-\d+)?)'
+    # Pattern: optional prefix + book name + chinese chapter + space + verse
+    pattern = rf'([（(]?参)?({book_pattern})([一二三四五六七八九十零廿卅]+)\s*(\d+(?:-\d+)?)'
     
     def replace_func(match):
         prefix = match.group(1) or ''
         book = match.group(2)
-        chinese_chapter = match.group(3).replace(' ', '') # Strip internal spaces
+        chinese_chapter = match.group(3)
         verse = match.group(4)
         
         # Convert Chinese chapter to Arabic
         arabic_chapter = chinese_to_arabic(chinese_chapter)
         
-        # Build normalized reference with colon
+        # Build normalized reference
         normalized_ref = f'{book}{arabic_chapter}:{verse}'
         
         return f'{prefix}{normalized_ref}'
     
-    content = re.sub(pattern, replace_func, content)
-    
-    # Handle abbreviated references in lists like （创28:18-22，卅一45，卅五14等）
-    # where subsequent references omit the book name
-    list_pattern = r'（([^）]+)）'
-    
-    def expand_abbreviated_refs(match):
-        list_content = match.group(1)
-        
-        # Find the first book name in the list
-        book_match = None
-        for book in BOOK_NAMES:
-            if book in list_content:
-                book_match = book
-                break
-        
-        if not book_match:
-            return match.group(0)  # No book found, return unchanged
-        
-        # Pattern for Chinese chapter + Arabic verse without book name
-        # e.g., "卅一45" or "卅一 45" or "卅 三 20" (with optional space)
-        abbrev_pattern = r'([，、]\s*)((?:[一二三四五六七八九十零廿卅]\s*)+)\s*(\d+(?:-\d+)?)'
-        
-        def add_book_name(m):
-            separator = m.group(1)
-            chinese_chapter = m.group(2).replace(' ', '') # Strip internal spaces
-            verse = m.group(3)
-            # Add the book name before the Chinese chapter
-            return f'{separator}{book_match}{chinese_chapter}{verse}'
-        
-        expanded = re.sub(abbrev_pattern, add_book_name, list_content)
-        return f'（{expanded}）'
-    
-    content = re.sub(list_pattern, expand_abbreviated_refs, content)
-    
-    # Re-run the main normalization pattern to catch newly expanded references
     content = re.sub(pattern, replace_func, content)
     
     # Handle single-chapter books: 犹14-15 → 犹1:14-15
@@ -140,15 +103,6 @@ def normalize_verse_references(content):
     
     content = re.sub(single_ref_pattern, add_chapter_one, content)
     
-    # Handle same-chapter verse lists: 创32:2、30 → 创32:2、创32:30
-    # Also handles comma separated: 创32:2，30
-    # Repeat a few times to handle multiple verses: 2、5、7
-    book_pattern = '|'.join(BOOK_NAMES)
-    verse_list_pattern = rf'({book_pattern})(\d+):(\d+(?:-\d+)?)([、，]\s*)(\d+(?:-\d+)?)'
-    
-    for _ in range(5): # Run multiple times for lists like 2,5,7,9,11
-        content = re.sub(verse_list_pattern, r'\1\2:\3\4\1\2:\5', content)
-        
     return content
 
 def main():
