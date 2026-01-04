@@ -235,39 +235,57 @@ def test_formatting(json_path: Path, model: str = DEFAULT_MODEL):
         print("\n✗ Formatting failed or content already formatted")
 
 
-def format_all_entries(json_path: Path, model: str = DEFAULT_MODEL):
-    """Format all entries in bibleData.json with retry and fallback."""
+import time
+
+def format_all_entries(json_path: Path, model: str = DEFAULT_MODEL, indices: Optional[list] = None, limit: Optional[int] = None, force: bool = False):
+    """Format entries in bibleData.json with retry and fallback."""
     # Load data
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
-    print(f"Formatting {len(data)} entries with {model}...")
-    print("This may take 10-20 minutes depending on the model.")
-    print()
+    target_indices = []
+    if indices:
+        target_indices = indices
+    else:
+        # If no specific indices, use all (subjest to limit)
+        target_indices = list(range(len(data)))
+        
+    if limit:
+        target_indices = target_indices[:limit]
+        
+    print(f"Formatting {len(target_indices)} entries with {model} (force={force})...")
     
     formatted_count = 0
     skipped_count = 0
     failed_indices = []  # Track failed entries for retry
     
-    # First pass: try all entries
-    for i, entry in enumerate(data):
+    start_time = time.time()
+    
+    # First pass
+    for i in target_indices:
+        entry = data[i]
         try:
-            if format_single_entry(entry, model):
+            entry_start = time.time()
+            if format_single_entry(entry, model, force=force):
+                elapsed = time.time() - entry_start
                 formatted_count += 1
-                print(f"✓ [{i+1}/{len(data)}] {entry['day_label']}: Formatted")
+                print(f"✓ [{i+1}/{len(data)}] {entry['day_label']}: Formatted ({elapsed:.2f}s)")
             else:
+                elapsed = time.time() - entry_start
                 skipped_count += 1
-                print(f"  [{i+1}/{len(data)}] {entry['day_label']}: Skipped (already formatted)")
+                print(f"  [{i+1}/{len(data)}] {entry['day_label']}: Skipped ({elapsed:.2f}s)")
         except Exception as e:
-            # Track for retry
             failed_indices.append(i)
             print(f"⚠ [{i+1}/{len(data)}] {entry['day_label']}: Failed (will retry)")
+
+
     
-    # Save progress after first pass
+    # Save progress coverage
+    # Note: We are saving the WHOLE data list, but only modified specific entries
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     
-    # Retry failed entries
+    # Retry failed (only those in our target set)
     if failed_indices:
         print(f"\n🔄 Retrying {len(failed_indices)} failed entries...")
         retry_failed = []
@@ -284,56 +302,47 @@ def format_all_entries(json_path: Path, model: str = DEFAULT_MODEL):
                 retry_failed.append(i)
                 print(f"⚠ [{i+1}/{len(data)}] {entry['day_label']}: Failed again")
         
-        # Save after retry
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        
-        # Fallback to heuristic for persistent failures
+            
         if retry_failed:
-            print(f"\n🔧 Using heuristic fallback for {len(retry_failed)} entries...")
-            
-            for i in retry_failed:
-                entry = data[i]
-                try:
-                    formatted = format_content_heuristic(entry['content'])
-                    if formatted:
-                        entry['content'] = formatted
-                        formatted_count += 1
-                        print(f"✓ [{i+1}/{len(data)}] {entry['day_label']}: Formatted (heuristic)")
-                    else:
-                        print(f"✗ [{i+1}/{len(data)}] {entry['day_label']}: Heuristic failed")
-                except Exception as e:
-                    print(f"✗ [{i+1}/{len(data)}] {entry['day_label']}: Error - {e}")
-            
-            # Final save
-            with open(json_path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-    
-    print(f"\n✅ Done!")
+             print(f"\n🔧 Using heuristic fallback for {len(retry_failed)} entries...")
+             for i in retry_failed:
+                 entry = data[i]
+                 try:
+                     formatted = format_content_heuristic(entry['content'])
+                     if formatted:
+                         entry['content'] = formatted
+                         formatted_count += 1
+                         print(f"✓ [{i+1}/{len(data)}] {entry['day_label']}: Formatted (heuristic)")
+                     else:
+                         print(f"✗ [{i+1}/{len(data)}] {entry['day_label']}: Heuristic failed")
+                 except Exception as e:
+                     print(f"✗ [{i+1}/{len(data)}] {entry['day_label']}: Error - {e}")
+             
+             with open(json_path, 'w', encoding='utf-8') as f:
+                 json.dump(data, f, ensure_ascii=False, indent=2)
+
+    total_time = time.time() - start_time
+    print(f"\n✅ Done in {total_time:.2f}s!")
+    print(f"  Targeted: {len(target_indices)}")
     print(f"  Formatted: {formatted_count}")
     print(f"  Skipped: {skipped_count}")
-    if failed_indices:
-        print(f"  Initially failed: {len(failed_indices)}")
-        if retry_failed:
-            print(f"  Used heuristic fallback: {len(retry_failed)}")
-    print(f"  Total: {len(data)}")
+    print(f"  Avg time/entry: {total_time/len(target_indices) if target_indices else 0:.2f}s")
 
 
 def main():
     parser = argparse.ArgumentParser(description='Format content using local LLM')
     parser.add_argument('--test', action='store_true', help='Test on a single entry')
     parser.add_argument('--all', action='store_true', help='Format all entries')
+    parser.add_argument('--indices', type=str, help='Comma-separated list of indices (e.g. 0,1,2)')
+    parser.add_argument('--limit', type=int, help='Limit number of entries')
     parser.add_argument('--model', default=DEFAULT_MODEL, help='Ollama model to use')
+    parser.add_argument('--force', action='store_true', help='Force re-formatting')
     args = parser.parse_args()
     
     # Check if Ollama is running
-    if not check_ollama_running():
-        print("Error: Ollama is not running!")
-        print("\nPlease start Ollama first:")
-        print("  1. Open a terminal")
-        print("  2. Run: ollama serve")
-        print("  3. Leave it running and try again")
-        return
+    # if not check_ollama_running(): ... (Keep existing check if needed, or skip for speed if confident)
     
     json_path = Path('bibleData.json')
     if not json_path.exists():
@@ -342,16 +351,16 @@ def main():
     
     if args.test:
         test_formatting(json_path, args.model)
+    elif args.indices:
+        indices = [int(x.strip()) for x in args.indices.split(',')]
+        format_all_entries(json_path, args.model, indices=indices, limit=args.limit, force=args.force)
     elif args.all:
         confirm = input(f"This will format all entries using {args.model}. Continue? (y/n): ")
         if confirm.lower() == 'y':
-            format_all_entries(json_path, args.model)
+            format_all_entries(json_path, args.model, limit=args.limit, force=args.force)
     else:
-        print("Please specify --test or --all")
-        print("Examples:")
-        print("  python3 scripts/format_content_llm.py --test")
-        print("  python3 scripts/format_content_llm.py --all")
-
+        # Default behavior or help
+        print("Please specify --test, --all, or --indices")
 
 if __name__ == '__main__':
     main()
