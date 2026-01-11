@@ -1,6 +1,6 @@
 [
   {
-    "day_label": "第1周 第1日",
+    "day_label": "第 1 / 365 天",
     "week": 1,
     "day": 1,
     "title": "起初，神创造",
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "day_label": "第1周 第2日",
+    "day_label": "第 2 / 365 天",
     "week": 1,
     "day": 2,
     "title": "从乐园到苦境",
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "day_label": "第1周 第3日",
+    "day_label": "第 3 / 365 天",
     "week": 1,
     "day": 3,
     "title": "洪水的审判",
@@ -52,7 +52,7 @@
     ]
   },
   {
-    "day_label": "第1周 第4日",
+    "day_label": "第 4 / 365 天",
     "week": 1,
     "day": 4,
     "title": "巴别塔与分散",
@@ -68,7 +68,7 @@
     ]
   },
   {
-    "day_label": "第1周 第5日",
+    "day_label": "第 5 / 365 天",
     "week": 1,
     "day": 5,
     "title": "亚伯兰蒙召与神的应许",
@@ -77,7 +77,7 @@
     "verse": ""
   },
   {
-    "day_label": "第1周 第6日",
+    "day_label": "第 6 / 365 天",
     "week": 1,
     "day": 6,
     "title": "神与亚伯兰立约",
@@ -97,7 +97,16 @@
     ]
   },
   {
-    "day_label": "第2周 第1日",
+    "day_label": "第 7 / 365 天",
+    "week": 1,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 8 / 365 天",
     "week": 2,
     "day": 1,
     "title": "神审判所多玛、蛾摩拉",
@@ -113,7 +122,7 @@
     ]
   },
   {
-    "day_label": "第2周 第2日",
+    "day_label": "第 9 / 365 天",
     "week": 2,
     "day": 2,
     "title": "顺服之子──以撒",
@@ -129,7 +138,7 @@
     ]
   },
   {
-    "day_label": "第2周 第3日",
+    "day_label": "第 10 / 365 天",
     "week": 2,
     "day": 3,
     "title": "以撒的家庭及信行",
@@ -145,7 +154,7 @@
     ]
   },
   {
-    "day_label": "第2周 第4日",
+    "day_label": "第 11 / 365 天",
     "week": 2,
     "day": 4,
     "title": "雅各离家出走",
@@ -161,7 +170,7 @@
     ]
   },
   {
-    "day_label": "第2周 第5日",
+    "day_label": "第 12 / 365 天",
     "week": 2,
     "day": 5,
     "title": "雅各成家与逃走",
@@ -177,7 +186,7 @@
     ]
   },
   {
-    "day_label": "第2周 第6日",
+    "day_label": "第 13 / 365 天",
     "week": 2,
     "day": 6,
     "title": "与神和好，与人和好",
@@ -193,7 +202,16 @@
     ]
   },
   {
-    "day_label": "第3周 第1日",
+    "day_label": "第 14 / 365 天",
+    "week": 2,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 15 / 365 天",
     "week": 3,
     "day": 1,
     "title": "人的软弱与神的怜悯",
@@ -209,7 +227,7 @@
     ]
   },
   {
-    "day_label": "第3周 第2日",
+    "day_label": "第 16 / 365 天",
     "week": 3,
     "day": 2,
     "title": "一个王的诞生",
@@ -229,7 +247,7 @@
     ]
   },
   {
-    "day_label": "第3周 第3日",
+    "day_label": "第 17 / 365 天",
     "week": 3,
     "day": 3,
     "title": "从最低升至最高",
@@ -245,7 +263,7 @@
     ]
   },
   {
-    "day_label": "第3周 第4日",
+    "day_label": "第 18 / 365 天",
     "week": 3,
     "day": 4,
     "title": "兄弟重逢未相认",
@@ -261,7 +279,7 @@
     ]
   },
   {
-    "day_label": "第3周 第5日",
+    "day_label": "第 19 / 365 天",
     "week": 3,
     "day": 5,
     "title": "饶恕与接纳",
@@ -281,7 +299,7 @@
     ]
   },
   {
-    "day_label": "第3周 第6日",
+    "day_label": "第 20 / 365 天",
     "week": 3,
     "day": 6,
     "title": "寄望于应许地",
@@ -297,7 +315,16 @@
     ]
   },
   {
-    "day_label": "第4周 第1日",
+    "day_label": "第 21 / 365 天",
+    "week": 3,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 22 / 365 天",
     "week": 4,
     "day": 1,
     "title": "以色列人埃及为奴",
@@ -313,7 +340,7 @@
     ]
   },
   {
-    "day_label": "第4周 第2日",
+    "day_label": "第 23 / 365 天",
     "week": 4,
     "day": 2,
     "title": "救主的出现",
@@ -329,7 +356,7 @@
     ]
   },
   {
-    "day_label": "第4周 第3日",
+    "day_label": "第 24 / 365 天",
     "week": 4,
     "day": 3,
     "title": "九灾降埃及（一）",
@@ -345,7 +372,7 @@
     ]
   },
   {
-    "day_label": "第4周 第5日",
+    "day_label": "第 25 / 365 天",
     "week": 4,
     "day": 5,
     "title": "死别与生离",
@@ -361,7 +388,7 @@
     ]
   },
   {
-    "day_label": "第4周 第6日",
+    "day_label": "第 26 / 365 天",
     "week": 4,
     "day": 6,
     "title": "过红海与凯歌",
@@ -377,7 +404,16 @@
     ]
   },
   {
-    "day_label": "第5周 第1日",
+    "day_label": "第 27 / 365 天",
+    "week": 4,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 28 / 365 天",
     "week": 5,
     "day": 1,
     "title": "最大的敌人",
@@ -393,7 +429,7 @@
     ]
   },
   {
-    "day_label": "第5周 第2日",
+    "day_label": "第 29 / 365 天",
     "week": 5,
     "day": 2,
     "title": "摩西的约──十诫",
@@ -417,7 +453,7 @@
     ]
   },
   {
-    "day_label": "第5周 第3日",
+    "day_label": "第 30 / 365 天",
     "week": 5,
     "day": 3,
     "title": "典章之颁布",
@@ -437,7 +473,7 @@
     ]
   },
   {
-    "day_label": "第5周 第4日",
+    "day_label": "第 31 / 365 天",
     "week": 5,
     "day": 4,
     "title": "有关敬拜殿宇之指示",
@@ -453,7 +489,7 @@
     ]
   },
   {
-    "day_label": "第5周 第5日",
+    "day_label": "第 32 / 365 天",
     "week": 5,
     "day": 5,
     "title": "给祭司的指示",
@@ -469,7 +505,7 @@
     ]
   },
   {
-    "day_label": "第5周 第6日",
+    "day_label": "第 33 / 365 天",
     "week": 5,
     "day": 6,
     "title": "叛逆的百姓与荣耀的领袖",
@@ -485,7 +521,16 @@
     ]
   },
   {
-    "day_label": "第6周 第1日",
+    "day_label": "第 34 / 365 天",
+    "week": 5,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 35 / 365 天",
     "week": 6,
     "day": 1,
     "title": "会幕各物之建造",
@@ -505,7 +550,7 @@
     ]
   },
   {
-    "day_label": "第6周 第2日",
+    "day_label": "第 36 / 365 天",
     "week": 6,
     "day": 2,
     "title": "三种自动的献祭",
@@ -521,7 +566,7 @@
     ]
   },
   {
-    "day_label": "第6周 第3日",
+    "day_label": "第 37 / 365 天",
     "week": 6,
     "day": 3,
     "title": "义务的祭及祭司献祭须知",
@@ -537,7 +582,7 @@
     ]
   },
   {
-    "day_label": "第6周 第4日",
+    "day_label": "第 38 / 365 天",
     "week": 6,
     "day": 4,
     "title": "祭司的职任与限制",
@@ -553,7 +598,7 @@
     ]
   },
   {
-    "day_label": "第6周 第5日",
+    "day_label": "第 39 / 365 天",
     "week": 6,
     "day": 5,
     "title": "家庭与卫生条例",
@@ -569,7 +614,7 @@
     ]
   },
   {
-    "day_label": "第6周 第6日",
+    "day_label": "第 40 / 365 天",
     "week": 6,
     "day": 6,
     "title": "漏症与赎罪日条例",
@@ -585,7 +630,16 @@
     ]
   },
   {
-    "day_label": "第7周 第1日",
+    "day_label": "第 41 / 365 天",
+    "week": 6,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 42 / 365 天",
     "week": 7,
     "day": 1,
     "title": "作圣洁的子民",
@@ -605,7 +659,7 @@
     ]
   },
   {
-    "day_label": "第7周 第2日",
+    "day_label": "第 43 / 365 天",
     "week": 7,
     "day": 2,
     "title": "作圣洁的领袖",
@@ -621,7 +675,7 @@
     ]
   },
   {
-    "day_label": "第7周 第3日",
+    "day_label": "第 44 / 365 天",
     "week": 7,
     "day": 3,
     "title": "对神及大自然之回应",
@@ -637,7 +691,7 @@
     ]
   },
   {
-    "day_label": "第7周 第4日",
+    "day_label": "第 45 / 365 天",
     "week": 7,
     "day": 4,
     "title": "人口普查及职业分配",
@@ -653,7 +707,7 @@
     ]
   },
   {
-    "day_label": "第7周 第5日",
+    "day_label": "第 46 / 365 天",
     "week": 7,
     "day": 5,
     "title": "洁净百姓",
@@ -669,7 +723,7 @@
     ]
   },
   {
-    "day_label": "第7周 第6日",
+    "day_label": "第 47 / 365 天",
     "week": 7,
     "day": 6,
     "title": "百姓的较弱",
@@ -685,7 +739,16 @@
     ]
   },
   {
-    "day_label": "第8周 第1日",
+    "day_label": "第 48 / 365 天",
+    "week": 7,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 49 / 365 天",
     "week": 8,
     "day": 1,
     "title": "逆流而上的人",
@@ -701,7 +764,7 @@
     ]
   },
   {
-    "day_label": "第8周 第2日",
+    "day_label": "第 50 / 365 天",
     "week": 8,
     "day": 2,
     "title": "自寻死路的百姓",
@@ -717,7 +780,7 @@
     ]
   },
   {
-    "day_label": "第8周 第3日",
+    "day_label": "第 51 / 365 天",
     "week": 8,
     "day": 3,
     "title": "最顽劣的敌人",
@@ -733,7 +796,7 @@
     ]
   },
   {
-    "day_label": "第8周 第4日",
+    "day_label": "第 52 / 365 天",
     "week": 8,
     "day": 4,
     "title": "日落、日出之二代",
@@ -749,7 +812,7 @@
     ]
   },
   {
-    "day_label": "第8周 第5日",
+    "day_label": "第 53 / 365 天",
     "week": 8,
     "day": 5,
     "title": "准备占地",
@@ -765,7 +828,7 @@
     ]
   },
   {
-    "day_label": "第8周 第6日",
+    "day_label": "第 54 / 365 天",
     "week": 8,
     "day": 6,
     "title": "进迦南的指示",
@@ -781,7 +844,16 @@
     ]
   },
   {
-    "day_label": "第9周 第1日",
+    "day_label": "第 55 / 365 天",
+    "week": 8,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 56 / 365 天",
     "week": 9,
     "day": 1,
     "title": "回顾历史，强调顺服",
@@ -801,7 +873,7 @@
     ]
   },
   {
-    "day_label": "第9周 第2日",
+    "day_label": "第 57 / 365 天",
     "week": 9,
     "day": 2,
     "title": "毋忘主的律法",
@@ -817,7 +889,7 @@
     ]
   },
   {
-    "day_label": "第9周 第3日",
+    "day_label": "第 58 / 365 天",
     "week": 9,
     "day": 3,
     "title": "回顾神恩及领袖的爱",
@@ -837,7 +909,7 @@
     ]
   },
   {
-    "day_label": "第9周 第4日",
+    "day_label": "第 59 / 365 天",
     "week": 9,
     "day": 4,
     "title": "新子民宗教律例",
@@ -853,7 +925,7 @@
     ]
   },
   {
-    "day_label": "第9周 第5日",
+    "day_label": "第 60 / 365 天",
     "week": 9,
     "day": 5,
     "title": "新子民治国须知",
@@ -869,7 +941,7 @@
     ]
   },
   {
-    "day_label": "第9周 第6日",
+    "day_label": "第 61 / 365 天",
     "week": 9,
     "day": 6,
     "title": "新子民之家事与社会条例",
@@ -885,7 +957,16 @@
     ]
   },
   {
-    "day_label": "第10周 第1日",
+    "day_label": "第 62 / 365 天",
+    "week": 9,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 63 / 365 天",
     "week": 10,
     "day": 1,
     "title": "祸福由人",
@@ -901,7 +982,7 @@
     ]
   },
   {
-    "day_label": "第10周 第2日",
+    "day_label": "第 64 / 365 天",
     "week": 10,
     "day": 2,
     "title": "得胜的骊歌",
@@ -917,7 +998,7 @@
     ]
   },
   {
-    "day_label": "第10周 第3日",
+    "day_label": "第 65 / 365 天",
     "week": 10,
     "day": 3,
     "title": "战前的准备",
@@ -933,7 +1014,7 @@
     ]
   },
   {
-    "day_label": "第10周 第4日",
+    "day_label": "第 66 / 365 天",
     "week": 10,
     "day": 4,
     "title": "最重要之战──内部之战",
@@ -949,7 +1030,7 @@
     ]
   },
   {
-    "day_label": "第10周 第5日",
+    "day_label": "第 67 / 365 天",
     "week": 10,
     "day": 5,
     "title": "南部及北部之战役",
@@ -965,7 +1046,7 @@
     ]
   },
   {
-    "day_label": "第10周 第6日",
+    "day_label": "第 68 / 365 天",
     "week": 10,
     "day": 6,
     "title": "战争的果实──分地（一）",
@@ -981,7 +1062,16 @@
     ]
   },
   {
-    "day_label": "第11周 第1日",
+    "day_label": "第 69 / 365 天",
+    "week": 10,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 70 / 365 天",
     "week": 11,
     "day": 1,
     "title": "战争的果实──分地（二）",
@@ -997,7 +1087,7 @@
     ]
   },
   {
-    "day_label": "第11周 第2日",
+    "day_label": "第 71 / 365 天",
     "week": 11,
     "day": 2,
     "title": "约书亚的遗嘱",
@@ -1013,7 +1103,7 @@
     ]
   },
   {
-    "day_label": "第11周 第3日",
+    "day_label": "第 72 / 365 天",
     "week": 11,
     "day": 3,
     "title": "恶性循环之祸根",
@@ -1029,7 +1119,7 @@
     ]
   },
   {
-    "day_label": "第11周 第4日",
+    "day_label": "第 73 / 365 天",
     "week": 11,
     "day": 4,
     "title": "基甸──米甸的征服者",
@@ -1045,7 +1135,7 @@
     ]
   },
   {
-    "day_label": "第11周 第5日",
+    "day_label": "第 74 / 365 天",
     "week": 11,
     "day": 5,
     "title": "失落的一代",
@@ -1061,7 +1151,7 @@
     ]
   },
   {
-    "day_label": "第11周 第6日",
+    "day_label": "第 75 / 365 天",
     "week": 11,
     "day": 6,
     "title": "败于自己手中的参孙",
@@ -1077,7 +1167,16 @@
     ]
   },
   {
-    "day_label": "第12周 第1日",
+    "day_label": "第 76 / 365 天",
+    "week": 11,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 77 / 365 天",
     "week": 12,
     "day": 1,
     "title": "黑暗的世代黑暗的世代",
@@ -1093,7 +1192,7 @@
     ]
   },
   {
-    "day_label": "第12周 第2日",
+    "day_label": "第 78 / 365 天",
     "week": 12,
     "day": 2,
     "title": "外邦女子的光辉见证",
@@ -1109,7 +1208,7 @@
     ]
   },
   {
-    "day_label": "第12周 第3日",
+    "day_label": "第 79 / 365 天",
     "week": 12,
     "day": 3,
     "title": "撒母耳的童年与呼召",
@@ -1125,7 +1224,7 @@
     ]
   },
   {
-    "day_label": "第12周 第4日",
+    "day_label": "第 80 / 365 天",
     "week": 12,
     "day": 4,
     "title": "约柜失而复得",
@@ -1141,7 +1240,7 @@
     ]
   },
   {
-    "day_label": "第12周 第5日",
+    "day_label": "第 81 / 365 天",
     "week": 12,
     "day": 5,
     "title": "第一位以色列王",
@@ -1157,7 +1256,7 @@
     ]
   },
   {
-    "day_label": "第12周 第6日",
+    "day_label": "第 82 / 365 天",
     "week": 12,
     "day": 6,
     "title": "扫罗之悖逆与见弃",
@@ -1173,7 +1272,16 @@
     ]
   },
   {
-    "day_label": "第13周 第1日",
+    "day_label": "第 83 / 365 天",
+    "week": 12,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 84 / 365 天",
     "week": 13,
     "day": 1,
     "title": "无冕之王在扫罗宫中",
@@ -1189,7 +1297,7 @@
     ]
   },
   {
-    "day_label": "第13周 第2日",
+    "day_label": "第 85 / 365 天",
     "week": 13,
     "day": 2,
     "title": "无冕之王要逃亡",
@@ -1205,7 +1313,7 @@
     ]
   },
   {
-    "day_label": "第13周 第3日",
+    "day_label": "第 86 / 365 天",
     "week": 13,
     "day": 3,
     "title": "无冕君王之恩慈",
@@ -1221,7 +1329,7 @@
     ]
   },
   {
-    "day_label": "第13周 第4日",
+    "day_label": "第 87 / 365 天",
     "week": 13,
     "day": 4,
     "title": "扫罗王朝告终",
@@ -1237,7 +1345,7 @@
     ]
   },
   {
-    "day_label": "第13周 第5日",
+    "day_label": "第 88 / 365 天",
     "week": 13,
     "day": 5,
     "title": "分裂的王国",
@@ -1253,7 +1361,7 @@
     ]
   },
   {
-    "day_label": "第13周 第6日",
+    "day_label": "第 89 / 365 天",
     "week": 13,
     "day": 6,
     "title": "全国统一",
@@ -1269,7 +1377,16 @@
     ]
   },
   {
-    "day_label": "第14周 第1日",
+    "day_label": "第 90 / 365 天",
+    "week": 13,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 91 / 365 天",
     "week": 14,
     "day": 1,
     "title": "扩张领土",
@@ -1285,7 +1402,7 @@
     ]
   },
   {
-    "day_label": "第14周 第2日",
+    "day_label": "第 92 / 365 天",
     "week": 14,
     "day": 2,
     "title": "大卫犯罪与后果",
@@ -1301,7 +1418,7 @@
     ]
   },
   {
-    "day_label": "第14周 第3日",
+    "day_label": "第 93 / 365 天",
     "week": 14,
     "day": 3,
     "title": "押沙龙叛变",
@@ -1317,7 +1434,7 @@
     ]
   },
   {
-    "day_label": "第14周 第4日",
+    "day_label": "第 94 / 365 天",
     "week": 14,
     "day": 4,
     "title": "动荡的王国",
@@ -1333,7 +1450,7 @@
     ]
   },
   {
-    "day_label": "第14周 第5日",
+    "day_label": "第 95 / 365 天",
     "week": 14,
     "day": 5,
     "title": "临终总结",
@@ -1349,7 +1466,7 @@
     ]
   },
   {
-    "day_label": "第14周 第6日",
+    "day_label": "第 96 / 365 天",
     "week": 14,
     "day": 6,
     "title": "所罗门继位为王",
@@ -1365,7 +1482,16 @@
     ]
   },
   {
-    "day_label": "第15周 第1日",
+    "day_label": "第 97 / 365 天",
+    "week": 14,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 98 / 365 天",
     "week": 15,
     "day": 1,
     "title": "所罗门建圣殿",
@@ -1381,7 +1507,7 @@
     ]
   },
   {
-    "day_label": "第15周 第2日",
+    "day_label": "第 99 / 365 天",
     "week": 15,
     "day": 2,
     "title": "所罗门的成与败",
@@ -1397,7 +1523,7 @@
     ]
   },
   {
-    "day_label": "第15周 第3日",
+    "day_label": "第 100 / 365 天",
     "week": 15,
     "day": 3,
     "title": "两国对敌",
@@ -1413,7 +1539,7 @@
     ]
   },
   {
-    "day_label": "第15周 第4日",
+    "day_label": "第 101 / 365 天",
     "week": 15,
     "day": 4,
     "title": "烈火先知以利亚",
@@ -1429,7 +1555,7 @@
     ]
   },
   {
-    "day_label": "第15周 第5日",
+    "day_label": "第 102 / 365 天",
     "week": 15,
     "day": 5,
     "title": "暴君的收场",
@@ -1445,7 +1571,7 @@
     ]
   },
   {
-    "day_label": "第15周 第6日",
+    "day_label": "第 103 / 365 天",
     "week": 15,
     "day": 6,
     "title": "神的工作不会停止",
@@ -1461,7 +1587,16 @@
     ]
   },
   {
-    "day_label": "第16周 第1日",
+    "day_label": "第 104 / 365 天",
+    "week": 15,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 105 / 365 天",
     "week": 16,
     "day": 1,
     "title": "以利沙的神迹",
@@ -1477,7 +1612,7 @@
     ]
   },
   {
-    "day_label": "第16周 第2日",
+    "day_label": "第 106 / 365 天",
     "week": 16,
     "day": 2,
     "title": "亚哈王朝的覆亡",
@@ -1493,7 +1628,7 @@
     ]
   },
   {
-    "day_label": "第16周 第3日",
+    "day_label": "第 107 / 365 天",
     "week": 16,
     "day": 3,
     "title": "以色列亡国",
@@ -1509,7 +1644,7 @@
     ]
   },
   {
-    "day_label": "第16周 第4日",
+    "day_label": "第 108 / 365 天",
     "week": 16,
     "day": 4,
     "title": "希西家的复兴",
@@ -1525,7 +1660,7 @@
     ]
   },
   {
-    "day_label": "第16周 第5日",
+    "day_label": "第 109 / 365 天",
     "week": 16,
     "day": 5,
     "title": "犹大之灭亡",
@@ -1541,7 +1676,7 @@
     ]
   },
   {
-    "day_label": "第16周 第6日",
+    "day_label": "第 110 / 365 天",
     "week": 16,
     "day": 6,
     "title": "大卫与以色列的家谱",
@@ -1557,7 +1692,16 @@
     ]
   },
   {
-    "day_label": "第17周 第1日",
+    "day_label": "第 111 / 365 天",
+    "week": 16,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 112 / 365 天",
     "week": 17,
     "day": 1,
     "title": "神拣选的王",
@@ -1573,7 +1717,7 @@
     ]
   },
   {
-    "day_label": "第17周 第2日",
+    "day_label": "第 113 / 365 天",
     "week": 17,
     "day": 2,
     "title": "从帐幕到圣殿之筹建",
@@ -1593,7 +1737,7 @@
     ]
   },
   {
-    "day_label": "第17周 第3日",
+    "day_label": "第 114 / 365 天",
     "week": 17,
     "day": 3,
     "title": "成就背后的危机",
@@ -1609,7 +1753,7 @@
     ]
   },
   {
-    "day_label": "第17周 第4日",
+    "day_label": "第 115 / 365 天",
     "week": 17,
     "day": 4,
     "title": "建圣殿之前奏",
@@ -1625,7 +1769,7 @@
     ]
   },
   {
-    "day_label": "第17周 第5日",
+    "day_label": "第 116 / 365 天",
     "week": 17,
     "day": 5,
     "title": "大卫临终言行",
@@ -1641,7 +1785,7 @@
     ]
   },
   {
-    "day_label": "第17周 第6日",
+    "day_label": "第 117 / 365 天",
     "week": 17,
     "day": 6,
     "title": "所罗门建圣殿",
@@ -1657,7 +1801,16 @@
     ]
   },
   {
-    "day_label": "第18周 第1日",
+    "day_label": "第 118 / 365 天",
+    "week": 17,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 119 / 365 天",
     "week": 18,
     "day": 1,
     "title": "所罗门之敬拜与丰富",
@@ -1677,7 +1830,7 @@
     ]
   },
   {
-    "day_label": "第18周 第2日",
+    "day_label": "第 120 / 365 天",
     "week": 18,
     "day": 2,
     "title": "罗波安王朝的腐败",
@@ -1693,7 +1846,7 @@
     ]
   },
   {
-    "day_label": "第18周 第3日",
+    "day_label": "第 121 / 365 天",
     "week": 18,
     "day": 3,
     "title": "亚撒重建祭坛",
@@ -1709,7 +1862,7 @@
     ]
   },
   {
-    "day_label": "第18周 第4日",
+    "day_label": "第 122 / 365 天",
     "week": 18,
     "day": 4,
     "title": "约沙法的复兴",
@@ -1725,7 +1878,7 @@
     ]
   },
   {
-    "day_label": "第18周 第5日",
+    "day_label": "第 123 / 365 天",
     "week": 18,
     "day": 5,
     "title": "转危为安的约阿施",
@@ -1741,7 +1894,7 @@
     ]
   },
   {
-    "day_label": "第18周 第6日",
+    "day_label": "第 124 / 365 天",
     "week": 18,
     "day": 6,
     "title": "乌西雅及约但的复兴",
@@ -1757,7 +1910,16 @@
     ]
   },
   {
-    "day_label": "第19周 第1日",
+    "day_label": "第 125 / 365 天",
+    "week": 18,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 126 / 365 天",
     "week": 19,
     "day": 1,
     "title": "从祷告经历神迹",
@@ -1773,7 +1935,7 @@
     ]
   },
   {
-    "day_label": "第19周 第2日",
+    "day_label": "第 127 / 365 天",
     "week": 19,
     "day": 2,
     "title": "巴比伦的战俘",
@@ -1789,7 +1951,7 @@
     ]
   },
   {
-    "day_label": "第19周 第3日",
+    "day_label": "第 128 / 365 天",
     "week": 19,
     "day": 3,
     "title": "重建圣殿使命",
@@ -1805,7 +1967,7 @@
     ]
   },
   {
-    "day_label": "第19周 第4日",
+    "day_label": "第 129 / 365 天",
     "week": 19,
     "day": 4,
     "title": "圣殿重建完成",
@@ -1821,7 +1983,7 @@
     ]
   },
   {
-    "day_label": "第19周 第5日",
+    "day_label": "第 130 / 365 天",
     "week": 19,
     "day": 5,
     "title": "以斯拉带来奋兴",
@@ -1837,7 +1999,7 @@
     ]
   },
   {
-    "day_label": "第19周 第6日",
+    "day_label": "第 131 / 365 天",
     "week": 19,
     "day": 6,
     "title": "重建城墙之异象与准备",
@@ -1853,7 +2015,16 @@
     ]
   },
   {
-    "day_label": "第20周 第1日",
+    "day_label": "第 132 / 365 天",
+    "week": 19,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 133 / 365 天",
     "week": 20,
     "day": 1,
     "title": "城墙重建完工",
@@ -1869,7 +2040,7 @@
     ]
   },
   {
-    "day_label": "第20周 第2日",
+    "day_label": "第 134 / 365 天",
     "week": 20,
     "day": 2,
     "title": "重建百姓生命",
@@ -1885,7 +2056,7 @@
     ]
   },
   {
-    "day_label": "第20周 第3日",
+    "day_label": "第 135 / 365 天",
     "week": 20,
     "day": 3,
     "title": "感恩、失望、再重整",
@@ -1901,7 +2072,7 @@
     ]
   },
   {
-    "day_label": "第20周 第4日",
+    "day_label": "第 136 / 365 天",
     "week": 20,
     "day": 4,
     "title": "犹太人皇后与危机",
@@ -1917,7 +2088,7 @@
     ]
   },
   {
-    "day_label": "第20周 第5日",
+    "day_label": "第 137 / 365 天",
     "week": 20,
     "day": 5,
     "title": "哈曼耻辱的收场",
@@ -1933,7 +2104,7 @@
     ]
   },
   {
-    "day_label": "第20周 第6日",
+    "day_label": "第 138 / 365 天",
     "week": 20,
     "day": 6,
     "title": "末底改的尊荣",
@@ -1949,7 +2120,16 @@
     ]
   },
   {
-    "day_label": "第21周 第1日",
+    "day_label": "第 139 / 365 天",
+    "week": 20,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 140 / 365 天",
     "week": 21,
     "day": 1,
     "title": "义人也会受苦",
@@ -1965,7 +2145,7 @@
     ]
   },
   {
-    "day_label": "第21周 第2日",
+    "day_label": "第 141 / 365 天",
     "week": 21,
     "day": 2,
     "title": "约伯答以利法（一）",
@@ -1981,7 +2161,7 @@
     ]
   },
   {
-    "day_label": "第21周 第3日",
+    "day_label": "第 142 / 365 天",
     "week": 21,
     "day": 3,
     "title": "约伯答比勒达（一）",
@@ -1997,7 +2177,7 @@
     ]
   },
   {
-    "day_label": "第21周 第4日",
+    "day_label": "第 143 / 365 天",
     "week": 21,
     "day": 4,
     "title": "约伯答琐法（一）",
@@ -2013,7 +2193,7 @@
     ]
   },
   {
-    "day_label": "第21周 第5日",
+    "day_label": "第 144 / 365 天",
     "week": 21,
     "day": 5,
     "title": "约伯辩以利法（二）",
@@ -2029,7 +2209,7 @@
     ]
   },
   {
-    "day_label": "第21周 第6日",
+    "day_label": "第 145 / 365 天",
     "week": 21,
     "day": 6,
     "title": "约伯答比勒达（二）",
@@ -2045,7 +2225,16 @@
     ]
   },
   {
-    "day_label": "第22周 第1日",
+    "day_label": "第 146 / 365 天",
+    "week": 21,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 147 / 365 天",
     "week": 22,
     "day": 1,
     "title": "约伯与琐法辩（二）",
@@ -2061,7 +2250,7 @@
     ]
   },
   {
-    "day_label": "第22周 第2日",
+    "day_label": "第 148 / 365 天",
     "week": 22,
     "day": 2,
     "title": "约伯与以利法辩（三）",
@@ -2077,7 +2266,7 @@
     ]
   },
   {
-    "day_label": "第22周 第3日",
+    "day_label": "第 149 / 365 天",
     "week": 22,
     "day": 3,
     "title": "约伯与比勒达辩（三）",
@@ -2097,7 +2286,7 @@
     ]
   },
   {
-    "day_label": "第22周 第4日",
+    "day_label": "第 150 / 365 天",
     "week": 22,
     "day": 4,
     "title": "约伯最后的呼吁",
@@ -2113,7 +2302,7 @@
     ]
   },
   {
-    "day_label": "第22周 第5日",
+    "day_label": "第 151 / 365 天",
     "week": 22,
     "day": 5,
     "title": "以利户的插入",
@@ -2133,7 +2322,7 @@
     ]
   },
   {
-    "day_label": "第22周 第6日",
+    "day_label": "第 152 / 365 天",
     "week": 22,
     "day": 6,
     "title": "以利户",
@@ -2149,7 +2338,16 @@
     ]
   },
   {
-    "day_label": "第23周 第1日",
+    "day_label": "第 153 / 365 天",
+    "week": 22,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 154 / 365 天",
     "week": 23,
     "day": 1,
     "title": "耶和华亲自回答约伯",
@@ -2165,7 +2363,7 @@
     ]
   },
   {
-    "day_label": "第23周 第2日",
+    "day_label": "第 155 / 365 天",
     "week": 23,
     "day": 2,
     "title": "约伯的胜利与神的祝福",
@@ -2181,7 +2379,7 @@
     ]
   },
   {
-    "day_label": "第23周 第3日",
+    "day_label": "第 156 / 365 天",
     "week": 23,
     "day": 3,
     "title": "有福人生",
@@ -2190,7 +2388,7 @@
     "verse": ""
   },
   {
-    "day_label": "第23周 第4日",
+    "day_label": "第 157 / 365 天",
     "week": 23,
     "day": 4,
     "title": "世人反对人子",
@@ -2199,7 +2397,7 @@
     "verse": ""
   },
   {
-    "day_label": "第23周 第5日",
+    "day_label": "第 158 / 365 天",
     "week": 23,
     "day": 5,
     "title": "信徒蒙福之根源",
@@ -2208,7 +2406,7 @@
     "verse": ""
   },
   {
-    "day_label": "第23周 第6日",
+    "day_label": "第 159 / 365 天",
     "week": 23,
     "day": 6,
     "title": "预言中之主基督",
@@ -2217,7 +2415,16 @@
     "verse": ""
   },
   {
-    "day_label": "第24周 第1日",
+    "day_label": "第 160 / 365 天",
+    "week": 23,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 161 / 365 天",
     "week": 24,
     "day": 1,
     "title": "仰望、等候与敬拜神",
@@ -2226,7 +2433,7 @@
     "verse": ""
   },
   {
-    "day_label": "第24周 第2日",
+    "day_label": "第 162 / 365 天",
     "week": 24,
     "day": 2,
     "title": "圣徒乐歌",
@@ -2235,7 +2442,7 @@
     "verse": ""
   },
   {
-    "day_label": "第24周 第3日",
+    "day_label": "第 163 / 365 天",
     "week": 24,
     "day": 3,
     "title": "在外忧内患中仰望主",
@@ -2244,7 +2451,7 @@
     "verse": ""
   },
   {
-    "day_label": "第24周 第4日",
+    "day_label": "第 164 / 365 天",
     "week": 24,
     "day": 4,
     "title": "以色列国之耻辱及盼望",
@@ -2253,7 +2460,7 @@
     "verse": ""
   },
   {
-    "day_label": "第24周 第5日",
+    "day_label": "第 165 / 365 天",
     "week": 24,
     "day": 5,
     "title": "谁可得救？",
@@ -2262,7 +2469,7 @@
     "verse": ""
   },
   {
-    "day_label": "第24周 第6日",
+    "day_label": "第 166 / 365 天",
     "week": 24,
     "day": 6,
     "title": "使人突围而出的信心",
@@ -2271,7 +2478,16 @@
     "verse": ""
   },
   {
-    "day_label": "第25周 第1日",
+    "day_label": "第 167 / 365 天",
+    "week": 24,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 168 / 365 天",
     "week": 25,
     "day": 1,
     "title": "磨炼出来之精金",
@@ -2280,7 +2496,7 @@
     "verse": ""
   },
   {
-    "day_label": "第25周 第2日",
+    "day_label": "第 169 / 365 天",
     "week": 25,
     "day": 2,
     "title": "以色列的救赎",
@@ -2289,7 +2505,7 @@
     "verse": ""
   },
   {
-    "day_label": "第25周 第3日",
+    "day_label": "第 170 / 365 天",
     "week": 25,
     "day": 3,
     "title": "人的问题，神的答案",
@@ -2298,7 +2514,7 @@
     "verse": ""
   },
   {
-    "day_label": "第25周 第4日",
+    "day_label": "第 171 / 365 天",
     "week": 25,
     "day": 4,
     "title": "以色列之恶性循环",
@@ -2307,7 +2523,7 @@
     "verse": ""
   },
   {
-    "day_label": "第25周 第5日",
+    "day_label": "第 172 / 365 天",
     "week": 25,
     "day": 5,
     "title": "永恒的颂歌",
@@ -2316,7 +2532,7 @@
     "verse": ""
   },
   {
-    "day_label": "第25周 第6日",
+    "day_label": "第 173 / 365 天",
     "week": 25,
     "day": 6,
     "title": "对神之颂赞",
@@ -2325,7 +2541,16 @@
     "verse": ""
   },
   {
-    "day_label": "第26周 第1日",
+    "day_label": "第 174 / 365 天",
+    "week": 25,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 175 / 365 天",
     "week": 26,
     "day": 1,
     "title": "为何我们要歌颂",
@@ -2334,7 +2559,7 @@
     "verse": ""
   },
   {
-    "day_label": "第26周 第2日",
+    "day_label": "第 176 / 365 天",
     "week": 26,
     "day": 2,
     "title": "神人间不平等之关系",
@@ -2343,7 +2568,7 @@
     "verse": ""
   },
   {
-    "day_label": "第26周 第3日",
+    "day_label": "第 177 / 365 天",
     "week": 26,
     "day": 3,
     "title": "为我们伸冤的主",
@@ -2352,7 +2577,7 @@
     "verse": ""
   },
   {
-    "day_label": "第26周 第4日",
+    "day_label": "第 178 / 365 天",
     "week": 26,
     "day": 4,
     "title": "无可比拟的神",
@@ -2361,7 +2586,7 @@
     "verse": ""
   },
   {
-    "day_label": "第26周 第5日",
+    "day_label": "第 179 / 365 天",
     "week": 26,
     "day": 5,
     "title": "神丰富之启示",
@@ -2370,7 +2595,7 @@
     "verse": ""
   },
   {
-    "day_label": "第26周 第6日",
+    "day_label": "第 180 / 365 天",
     "week": 26,
     "day": 6,
     "title": "门徒远行之歌",
@@ -2379,7 +2604,16 @@
     "verse": ""
   },
   {
-    "day_label": "第27周 第1日",
+    "day_label": "第 181 / 365 天",
+    "week": 26,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 182 / 365 天",
     "week": 27,
     "day": 1,
     "title": "和谐的景象",
@@ -2388,7 +2622,7 @@
     "verse": ""
   },
   {
-    "day_label": "第27周 第2日",
+    "day_label": "第 183 / 365 天",
     "week": 27,
     "day": 2,
     "title": "人的尽头，神的起头",
@@ -2397,7 +2631,7 @@
     "verse": ""
   },
   {
-    "day_label": "第27周 第3日",
+    "day_label": "第 184 / 365 天",
     "week": 27,
     "day": 3,
     "title": "神啊，救我！",
@@ -2406,7 +2640,7 @@
     "verse": ""
   },
   {
-    "day_label": "第27周 第4日",
+    "day_label": "第 185 / 365 天",
     "week": 27,
     "day": 4,
     "title": "赞美的人生",
@@ -2415,7 +2649,7 @@
     "verse": ""
   },
   {
-    "day_label": "第27周 第5日",
+    "day_label": "第 186 / 365 天",
     "week": 27,
     "day": 5,
     "title": "不能止渴的饮料",
@@ -2431,7 +2665,7 @@
     ]
   },
   {
-    "day_label": "第27周 第6日",
+    "day_label": "第 187 / 365 天",
     "week": 27,
     "day": 6,
     "title": "人生──不能逃避之痛苦？",
@@ -2447,7 +2681,16 @@
     ]
   },
   {
-    "day_label": "第28周 第1日",
+    "day_label": "第 188 / 365 天",
+    "week": 27,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 189 / 365 天",
     "week": 28,
     "day": 1,
     "title": "揭开人生之谜",
@@ -2467,7 +2710,7 @@
     ]
   },
   {
-    "day_label": "第28周 第2日",
+    "day_label": "第 190 / 365 天",
     "week": 28,
     "day": 2,
     "title": "田园初恋",
@@ -2483,7 +2726,7 @@
     ]
   },
   {
-    "day_label": "第28周 第3日",
+    "day_label": "第 191 / 365 天",
     "week": 28,
     "day": 3,
     "title": "在爱中成长",
@@ -2499,7 +2742,7 @@
     ]
   },
   {
-    "day_label": "第28周 第4日",
+    "day_label": "第 192 / 365 天",
     "week": 28,
     "day": 4,
     "title": "卖主自焚的犹大",
@@ -2515,7 +2758,7 @@
     ]
   },
   {
-    "day_label": "第28周 第5日",
+    "day_label": "第 193 / 365 天",
     "week": 28,
     "day": 5,
     "title": "先知的蒙召与神的审判",
@@ -2535,7 +2778,7 @@
     ]
   },
   {
-    "day_label": "第28周 第6日",
+    "day_label": "第 194 / 365 天",
     "week": 28,
     "day": 6,
     "title": "犹大之黑暗与光明",
@@ -2551,7 +2794,16 @@
     ]
   },
   {
-    "day_label": "第29周 第1日",
+    "day_label": "第 195 / 365 天",
+    "week": 28,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 196 / 365 天",
     "week": 29,
     "day": 1,
     "title": "列国的悲苦结局（一）",
@@ -2567,7 +2819,7 @@
     ]
   },
   {
-    "day_label": "第29周 第2日",
+    "day_label": "第 197 / 365 天",
     "week": 29,
     "day": 2,
     "title": "列国之悲苦结局（二）",
@@ -2583,7 +2835,7 @@
     ]
   },
   {
-    "day_label": "第29周 第3日",
+    "day_label": "第 198 / 365 天",
     "week": 29,
     "day": 3,
     "title": "人人皆有！",
@@ -2599,7 +2851,7 @@
     ]
   },
   {
-    "day_label": "第29周 第4日",
+    "day_label": "第 199 / 365 天",
     "week": 29,
     "day": 4,
     "title": "审判与释放",
@@ -2615,7 +2867,7 @@
     ]
   },
   {
-    "day_label": "第29周 第5日",
+    "day_label": "第 200 / 365 天",
     "week": 29,
     "day": 5,
     "title": "痛苦的日子",
@@ -2635,7 +2887,7 @@
     ]
   },
   {
-    "day_label": "第29周 第6日",
+    "day_label": "第 201 / 365 天",
     "week": 29,
     "day": 6,
     "title": "审判与审判官、公义的王",
@@ -2651,7 +2903,16 @@
     ]
   },
   {
-    "day_label": "第30周 第1日",
+    "day_label": "第 202 / 365 天",
+    "week": 29,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 203 / 365 天",
     "week": 30,
     "day": 1,
     "title": "屡解危机的神",
@@ -2667,7 +2928,7 @@
     ]
   },
   {
-    "day_label": "第30周 第2日",
+    "day_label": "第 204 / 365 天",
     "week": 30,
     "day": 2,
     "title": "无可比拟的神",
@@ -2683,7 +2944,7 @@
     ]
   },
   {
-    "day_label": "第30周 第3日",
+    "day_label": "第 205 / 365 天",
     "week": 30,
     "day": 3,
     "title": "抉择与其结果",
@@ -2699,7 +2960,7 @@
     ]
   },
   {
-    "day_label": "第30周 第4日",
+    "day_label": "第 206 / 365 天",
     "week": 30,
     "day": 4,
     "title": "受苦的仆人",
@@ -2715,7 +2976,7 @@
     ]
   },
   {
-    "day_label": "第30周 第5日",
+    "day_label": "第 207 / 365 天",
     "week": 30,
     "day": 5,
     "title": "蒙赎之子民",
@@ -2747,7 +3008,7 @@
     ]
   },
   {
-    "day_label": "第30周 第6日",
+    "day_label": "第 208 / 365 天",
     "week": 30,
     "day": 6,
     "title": "犹大之羞辱与荣耀",
@@ -2763,7 +3024,16 @@
     ]
   },
   {
-    "day_label": "第31周 第1日",
+    "day_label": "第 209 / 365 天",
+    "week": 30,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 210 / 365 天",
     "week": 31,
     "day": 1,
     "title": "蒙福的祷告",
@@ -2779,7 +3049,7 @@
     ]
   },
   {
-    "day_label": "第31周 第2日",
+    "day_label": "第 211 / 365 天",
     "week": 31,
     "day": 2,
     "title": "审判的宣告",
@@ -2799,7 +3069,7 @@
     ]
   },
   {
-    "day_label": "第31周 第3日",
+    "day_label": "第 212 / 365 天",
     "week": 31,
     "day": 3,
     "title": "毁灭的预言",
@@ -2808,7 +3078,7 @@
     "verse": ""
   },
   {
-    "day_label": "第31周 第4日",
+    "day_label": "第 213 / 365 天",
     "week": 31,
     "day": 4,
     "title": "忧伤的预言",
@@ -2824,7 +3094,7 @@
     ]
   },
   {
-    "day_label": "第31周 第5日",
+    "day_label": "第 214 / 365 天",
     "week": 31,
     "day": 5,
     "title": "犹大是腐烂的腰带",
@@ -2844,7 +3114,7 @@
     ]
   },
   {
-    "day_label": "第31周 第6日",
+    "day_label": "第 215 / 365 天",
     "week": 31,
     "day": 6,
     "title": "先知及犹大的遭遇",
@@ -2860,7 +3130,16 @@
     ]
   },
   {
-    "day_label": "第32周 第1日",
+    "day_label": "第 216 / 365 天",
+    "week": 31,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 217 / 365 天",
     "week": 32,
     "day": 1,
     "title": "为时已晚！",
@@ -2876,7 +3155,7 @@
     ]
   },
   {
-    "day_label": "第32周 第2日",
+    "day_label": "第 218 / 365 天",
     "week": 32,
     "day": 2,
     "title": "犹大王朝没落之预言",
@@ -2892,7 +3171,7 @@
     ]
   },
   {
-    "day_label": "第32周 第3日",
+    "day_label": "第 219 / 365 天",
     "week": 32,
     "day": 3,
     "title": "审判后的希望",
@@ -2908,7 +3187,7 @@
     ]
   },
   {
-    "day_label": "第32周 第4日",
+    "day_label": "第 220 / 365 天",
     "week": 32,
     "day": 4,
     "title": "受神审判的西底家",
@@ -2924,7 +3203,7 @@
     ]
   },
   {
-    "day_label": "第32周 第5日",
+    "day_label": "第 221 / 365 天",
     "week": 32,
     "day": 5,
     "title": "死性不改的百姓",
@@ -2940,7 +3219,7 @@
     ]
   },
   {
-    "day_label": "第32周 第6日",
+    "day_label": "第 222 / 365 天",
     "week": 32,
     "day": 6,
     "title": "全民的管教",
@@ -2956,7 +3235,16 @@
     ]
   },
   {
-    "day_label": "第33周 第1日",
+    "day_label": "第 223 / 365 天",
+    "week": 32,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 224 / 365 天",
     "week": 33,
     "day": 1,
     "title": "侵略者之悲惨结局",
@@ -2972,7 +3260,7 @@
     ]
   },
   {
-    "day_label": "第33周 第2日",
+    "day_label": "第 225 / 365 天",
     "week": 33,
     "day": 2,
     "title": "挽歌",
@@ -2992,7 +3280,7 @@
     ]
   },
   {
-    "day_label": "第33周 第3日",
+    "day_label": "第 226 / 365 天",
     "week": 33,
     "day": 3,
     "title": "以西结所见之信号",
@@ -3008,7 +3296,7 @@
     ]
   },
   {
-    "day_label": "第33周 第4日",
+    "day_label": "第 227 / 365 天",
     "week": 33,
     "day": 4,
     "title": "耶路撒冷因罪受罚",
@@ -3024,7 +3312,7 @@
     ]
   },
   {
-    "day_label": "第33周 第5日",
+    "day_label": "第 228 / 365 天",
     "week": 33,
     "day": 5,
     "title": "唯悔改者得救",
@@ -3040,7 +3328,7 @@
     ]
   },
   {
-    "day_label": "第33周 第6日",
+    "day_label": "第 229 / 365 天",
     "week": 33,
     "day": 6,
     "title": "犹大受审判之比喻",
@@ -3056,7 +3344,16 @@
     ]
   },
   {
-    "day_label": "第34周 第1日",
+    "day_label": "第 230 / 365 天",
+    "week": 33,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 231 / 365 天",
     "week": 34,
     "day": 1,
     "title": "犹大受审之比喻",
@@ -3072,7 +3369,7 @@
     ]
   },
   {
-    "day_label": "第34周 第2日",
+    "day_label": "第 232 / 365 天",
     "week": 34,
     "day": 2,
     "title": "罪人的挽歌",
@@ -3088,7 +3385,7 @@
     ]
   },
   {
-    "day_label": "第34周 第3日",
+    "day_label": "第 233 / 365 天",
     "week": 34,
     "day": 3,
     "title": "神对列国的审判",
@@ -3108,7 +3405,7 @@
     ]
   },
   {
-    "day_label": "第34周 第4日",
+    "day_label": "第 234 / 365 天",
     "week": 34,
     "day": 4,
     "title": "对埃及的审判",
@@ -3124,7 +3421,7 @@
     ]
   },
   {
-    "day_label": "第34周 第5日",
+    "day_label": "第 235 / 365 天",
     "week": 34,
     "day": 5,
     "title": "四篇劝慰性信息",
@@ -3140,7 +3437,7 @@
     ]
   },
   {
-    "day_label": "第34周 第6日",
+    "day_label": "第 236 / 365 天",
     "week": 34,
     "day": 6,
     "title": "枯骨复生",
@@ -3156,7 +3453,16 @@
     ]
   },
   {
-    "day_label": "第35周 第1日",
+    "day_label": "第 237 / 365 天",
+    "week": 34,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 238 / 365 天",
     "week": 35,
     "day": 1,
     "title": "新的敬拜中心",
@@ -3172,7 +3478,7 @@
     ]
   },
   {
-    "day_label": "第35周 第2日",
+    "day_label": "第 239 / 365 天",
     "week": 35,
     "day": 2,
     "title": "敬拜的复兴与神的产业",
@@ -3188,7 +3494,7 @@
     ]
   },
   {
-    "day_label": "第35周 第3日",
+    "day_label": "第 240 / 365 天",
     "week": 35,
     "day": 3,
     "title": "出于污泥而不染",
@@ -3204,7 +3510,7 @@
     ]
   },
   {
-    "day_label": "第35周 第4日",
+    "day_label": "第 241 / 365 天",
     "week": 35,
     "day": 4,
     "title": "谁是主宰？",
@@ -3224,7 +3530,7 @@
     ]
   },
   {
-    "day_label": "第35周 第5日",
+    "day_label": "第 242 / 365 天",
     "week": 35,
     "day": 5,
     "title": "预言中之中东及欧洲局势",
@@ -3240,7 +3546,7 @@
     ]
   },
   {
-    "day_label": "第35周 第6日",
+    "day_label": "第 243 / 365 天",
     "week": 35,
     "day": 6,
     "title": "有关结局之预言",
@@ -3256,7 +3562,16 @@
     ]
   },
   {
-    "day_label": "第36周 第1日",
+    "day_label": "第 244 / 365 天",
+    "week": 35,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 245 / 365 天",
     "week": 36,
     "day": 1,
     "title": "先知的婚姻",
@@ -3272,7 +3587,7 @@
     ]
   },
   {
-    "day_label": "第36周 第2日",
+    "day_label": "第 246 / 365 天",
     "week": 36,
     "day": 2,
     "title": "不义的选民",
@@ -3288,7 +3603,7 @@
     ]
   },
   {
-    "day_label": "第36周 第3日",
+    "day_label": "第 247 / 365 天",
     "week": 36,
     "day": 3,
     "title": "以色列要受管教",
@@ -3304,7 +3619,7 @@
     ]
   },
   {
-    "day_label": "第36周 第4日",
+    "day_label": "第 248 / 365 天",
     "week": 36,
     "day": 4,
     "title": "以色列的复兴",
@@ -3320,7 +3635,7 @@
     ]
   },
   {
-    "day_label": "第36周 第5日",
+    "day_label": "第 249 / 365 天",
     "week": 36,
     "day": 5,
     "title": "耶和华的审判",
@@ -3336,7 +3651,7 @@
     ]
   },
   {
-    "day_label": "第36周 第6日",
+    "day_label": "第 250 / 365 天",
     "week": 36,
     "day": 6,
     "title": "神要降的审判",
@@ -3352,23 +3667,16 @@
     ]
   },
   {
-    "day_label": "第36周 第1日",
+    "day_label": "第 251 / 365 天",
     "week": 36,
-    "day": 1,
-    "title": "神要降的审判",
-    "scripture": "摩三至六章",
-    "content": "<p>宣告完神将要降下的审判及灾祸后，先知解释其原因。他借着三篇信息向百姓发出有力的责备及警 告，首先，先知责备以色列人现在的罪，包括他们的忘恩，忘记是耶和华将他们从埃及为奴之地领 出来的。</p>\n\n<p>先知用多个比喻说明，有因必有果，以色列受管教绝非偶然。跟着先知指出以色列必被围 攻，纵使他们得救，亦必经亡国之痛，主必拆毁他们的祭坛及房屋（三章）。</p>\n\n<p>先知又指出以色列过 去的罪，先知先后五次以「你们仍不归向我」说明以色列受管教乃罪有应得。总括过去，以色列不 听神的话（摩4:1-5），他们屡行不义，表面敬虔，实质败坏，宣扬的是甘心的祭，实际献的却是有 酵的祭（摩4:5）。</p>\n\n<p>其次，他们不理神的警告（摩4:6-11），神多次藉饥荒、旱灾、瘟疫、外敌毁坏等， 去警告他们，但他们「仍不归向神」，因此，他们必不能逃脱神的审判（四章）。先知在述完以色 列现在及过去的罪后，便指出神将来要给他们的刑罚。</p>\n\n<p>先知劝他们寻求宗教的真义，寻求神的怜悯， 寻求社会的公义及寻求个人的为善。先知又以「祸哉」警告过着虚假宗教生活的百姓，不要再活在 安逸、放纵的败坏生活中（摩5:18-27），又警告国家领袖不要只顾着自己享受，恃强凌弱，贪污枉 法，荒宴淫逸，不为人民设想，神必审判他们的！ 以色列人宣传给众人知道的是「甘心祭」，都是好的方面，惟恐人不知的，是叫人知道自己为神做 了些什么，但实际上他们所献的，是有酵的祭──有罪的、动机不良的。</p>\n\n<p>弟兄姊妹，我们今日献的 祭是否也如此？ 当有灾难、逆境、苦病、拯救、保守等发生在我们身上，神是期望我们归向他，更亲近他的，可惜 以色列人「仍不归向神」。</p>\n\n请思想，过去你是否经历过类似的软弱？什么时候，在什么情形下你没 有「归向神」、「更亲近、听从神」？现在是向神悔改及向神立志的时候了！ <table><tr><td>第三章</td><td>第四章</td><td>五  1-17</td><td>五  18至六14</td></tr><tr><td>现在的罪</td><td>过去的罪</td><td>所以要寻求</td><td>所以祸灾</td></tr><tr><td>种瓜得瓜</td><td>不听从、不理会</td><td>公义、怜悯、为善</td><td>百姓、元首受   罚</td></tr></table>",
-    "verse": "阿摩司书五章十四节",
-    "verse_text": "你们要求善， 不要求恶，就必存活。 这样，耶和华－万军之 神 必照你们所说的与你们同在。",
-    "verse_parts": [
-      {
-        "reference": "阿摩司书 5:14",
-        "text": "你们要求善， 不要求恶，就必存活。 这样，耶和华－万军之 神 必照你们所说的与你们同在。"
-      }
-    ]
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
   },
   {
-    "day_label": "第37周 第2日",
+    "day_label": "第 252 / 365 天",
     "week": 37,
     "day": 2,
     "title": "五异象所带出的信息",
@@ -3384,7 +3692,7 @@
     ]
   },
   {
-    "day_label": "第37周 第3日",
+    "day_label": "第 253 / 365 天",
     "week": 37,
     "day": 3,
     "title": "以东的结局",
@@ -3393,7 +3701,7 @@
     "verse": "俄巴底亚书廿一节"
   },
   {
-    "day_label": "第37周 第4日",
+    "day_label": "第 254 / 365 天",
     "week": 37,
     "day": 4,
     "title": "违命与顺命的结果",
@@ -3409,7 +3717,7 @@
     ]
   },
   {
-    "day_label": "第37周 第5日",
+    "day_label": "第 255 / 365 天",
     "week": 37,
     "day": 5,
     "title": "神对百姓的审判",
@@ -3425,7 +3733,7 @@
     ]
   },
   {
-    "day_label": "第37周 第6日",
+    "day_label": "第 256 / 365 天",
     "week": 37,
     "day": 6,
     "title": "为首领者下马，弥赛亚上任",
@@ -3441,7 +3749,16 @@
     ]
   },
   {
-    "day_label": "第38周 第1日",
+    "day_label": "第 257 / 365 天",
+    "week": 37,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 258 / 365 天",
     "week": 38,
     "day": 1,
     "title": "审判官的判决",
@@ -3457,7 +3774,7 @@
     ]
   },
   {
-    "day_label": "第38周 第2日",
+    "day_label": "第 259 / 365 天",
     "week": 38,
     "day": 2,
     "title": "神对尼尼微的审判",
@@ -3473,7 +3790,7 @@
     ]
   },
   {
-    "day_label": "第38周 第3日",
+    "day_label": "第 260 / 365 天",
     "week": 38,
     "day": 3,
     "title": "从怀疑到相信",
@@ -3489,7 +3806,7 @@
     ]
   },
   {
-    "day_label": "第38周 第4日",
+    "day_label": "第 261 / 365 天",
     "week": 38,
     "day": 4,
     "title": "耶和华的日子",
@@ -3505,7 +3822,7 @@
     ]
   },
   {
-    "day_label": "第38周 第5日",
+    "day_label": "第 262 / 365 天",
     "week": 38,
     "day": 5,
     "title": "重建圣殿",
@@ -3521,7 +3838,7 @@
     ]
   },
   {
-    "day_label": "第38周 第6日",
+    "day_label": "第 263 / 365 天",
     "week": 38,
     "day": 6,
     "title": "头四个异象",
@@ -3537,7 +3854,16 @@
     ]
   },
   {
-    "day_label": "第39周 第1日",
+    "day_label": "第 264 / 365 天",
+    "week": 38,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 265 / 365 天",
     "week": 39,
     "day": 1,
     "title": "后四异象",
@@ -3553,7 +3879,7 @@
     ]
   },
   {
-    "day_label": "第39周 第2日",
+    "day_label": "第 266 / 365 天",
     "week": 39,
     "day": 2,
     "title": "另一种「圣殿」之重建",
@@ -3569,7 +3895,7 @@
     ]
   },
   {
-    "day_label": "第39周 第3日",
+    "day_label": "第 267 / 365 天",
     "week": 39,
     "day": 3,
     "title": "有关弥赛亚之预言",
@@ -3585,7 +3911,7 @@
     ]
   },
   {
-    "day_label": "第39周 第4日",
+    "day_label": "第 268 / 365 天",
     "week": 39,
     "day": 4,
     "title": "有关弥赛亚国度之预言",
@@ -3601,7 +3927,7 @@
     ]
   },
   {
-    "day_label": "第39周 第5日",
+    "day_label": "第 269 / 365 天",
     "week": 39,
     "day": 5,
     "title": "神对以色列之控告与警告",
@@ -3621,7 +3947,7 @@
     ]
   },
   {
-    "day_label": "第39周 第6日",
+    "day_label": "第 270 / 365 天",
     "week": 39,
     "day": 6,
     "title": "从箴言看怒气",
@@ -3637,7 +3963,16 @@
     ]
   },
   {
-    "day_label": "第40周 第1日",
+    "day_label": "第 271 / 365 天",
+    "week": 39,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 272 / 365 天",
     "week": 40,
     "day": 1,
     "title": "君王的来临及受试炼",
@@ -3657,7 +3992,7 @@
     ]
   },
   {
-    "day_label": "第40周 第2日",
+    "day_label": "第 273 / 365 天",
     "week": 40,
     "day": 2,
     "title": "君王的教训",
@@ -3677,7 +4012,7 @@
     ]
   },
   {
-    "day_label": "第40周 第3日",
+    "day_label": "第 274 / 365 天",
     "week": 40,
     "day": 3,
     "title": "君王的权柄",
@@ -3693,7 +4028,7 @@
     ]
   },
   {
-    "day_label": "第40周 第4日",
+    "day_label": "第 275 / 365 天",
     "week": 40,
     "day": 4,
     "title": "君王的被弃",
@@ -3709,7 +4044,7 @@
     ]
   },
   {
-    "day_label": "第40周 第5日",
+    "day_label": "第 276 / 365 天",
     "week": 40,
     "day": 5,
     "title": "王的被拒及预言被杀",
@@ -3725,7 +4060,7 @@
     ]
   },
   {
-    "day_label": "第40周 第6日",
+    "day_label": "第 277 / 365 天",
     "week": 40,
     "day": 6,
     "title": "君王的门徒训练",
@@ -3741,7 +4076,16 @@
     ]
   },
   {
-    "day_label": "第41周 第1日",
+    "day_label": "第 278 / 365 天",
+    "week": 40,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 279 / 365 天",
     "week": 41,
     "day": 1,
     "title": "王受难前之遭遇及信息",
@@ -3757,7 +4101,7 @@
     ]
   },
   {
-    "day_label": "第41周 第2日",
+    "day_label": "第 280 / 365 天",
     "week": 41,
     "day": 2,
     "title": "主的受难及复活",
@@ -3773,7 +4117,7 @@
     ]
   },
   {
-    "day_label": "第41周 第3日",
+    "day_label": "第 281 / 365 天",
     "week": 41,
     "day": 3,
     "title": "神仆的预备及工作",
@@ -3789,7 +4133,7 @@
     ]
   },
   {
-    "day_label": "第41周 第4日",
+    "day_label": "第 282 / 365 天",
     "week": 41,
     "day": 4,
     "title": "神仆的教训和使命",
@@ -3805,7 +4149,7 @@
     ]
   },
   {
-    "day_label": "第41周 第5日",
+    "day_label": "第 283 / 365 天",
     "week": 41,
     "day": 5,
     "title": "神仆训练接班人",
@@ -3821,7 +4165,7 @@
     ]
   },
   {
-    "day_label": "第41周 第6日",
+    "day_label": "第 284 / 365 天",
     "week": 41,
     "day": 6,
     "title": "神仆的受苦",
@@ -3837,7 +4181,16 @@
     ]
   },
   {
-    "day_label": "第42周 第1日",
+    "day_label": "第 285 / 365 天",
+    "week": 41,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 286 / 365 天",
     "week": 42,
     "day": 1,
     "title": "神仆的受难及复活",
@@ -3853,7 +4206,7 @@
     ]
   },
   {
-    "day_label": "第42周 第2日",
+    "day_label": "第 287 / 365 天",
     "week": 42,
     "day": 2,
     "title": "人子的降世及准备",
@@ -3869,7 +4222,7 @@
     ]
   },
   {
-    "day_label": "第42周 第3日",
+    "day_label": "第 288 / 365 天",
     "week": 42,
     "day": 3,
     "title": "人子的权柄",
@@ -3889,7 +4242,7 @@
     ]
   },
   {
-    "day_label": "第42周 第4日",
+    "day_label": "第 289 / 365 天",
     "week": 42,
     "day": 4,
     "title": "人子的服侍",
@@ -3905,7 +4258,7 @@
     ]
   },
   {
-    "day_label": "第42周 第5日",
+    "day_label": "第 290 / 365 天",
     "week": 42,
     "day": 5,
     "title": "教训门徒，领袖责备",
@@ -3921,7 +4274,7 @@
     ]
   },
   {
-    "day_label": "第42周 第6日",
+    "day_label": "第 291 / 365 天",
     "week": 42,
     "day": 6,
     "title": "人子的比喻",
@@ -3937,7 +4290,16 @@
     ]
   },
   {
-    "day_label": "第43周 第1日",
+    "day_label": "第 292 / 365 天",
+    "week": 42,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 293 / 365 天",
     "week": 43,
     "day": 1,
     "title": "赴耶城途中之教训",
@@ -3953,7 +4315,7 @@
     ]
   },
   {
-    "day_label": "第43周 第2日",
+    "day_label": "第 294 / 365 天",
     "week": 43,
     "day": 2,
     "title": "人子的受苦",
@@ -3969,7 +4331,7 @@
     ]
   },
   {
-    "day_label": "第43周 第3日",
+    "day_label": "第 295 / 365 天",
     "week": 43,
     "day": 3,
     "title": "人子的受害与复活",
@@ -3989,7 +4351,7 @@
     ]
   },
   {
-    "day_label": "第43周 第4日",
+    "day_label": "第 296 / 365 天",
     "week": 43,
     "day": 4,
     "title": "道成肉身的神子",
@@ -4013,7 +4375,7 @@
     ]
   },
   {
-    "day_label": "第43周 第5日",
+    "day_label": "第 297 / 365 天",
     "week": 43,
     "day": 5,
     "title": "神子的神迹及宣道",
@@ -4029,7 +4391,7 @@
     ]
   },
   {
-    "day_label": "第43周 第6日",
+    "day_label": "第 298 / 365 天",
     "week": 43,
     "day": 6,
     "title": "叫人得光、自由、生命",
@@ -4049,7 +4411,16 @@
     ]
   },
   {
-    "day_label": "第44周 第1日",
+    "day_label": "第 299 / 365 天",
+    "week": 43,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 300 / 365 天",
     "week": 44,
     "day": 1,
     "title": "从最高来到最低的神子",
@@ -4069,7 +4440,7 @@
     ]
   },
   {
-    "day_label": "第44周 第2日",
+    "day_label": "第 301 / 365 天",
     "week": 44,
     "day": 2,
     "title": "临别赠言",
@@ -4085,7 +4456,7 @@
     ]
   },
   {
-    "day_label": "第44周 第3日",
+    "day_label": "第 302 / 365 天",
     "week": 44,
     "day": 3,
     "title": "神子的受难与复活",
@@ -4101,7 +4472,7 @@
     ]
   },
   {
-    "day_label": "第44周 第4日",
+    "day_label": "第 303 / 365 天",
     "week": 44,
     "day": 4,
     "title": "教会的开始及服侍",
@@ -4121,7 +4492,7 @@
     ]
   },
   {
-    "day_label": "第44周 第5日",
+    "day_label": "第 304 / 365 天",
     "week": 44,
     "day": 5,
     "title": "教会的试炼",
@@ -4137,7 +4508,7 @@
     ]
   },
   {
-    "day_label": "第44周 第6日",
+    "day_label": "第 305 / 365 天",
     "week": 44,
     "day": 6,
     "title": "教会拓展",
@@ -4165,7 +4536,16 @@
     ]
   },
   {
-    "day_label": "第45周 第1日",
+    "day_label": "第 306 / 365 天",
+    "week": 44,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 307 / 365 天",
     "week": 45,
     "day": 1,
     "title": "保罗首次宣教旅程",
@@ -4185,7 +4565,7 @@
     ]
   },
   {
-    "day_label": "第45周 第2日",
+    "day_label": "第 308 / 365 天",
     "week": 45,
     "day": 2,
     "title": "保罗第二次宣教旅程",
@@ -4201,7 +4581,7 @@
     ]
   },
   {
-    "day_label": "第45周 第3日",
+    "day_label": "第 309 / 365 天",
     "week": 45,
     "day": 3,
     "title": "保罗第三次宣教旅程",
@@ -4217,7 +4597,7 @@
     ]
   },
   {
-    "day_label": "第45周 第4日",
+    "day_label": "第 310 / 365 天",
     "week": 45,
     "day": 4,
     "title": "保罗被捉拿",
@@ -4233,7 +4613,7 @@
     ]
   },
   {
-    "day_label": "第45周 第5日",
+    "day_label": "第 311 / 365 天",
     "week": 45,
     "day": 5,
     "title": "福音的西传",
@@ -4253,7 +4633,7 @@
     ]
   },
   {
-    "day_label": "第45周 第6日",
+    "day_label": "第 312 / 365 天",
     "week": 45,
     "day": 6,
     "title": "全人类均无能自救",
@@ -4273,7 +4653,16 @@
     ]
   },
   {
-    "day_label": "第46周 第1日",
+    "day_label": "第 313 / 365 天",
+    "week": 45,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 314 / 365 天",
     "week": 46,
     "day": 1,
     "title": "称义与成圣之途",
@@ -4293,7 +4682,7 @@
     ]
   },
   {
-    "day_label": "第46周 第2日",
+    "day_label": "第 315 / 365 天",
     "week": 46,
     "day": 2,
     "title": "福音与选民关系",
@@ -4313,7 +4702,7 @@
     ]
   },
   {
-    "day_label": "第46周 第3日",
+    "day_label": "第 316 / 365 天",
     "week": 46,
     "day": 3,
     "title": "称义者的新生活",
@@ -4333,7 +4722,7 @@
     ]
   },
   {
-    "day_label": "第46周 第4日",
+    "day_label": "第 317 / 365 天",
     "week": 46,
     "day": 4,
     "title": "教会的分裂",
@@ -4353,7 +4742,7 @@
     ]
   },
   {
-    "day_label": "第46周 第5日",
+    "day_label": "第 318 / 365 天",
     "week": 46,
     "day": 5,
     "title": "教会的罪与纪律",
@@ -4373,7 +4762,7 @@
     ]
   },
   {
-    "day_label": "第46周 第6日",
+    "day_label": "第 319 / 365 天",
     "week": 46,
     "day": 6,
     "title": "信徒的自由",
@@ -4397,7 +4786,16 @@
     ]
   },
   {
-    "day_label": "第47周 第1日",
+    "day_label": "第 320 / 365 天",
+    "week": 46,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 321 / 365 天",
     "week": 47,
     "day": 1,
     "title": "教会生活上之问题",
@@ -4413,7 +4811,7 @@
     ]
   },
   {
-    "day_label": "第47周 第2日",
+    "day_label": "第 322 / 365 天",
     "week": 47,
     "day": 2,
     "title": "有关复活之争论及奉献",
@@ -4429,7 +4827,7 @@
     ]
   },
   {
-    "day_label": "第47周 第3日",
+    "day_label": "第 323 / 365 天",
     "week": 47,
     "day": 3,
     "title": "使徒的身份及职事",
@@ -4445,7 +4843,7 @@
     ]
   },
   {
-    "day_label": "第47周 第4日",
+    "day_label": "第 324 / 365 天",
     "week": 47,
     "day": 4,
     "title": "使徒的生命及心愿",
@@ -4461,7 +4859,7 @@
     ]
   },
   {
-    "day_label": "第47周 第5日",
+    "day_label": "第 325 / 365 天",
     "week": 47,
     "day": 5,
     "title": "更上一层楼",
@@ -4477,7 +4875,7 @@
     ]
   },
   {
-    "day_label": "第47周 第6日",
+    "day_label": "第 326 / 365 天",
     "week": 47,
     "day": 6,
     "title": "使徒之忍耐、异象与期盼",
@@ -4493,7 +4891,16 @@
     ]
   },
   {
-    "day_label": "第48周 第1日",
+    "day_label": "第 327 / 365 天",
+    "week": 47,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 328 / 365 天",
     "week": 48,
     "day": 1,
     "title": "真理与自由",
@@ -4513,7 +4920,7 @@
     ]
   },
   {
-    "day_label": "第48周 第2日",
+    "day_label": "第 329 / 365 天",
     "week": 48,
     "day": 2,
     "title": "美哉！基督的身体！",
@@ -4529,7 +4936,7 @@
     ]
   },
   {
-    "day_label": "第48周 第3日",
+    "day_label": "第 330 / 365 天",
     "week": 48,
     "day": 3,
     "title": "基督里的满足与喜乐",
@@ -4545,7 +4952,7 @@
     ]
   },
   {
-    "day_label": "第48周 第4日",
+    "day_label": "第 331 / 365 天",
     "week": 48,
     "day": 4,
     "title": "基督里的丰富",
@@ -4561,7 +4968,7 @@
     ]
   },
   {
-    "day_label": "第48周 第5日",
+    "day_label": "第 332 / 365 天",
     "week": 48,
     "day": 5,
     "title": "主再来的安慰",
@@ -4581,7 +4988,7 @@
     ]
   },
   {
-    "day_label": "第48周 第6日",
+    "day_label": "第 333 / 365 天",
     "week": 48,
     "day": 6,
     "title": "矫正对主再来之误解",
@@ -4597,7 +5004,16 @@
     ]
   },
   {
-    "day_label": "第49周 第1日",
+    "day_label": "第 334 / 365 天",
+    "week": 48,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 335 / 365 天",
     "week": 49,
     "day": 1,
     "title": "领袖手册",
@@ -4613,7 +5029,7 @@
     ]
   },
   {
-    "day_label": "第49周 第2日",
+    "day_label": "第 336 / 365 天",
     "week": 49,
     "day": 2,
     "title": "给真理斗士的战斗手册",
@@ -4629,7 +5045,7 @@
     ]
   },
   {
-    "day_label": "第49周 第3日",
+    "day_label": "第 337 / 365 天",
     "week": 49,
     "day": 3,
     "title": "如何劝化「烂泥」？",
@@ -4645,7 +5061,7 @@
     ]
   },
   {
-    "day_label": "第49周 第4日",
+    "day_label": "第 338 / 365 天",
     "week": 49,
     "day": 4,
     "title": "门徒的标志",
@@ -4654,7 +5070,7 @@
     "verse": "腓利门书第六节"
   },
   {
-    "day_label": "第49周 第5日",
+    "day_label": "第 339 / 365 天",
     "week": 49,
     "day": 5,
     "title": "超越天使与以色列领袖之主",
@@ -4670,7 +5086,7 @@
     ]
   },
   {
-    "day_label": "第49周 第6日",
+    "day_label": "第 340 / 365 天",
     "week": 49,
     "day": 6,
     "title": "超越大祭司的主基督",
@@ -4686,7 +5102,16 @@
     ]
   },
   {
-    "day_label": "第50周 第1日",
+    "day_label": "第 341 / 365 天",
+    "week": 49,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 342 / 365 天",
     "week": 50,
     "day": 1,
     "title": "基督救赎功效远超旧约",
@@ -4702,7 +5127,7 @@
     ]
   },
   {
-    "day_label": "第50周 第2日",
+    "day_label": "第 343 / 365 天",
     "week": 50,
     "day": 2,
     "title": "基督徒超越旧宗教信徒",
@@ -4718,7 +5143,7 @@
     ]
   },
   {
-    "day_label": "第50周 第3日",
+    "day_label": "第 344 / 365 天",
     "week": 50,
     "day": 3,
     "title": "真的信心",
@@ -4734,7 +5159,7 @@
     ]
   },
   {
-    "day_label": "第50周 第4日",
+    "day_label": "第 345 / 365 天",
     "week": 50,
     "day": 4,
     "title": "有意义之受苦",
@@ -4758,7 +5183,7 @@
     ]
   },
   {
-    "day_label": "第50周 第5日",
+    "day_label": "第 346 / 365 天",
     "week": 50,
     "day": 5,
     "title": "教会内之仇敌",
@@ -4774,7 +5199,7 @@
     ]
   },
   {
-    "day_label": "第50周 第6日",
+    "day_label": "第 347 / 365 天",
     "week": 50,
     "day": 6,
     "title": "门徒与神之相交",
@@ -4790,7 +5215,16 @@
     ]
   },
   {
-    "day_label": "第51周 第1日",
+    "day_label": "第 348 / 365 天",
+    "week": 50,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 349 / 365 天",
     "week": 51,
     "day": 1,
     "title": "门徒的绝交、相交及护教",
@@ -4799,7 +5233,7 @@
     "verse": "犹大书二十至廿一节"
   },
   {
-    "day_label": "第51周 第2日",
+    "day_label": "第 350 / 365 天",
     "week": 51,
     "day": 2,
     "title": "神对众教会的提醒",
@@ -4815,7 +5249,7 @@
     ]
   },
   {
-    "day_label": "第51周 第3日",
+    "day_label": "第 351 / 365 天",
     "week": 51,
     "day": 3,
     "title": "从天上的敬拜到地上的七印",
@@ -4831,7 +5265,7 @@
     ]
   },
   {
-    "day_label": "第51周 第4日",
+    "day_label": "第 352 / 365 天",
     "week": 51,
     "day": 4,
     "title": "灾难中之圣徒及七号灾难",
@@ -4847,7 +5281,7 @@
     ]
   },
   {
-    "day_label": "第51周 第5日",
+    "day_label": "第 353 / 365 天",
     "week": 51,
     "day": 5,
     "title": "怪兽「掌权」时代",
@@ -4863,7 +5297,7 @@
     ]
   },
   {
-    "day_label": "第51周 第6日",
+    "day_label": "第 354 / 365 天",
     "week": 51,
     "day": 6,
     "title": "从七碗之灾到世界大战",
@@ -4879,7 +5313,16 @@
     ]
   },
   {
-    "day_label": "第52周 第1日",
+    "day_label": "第 355 / 365 天",
+    "week": 51,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
+  },
+  {
+    "day_label": "第 356 / 365 天",
     "week": 52,
     "day": 1,
     "title": "大结局",
@@ -4895,7 +5338,7 @@
     ]
   },
   {
-    "day_label": "第52周 第2日",
+    "day_label": "第 357 / 365 天",
     "week": 52,
     "day": 2,
     "title": "主基督作王了！",
@@ -4911,7 +5354,7 @@
     ]
   },
   {
-    "day_label": "第52周 第3日",
+    "day_label": "第 358 / 365 天",
     "week": 52,
     "day": 3,
     "title": "门徒与交友",
@@ -4927,7 +5370,7 @@
     ]
   },
   {
-    "day_label": "第52周 第4日",
+    "day_label": "第 359 / 365 天",
     "week": 52,
     "day": 4,
     "title": "谦卑与骄傲",
@@ -4943,7 +5386,7 @@
     ]
   },
   {
-    "day_label": "第52周 第5日",
+    "day_label": "第 360 / 365 天",
     "week": 52,
     "day": 5,
     "title": "控制我们的舌头",
@@ -4959,7 +5402,7 @@
     ]
   },
   {
-    "day_label": "第52周 第6日",
+    "day_label": "第 361 / 365 天",
     "week": 52,
     "day": 6,
     "title": "保守你的心",
@@ -4973,5 +5416,14 @@
         "text": "你要保守你心，胜过保守一切 ， 因为一生的果效是由心发出。"
       }
     ]
+  },
+  {
+    "day_label": "第 362 / 365 天",
+    "week": 52,
+    "day": 7,
+    "title": "安息日 (Sabbath Day)",
+    "scripture": "",
+    "content": "<p>今天是安息日，请休息并在主里安息。</p><p>Today is the Sabbath day. Please rest and find peace in the Lord.</p>",
+    "verse": ""
   }
 ]
