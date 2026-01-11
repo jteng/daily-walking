@@ -514,9 +514,27 @@ const Reader = {
                 const diff = startX - e.changedTouches[0].clientX;
                 if (Math.abs(diff) > threshold) {
                     if (diff > 0) {
-                        this.goToPanel(Math.min(this.currentPanel + 1, 1));
+                        // Swipe Left (Next)
+                        if (this.currentPanel < 1) {
+                            this.goToPanel(this.currentPanel + 1);
+                        } else {
+                            // At end (Devotion) -> Next Day (Bible)
+                            if (window.adjustDay) {
+                                window.adjustDay(1);
+                                this.goToPanel(0);
+                            }
+                        }
                     } else {
-                        this.goToPanel(Math.max(this.currentPanel - 1, 0));
+                        // Swipe Right (Prev)
+                        if (this.currentPanel > 0) {
+                            this.goToPanel(this.currentPanel - 1);
+                        } else {
+                            // At start (Bible) -> Prev Day (Devotion)
+                            if (window.adjustDay) {
+                                window.adjustDay(-1);
+                                this.goToPanel(1);
+                            }
+                        }
                     }
                 }
             }, {passive: true});
@@ -1091,9 +1109,8 @@ window.Reader = Reader;
         const data = bibleData[currentDayIndex];
         
         // Display week and day number for debugging
-        const weekNum = Math.floor(currentDayIndex / 6) + 1;
-        const dayNum = (currentDayIndex % 6) + 1;
-        setText('week-day-info', `第${weekNum}周 第${dayNum}日 (索引: ${currentDayIndex})`);
+        // Use label from JSON which matches user preference "Day X / 365"
+        setText('week-day-info', data.day_label || '');
         
         setText('scripture', data.scripture || '');
         setText('day-title', data.title || '');

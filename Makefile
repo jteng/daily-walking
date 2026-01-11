@@ -53,6 +53,10 @@ publish: venv ## Prepare data for publishing (extract → normalize → fix tabl
 	.venv/bin/python scripts/apply_manual_fixes.py
 	@echo "✓ Manual fixes complete"
 	@echo ""
+	@echo "📅 Step 5.5/6: Processing Sabbath days and labels..."
+	.venv/bin/python scripts/process_bible_data.py
+	@echo "✓ Sabbath days and labels processed"
+	@echo ""
 	@echo "�📖 Step 6/6: Populating verse text..."
 	.venv/bin/python scripts/add_verse_text_v2.py
 	@echo "✓ Verse population complete"
