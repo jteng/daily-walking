@@ -505,34 +505,45 @@ const Reader = {
         
         if (container) {
             container.addEventListener('touchstart', (e) => {
-                if (this.mode === 'classic') return; // Disable swipe in classic mode
                 startX = e.touches[0].clientX;
             }, {passive: true});
             
             container.addEventListener('touchend', (e) => {
-                if (this.mode === 'classic') return; // Disable swipe in classic mode
                 const diff = startX - e.changedTouches[0].clientX;
                 if (Math.abs(diff) > threshold) {
-                    if (diff > 0) {
-                        // Swipe Left (Next)
-                        if (this.currentPanel < 1) {
-                            this.goToPanel(this.currentPanel + 1);
+                    // Logic depends on Mode
+                    if (this.mode === 'classic') {
+                        // Classic Mode: Left/Right swipes change Day
+                        if (diff > 0) {
+                            // Swipe Left -> Next Day
+                            if (window.adjustDay) window.adjustDay(1);
                         } else {
-                            // At end (Devotion) -> Next Day (Bible)
-                            if (window.adjustDay) {
-                                window.adjustDay(1);
-                                this.goToPanel(0);
-                            }
+                            // Swipe Right -> Prev Day
+                            if (window.adjustDay) window.adjustDay(-1);
                         }
                     } else {
-                        // Swipe Right (Prev)
-                        if (this.currentPanel > 0) {
-                            this.goToPanel(this.currentPanel - 1);
+                        // Swipe (Split) Mode: Panel navigation with Day change at boundaries
+                        if (diff > 0) {
+                            // Swipe Left (Next)
+                            if (this.currentPanel < 1) {
+                                this.goToPanel(this.currentPanel + 1);
+                            } else {
+                                // At end (Devotion) -> Next Day (Bible)
+                                if (window.adjustDay) {
+                                    window.adjustDay(1);
+                                    this.goToPanel(0);
+                                }
+                            }
                         } else {
-                            // At start (Bible) -> Prev Day (Devotion)
-                            if (window.adjustDay) {
-                                window.adjustDay(-1);
-                                this.goToPanel(1);
+                            // Swipe Right (Prev)
+                            if (this.currentPanel > 0) {
+                                this.goToPanel(this.currentPanel - 1);
+                            } else {
+                                // At start (Bible) -> Prev Day (Devotion)
+                                if (window.adjustDay) {
+                                    window.adjustDay(-1);
+                                    this.goToPanel(1);
+                                }
                             }
                         }
                     }
