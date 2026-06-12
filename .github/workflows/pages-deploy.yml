@@ -23,11 +23,22 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Assemble site
+        # Allowlist only — keeps the source PDF, .bak backups and intermediate
+        # JSON files out of the published site.
+        run: |
+          mkdir -p _site
+          cp index.html sw.js manifest.json bibleData.json ChineseSimplifiedBible.xml _site/
+          cp -r icons _site/
+
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
-          publish_dir: .
+          publish_dir: ./_site
           publish_branch: gh-pages
+          # Replace gh-pages with a single commit each deploy so old history
+          # (which previously contained the source PDF) is not retained.
+          force_orphan: true
           deploy_key: ${{ secrets.DEPLOY_KEY }}
           # fallback to using the personal access token if no deploy key
           github_token: ${{ secrets.GITHUB_TOKEN }}

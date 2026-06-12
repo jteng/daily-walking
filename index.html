@@ -500,17 +500,23 @@ const Reader = {
 
         // Touch handling
         let startX = 0;
-        const threshold = 50;
+        let startY = 0;
+        const threshold = 60;   // min horizontal distance (px) to count as a swipe
+        const ratio = 1.5;      // horizontal travel must dominate vertical by this factor
         const container = document.querySelector('.reader-container');
-        
+
         if (container) {
             container.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
             }, {passive: true});
-            
+
             container.addEventListener('touchend', (e) => {
                 const diff = startX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > threshold) {
+                const diffY = startY - e.changedTouches[0].clientY;
+                // Only act on a deliberate, predominantly-horizontal swipe so a
+                // vertical scroll with slight horizontal drift isn't read as one.
+                if (Math.abs(diff) > threshold && Math.abs(diff) > Math.abs(diffY) * ratio) {
                     // Logic depends on Mode
                     if (this.mode === 'classic') {
                         // Classic Mode: Left/Right swipes change Day
@@ -1241,7 +1247,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v10'; // Bump version
+        const APP_SW_VERSION = 'v11'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
