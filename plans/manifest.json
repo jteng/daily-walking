@@ -1,0 +1,18 @@
+{
+  "plans": [
+    {
+      "id": "original",
+      "name": "原版 · 圣经纵览",
+      "file": "bibleData.json",
+      "overlay": false,
+      "credit": "内容来源：《每天与主同行》· 苏颖智 著"
+    },
+    {
+      "id": "devotional",
+      "name": "默想版 · 灵修默想",
+      "file": "plans/devotional.json",
+      "overlay": true,
+      "credit": "灵修默想 · 按每日经文配搭属灵导师风格（初稿，持续增补中）"
+    }
+  ]
+}
