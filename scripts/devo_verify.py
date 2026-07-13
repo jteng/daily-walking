@@ -20,12 +20,26 @@ from devo_lib import DEVO_PATH, text_for_ref, find_citations, verse_text, BOOK_I
 
 
 def norm(s):
-    return re.sub(r'[\s，。、；：！？「」『』（）()·,.!?;:"\'\-]', '', s or '')
+    # strip whitespace, CJK + ASCII punctuation, dashes (－—-) and ellipsis (…)
+    return re.sub(r'[\s，。、；：！？「」『』（）()·,.!?;:"\'\-－—…]', '', s or '')
 
 
 def canonical_for_citation(c):
     texts = [verse_text(c['book'], c['chapter'], v) for v in c['verses']]
     texts = [t for t in texts if t]
+    return ''.join(texts) if texts else None
+
+
+def canonical_expanded(c):
+    """Canonical text for the cited verses plus one verse of context on each side,
+    so a quote that legitimately leads in from the preceding verse still substring-matches."""
+    vs = sorted(c['verses'])
+    lo, hi = vs[0] - 1, vs[-1] + 1
+    texts = []
+    for v in range(lo, hi + 1):
+        t = verse_text(c['book'], c['chapter'], v)
+        if t:
+            texts.append(t)
     return ''.join(texts) if texts else None
 
 
@@ -59,14 +73,16 @@ def verify_entry(e):
         idx = html.find(c['raw'])
         q = preceding_quote(html, idx) if idx >= 0 else None
         if q:
-            nq, nc = norm(q), norm(canon)
-            # quote should be a substring-ish of canonical (allow partial quotes)
-            if nq not in nc and nc not in nq:
-                # allow small edit distance for partial quotations
-                overlap = sum(1 for ch in nq if ch in nc)
-                if overlap < 0.75 * len(nq):
-                    warns.append(f'{lbl}: quote before {c["raw"]} may not match text\n'
-                                 f'      quoted: {q}\n      canon : {canon}')
+            # Every 「…」 fragment (split on the ellipsis that marks omissions) must be a
+            # CONTIGUOUS substring of the canonical verse text (± one verse of context).
+            # This catches both silent clause-merges and same-character reorderings that a
+            # char-overlap heuristic would miss.
+            nc = norm(canonical_expanded(c) or canon)
+            for frag in re.split(r'…+|\.\.\.+', q):
+                nf = norm(frag)
+                if len(nf) >= 4 and nf not in nc:
+                    warns.append(f'{lbl}: quoted fragment not contiguous in {c["raw"]}\n'
+                                 f'      quoted: {frag}\n      canon : {canonical_expanded(c) or canon}')
     return errors, warns
 
 
