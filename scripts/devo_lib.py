@@ -34,6 +34,11 @@ BASE_PATH = REPO_ROOT / 'bibleData.json'
 # Luke; add the correct full names (longest-match wins in parse_verse_reference).
 CHINESE_BOOK_MAP.setdefault('路得记', 'RUT')
 CHINESE_BOOK_MAP.setdefault('路得', 'RUT')
+# 约壹/约贰/约叁 abbreviations for 1-3 John were missing; bare '约' resolves to the
+# Gospel (JHN), so add them explicitly (longest-match wins over '约').
+CHINESE_BOOK_MAP.setdefault('约壹', '1JN')
+CHINESE_BOOK_MAP.setdefault('约贰', '2JN')
+CHINESE_BOOK_MAP.setdefault('约叁', '3JN')
 
 _VERSE_INDEX = None  # {(book_number, chapter, verse): text}
 _BASE_WD = None      # {(week, day): base_entry}
