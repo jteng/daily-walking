@@ -1,4 +1,4 @@
-# WalkWithGod — Python project wrapper
+# Daily Walk With The Lord — Python project wrapper
 
 This repository was converted to a minimal Python project. It contains a tiny
 HTTP server (no external dependencies) that can serve the existing `index.html`
