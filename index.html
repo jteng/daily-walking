@@ -1249,7 +1249,11 @@ window.Reader = Reader;
 
         // Update the source/credit line for the active plan
         const creditEl = document.getElementById('plan-credit');
-        if (creditEl && plan && plan.credit) creditEl.innerText = plan.credit;
+        if (creditEl) {
+            const creditText = (plan && plan.credit) ? plan.credit : '';
+            creditEl.innerText = creditText;
+            creditEl.style.display = creditText ? '' : 'none';
+        }
 
         // Rebuild indices + dropdown for the (possibly re-titled) entries
         chapterIndex.length = 0;
