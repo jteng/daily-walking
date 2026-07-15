@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_verify.py *)",
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_verify.py)",
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_gap.py *)",
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_gap.py)",
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_lookup.py *)",
+      "Bash(curl -s -o /dev/null -w * http://localhost:8000*)",
+      "Bash(ipconfig getifaddr *)"
+    ]
+  }
+}
