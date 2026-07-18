@@ -15,8 +15,9 @@ venv/
 # Source material — kept locally for the pipeline, never published (copyright)
 daily-walk-with-God.pdf
 
-# devo_merge.py timestamped backups
+# devo_merge.py / devo_merge_base.py timestamped backups
 plans/devotional.json.bak.*
+bibleData.json.bak.*
 .gstack/
 
 # Claude Code: personal/local-only settings and runtime state
