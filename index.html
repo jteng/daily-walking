@@ -350,8 +350,7 @@
                     <button id="next-btn" onclick="adjustDay(1)">下一日</button>
                 </div>
 
-                <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: #666; font-size: 0.85em; line-height: 1.6; border-top: 1px dashed #eee; margin-top: 30px;">
-                    内容来源：《每天与主同行》· 苏颖智 著
+                <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: #666; font-size: 0.85em; line-height: 1.6; border-top: 1px dashed #eee; margin-top: 30px; display: none;">
                 </footer>
             </div>
         </div>
@@ -1292,7 +1291,7 @@ window.Reader = Reader;
             .then(m => { plansManifest = (m && Array.isArray(m.plans)) ? m.plans : []; })
             .catch(err => {
                 console.warn('无法加载 plans/manifest.json, 使用默认计划:', err);
-                plansManifest = [{ id: 'original', name: '原版', file: 'bibleData.json', overlay: false, credit: '内容来源：《每天与主同行》· 苏颖智 著' }];
+                plansManifest = [{ id: 'original', name: '纵览版 · 圣经纵览', file: 'bibleData.json', overlay: false, credit: '' }];
             })
             .then(() => {
                 if (!plansManifest.some(p => p.id === currentPlanId)) {
@@ -1313,7 +1312,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v13'; // Bump version
+        const APP_SW_VERSION = 'v14'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))

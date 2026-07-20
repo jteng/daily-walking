@@ -6,6 +6,8 @@
       "Bash(PYTHONPATH=scripts python3 scripts/devo_gap.py *)",
       "Bash(PYTHONPATH=scripts python3 scripts/devo_gap.py)",
       "Bash(PYTHONPATH=scripts python3 scripts/devo_lookup.py *)",
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_chapter.py *)",
+      "Bash(PYTHONPATH=scripts python3 scripts/devo_chapter.py)",
       "Bash(curl -s -o /dev/null -w * http://localhost:8000*)",
       "Bash(ipconfig getifaddr *)"
     ]

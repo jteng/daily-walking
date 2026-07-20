@@ -2,10 +2,10 @@
   "plans": [
     {
       "id": "original",
-      "name": "原版 · 圣经纵览",
+      "name": "纵览版 · 圣经纵览",
       "file": "bibleData.json",
       "overlay": false,
-      "credit": "内容来源：《每天与主同行》· 苏颖智 著"
+      "credit": ""
     },
     {
       "id": "devotional",
