@@ -39,6 +39,12 @@ CHINESE_BOOK_MAP.setdefault('路得', 'RUT')
 CHINESE_BOOK_MAP.setdefault('约壹', '1JN')
 CHINESE_BOOK_MAP.setdefault('约贰', '2JN')
 CHINESE_BOOK_MAP.setdefault('约叁', '3JN')
+# Formal-numeral full names (壹/贰/叁 instead of 一/二/三) were also missing, so
+# '约翰壹书' etc. fell through the fuzzy startswith() match to bare '约翰' -> JHN
+# (the Gospel) instead of 1-3 John. Add them explicitly.
+CHINESE_BOOK_MAP.setdefault('约翰壹书', '1JN')
+CHINESE_BOOK_MAP.setdefault('约翰贰书', '2JN')
+CHINESE_BOOK_MAP.setdefault('约翰叁书', '3JN')
 
 _VERSE_INDEX = None  # {(book_number, chapter, verse): text}
 _BASE_WD = None      # {(week, day): base_entry}
@@ -102,6 +108,22 @@ def verse_text(book_code, chapter, verse):
     if bnum is None:
         return None
     return idx.get((bnum, chapter, verse))
+
+
+def chapter_verses(book_code, chapter):
+    """Return an ordered list of (verse_num, text) for a whole chapter, or []
+    if the book/chapter can't be found. Used for exegetical spot-checks where a
+    full chapter needs to be read rather than a single cited verse."""
+    idx = _build_index()
+    bnum = BOOK_ID_TO_NUMBER.get(book_code)
+    if bnum is None:
+        return []
+    out = []
+    vnum = 1
+    while (bnum, chapter, vnum) in idx:
+        out.append((vnum, idx[(bnum, chapter, vnum)]))
+        vnum += 1
+    return out
 
 
 def text_for_ref(ref_str):
