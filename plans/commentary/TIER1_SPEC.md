@@ -44,10 +44,10 @@ rest/review days have no `verse_parts` and are skipped automatically).
 
 ## Batch procedure (one cron firing)
 
-1. `python3 scripts/commentary_status.py --next 40` — prints the next undone days
-   with `day`, `title`, `scripture`, `reference`, `verse_text`. (Batch size 40 is
-   a starting guess; the real limit is your 4-hour usage budget. The resume logic
-   makes an over- or under-shoot harmless.)
+1. `python3 scripts/commentary_status.py --next 80` — prints the next undone days
+   with `day`, `title`, `scripture`, `reference`, `verse_text`. (Batch cap is 80;
+   the real limit is your 4-hour usage budget, so the batch may stop earlier. The
+   resume logic makes an over- or under-shoot harmless.)
 2. Author a note for each day per the house style above.
 3. **Persist in sub-chunks of ~10** so a usage cutoff never loses much:
    - Write `plans/commentary/_incoming.json` = JSON array of
@@ -55,7 +55,7 @@ rest/review days have no `verse_parts` and are skipped automatically).
    - `python3 scripts/commentary_merge.py` (validates length, folds into
      `tier1.json`, clears `_incoming.json`).
    - `git add -A && git commit -m "Tier 1 commentary: days X-Y"`.
-4. Repeat step 3 until the batch (max 40) is done or usage runs out.
+4. Repeat step 3 until the batch (max 80) is done or usage runs out.
 5. `python3 scripts/commentary_status.py` — if `remaining: 0`, the run is
    complete: `CronList` then `CronDelete` this job, and stop.
 
