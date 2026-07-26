@@ -259,6 +259,22 @@
             font-size: 1.1em;
             color: var(--primary);
         }
+        /* Tier 1 verse commentary — collapsible "逐节释义" card under the key verse */
+        .tier1-commentary { margin-top: 16px; padding: 0; overflow: hidden; }
+        .tier1-toggle {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; box-sizing: border-box;
+            background: none; border: none; cursor: pointer;
+            padding: 12px 15px; margin: 0;
+            font-family: inherit; font-size: 1em; font-weight: 600;
+            color: var(--primary); text-align: left;
+        }
+        .tier1-chev { transition: transform 0.2s ease; font-size: 0.9em; }
+        .tier1-commentary.open .tier1-chev { transform: rotate(180deg); }
+        .tier1-body { padding: 0 15px 6px 15px; }
+        .tier1-body p { margin: 0 0 12px 0; line-height: 1.75; color: var(--text); }
+        .tier1-body p:last-child { margin-bottom: 10px; }
+        .tier1-body strong { color: var(--primary); }
         /* Table styling for extracted tables inserted into content */
         #devotional-content table {
             width: 100%;
@@ -951,6 +967,49 @@ window.Reader = Reader;
     let baseData = null;
     let plansManifest = [];
     let currentPlanId = localStorage.getItem('planId') || 'original';
+    // Tier 1 verse commentary: an object keyed by verse reference
+    // (e.g. "创世记 1:27"), each value { reference, verse_text, beats: [[lead, body], ...] }.
+    // Loaded once; days whose highlighted verse has no note simply show no card.
+    let tier1Commentary = null;
+    async function loadCommentary() {
+        if (tier1Commentary) return tier1Commentary;
+        try {
+            const r = await fetch('plans/commentary/tier1.json', { cache: 'no-store' });
+            tier1Commentary = r.ok ? await r.json() : {};
+        } catch (err) {
+            console.warn('无法加载逐节释义 (tier1.json):', err);
+            tier1Commentary = {};
+        }
+        return tier1Commentary;
+    }
+    // Build the collapsible commentary card for a verse reference, or '' if none.
+    function renderCommentaryCard(reference) {
+        if (!tier1Commentary || !reference) return '';
+        const note = tier1Commentary[reference];
+        if (!note || !Array.isArray(note.beats) || note.beats.length === 0) return '';
+        const body = note.beats.map(b =>
+            `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
+        ).join('');
+        return `<div class="commentary-box tier1-commentary">
+            <button type="button" class="tier1-toggle" aria-expanded="false">
+                <span>逐节释义</span><span class="tier1-chev" aria-hidden="true">▾</span>
+            </button>
+            <div class="tier1-body" hidden>${body}</div>
+        </div>`;
+    }
+    // One delegated handler toggles any commentary card (renderDay rebuilds
+    // the verse HTML each time, so a per-card listener would leak).
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tier1-toggle');
+        if (!btn) return;
+        const card = btn.closest('.tier1-commentary');
+        const body = card && card.querySelector('.tier1-body');
+        if (!body) return;
+        const open = body.hasAttribute('hidden');
+        body.toggleAttribute('hidden', !open);
+        btn.setAttribute('aria-expanded', String(open));
+        card.classList.toggle('open', open);
+    });
     // Default current day is day 1 for fresh users (index 0). A saved value
     // in localStorage overrides this. (Previously we computed a default from
     // Jan 1 of the current year; keep that helper for advanced uses.)
@@ -1172,14 +1231,21 @@ window.Reader = Reader;
                 verseHtml = data.verse || '';
             }
             
+            // Tier 1 verse commentary card(s) for the day's highlighted verse(s)
+            let commentaryHtml = '';
+            if (data.verse_parts && data.verse_parts.length > 0) {
+                const refs = [...new Set(data.verse_parts.map(p => p.reference))];
+                commentaryHtml = refs.map(renderCommentaryCard).join('');
+            }
+
             // Wrap in styled box with label
             if (verseHtml) {
                 verseEl.innerHTML = `<div class="verse-box" style="margin-top:0; margin-bottom:20px;">
                     <strong style="color:var(--primary); display:block; margin-bottom:8px;">今日金句：</strong>
                     ${verseHtml}
-                </div>`;
+                </div>${commentaryHtml}`;
             } else {
-                verseEl.innerHTML = '';
+                verseEl.innerHTML = commentaryHtml;
             }
         }
 
@@ -1232,6 +1298,7 @@ window.Reader = Reader;
         localStorage.setItem('planId', currentPlanId);
 
         const base = await fetchBaseData();
+        await loadCommentary();
         bibleData = base;
 
         if (plan && plan.overlay && plan.file) {
