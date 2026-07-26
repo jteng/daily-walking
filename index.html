@@ -353,6 +353,9 @@
 
                 <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: #666; font-size: 0.85em; line-height: 1.6; border-top: 1px dashed #eee; margin-top: 30px; display: none;">
                 </footer>
+                <footer id="app-verse" style="text-align: center; padding: 16px 20px 24px 20px; color: #999; font-size: 0.8em; line-height: 1.7; font-style: italic;">
+                    「我的神我的王啊，我要尊崇你！我要永永远远称颂你的名！我要天天称颂你，也要永永远远赞美你的名！」<br>——诗篇 145:1-2
+                </footer>
             </div>
         </div>
         
@@ -1313,7 +1316,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v16'; // Bump version
+        const APP_SW_VERSION = 'v17'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
