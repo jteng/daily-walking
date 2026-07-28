@@ -1231,9 +1231,12 @@ window.Reader = Reader;
                 verseHtml = data.verse || '';
             }
             
-            // Tier 1 verse commentary card(s) for the day's highlighted verse(s)
+            // Tier 1 verse commentary card(s) for the day's highlighted verse(s).
+            // Shown only on the 纵览版 (original) plan — the 默想版 devotional
+            // overlay already sits on the same verse with its own 默想, so the
+            // two cards would duplicate each other there.
             let commentaryHtml = '';
-            if (data.verse_parts && data.verse_parts.length > 0) {
+            if (currentPlanId === 'original' && data.verse_parts && data.verse_parts.length > 0) {
                 const refs = [...new Set(data.verse_parts.map(p => p.reference))];
                 commentaryHtml = refs.map(renderCommentaryCard).join('');
             }
