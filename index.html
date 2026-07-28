@@ -499,7 +499,14 @@ const Reader = {
         } 
         // Case B: Chinese Numbers
         else {
-            remaining = remaining.replace(/[章篇]/g, '');
+            // Strip 章/篇 and the 上/下 half-chapter marker (e.g. "四章下至
+            // 六章" = chapter 4-second-half through chapter 6). By this
+            // point book abbreviations are already consumed (step 1), so
+            // any remaining 上/下 here can only be this marker, never part
+            // of a book code like 撒上/王下 — safe to strip unconditionally.
+            // This app has no half-chapter granularity, so both halves just
+            // resolve to that chapter's number.
+            remaining = remaining.replace(/[章篇]/g, '').replace(/[上下]/g, '');
             const parts = remaining.split('至');
             startChap = this.chineseToArabic(parts[0].trim());
             
