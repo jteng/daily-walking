@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever the precache list or strategy changes.
-const CACHE_NAME = 'wwg-v11';
+const CACHE_NAME = 'wwg-v12';
 
 // Relative URLs so the SW works under any base path (e.g. GitHub Pages
 // serves this app from /daily-walking/, not the domain root).
@@ -10,7 +10,8 @@ const OFFLINE_URLS = [
   './bibleData.json',
   './plans/manifest.json',
   './plans/devotional.json',
-  './plans/commentary/tier1.json'
+  './plans/commentary/tier1.json',
+  './plans/commentary/chapters.json'
 ];
 
 self.addEventListener('install', event => {
@@ -46,7 +47,8 @@ self.addEventListener('fetch', event => {
   // fall back to cache so plan content stays fresh but works offline.
   if (url.pathname.endsWith('/bibleData.json') || url.pathname.endsWith('/bibleData_with_tables.json') ||
       url.pathname.endsWith('/plans/manifest.json') || url.pathname.endsWith('/plans/devotional.json') ||
-      url.pathname.endsWith('/plans/commentary/tier1.json')) {
+      url.pathname.endsWith('/plans/commentary/tier1.json') ||
+      url.pathname.endsWith('/plans/commentary/chapters.json')) {
     event.respondWith(
       fetch(request).then(resp => {
         const copy = resp.clone();

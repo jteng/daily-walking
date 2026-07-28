@@ -13,21 +13,14 @@ Usage:
 import argparse
 import json
 import os
-import re
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from commentary_common import LEN_MIN, LEN_MAX, LEN_HARD_MIN, LEN_HARD_MAX, day_num, note_len as _note_len
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BIBLE = os.path.join(ROOT, "bibleData.json")
 TIER1 = os.path.join(ROOT, "plans", "commentary", "tier1.json")
-
-# House-style length target (visible chars, whitespace stripped). See TIER1_SPEC.md.
-LEN_MIN, LEN_MAX = 450, 600
-LEN_HARD_MIN, LEN_HARD_MAX = 400, 660
-
-
-def day_num(entry):
-    m = re.search(r"第\s*(\d+)\s*/\s*365", entry.get("day_label", ""))
-    return int(m.group(1)) if m else None
 
 
 def load_worklist():
@@ -59,9 +52,7 @@ def load_done():
 
 def note_len(record):
     """Visible-char count of an assembled note record."""
-    beats = record.get("beats") or []
-    text = "".join((lead or "") + (body or "") for lead, body in beats)
-    return len(re.sub(r"\s+", "", text))
+    return _note_len(record.get("beats") or [])
 
 
 def main():

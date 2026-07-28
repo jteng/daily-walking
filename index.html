@@ -269,6 +269,7 @@
             font-family: inherit; font-size: 1em; font-weight: 600;
             color: var(--primary); text-align: left;
         }
+        .tier1-subtitle { font-weight: 400; color: #888; font-size: 0.85em; margin-left: 6px; }
         .tier1-chev { transition: transform 0.2s ease; font-size: 0.9em; }
         .tier1-commentary.open .tier1-chev { transform: rotate(180deg); }
         .tier1-body { padding: 0 15px 6px 15px; }
@@ -455,7 +456,17 @@ const Reader = {
         if (!scripture) return null;
         
         // 1. Identify Book
-        const books = Object.keys(this.bookMap).sort((a, b) => b.length - a.length);
+        // '约一'/'约二'/'约三' (1/2/3 John) are excluded here: they never
+        // appear as a scripture-string prefix in this app's data (which
+        // always spells those out as '约壹' or the full name specifically to
+        // avoid this collision — see bibleData.json day 347, "约壹一至五章").
+        // Matching them here would wrongly swallow "约" (John's Gospel) +
+        // a Chinese numeral chapter, e.g. "约一至四章" (John 1-4) misparsing
+        // as book "约一" (1 John) with an empty/invalid start chapter.
+        const AMBIGUOUS_SCRIPTURE_BOOK_PREFIXES = new Set(['约一', '约二', '约三']);
+        const books = Object.keys(this.bookMap)
+            .filter(b => !AMBIGUOUS_SCRIPTURE_BOOK_PREFIXES.has(b))
+            .sort((a, b) => b.length - a.length);
         let bookAbbr = null;
         let remaining = scripture;
         
@@ -967,6 +978,9 @@ window.Reader = Reader;
     let baseData = null;
     let plansManifest = [];
     let currentPlanId = localStorage.getItem('planId') || 'original';
+    // Chapter-by-chapter commentary pilot (see the commentary design doc):
+    // pilot book only, decoupled from any single reading day.
+    const PILOT_BOOKS = new Set(['约翰福音', '路加福音']);
     // Tier 1 verse commentary: an object keyed by verse reference
     // (e.g. "创世记 1:27"), each value { reference, verse_text, beats: [[lead, body], ...] }.
     // Loaded once; days whose highlighted verse has no note simply show no card.
@@ -982,17 +996,37 @@ window.Reader = Reader;
         }
         return tier1Commentary;
     }
-    // Build the collapsible commentary card for a verse reference, or '' if none.
-    function renderCommentaryCard(reference) {
-        if (!tier1Commentary || !reference) return '';
-        const note = tier1Commentary[reference];
+    // Chapter commentary pilot: an object keyed by "书名 章" (e.g. "约翰福音 1"),
+    // each value { reference, verse_text, beats: [[lead, body], ...] }. Same
+    // shape as tier1Commentary, loaded the same way, kept as a separate corpus
+    // since it's chapter-grain rather than day-grain.
+    let chapterCommentary = null;
+    async function loadChapterCommentary() {
+        if (chapterCommentary) return chapterCommentary;
+        try {
+            const r = await fetch('plans/commentary/chapters.json', { cache: 'no-store' });
+            chapterCommentary = r.ok ? await r.json() : {};
+        } catch (err) {
+            console.warn('无法加载逐章释义 (chapters.json):', err);
+            chapterCommentary = {};
+        }
+        return chapterCommentary;
+    }
+    // Build the collapsible commentary card for a reference key, or '' if none.
+    // `corpus` is tier1Commentary or chapterCommentary; `label` is the card's
+    // toggle text ("逐节释义" vs "逐章释义"); `subtitle` (chapter cards only)
+    // disambiguates stacked cards on multi-chapter pilot-book days.
+    function renderCommentaryCard(reference, corpus, label, subtitle) {
+        if (!corpus || !reference) return '';
+        const note = corpus[reference];
         if (!note || !Array.isArray(note.beats) || note.beats.length === 0) return '';
         const body = note.beats.map(b =>
             `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
         ).join('');
+        const subtitleHtml = subtitle ? `<span class="tier1-subtitle">${subtitle}</span>` : '';
         return `<div class="commentary-box tier1-commentary">
             <button type="button" class="tier1-toggle" aria-expanded="false">
-                <span>逐节释义</span><span class="tier1-chev" aria-hidden="true">▾</span>
+                <span>${label}${subtitleHtml}</span><span class="tier1-chev" aria-hidden="true">▾</span>
             </button>
             <div class="tier1-body" hidden>${body}</div>
         </div>`;
@@ -1231,14 +1265,36 @@ window.Reader = Reader;
                 verseHtml = data.verse || '';
             }
             
-            // Tier 1 verse commentary card(s) for the day's highlighted verse(s).
-            // Shown only on the 纵览版 (original) plan — the 默想版 devotional
-            // overlay already sits on the same verse with its own 默想, so the
-            // two cards would duplicate each other there.
+            // Commentary card(s) for the day's highlighted verse(s). Shown only
+            // on the 纵览版 (original) plan — the 默想版 devotional overlay
+            // already sits on the same verse with its own 默想, so the two
+            // cards would duplicate each other there.
+            //
+            // Gating rule: if the day's highlighted verse is in a pilot book
+            // (PILOT_BOOKS), render one "逐章释义" card per chapter of the
+            // day's scripture span, replacing the Tier 1 card. Otherwise
+            // (including days whose span merely touches a pilot book
+            // without the highlighted verse being in it), render the
+            // unchanged single Tier 1 "逐节释义" card.
             let commentaryHtml = '';
             if (currentPlanId === 'original' && data.verse_parts && data.verse_parts.length > 0) {
-                const refs = [...new Set(data.verse_parts.map(p => p.reference))];
-                commentaryHtml = refs.map(renderCommentaryCard).join('');
+                const highlightedBook = data.verse_parts[0].reference.split(' ')[0];
+                if (PILOT_BOOKS.has(highlightedBook) && window.Reader) {
+                    const parsed = window.Reader.parseScripture(data.scripture);
+                    if (parsed) {
+                        const chapters = [];
+                        for (let c = parsed.startChapter; c <= parsed.endChapter; c++) chapters.push(c);
+                        commentaryHtml = chapters.map(c => {
+                            const key = `${highlightedBook} ${c}`;
+                            const note = chapterCommentary && chapterCommentary[key];
+                            const subtitle = note ? ` ${parsed.bookName} ${c}章 · 关键经文 ${note.reference}` : '';
+                            return renderCommentaryCard(key, chapterCommentary, '逐章释义', subtitle);
+                        }).join('');
+                    }
+                } else {
+                    const refs = [...new Set(data.verse_parts.map(p => p.reference))];
+                    commentaryHtml = refs.map(ref => renderCommentaryCard(ref, tier1Commentary, '逐节释义')).join('');
+                }
             }
 
             // Wrap in styled box with label
@@ -1302,6 +1358,7 @@ window.Reader = Reader;
 
         const base = await fetchBaseData();
         await loadCommentary();
+        await loadChapterCommentary();
         bibleData = base;
 
         if (plan && plan.overlay && plan.file) {

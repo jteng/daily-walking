@@ -15,22 +15,16 @@ and clears _incoming.json. Idempotent: re-running with the same input is safe.
 """
 import json
 import os
-import re
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from commentary_common import LEN_MIN, LEN_MAX, LEN_HARD_MIN, LEN_HARD_MAX, day_num, note_len
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BIBLE = os.path.join(ROOT, "bibleData.json")
 COMM = os.path.join(ROOT, "plans", "commentary")
 TIER1 = os.path.join(COMM, "tier1.json")
 INCOMING = os.path.join(COMM, "_incoming.json")
-
-LEN_MIN, LEN_MAX = 450, 600
-LEN_HARD_MIN, LEN_HARD_MAX = 400, 660
-
-
-def day_num(entry):
-    m = re.search(r"第\s*(\d+)\s*/\s*365", entry.get("day_label", ""))
-    return int(m.group(1)) if m else None
 
 
 def build_index():
@@ -46,11 +40,6 @@ def build_index():
             "verse_text": " ".join(p["text"] for p in vp),
         }
     return by_day
-
-
-def note_len(beats):
-    text = "".join((lead or "") + (body or "") for lead, body in beats)
-    return len(re.sub(r"\s+", "", text))
 
 
 def main():
