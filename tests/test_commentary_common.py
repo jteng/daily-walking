@@ -3,7 +3,20 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 
-from commentary_common import LEN_HARD_MAX, LEN_HARD_MIN, LEN_MAX, LEN_MIN, day_num, note_len
+from commentary_common import (
+    LEN_HARD_MAX,
+    LEN_HARD_MIN,
+    LEN_MAX,
+    LEN_MIN,
+    SECTION_BEATS_MAX,
+    SECTION_BEATS_MIN,
+    SECTION_LEN_HARD_MAX,
+    SECTION_LEN_HARD_MIN,
+    SECTION_LEN_MAX,
+    SECTION_LEN_MIN,
+    day_num,
+    note_len,
+)
 
 
 def test_day_num_parses_standard_label():
@@ -46,3 +59,11 @@ def test_length_constants_unchanged():
     # gate — silently changing them would change which notes get accepted.
     assert (LEN_MIN, LEN_MAX) == (450, 600)
     assert (LEN_HARD_MIN, LEN_HARD_MAX) == (400, 660)
+
+
+def test_section_constants_unchanged():
+    # Regression guard for the chapter-section bounds (CHAPTER_SPEC.md),
+    # enforced by chapter_merge.py's per-section validation gate.
+    assert (SECTION_LEN_MIN, SECTION_LEN_MAX) == (350, 500)
+    assert (SECTION_LEN_HARD_MIN, SECTION_LEN_HARD_MAX) == (300, 550)
+    assert (SECTION_BEATS_MIN, SECTION_BEATS_MAX) == (3, 4)

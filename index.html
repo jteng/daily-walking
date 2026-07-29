@@ -699,9 +699,12 @@ const Reader = {
                         : null;
                     if (hit) {
                         anyCommentaryMarked = true;
-                        const sourceClass = hit.source === 'verse' ? 'exact' : 'chapter-only';
-                        const ref = hit.source === 'verse' ? `${fullBookName} ${c}:${num}` : `${fullBookName} ${c}`;
-                        html += `<div class="bible-verse has-commentary ${sourceClass}" data-note-source="${hit.source}" data-ref="${ref}" tabindex="0" role="button" aria-label="查看第${num}节释义">
+                        // 'verse' (tier1) and 'section' (chapter-array, verse
+                        // falls in that section's own range) are both precise
+                        // hits; only 'chapter' (nearest-section fallback) is
+                        // approximate — see resolveVerseCommentary.
+                        const sourceClass = (hit.source === 'verse' || hit.source === 'section') ? 'exact' : 'chapter-only';
+                        html += `<div class="bible-verse has-commentary ${sourceClass}" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="查看第${num}节释义">
                             <span class="verse-num">${num}</span>${text}
                         </div>`;
                     } else {
@@ -1090,40 +1093,70 @@ window.Reader = Reader;
         }
         return commentaryVerseIndex;
     }
-    // Resolve a tapped verse to its commentary note: exact tier1 hit first, else
-    // the whole-chapter reflection if this chapter has one, else null.
+    // Parse a chapter-section's own "C:V" / "C:V-V" reference into a verse
+    // range. The chapter number prefix is redundant (each section already
+    // lives under its own "书 章" key) — only the verse component matters here.
+    function parseChapterSectionRange(reference) {
+        const m = /^\d+:(\d+)(-(\d+))?$/.exec(reference || '');
+        if (!m) return null;
+        const start = parseInt(m[1], 10);
+        const end = m[3] ? parseInt(m[3], 10) : start;
+        return { start, end };
+    }
+    // Resolve a tapped verse to its commentary note, in priority order:
+    //   1. tier1 exact hit (day-grain, one verse or short range)
+    //   2. a chapter-section entry whose own range contains this verse
+    //      ("section" — chapters.json is now an array of pericope-level
+    //      entries per chapter, not one whole-chapter note; see CHAPTER_SPEC.md)
+    //   3. the chapter's nearest section, as a "this chapter has commentary
+    //      nearby" fallback ("chapter") — happens for verses that fall
+    //      between authored sections (e.g. a narrator transition line)
+    //   4. null
     function resolveVerseCommentary(book, chapter, verse) {
         const exact = commentaryVerseIndex.get(`${book} ${chapter}:${verse}`);
         if (exact) return exact;
-        const chapterKey = `${book} ${chapter}`;
-        const chapterNote = chapterCommentary && chapterCommentary[chapterKey];
-        if (chapterNote) return { note: chapterNote, source: 'chapter' };
-        return null;
+
+        const sections = chapterCommentary && chapterCommentary[`${book} ${chapter}`];
+        if (!sections || !sections.length) return null;
+
+        const v = parseInt(verse, 10);
+        let nearest = null, nearestDist = Infinity;
+        for (const section of sections) {
+            const range = parseChapterSectionRange(section.reference);
+            if (!range) continue;
+            if (v >= range.start && v <= range.end) {
+                return { note: section, source: 'section' };
+            }
+            const dist = v < range.start ? range.start - v : v - range.end;
+            if (dist < nearestDist) { nearestDist = dist; nearest = section; }
+        }
+        return nearest ? { note: nearest, source: 'chapter' } : null;
     }
-    // Build the tooltip content for a resolved commentary note. `ref` is the
-    // .bible-verse's data-ref ("书名 章:节" for an exact hit, "书名 章" for a
-    // chapter-only fallback) — used to label which grain of note this is.
-    function buildCommentaryTooltipHtml(note, source, ref) {
-        const label = source === 'verse' ? '逐节释义' : '逐章释义';
-        const headerText = source === 'verse'
-            ? `${label} · ${ref}`
-            : `${label} · ${ref}章 · 关键经文 ${note.reference}`;
+    // Build the tooltip content for a resolved commentary note. Every note
+    // (tier1 or chapter-section) carries its own full `reference`; tier1's
+    // already includes the book name ("创世记 9:12-13"), a chapter-section's
+    // is chapter:verse only ("13:1-9") so it needs the book prefixed here.
+    function buildCommentaryTooltipHtml(note, source, book) {
+        const label = source === 'verse' ? '逐节释义' : source === 'section' ? '逐段释义' : '逐章释义';
+        const ref = source === 'verse' ? note.reference : `${book} ${note.reference}`;
         const body = (note.beats || []).map(b =>
             `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
         ).join('');
-        return `<span class="verse-tooltip-ref">${headerText}</span>${body}`;
+        return `<span class="verse-tooltip-ref">${label} · ${ref}</span>${body}`;
     }
-    // Re-resolve a marked verse div's note from its data-ref/data-note-source
-    // against the in-memory corpora (no per-element cache — see plan-eng-review).
+    // Re-resolve a marked verse div's note by calling the exact same lookup
+    // used at mark-time (index by data-book/data-chapter/data-verse rather
+    // than a cached ref string — no per-element cache, see plan-eng-review;
+    // resolveVerseCommentary is deterministic so this always finds the same
+    // note, including the correct nearest section for a "chapter" fallback).
     function openCommentaryTooltip(verseEl, x, y) {
-        const ref = verseEl.dataset.ref;
-        const source = verseEl.dataset.noteSource;
-        if (!ref || !source) return;
-        const note = source === 'verse'
-            ? (commentaryVerseIndex.get(ref) || {}).note
-            : (chapterCommentary && chapterCommentary[ref]);
-        if (!note) return;
-        showTooltipAt(buildCommentaryTooltipHtml(note, source, ref), x, y, verseEl);
+        const book = verseEl.dataset.book;
+        const chapter = verseEl.dataset.chapter;
+        const verse = verseEl.dataset.verse;
+        if (!book || !chapter || !verse) return;
+        const hit = resolveVerseCommentary(book, chapter, verse);
+        if (!hit) return;
+        showTooltipAt(buildCommentaryTooltipHtml(hit.note, hit.source, book), x, y, verseEl);
         dismissCommentaryHint(); // opening a tooltip is proof the hint did its job
     }
     // First-time onboarding hint: shown once (ever, via localStorage) the

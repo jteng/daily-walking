@@ -10,51 +10,77 @@ available to respond; if you stop and wait, the batch is wasted.
 
 A companion to [TIER1_SPEC.md](TIER1_SPEC.md) (verse-grain commentary, one
 key verse per *reading day*), but keyed to the Bible's own **chapter**
-structure instead, decoupled from the reading plan's day boundaries. It
-surfaces in the app as one collapsible "逐章释义" card per chapter, stacked
-on any reading day whose highlighted verse falls in a pilot book — see
-`index.html`'s `PILOT_BOOKS` constant and the design doc at
+structure instead, decoupled from the reading plan's day boundaries.
+
+**Each chapter is a handful of pericope-level *sections*, not one
+whole-chapter note.** (Revised 2026-07-28 — the original pilot authored one
+key verse + 4-5 beats per whole chapter; that under-covers any chapter with
+more than one real movement, e.g. Luke 15's three parables collapsed into a
+single reflection on one of them. `chapters.json` is now `{"书 章": [section,
+...]}` — an array — so a chapter can carry as many sections as it actually
+needs.) It surfaces in the app as a tappable mark on every verse in the Bible
+reading panel: tapping a verse inside a section's own range shows that
+section's note (an "exact" mark, same tier as a Tier 1 verse hit); tapping a
+verse between sections falls back to the nearest section, shown as an
+approximate "chapter" mark. See `index.html`'s `resolveVerseCommentary` and
+the design doc at
 `~/.gstack/projects/jteng-daily-walking/jingteng-commentary-design-20260727-204502.md`
-for the full architecture and gating rule.
+for the full architecture.
 
 **Current pilot book: 路加福音 (Luke), all 24 chapters.** 约翰福音 (John)
-1-2 already shipped as the original proof of concept and needs no further
-work. When Luke is fully drafted, moving to the next book means editing three
-constants at the top of `scripts/chapter_status.py`
-(`PILOT_BOOK_NAME` / `PILOT_BOOK_NUMBER` / `PILOT_CHAPTERS`) and adding the
-new book's full Chinese name to `PILOT_BOOKS` in `index.html` — see that
-file's inline comments for exact locations.
+1-2 already shipped (as single-section entries, from the original one-note
+pilot) and needs no further work. When Luke is fully drafted, moving to the
+next book means editing three constants at the top of
+`scripts/chapter_status.py` (`PILOT_BOOK_NAME` / `PILOT_BOOK_NUMBER` /
+`PILOT_CHAPTERS`) — see that file's inline comments for exact locations.
 
-## Key difference from Tier 1: you choose the key verse
+## Key difference from Tier 1: you choose the sections
 
 Tier 1 authors a note for an already-chosen verse (the day's `verse_parts`).
-Chapter commentary has no such verse pre-selected — `chapter_status.py --next
-N` gives you the **full text of the chapter**, and picking the key verse (or
-short verse range) is your first job before writing anything. Choose the
-verse or range that best carries the chapter's central movement — usually
-where the narrative turns, the theological claim lands, or (in Luke)
-where Jesus's own words or action crystallize the scene's point. Prefer a
-single verse or a tight 2-4 verse range (matches Tier 1's own convention of
-occasional short ranges like `"9:12-13"`). Write the choice as `"C:V"` or
-`"C:V-V"` in the `key_verse` field — the merge script resolves the verse text
-from the chapter automatically, so you don't need to copy it in yourself.
+Chapter commentary has no verse pre-selected — `chapter_status.py --next N`
+gives you the **full text of the chapter**, and breaking it into sections is
+your first job before writing anything.
+
+- Read the whole chapter and identify its natural pericopes — the places a
+  study Bible or preaching outline would put a paragraph break: a scene
+  change, a new parable, a shift from narrative to teaching, etc.
+- **Typically 3-5 sections per chapter.** A short or single-scene chapter
+  (e.g. a brief narrative aside) may need only 2; don't force more sections
+  than the chapter's actual structure supports. A long chapter with several
+  distinct units (e.g. Luke 15's three parables, Luke 18's several short
+  pericopes) may need up to 5-6.
+- Each section gets its own key verse or short range — the same convention
+  as Tier 1 (prefer a single verse or a tight 2-4 verse range that carries
+  that *section's* central movement, not the whole chapter's). Write it as
+  `"C:V"` or `"C:V-V"` in `key_verse` — the merge script resolves the verse
+  text from the chapter automatically.
+- Sections should roughly span the chapter (few large gaps), but don't force
+  contiguous coverage — a short connecting verse between two pericopes
+  doesn't need its own section; it'll fall back to whichever neighboring
+  section is closer when a reader taps it.
 
 ## House style
 
 Identical to Tier 1's (see TIER1_SPEC.md for the full rationale) — the two
-corpora should read as one voice across the app:
+corpora should read as one voice across the app. Applies **per section**:
 
-- **Length: 450–600 visible characters** (whitespace-stripped), hard bounds
-  400-660, enforced by `chapter_merge.py`. On a simple chapter, land near 450
-  rather than padding.
-- **Structure: 4-5 beats**, each `[lead, body]`. Standard arc:
-  1. **Observe the text** — its place in the chapter/book, structure, a
-     repeated word or turn.
+- **Length: 350-450 visible characters** (whitespace-stripped), hard bounds
+  300-550, enforced by `chapter_merge.py`. Each section is narrower in scope
+  than a whole-chapter note used to be — don't pad to reach the old
+  450-600 range.
+- **Structure: 3-4 beats**, each `[lead, body]`. Standard arc, compressed
+  from Tier 1's 4-5 since a section is a smaller unit of text:
+  1. **Observe the text** — what happens in this section, its place in the
+     chapter's flow, a repeated word or turn.
   2. **The key term / phrase** — the pivotal word in the chosen verse(s).
-  3. **Scope / implication** — widen to what the chapter establishes.
-  4. **Connect to Christ** — redemptive-historical line to the gospel.
-  5. **默想** (always last, lead = `默想。`) — one or two second-person
-     application questions.
+  3. *(if the section carries it)* **Connect to Christ** — redemptive-
+     historical line to the gospel. Fold into beat 2 on a shorter section
+     rather than forcing a fourth beat where there isn't room.
+  4. **默想** (always last, lead = `默想。`) — one or two second-person
+     application questions. Every section ends with its own — each section
+     is independently tappable while reading, so each must be a complete,
+     self-contained reflection, not half a thought that depends on a reader
+     having also opened a different section of the same chapter.
 - **Voice: match the expositor to genre.** For Luke (Gospel narrative):
   **Carson / Sinclair Ferguson** — the same blend already used for John.
   (Full genre table in TIER1_SPEC.md if the pilot ever moves to a different
@@ -72,20 +98,18 @@ corpora should read as one voice across the app:
    chapter count (24) — don't self-limit to a small slice; attempt the whole
    remaining book each firing. The real limit is your 4-hour usage budget, so
    a firing may stop partway through — that's fine, the resume guarantee
-   below makes an over- or under-shoot harmless. Lower the 40 only if a
-   future, larger pilot book makes one firing's context genuinely too much
-   to hold at once.
-3. For each chapter: read the full text, choose the key verse/range, write
-   the beats per the house style above.
-4. **Persist in sub-chunks of ~4** (smaller than Tier 1's 10 — a whole
-   chapter is more source text to synthesize than a single pre-chosen verse,
-   so a chunk takes longer). This is about loss-protection granularity
-   *within* a firing (commit every ~4 chapters so a cutoff mid-firing loses
-   little), not a cap on how much the firing as a whole should attempt:
+   below makes an over- or under-shoot harmless.
+3. For each chapter: read the full text, break it into 3-5 sections per
+   "Key difference" above, write each section's beats per the house style.
+4. **Persist in sub-chunks of ~2 chapters' worth of sections** (a chapter now
+   produces 3-5x the content of the old single-note pilot, so a smaller
+   chunk keeps loss-protection granularity similar to before):
    - Write `plans/commentary/_incoming_chapters.json` = JSON array of
-     `{"chapter": N, "key_verse": "C:V" or "C:V-V", "voice": "...", "beats": [["lead","body"], ...]}`.
-   - `python3 scripts/chapter_merge.py` (validates length/beat-count via
-     `commentary_common.py`, folds into `chapters.json`, clears the inbox).
+     `{"chapter": N, "sections": [{"key_verse": "C:V" or "C:V-V", "voice": "...", "beats": [["lead","body"], ...]}, ...]}`.
+   - `python3 scripts/chapter_merge.py` (validates length/beat-count per
+     section via `commentary_common.py`, upserts into `chapters.json` by
+     section reference — safe to re-run/extend a chapter across multiple
+     chunks — and clears the inbox).
    - `git add -A && git commit -m "Chapter commentary: Luke N-M"`.
 5. Repeat step 4 until remaining chapters are exhausted or usage runs out.
 6. `python3 scripts/chapter_status.py` — if `remaining: 0` for the current
@@ -96,14 +120,18 @@ corpora should read as one voice across the app:
 ## Resume guarantee
 
 "Remaining" is always computed as: chapters in `PILOT_CHAPTERS` whose key
-(`"书名 章"`) is absent from `chapters.json`. Every firing continues where
-the last left off — no counters, no shared state, no double-drafting. This
-is the same guarantee TIER1_SPEC.md's pipeline already proved across 100→310
-entries over multiple unattended cron batches without losing work.
+(`"书名 章"`) is absent from `chapters.json`. A chapter counts as drafted
+once its key exists with at least one section — so within a chapter, adding
+sections across multiple firings/chunks is safe (upsert-by-reference in
+`chapter_merge.py`), but a chapter you've started should be finished (all its
+sections written) in the same firing before moving to the next chapter,
+since `chapter_status.py` has no notion of "partially sectioned." This is the
+same no-shared-state guarantee TIER1_SPEC.md's pipeline already proved across
+100→310 entries over multiple unattended cron batches without losing work.
 
 ## Sanity checks before ending a batch
 
 - `python3 -m pytest tests/` should still pass (commentary_common.py's
   regression tests + the rest of the suite).
 - `python3 scripts/chapter_status.py` output should show `drafted` increased
-  by exactly the number of chapters merged this batch.
+  by exactly the number of *chapters* (not sections) merged this batch.
