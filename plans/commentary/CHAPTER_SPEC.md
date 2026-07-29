@@ -27,10 +27,11 @@ the design doc at
 `~/.gstack/projects/jteng-daily-walking/jingteng-commentary-design-20260727-204502.md`
 for the full architecture.
 
-**Current pilot book: 路加福音 (Luke), all 24 chapters.** 约翰福音 (John)
-1-2 already shipped (as single-section entries, from the original one-note
-pilot) and needs no further work. When Luke is fully drafted, moving to the
-next book means editing three constants at the top of
+**Current pilot book: 约翰福音 (John), chapters 3-21.** 路加福音 (Luke) is
+fully drafted (24/24, multi-section). 约翰福音 1-2 already shipped (as
+single-section entries, from the original one-note pilot) and need no
+further work — that's why the range starts at 3. When John is fully
+drafted, moving to the next book means editing three constants at the top of
 `scripts/chapter_status.py` (`PILOT_BOOK_NAME` / `PILOT_BOOK_NUMBER` /
 `PILOT_CHAPTERS`) — see that file's inline comments for exact locations.
 
