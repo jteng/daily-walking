@@ -262,7 +262,14 @@
                 /* Remove forced centering hacks, let JS position it */
                 transform: none !important;
                 left: auto !important;
-                pointer-events: auto; /* Allow clicking inside? */
+                /* pointer-events is intentionally NOT set here — the base rule
+                   is `none`, and `.verse-tooltip.show` below grants `auto`.
+                   Unconditionally granting it here (as this used to) left the
+                   hidden tooltip interactive at its last position — on a
+                   verse-dense page it would silently sit on top of and
+                   swallow taps meant for nearby verses. This was the real
+                   cause of "works on the first verse, not later ones" on
+                   mobile only (desktop never had this override). */
             }
         }
 
