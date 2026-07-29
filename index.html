@@ -190,6 +190,46 @@
             vertical-align: super;
             margin-right: 4px;
         }
+        .bible-verse.has-commentary {
+            cursor: pointer;
+        }
+        .bible-verse.has-commentary.exact .verse-num {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: var(--primary);
+            color: var(--primary);
+        }
+        .bible-verse.has-commentary.chapter-only .verse-num {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: #bbb;
+        }
+        .bible-verse.has-commentary:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        .commentary-hint {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: #eef5ff;
+            border: 1px dashed var(--primary);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 0.85em;
+            color: var(--primary);
+        }
+        .commentary-hint-dismiss {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.2em;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0 2px;
+        }
 
         /* Tooltip Styles (Keep transparent/overlay) */
         .verse-tooltip {
@@ -201,43 +241,45 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             z-index: 1000;
             max-width: 300px;
+            max-height: 70vh;
+            overflow-y: auto;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.2s;
             font-size: 0.9em;
             line-height: 1.5;
         }
-        
+
         @media (max-width: 768px) {
             .reader-panel { padding: 10px; }
             .panel-content { padding: 16px; }
-            
+
             /* Mobile tooltip refinements */
             .verse-tooltip {
                 max-width: 90vw !important;
+                max-height: 60vh;
                 width: max-content; /* Shrink to fit content */
                 /* Remove forced centering hacks, let JS position it */
                 transform: none !important;
-                left: auto !important; 
+                left: auto !important;
                 pointer-events: auto; /* Allow clicking inside? */
             }
         }
-        
+
+        /* Shown tooltips need real pointer-events so a mouse-wheel over a
+           tall (overflowing) note scrolls it instead of passing the wheel
+           event through to the page, which would trigger close-on-scroll. */
         .verse-tooltip.show {
             opacity: 1;
+            pointer-events: auto;
         }
-        
+
         .verse-tooltip-ref {
             font-weight: bold;
             color: var(--primary);
             margin-bottom: 8px;
             display: block;
             font-size: 0.95em;
-            pointer-events: none;
-        }
-        
-        .verse-tooltip * {
-            pointer-events: none;
         }
         /* Existing styles that are still relevant or not fully overridden */
         .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
@@ -245,37 +287,6 @@
         h2 { margin: 0 0 15px 0; font-size: 1.4em; }
         .section-title { font-weight: bold; border-left: 4px solid var(--primary); padding-left: 10px; margin: 25px 0 10px 0; }
         .verse-box { background: #eef5ff; border-radius: 8px; padding: 15px; font-style: italic; color: #444; margin-top: 20px; border: 1px dashed var(--primary); }
-        .commentary-box {
-            background-color: #f9fafb;
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 4px;
-            font-size: 0.95em;
-            color: #444;
-        }
-        .commentary-box h5 {
-            margin: 0 0 10px 0;
-            font-size: 1.1em;
-            color: var(--primary);
-        }
-        /* Tier 1 verse commentary — collapsible "逐节释义" card under the key verse */
-        .tier1-commentary { margin-top: 16px; padding: 0; overflow: hidden; }
-        .tier1-toggle {
-            display: flex; align-items: center; justify-content: space-between;
-            width: 100%; box-sizing: border-box;
-            background: none; border: none; cursor: pointer;
-            padding: 12px 15px; margin: 0;
-            font-family: inherit; font-size: 1em; font-weight: 600;
-            color: var(--primary); text-align: left;
-        }
-        .tier1-subtitle { font-weight: 400; color: #888; font-size: 0.85em; margin-left: 6px; }
-        .tier1-chev { transition: transform 0.2s ease; font-size: 0.9em; }
-        .tier1-commentary.open .tier1-chev { transform: rotate(180deg); }
-        .tier1-body { padding: 0 15px 6px 15px; }
-        .tier1-body p { margin: 0 0 12px 0; line-height: 1.75; color: var(--text); }
-        .tier1-body p:last-child { margin-bottom: 10px; }
-        .tier1-body strong { color: var(--primary); }
         /* Table styling for extracted tables inserted into content */
         #devotional-content table {
             width: 100%;
@@ -601,6 +612,10 @@ const Reader = {
         
         // Explicitly load bible XML if not already loaded to ensure readyness
         if (window.loadBibleXML) window.loadBibleXML();
+
+        // Bible-panel commentary tap handler (delegated, registered once —
+        // see initCommentaryTapHandler).
+        if (window.initCommentaryTapHandler) window.initCommentaryTapHandler();
     },
     
     // Toggle Mode
@@ -664,28 +679,51 @@ const Reader = {
             return;
         }
         
+        // Commentary corpora are keyed by full book name ("创世记"), but
+        // parsed.bookName is the abbreviation ("创") — convert once per call.
+        const fullBookName = (typeof getFullBookName === 'function') ? getFullBookName(parsed.bookName) : parsed.bookName;
+        let anyCommentaryMarked = false;
+
         for (let c = parsed.startChapter; c <= parsed.endChapter; c++) {
             const chapterNode = bookNode.querySelector(`chapter[number="${c}"]`);
             if (chapterNode) {
                 html += `<div class="bible-chapter">
                     <h3>${parsed.bookName} 第${c}章</h3>`;
-                
+
                 const verses = chapterNode.querySelectorAll('verse');
                 verses.forEach(v => {
                     const num = v.getAttribute('number');
                     const text = v.textContent;
-                    html += `<div class="bible-verse">
-                        <span class="verse-num">${num}</span>${text}
-                    </div>`;
+                    const hit = (typeof resolveVerseCommentary === 'function' && commentaryVerseIndex)
+                        ? resolveVerseCommentary(fullBookName, c, num)
+                        : null;
+                    if (hit) {
+                        anyCommentaryMarked = true;
+                        const sourceClass = hit.source === 'verse' ? 'exact' : 'chapter-only';
+                        const ref = hit.source === 'verse' ? `${fullBookName} ${c}:${num}` : `${fullBookName} ${c}`;
+                        html += `<div class="bible-verse has-commentary ${sourceClass}" data-note-source="${hit.source}" data-ref="${ref}" tabindex="0" role="button" aria-label="查看第${num}节释义">
+                            <span class="verse-num">${num}</span>${text}
+                        </div>`;
+                    } else {
+                        html += `<div class="bible-verse">
+                            <span class="verse-num">${num}</span>${text}
+                        </div>`;
+                    }
                 });
-                
+
                 html += `</div>`;
             } else {
                  html += `<div style="color:#999; margin:10px 0;">(未找到第${c}章)</div>`;
             }
         }
         
-        container.innerHTML = html || '<div>未找到经文内容</div>';
+        // First-time discoverability nudge: coverage is still sparse, so a
+        // subtle dotted underline alone may go unnoticed. Shows once, ever.
+        const hintHtml = (anyCommentaryMarked && !localStorage.getItem('commentaryHintSeen') && typeof buildCommentaryHintHtml === 'function')
+            ? buildCommentaryHintHtml()
+            : '';
+
+        container.innerHTML = hintHtml + (html || '<div>未找到经文内容</div>');
     }
 };
 
@@ -694,20 +732,92 @@ window.Reader = Reader;
 </script>
 <script>
     let tooltipElement = null;
-    
+    let tooltipTriggerEl = null;
+
     function createTooltip() {
         if (!tooltipElement) {
             tooltipElement = document.createElement('div');
             tooltipElement.className = 'verse-tooltip';
+            tooltipElement.id = 'verse-tooltip-el';
+            tooltipElement.setAttribute('role', 'tooltip');
             document.body.appendChild(tooltipElement);
         }
         return tooltipElement;
     }
-    
-    function hideVerseTooltip() {
+
+    // opts.returnFocus: move focus back to the element that opened the tooltip
+    // (used on Escape for keyboard users; other close paths — scroll, outside
+    // click, day navigation — don't need to move focus).
+    function hideVerseTooltip(opts) {
         if (tooltipElement) {
             tooltipElement.classList.remove('show');
         }
+        if (tooltipTriggerEl) {
+            tooltipTriggerEl.removeAttribute('aria-describedby');
+            if (opts && opts.returnFocus) tooltipTriggerEl.focus();
+            tooltipTriggerEl = null;
+        }
+    }
+
+    // Shared tooltip renderer: shows `html`, positions it clamped to the
+    // viewport around (x, y), and arms close-on-scroll. Used by both the
+    // prose verse-ref hover (raw verse text) and the Bible-panel commentary
+    // tap (rendered beats) so they share identical position/dismiss behavior.
+    // `triggerEl`, when given, gets aria-describedby wired to the tooltip and
+    // is where focus returns to on Escape (see hideVerseTooltip).
+    function showTooltipAt(html, x, y, triggerEl) {
+        const tooltip = createTooltip();
+        tooltip.innerHTML = html;
+        tooltip.classList.add('show');
+
+        if (triggerEl) {
+            triggerEl.setAttribute('aria-describedby', tooltip.id);
+            tooltipTriggerEl = triggerEl;
+        }
+
+        const tooltipRect = tooltip.getBoundingClientRect();
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+        const padding = 10;
+
+        // Horizontal: attempt to center on the trigger point, clamp to screen edges
+        let left = x - (tooltipRect.width / 2);
+        if (left < padding) left = padding;
+        if (left + tooltipRect.width > screenW - padding) {
+            left = screenW - tooltipRect.width - padding;
+        }
+
+        // Vertical: prefer below, flip above if insufficient space
+        const spaceBelow = screenH - y;
+        const spaceAbove = y;
+        let top;
+        if (spaceBelow > tooltipRect.height + 20 || spaceBelow > spaceAbove) {
+            top = y + 20;
+        } else {
+            top = y - tooltipRect.height - 20;
+        }
+        // Final clamp (reserve 80px at top for header)
+        if (top < 80) top = 80;
+        if (top + tooltipRect.height > screenH - padding) {
+            top = screenH - tooltipRect.height - padding;
+        }
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+
+        // Close on scroll — no auto-close timer, let the user read at their
+        // own pace. Delay arming slightly so the triggering touch/click
+        // itself doesn't immediately fire it.
+        if (window.tooltipScrollListener) {
+            window.removeEventListener('scroll', window.tooltipScrollListener);
+        }
+        window.tooltipScrollListener = function() {
+            hideVerseTooltip();
+            window.removeEventListener('scroll', window.tooltipScrollListener);
+        };
+        setTimeout(() => {
+            window.addEventListener('scroll', window.tooltipScrollListener, { passive: true });
+        }, 100);
     }
     
     // Bible XML data
@@ -884,34 +994,18 @@ window.Reader = Reader;
             span.addEventListener('mouseenter', showVerseTooltipFromData);
             span.addEventListener('mouseleave', hideVerseTooltip);
             span.addEventListener('click', (e) => {
-                e.preventDefault(); 
+                e.preventDefault();
                 e.stopPropagation(); // Prevent closing immediately
                 showVerseTooltipFromData(e);
-                
-                // No auto-close timer - let user read at their own pace
-                // But add scroll listener to close when scrolling starts
-                
-                // Remove existing scroll listener if any (to prevent duplicates)
-                if (window.tooltipScrollListener) {
-                    window.removeEventListener('scroll', window.tooltipScrollListener);
-                }
-                
-                // Create new scroll listener
-                window.tooltipScrollListener = function() {
-                    hideVerseTooltip();
-                    window.removeEventListener('scroll', window.tooltipScrollListener);
-                };
-                
-                // Add listener with small delay to prevent immediate trigger on touch
-                setTimeout(() => {
-                    window.addEventListener('scroll', window.tooltipScrollListener, {passive: true});
-                }, 100);
             });
         });
         
-        // Close tooltip when clicking anywhere else
+        // Close tooltip when clicking anywhere else. Must also exclude
+        // .has-commentary verses (the Bible-panel tap trigger) — otherwise
+        // this same click bubbles up from the delegated tap handler that
+        // just opened the tooltip and immediately closes it again.
         document.addEventListener('click', (e) => {
-             if (!e.target.closest('.verse-ref') && !e.target.closest('.verse-tooltip')) {
+             if (!e.target.closest('.verse-ref') && !e.target.closest('.bible-verse.has-commentary') && !e.target.closest('.verse-tooltip')) {
                  hideVerseTooltip();
              }
         });
@@ -923,57 +1017,9 @@ window.Reader = Reader;
     function showVerseTooltipFromData(event) {
         const ref = event.target.dataset.ref;
         const verseText = event.target.dataset.verse;
-        
-        console.log('Tooltip triggered:', ref, verseText ? 'has text' : 'no text');
-        
         if (!verseText) return;
-        
-        const tooltip = createTooltip();
-        tooltip.innerHTML = `<span class="verse-tooltip-ref">${ref}</span>${verseText}`;
-        tooltip.classList.add('show');
-        
-        const x = event.clientX;
-        const y = event.clientY;
-        const tooltipRect = tooltip.getBoundingClientRect();
-        
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
-        const padding = 10;
-        
-        // Horizontal: Attempt to center on click, but clamp to screen edges
-        let left = x - (tooltipRect.width / 2);
-        
-        // Clamp Horizontal
-        if (left < padding) left = padding;
-        if (left + tooltipRect.width > screenW - padding) {
-            left = screenW - tooltipRect.width - padding;
-        }
-        
-        // Vertical: Prefer bottom, flip to top if insufficient space
-        // Check space below
-        const spaceBelow = screenH - y;
-        const spaceAbove = y;
-        
-        let top;
-        // If enough space below (allow 20px gap) OR not enough space above either
-        if (spaceBelow > tooltipRect.height + 20 || spaceBelow > spaceAbove) {
-            top = y + 20;
-        } else {
-            // Place above
-            top = y - tooltipRect.height - 20;
-        }
-        
-        // Final Vertical Clamp (ensure it never goes off screen)
-        // Reserve 80px at top for header if possible
-        if (top < 80) top = 80;
-        if (top + tooltipRect.height > screenH - padding) {
-             top = screenH - tooltipRect.height - padding;
-        }
-        
-        tooltip.style.left = left + 'px';
-        tooltip.style.top = top + 'px';
-        
-        console.log('Tooltip positioned at:', left, top);
+        const html = `<span class="verse-tooltip-ref">${ref}</span>${verseText}`;
+        showTooltipAt(html, event.clientX, event.clientY);
     }
 
     // Load data from bibleData.json (generated by extractor). Falls back to a
@@ -985,9 +1031,6 @@ window.Reader = Reader;
     let baseData = null;
     let plansManifest = [];
     let currentPlanId = localStorage.getItem('planId') || 'original';
-    // Chapter-by-chapter commentary pilot (see the commentary design doc):
-    // pilot book only, decoupled from any single reading day.
-    const PILOT_BOOKS = new Set(['约翰福音', '路加福音']);
     // Tier 1 verse commentary: an object keyed by verse reference
     // (e.g. "创世记 1:27"), each value { reference, verse_text, beats: [[lead, body], ...] }.
     // Loaded once; days whose highlighted verse has no note simply show no card.
@@ -1019,38 +1062,123 @@ window.Reader = Reader;
         }
         return chapterCommentary;
     }
-    // Build the collapsible commentary card for a reference key, or '' if none.
-    // `corpus` is tier1Commentary or chapterCommentary; `label` is the card's
-    // toggle text ("逐节释义" vs "逐章释义"); `subtitle` (chapter cards only)
-    // disambiguates stacked cards on multi-chapter pilot-book days.
-    function renderCommentaryCard(reference, corpus, label, subtitle) {
-        if (!corpus || !reference) return '';
-        const note = corpus[reference];
-        if (!note || !Array.isArray(note.beats) || note.beats.length === 0) return '';
-        const body = note.beats.map(b =>
+    // Verse -> note lookup for the Bible-panel tap feature. Built once tier1Commentary
+    // and chapterCommentary are both loaded: expands tier1 range keys ("书 章:节-节2")
+    // into one Map entry per individual verse, so a tap on any verse in the range
+    // resolves directly. commentaryChapterHasNote is the cheap "any commentary in this
+    // chapter" set, reused by the chapter-dropdown marker.
+    let commentaryVerseIndex = null;
+    let commentaryChapterHasNote = null;
+    const TIER1_KEY_RE = /^(\S+) (\d+):(\d+)(-(\d+))?$/;
+    function buildCommentaryIndex() {
+        if (commentaryVerseIndex) return commentaryVerseIndex;
+        commentaryVerseIndex = new Map();
+        commentaryChapterHasNote = new Set();
+        for (const [key, note] of Object.entries(tier1Commentary || {})) {
+            const m = TIER1_KEY_RE.exec(key);
+            if (!m) continue; // malformed/unexpected key shape: skip, don't break the whole index
+            const [, book, chapter, startVerse, , endVerse] = m;
+            const start = parseInt(startVerse, 10);
+            const end = endVerse ? parseInt(endVerse, 10) : start;
+            commentaryChapterHasNote.add(`${book} ${chapter}`);
+            for (let v = start; v <= end; v++) {
+                commentaryVerseIndex.set(`${book} ${chapter}:${v}`, { note, source: 'verse' });
+            }
+        }
+        for (const key of Object.keys(chapterCommentary || {})) {
+            commentaryChapterHasNote.add(key);
+        }
+        return commentaryVerseIndex;
+    }
+    // Resolve a tapped verse to its commentary note: exact tier1 hit first, else
+    // the whole-chapter reflection if this chapter has one, else null.
+    function resolveVerseCommentary(book, chapter, verse) {
+        const exact = commentaryVerseIndex.get(`${book} ${chapter}:${verse}`);
+        if (exact) return exact;
+        const chapterKey = `${book} ${chapter}`;
+        const chapterNote = chapterCommentary && chapterCommentary[chapterKey];
+        if (chapterNote) return { note: chapterNote, source: 'chapter' };
+        return null;
+    }
+    // Build the tooltip content for a resolved commentary note. `ref` is the
+    // .bible-verse's data-ref ("书名 章:节" for an exact hit, "书名 章" for a
+    // chapter-only fallback) — used to label which grain of note this is.
+    function buildCommentaryTooltipHtml(note, source, ref) {
+        const label = source === 'verse' ? '逐节释义' : '逐章释义';
+        const headerText = source === 'verse'
+            ? `${label} · ${ref}`
+            : `${label} · ${ref}章 · 关键经文 ${note.reference}`;
+        const body = (note.beats || []).map(b =>
             `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
         ).join('');
-        const subtitleHtml = subtitle ? `<span class="tier1-subtitle">${subtitle}</span>` : '';
-        return `<div class="commentary-box tier1-commentary">
-            <button type="button" class="tier1-toggle" aria-expanded="false">
-                <span>${label}${subtitleHtml}</span><span class="tier1-chev" aria-hidden="true">▾</span>
-            </button>
-            <div class="tier1-body" hidden>${body}</div>
+        return `<span class="verse-tooltip-ref">${headerText}</span>${body}`;
+    }
+    // Re-resolve a marked verse div's note from its data-ref/data-note-source
+    // against the in-memory corpora (no per-element cache — see plan-eng-review).
+    function openCommentaryTooltip(verseEl, x, y) {
+        const ref = verseEl.dataset.ref;
+        const source = verseEl.dataset.noteSource;
+        if (!ref || !source) return;
+        const note = source === 'verse'
+            ? (commentaryVerseIndex.get(ref) || {}).note
+            : (chapterCommentary && chapterCommentary[ref]);
+        if (!note) return;
+        showTooltipAt(buildCommentaryTooltipHtml(note, source, ref), x, y, verseEl);
+        dismissCommentaryHint(); // opening a tooltip is proof the hint did its job
+    }
+    // First-time onboarding hint: shown once (ever, via localStorage) the
+    // first time a rendered chapter has any marked verse, so the sparse
+    // dotted-underline marks don't go unnoticed. Dismissed by its own button
+    // or automatically once the reader successfully opens a tooltip.
+    function buildCommentaryHintHtml() {
+        return `<div class="commentary-hint" id="commentary-hint">
+            <span>点击带下划线的经节查看释义</span>
+            <button type="button" class="commentary-hint-dismiss" aria-label="关闭提示">&times;</button>
         </div>`;
     }
-    // One delegated handler toggles any commentary card (renderDay rebuilds
-    // the verse HTML each time, so a per-card listener would leak).
-    document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.tier1-toggle');
-        if (!btn) return;
-        const card = btn.closest('.tier1-commentary');
-        const body = card && card.querySelector('.tier1-body');
-        if (!body) return;
-        const open = body.hasAttribute('hidden');
-        body.toggleAttribute('hidden', !open);
-        btn.setAttribute('aria-expanded', String(open));
-        card.classList.toggle('open', open);
-    });
+    function dismissCommentaryHint() {
+        localStorage.setItem('commentaryHintSeen', '1');
+        const hint = document.getElementById('commentary-hint');
+        if (hint) hint.remove();
+    }
+    // Delegated tap/keyboard handler for commentary marks in the Bible panel.
+    // Registered once (called from Reader.init, itself called exactly once) on
+    // the persistent #full-scripture-content container, since renderBible()
+    // replaces its innerHTML on every day change — a per-element listener
+    // would leak on every re-render.
+    function initCommentaryTapHandler() {
+        const container = document.getElementById('full-scripture-content');
+        if (!container) return;
+
+        container.addEventListener('click', (e) => {
+            if (e.target.closest('.commentary-hint-dismiss')) {
+                dismissCommentaryHint();
+                return;
+            }
+            const verseEl = e.target.closest('.bible-verse.has-commentary');
+            if (!verseEl) return;
+            openCommentaryTooltip(verseEl, e.clientX, e.clientY);
+        });
+
+        container.addEventListener('keydown', (e) => {
+            const verseEl = e.target.closest('.bible-verse.has-commentary');
+            if (!verseEl) return;
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault(); // Space would otherwise scroll the page
+                const rect = verseEl.getBoundingClientRect();
+                openCommentaryTooltip(verseEl, rect.left + rect.width / 2, rect.bottom);
+            } else if (e.key === 'Escape') {
+                hideVerseTooltip({ returnFocus: true });
+            }
+        });
+
+        // Tooltip content isn't itself focusable, so any blur of the
+        // triggering verse means the user tabbed away from it — close.
+        container.addEventListener('focusout', (e) => {
+            if (e.target.closest('.bible-verse.has-commentary')) hideVerseTooltip();
+        });
+    }
+    window.initCommentaryTapHandler = initCommentaryTapHandler;
     // Default current day is day 1 for fresh users (index 0). A saved value
     // in localStorage overrides this. (Previously we computed a default from
     // Jan 1 of the current year; keep that helper for advanced uses.)
@@ -1196,9 +1324,22 @@ window.Reader = Reader;
         chapterIndex.forEach(item => {
             const option = document.createElement('option');
             option.value = item.index;
-            option.textContent = `${item.bookFull} ${item.chapterPart}`;
+            option.textContent = `${chapterSpanHasCommentary(item) ? '★ ' : ''}${item.bookFull} ${item.chapterPart}`;
             chapterSelect.appendChild(option);
         });
+    }
+    // A dropdown entry covers a whole reading day's span, which may be
+    // several chapters (e.g. "六至九章") — mark it if any chapter in that
+    // span has commentary, using the same chapter-has-commentary set built
+    // alongside the verse index (see buildCommentaryIndex).
+    function chapterSpanHasCommentary(item) {
+        if (!commentaryChapterHasNote || !window.Reader) return false;
+        const parsed = window.Reader.parseScripture(item.scripture);
+        if (!parsed) return false;
+        for (let c = parsed.startChapter; c <= parsed.endChapter; c++) {
+            if (commentaryChapterHasNote.has(`${item.bookFull} ${c}`)) return true;
+        }
+        return false;
     }
 
     // Wire up chapter selector after DOM is ready
@@ -1222,6 +1363,11 @@ window.Reader = Reader;
 
     function renderDay() {
         try {
+        // Any open commentary/verse tooltip is anchored to a verse on the day
+        // we're about to leave — close it so navigating away doesn't leave a
+        // stale note visible (found in /plan-ceo-review).
+        if (typeof hideVerseTooltip === 'function') hideVerseTooltip();
+
         if (!bibleData || bibleData.length === 0) {
             setText('day-title', '未找到数据');
             setText('devotional-content', '请先运行提取器生成 bibleData.json，然后刷新页面。');
@@ -1272,46 +1418,18 @@ window.Reader = Reader;
                 verseHtml = data.verse || '';
             }
             
-            // Commentary card(s) for the day's highlighted verse(s). Shown only
-            // on the 纵览版 (original) plan — the 默想版 devotional overlay
-            // already sits on the same verse with its own 默想, so the two
-            // cards would duplicate each other there.
-            //
-            // Gating rule: if the day's highlighted verse is in a pilot book
-            // (PILOT_BOOKS), render one "逐章释义" card per chapter of the
-            // day's scripture span, replacing the Tier 1 card. Otherwise
-            // (including days whose span merely touches a pilot book
-            // without the highlighted verse being in it), render the
-            // unchanged single Tier 1 "逐节释义" card.
-            let commentaryHtml = '';
-            if (currentPlanId === 'original' && data.verse_parts && data.verse_parts.length > 0) {
-                const highlightedBook = data.verse_parts[0].reference.split(' ')[0];
-                if (PILOT_BOOKS.has(highlightedBook) && window.Reader) {
-                    const parsed = window.Reader.parseScripture(data.scripture);
-                    if (parsed) {
-                        const chapters = [];
-                        for (let c = parsed.startChapter; c <= parsed.endChapter; c++) chapters.push(c);
-                        commentaryHtml = chapters.map(c => {
-                            const key = `${highlightedBook} ${c}`;
-                            const note = chapterCommentary && chapterCommentary[key];
-                            const subtitle = note ? ` ${parsed.bookName} ${c}章 · 关键经文 ${note.reference}` : '';
-                            return renderCommentaryCard(key, chapterCommentary, '逐章释义', subtitle);
-                        }).join('');
-                    }
-                } else {
-                    const refs = [...new Set(data.verse_parts.map(p => p.reference))];
-                    commentaryHtml = refs.map(ref => renderCommentaryCard(ref, tier1Commentary, '逐节释义')).join('');
-                }
-            }
-
-            // Wrap in styled box with label
+            // Commentary now lives in the Bible panel itself (tap a marked
+            // verse), not as a fixed card here — see Reader.renderBible /
+            // initCommentaryTapHandler. That surface works for every plan
+            // (it's the shared scripture text, not a plan-specific overlay),
+            // so unlike the old card there's no currentPlanId gating needed.
             if (verseHtml) {
                 verseEl.innerHTML = `<div class="verse-box" style="margin-top:0; margin-bottom:20px;">
                     <strong style="color:var(--primary); display:block; margin-bottom:8px;">今日金句：</strong>
                     ${verseHtml}
-                </div>${commentaryHtml}`;
+                </div>`;
             } else {
-                verseEl.innerHTML = commentaryHtml;
+                verseEl.innerHTML = '';
             }
         }
 
@@ -1366,6 +1484,7 @@ window.Reader = Reader;
         const base = await fetchBaseData();
         await loadCommentary();
         await loadChapterCommentary();
+        buildCommentaryIndex();
         bibleData = base;
 
         if (plan && plan.overlay && plan.file) {
