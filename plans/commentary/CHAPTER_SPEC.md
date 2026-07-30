@@ -27,14 +27,20 @@ the design doc at
 `~/.gstack/projects/jteng-daily-walking/jingteng-commentary-design-20260727-204502.md`
 for the full architecture.
 
-**Current pilot book: 使徒行传 (Acts), all 28 chapters.** 路加福音 (Luke)
-and 约翰福音 (John) are both fully drafted (24/24 and 21/21). Acts is
-narrative history (Luke's sequel), so it takes the same Carson / Sinclair
-Ferguson voice as the Gospels (see TIER1_SPEC.md's genre table). When Acts
-is fully drafted, moving to the next book means editing three constants at
-the top of `scripts/chapter_status.py` (`PILOT_BOOK_NAME` /
-`PILOT_BOOK_NUMBER` / `PILOT_CHAPTERS`) — see that file's inline comments
-for exact locations.
+**Current pilot book: 罗马书 (Romans), all 16 chapters.** 路加福音 (Luke),
+约翰福音 (John), and 使徒行传 (Acts) are all fully drafted (24/24, 21/21,
+28/28). Romans is doctrinal epistle, not narrative — it takes the
+**MacArthur / R.C. Sproul / Keller** voice per TIER1_SPEC.md's genre table
+(epistles: grace/doctrine), a shift from the Carson/Ferguson voice used for
+the Gospels and Acts. Sections will lean more on tracing Paul's argument
+(a chapter is often one sustained line of reasoning, not several discrete
+scenes) than on narrative pericope breaks — identify the natural turns in
+the argument (a new question Paul raises, an "therefore"/"but now" pivot, a
+shift from doctrine to application) the same way a scene change would mark
+a narrative section. When Romans is fully drafted, moving to the next book
+means editing three constants at the top of `scripts/chapter_status.py`
+(`PILOT_BOOK_NAME` / `PILOT_BOOK_NUMBER` / `PILOT_CHAPTERS`) — see that
+file's inline comments for exact locations.
 
 ## Key difference from Tier 1: you choose the sections
 
@@ -83,10 +89,11 @@ corpora should read as one voice across the app. Applies **per section**:
      is independently tappable while reading, so each must be a complete,
      self-contained reflection, not half a thought that depends on a reader
      having also opened a different section of the same chapter.
-- **Voice: match the expositor to genre.** For Luke (Gospel narrative):
-  **Carson / Sinclair Ferguson** — the same blend already used for John.
-  (Full genre table in TIER1_SPEC.md if the pilot ever moves to a different
-  kind of book.)
+- **Voice: match the expositor to genre.** For Romans (epistle,
+  grace/doctrine): **MacArthur / R.C. Sproul / Keller** per TIER1_SPEC.md's
+  genre table. (Luke, John, and Acts used Carson / Sinclair Ferguson, the
+  Gospels & Acts blend — narrative voice, now retired until the pilot
+  returns to a narrative book.)
 - **Language: Simplified Chinese**, 和合本 wording, warm reverent register
   matching existing content. Cross-references in short form (`西一 15`,
   `罗八 29`). No section-title HTML — plain prose only.
