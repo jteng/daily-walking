@@ -30,13 +30,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHAPTERS = os.path.join(ROOT, "plans", "commentary", "chapters.json")
 XML_PATH = os.path.join(ROOT, "ChineseSimplifiedBible.xml")
 
-# Pilot scope — edit these to move on to the next book. 约翰福音 1-2 (the
-# original 2-chapter proof of concept, single-section entries) already
-# shipped in chapters.json and are excluded from this range since they need
-# no further work.
-PILOT_BOOK_NAME = "约翰福音"
-PILOT_BOOK_NUMBER = 43  # matches index.html's Reader.bookMap['约'] and the XML's book@number
-PILOT_CHAPTERS = range(3, 22)  # John 3-21 (chapters 1-2 already shipped)
+# Pilot scope — edit these to move on to the next book. 约翰福音 (John) and
+# 路加福音 (Luke) are both fully drafted and stay in chapters.json.
+PILOT_BOOK_NAME = "使徒行传"
+PILOT_BOOK_NUMBER = 44  # matches index.html's Reader.bookMap['徒'] and the XML's book@number
+PILOT_CHAPTERS = range(1, 29)  # all 28 chapters of Acts
 
 
 def load_done():
