@@ -27,20 +27,39 @@ the design doc at
 `~/.gstack/projects/jteng-daily-walking/jingteng-commentary-design-20260727-204502.md`
 for the full architecture.
 
-**Current pilot book: 罗马书 (Romans), all 16 chapters.** 路加福音 (Luke),
-约翰福音 (John), and 使徒行传 (Acts) are all fully drafted (24/24, 21/21,
-28/28). Romans is doctrinal epistle, not narrative — it takes the
-**MacArthur / R.C. Sproul / Keller** voice per TIER1_SPEC.md's genre table
-(epistles: grace/doctrine), a shift from the Carson/Ferguson voice used for
-the Gospels and Acts. Sections will lean more on tracing Paul's argument
-(a chapter is often one sustained line of reasoning, not several discrete
-scenes) than on narrative pericope breaks — identify the natural turns in
-the argument (a new question Paul raises, an "therefore"/"but now" pivot, a
-shift from doctrine to application) the same way a scene change would mark
-a narrative section. When Romans is fully drafted, moving to the next book
-means editing three constants at the top of `scripts/chapter_status.py`
-(`PILOT_BOOK_NAME` / `PILOT_BOOK_NUMBER` / `PILOT_CHAPTERS`) — see that
-file's inline comments for exact locations.
+**Scope: the full remaining Bible, one auto-advancing queue.** (Revised
+2026-07-31 — 路加福音/Luke, 约翰福音/John, 使徒行传/Acts, and 罗马书/Romans
+are fully drafted; the user asked to finish all other 62 books rather than
+pick one at a time.) `scripts/bible_books.py` holds `QUEUE`, the ordered
+list of every remaining book: 1 Corinthians through Revelation, then
+Matthew and Mark (the two Gospels skipped when the pilot started with
+Luke), then Genesis through Malachi — finish the whole NT before starting
+the OT. `scripts/chapter_status.py` walks this queue automatically — the
+"current book" is simply the first one in `QUEUE` with an undone chapter,
+so **there is no manual scope edit between books anymore**; the script
+just keeps going until every book in `QUEUE` is done.
+
+**Voice is per-book, not a single constant.** `bible_books.voice_for_book`
+maps each book to its expositor per TIER1_SPEC.md's genre table: epistles
+(46-65) get MacArthur/Sproul/Keller (same as Romans), Matthew/Mark get
+Carson/Ferguson (same as Luke/John/Acts), Revelation gets MacArthur/Motyer
+(apocalyptic — not in TIER1_SPEC's table, so doctrinal exposition plus the
+prophetic/OT-echo voice), Job/Psalms/Proverbs/Ecclesiastes/Song of Songs
+get Kidner/Piper, the Prophets (Isaiah-Malachi) get Motyer, and OT
+narrative (Genesis-Esther) gets Kidner/Waltke. `chapter_status.py --next N`
+already tags every chapter it returns with the right `voice` for its
+book — use that value directly rather than re-deriving it.
+
+For epistles, lean on tracing the author's argument (a chapter is often
+one sustained line of reasoning, not several discrete scenes) rather than
+narrative pericope breaks — identify the natural turns (a new question
+raised, a "therefore"/"but now" pivot, a shift from doctrine to
+application) the same way a scene change would mark a narrative section.
+For OT narrative and the Gospels, sectioning works the same way it did for
+Luke/John/Acts. For Psalms and the Prophets, a "chapter" is often one
+poem or oracle — sections there should follow the poem's own movements
+(a shift in addressee, a turn from lament to praise, a new oracle
+formula) rather than forcing scene breaks onto material that has none.
 
 ## Key difference from Tier 1: you choose the sections
 
@@ -89,54 +108,72 @@ corpora should read as one voice across the app. Applies **per section**:
      is independently tappable while reading, so each must be a complete,
      self-contained reflection, not half a thought that depends on a reader
      having also opened a different section of the same chapter.
-- **Voice: match the expositor to genre.** For Romans (epistle,
-  grace/doctrine): **MacArthur / R.C. Sproul / Keller** per TIER1_SPEC.md's
-  genre table. (Luke, John, and Acts used Carson / Sinclair Ferguson, the
-  Gospels & Acts blend — narrative voice, now retired until the pilot
-  returns to a narrative book.)
+- **Voice: match the expositor to genre**, per book — see
+  `bible_books.voice_for_book` and the "Scope" section above.
+  `chapter_status.py --next N` tags each chapter with its book's voice
+  already; use that value for every section drafted from that chapter.
 - **Language: Simplified Chinese**, 和合本 wording, warm reverent register
   matching existing content. Cross-references in short form (`西一 15`,
   `罗八 29`). No section-title HTML — plain prose only.
 
 ## Batch procedure (one cron firing)
 
-1. `python3 scripts/chapter_status.py` — see how many chapters remain.
-2. `python3 scripts/chapter_status.py --next 40` — prints every undone
-   chapter's full verse-by-verse text as `{key, book, chapter, verse_count,
-   verses}`. The cap (40) is intentionally above the pilot book's total
-   chapter count (24) — don't self-limit to a small slice; attempt the whole
-   remaining book each firing. The real limit is your 4-hour usage budget, so
-   a firing may stop partway through — that's fine, the resume guarantee
-   below makes an over- or under-shoot harmless.
+1. `python3 scripts/chapter_status.py` — see how many chapters remain
+   overall, which book is current, and which books are queued next.
+2. `python3 scripts/chapter_status.py --next 48` — prints the next 48
+   undone chapters' full verse-by-verse text as `{key, book, book_number,
+   chapter, voice, verse_count, verses}`, **possibly spanning several
+   queued books** if the current book has fewer than 48 chapters left (most
+   remaining books are short epistles, so this is normal and expected —
+   don't stop at a book boundary just because one was reached). The cap
+   (48) is a batch-size choice, not a usage estimate — the real limit is
+   your usage budget, so a firing may stop partway through the 48; that's
+   fine, the resume guarantee below makes an over- or under-shoot
+   harmless.
 3. For each chapter: read the full text, break it into 3-5 sections per
-   "Key difference" above, write each section's beats per the house style.
-4. **Persist in sub-chunks of ~2 chapters' worth of sections** (a chapter now
-   produces 3-5x the content of the old single-note pilot, so a smaller
-   chunk keeps loss-protection granularity similar to before):
+   "Key difference" above, write each section's beats per the house style,
+   using the `voice` the worklist already tagged that chapter with.
+4. **Persist in sub-chunks of ~2 chapters' worth of sections** (a chapter
+   produces 3-5x the content of a single-note entry, so a smaller chunk
+   keeps loss-protection granularity tight):
    - Write `plans/commentary/_incoming_chapters.json` = JSON array of
-     `{"chapter": N, "sections": [{"key_verse": "C:V" or "C:V-V", "voice": "...", "beats": [["lead","body"], ...]}, ...]}`.
+     `{"book": "书名", "chapter": N, "sections": [{"key_verse": "C:V" or "C:V-V", "voice": "...", "beats": [["lead","body"], ...]}, ...]}`.
+     Every record names its own book — a chunk can freely mix chapters
+     from two different queued books.
    - `python3 scripts/chapter_merge.py` (validates length/beat-count per
      section via `commentary_common.py`, upserts into `chapters.json` by
      section reference — safe to re-run/extend a chapter across multiple
      chunks — and clears the inbox).
-   - `git add -A && git commit -m "Chapter commentary: Luke N-M"`.
-5. Repeat step 4 until remaining chapters are exhausted or usage runs out.
-6. `python3 scripts/chapter_status.py` — if `remaining: 0` for the current
-   pilot book, the run is complete: `CronList` then `CronDelete` this job,
-   and stop. (If there's a next book queued, update the three constants
-   per "Current pilot book" above instead of deleting the job.)
+   - `git add -A && git commit -m "Chapter commentary: <book> N-M"` (or,
+     when a chunk spans a book boundary, name both: `"Chapter commentary:
+     加拉太书 5-6, 以弗所书 1"`).
+5. Repeat step 4 until the 48-chapter worklist is exhausted or usage runs
+   out. When a book completes mid-batch, just keep going into the next
+   book already present in the worklist from step 2 — no scope edit, no
+   pause, no separate commit needed to "move on."
+6. `python3 scripts/chapter_status.py` — if `remaining: 0` (every book in
+   `QUEUE` is fully drafted, not just the current one), the whole project
+   is complete: `CronList` then `CronDelete` this job, run
+   `python3 -m pytest tests/` one last time, and stop. Otherwise, this
+   firing is done — leave the cron job running for the next firing to pick
+   up wherever `chapter_status.py` says to.
 
 ## Resume guarantee
 
-"Remaining" is always computed as: chapters in `PILOT_CHAPTERS` whose key
-(`"书名 章"`) is absent from `chapters.json`. A chapter counts as drafted
-once its key exists with at least one section — so within a chapter, adding
-sections across multiple firings/chunks is safe (upsert-by-reference in
-`chapter_merge.py`), but a chapter you've started should be finished (all its
-sections written) in the same firing before moving to the next chapter,
-since `chapter_status.py` has no notion of "partially sectioned." This is the
-same no-shared-state guarantee TIER1_SPEC.md's pipeline already proved across
-100→310 entries over multiple unattended cron batches without losing work.
+"Remaining" is always computed as: every `(book, chapter)` pair across
+`bible_books.QUEUE` whose key (`"书名 章"`) is absent from `chapters.json`.
+A chapter counts as drafted once its key exists with at least one section —
+so within a chapter, adding sections across multiple firings/chunks is safe
+(upsert-by-reference in `chapter_merge.py`), but a chapter you've started
+should be finished (all its sections written) in the same firing before
+moving to the next chapter, since `chapter_status.py` has no notion of
+"partially sectioned." The queue itself needs no bookkeeping beyond
+`chapters.json` — `current_book()` just walks `QUEUE` in order and returns
+the first book with any undone chapter, so a firing that stops mid-book,
+mid-batch, or exactly on a book boundary all resume identically next time.
+This is the same no-shared-state guarantee TIER1_SPEC.md's pipeline already
+proved across 100→310 entries over multiple unattended cron batches without
+losing work.
 
 ## Sanity checks before ending a batch
 
