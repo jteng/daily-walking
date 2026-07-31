@@ -147,10 +147,17 @@ corpora should read as one voice across the app. Applies **per section**:
    - `git add -A && git commit -m "Chapter commentary: <book> N-M"` (or,
      when a chunk spans a book boundary, name both: `"Chapter commentary:
      加拉太书 5-6, 以弗所书 1"`).
+   - `git push origin commentary:main` — **immediately, after every single
+     commit, not batched up for later.** This is a clean fast-forward that
+     triggers `pages-deploy.yml`, so every ~2-chapter chunk goes live on
+     its own. Never let more than one commit sit unpushed — if a firing
+     gets cut off mid-batch, whatever was already pushed is safely live
+     regardless of how the rest of the firing goes.
 5. Repeat step 4 until the 48-chapter worklist is exhausted or usage runs
    out. When a book completes mid-batch, just keep going into the next
    book already present in the worklist from step 2 — no scope edit, no
-   pause, no separate commit needed to "move on."
+   pause, no separate commit needed to "move on." Each chunk still gets
+   its own commit-then-push per step 4, even across the book boundary.
 6. `python3 scripts/chapter_status.py` — if `remaining: 0` (every book in
    `QUEUE` is fully drafted, not just the current one), the whole project
    is complete: `CronList` then `CronDelete` this job, run
