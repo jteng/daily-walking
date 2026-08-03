@@ -786,8 +786,13 @@ window.Reader = Reader;
         }
 
         const tooltipRect = tooltip.getBoundingClientRect();
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
+        // Prefer visualViewport when available: on iOS Safari, window.innerWidth/
+        // innerHeight lag behind while the address-bar chrome is animating
+        // (e.g. right after a scroll), which can position the tooltip against
+        // a stale viewport size. visualViewport tracks what's actually visible.
+        const vv = window.visualViewport;
+        const screenW = vv ? vv.width : window.innerWidth;
+        const screenH = vv ? vv.height : window.innerHeight;
         const padding = 10;
 
         // Horizontal: attempt to center on the trigger point, clamp to screen edges
@@ -818,12 +823,26 @@ window.Reader = Reader;
         // Close on scroll — no auto-close timer, let the user read at their
         // own pace. Delay arming slightly so the triggering touch/click
         // itself doesn't immediately fire it.
+        //
+        // On iOS Safari, momentum/elastic scrolling keeps firing 'scroll'
+        // events for up to a second or more after the finger lifts. If the
+        // user taps a verse right as that tail end is still settling, a
+        // naive "close on the very next scroll event" listener fires almost
+        // immediately and kills the tooltip before it's ever seen — it opens
+        // fine but looks like it "doesn't show up". Require a real scroll
+        // *distance* past where things were when the tooltip opened, so
+        // residual momentum (a few px) is ignored but intentional scrolling
+        // still closes it right away.
         if (window.tooltipScrollListener) {
             window.removeEventListener('scroll', window.tooltipScrollListener);
         }
+        const openScrollY = window.scrollY;
+        const SCROLL_CLOSE_THRESHOLD = 15; // px
         window.tooltipScrollListener = function() {
-            hideVerseTooltip();
-            window.removeEventListener('scroll', window.tooltipScrollListener);
+            if (Math.abs(window.scrollY - openScrollY) > SCROLL_CLOSE_THRESHOLD) {
+                hideVerseTooltip();
+                window.removeEventListener('scroll', window.tooltipScrollListener);
+            }
         };
         setTimeout(() => {
             window.addEventListener('scroll', window.tooltipScrollListener, { passive: true });
