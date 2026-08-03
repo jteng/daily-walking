@@ -193,16 +193,11 @@
         .bible-verse.has-commentary {
             cursor: pointer;
         }
-        .bible-verse.has-commentary.exact .verse-num {
+        .bible-verse.has-commentary .verse-num {
             text-decoration: underline;
             text-decoration-style: dotted;
             text-decoration-color: var(--primary);
             color: var(--primary);
-        }
-        .bible-verse.has-commentary.chapter-only .verse-num {
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-decoration-color: #bbb;
         }
         .bible-verse.has-commentary:focus {
             outline: 2px solid var(--primary);
@@ -334,7 +329,7 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行 <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.0.1</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
         <select id="jump-plan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
@@ -706,12 +701,7 @@ const Reader = {
                         : null;
                     if (hit) {
                         anyCommentaryMarked = true;
-                        // 'verse' (tier1) and 'section' (chapter-array, verse
-                        // falls in that section's own range) are both precise
-                        // hits; only 'chapter' (nearest-section fallback) is
-                        // approximate — see resolveVerseCommentary.
-                        const sourceClass = (hit.source === 'verse' || hit.source === 'section') ? 'exact' : 'chapter-only';
-                        html += `<div class="bible-verse has-commentary ${sourceClass}" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="查看第${num}节释义">
+                        html += `<div class="bible-verse has-commentary" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="查看第${num}节释义">
                             <span class="verse-num">${num}</span>${text}
                         </div>`;
                     } else {
@@ -1129,15 +1119,14 @@ window.Reader = Reader;
         const end = m[3] ? parseInt(m[3], 10) : start;
         return { start, end };
     }
-    // Resolve a tapped verse to its commentary note, in priority order:
+    // Resolve a tapped verse to its commentary note. Only a direct hit
+    // counts — no "nearest section in this chapter" fallback, so a verse is
+    // only ever marked/openable when it has commentary of its own:
     //   1. tier1 exact hit (day-grain, one verse or short range)
     //   2. a chapter-section entry whose own range contains this verse
-    //      ("section" — chapters.json is now an array of pericope-level
-    //      entries per chapter, not one whole-chapter note; see CHAPTER_SPEC.md)
-    //   3. the chapter's nearest section, as a "this chapter has commentary
-    //      nearby" fallback ("chapter") — happens for verses that fall
-    //      between authored sections (e.g. a narrator transition line)
-    //   4. null
+    //      ("section" — chapters.json is an array of pericope-level entries
+    //      per chapter, not one whole-chapter note; see CHAPTER_SPEC.md)
+    //   3. null
     function resolveVerseCommentary(book, chapter, verse) {
         const exact = commentaryVerseIndex.get(`${book} ${chapter}:${verse}`);
         if (exact) return exact;
@@ -1146,24 +1135,20 @@ window.Reader = Reader;
         if (!sections || !sections.length) return null;
 
         const v = parseInt(verse, 10);
-        let nearest = null, nearestDist = Infinity;
         for (const section of sections) {
             const range = parseChapterSectionRange(section.reference);
-            if (!range) continue;
-            if (v >= range.start && v <= range.end) {
+            if (range && v >= range.start && v <= range.end) {
                 return { note: section, source: 'section' };
             }
-            const dist = v < range.start ? range.start - v : v - range.end;
-            if (dist < nearestDist) { nearestDist = dist; nearest = section; }
         }
-        return nearest ? { note: nearest, source: 'chapter' } : null;
+        return null;
     }
     // Build the tooltip content for a resolved commentary note. Every note
     // (tier1 or chapter-section) carries its own full `reference`; tier1's
     // already includes the book name ("创世记 9:12-13"), a chapter-section's
     // is chapter:verse only ("13:1-9") so it needs the book prefixed here.
     function buildCommentaryTooltipHtml(note, source, book) {
-        const label = source === 'verse' ? '逐节释义' : source === 'section' ? '逐段释义' : '逐章释义';
+        const label = source === 'verse' ? '逐节释义' : '逐段释义';
         const ref = source === 'verse' ? note.reference : `${book} ${note.reference}`;
         const body = (note.beats || []).map(b =>
             `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
@@ -1174,7 +1159,7 @@ window.Reader = Reader;
     // used at mark-time (index by data-book/data-chapter/data-verse rather
     // than a cached ref string — no per-element cache, see plan-eng-review;
     // resolveVerseCommentary is deterministic so this always finds the same
-    // note, including the correct nearest section for a "chapter" fallback).
+    // note.
     function openCommentaryTooltip(verseEl, x, y) {
         const book = verseEl.dataset.book;
         const chapter = verseEl.dataset.chapter;
@@ -1628,7 +1613,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v17'; // Bump version
+        const APP_SW_VERSION = 'v18'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
