@@ -16,17 +16,47 @@
     <link rel="mask-icon" href="./icons/icon.svg" color="#4A90E2">
     
     <style>
-        :root { --primary: #4A90E2; --bg: #f5f7fa; --text: #333; }
-        body { font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; }
-        header { background: var(--primary); color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         :root {
             --primary: #2c9aff;
             --text: #333;
+            --text-muted: #666;
+            --text-faint: #999;
             --bg: #f5f5f7;
             --card-bg: #ffffff;
             --shadow: 0 4px 12px rgba(0,0,0,0.05);
+            --border: #ddd;
+            --border-light: #eee;
+            --hint-bg: #eef5ff;
+            --table-header-bg: #f7f9fc;
+            --table-border: #e0e6ef;
+            --disabled-bg: #ccc;
+            --tooltip-bg: #ffffff;
+            --tooltip-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        
+        /* Dark mode: same layout, just a night-friendly palette. Follows the
+           OS/browser setting (no in-app toggle) via prefers-color-scheme. */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #5aa9ff;
+                --text: #e4e6eb;
+                --text-muted: #a9aeb8;
+                --text-faint: #82868f;
+                --bg: #121417;
+                --card-bg: #1c1f24;
+                --shadow: 0 4px 12px rgba(0,0,0,0.4);
+                --border: #363b42;
+                --border-light: #2a2e34;
+                --hint-bg: #1a2733;
+                --table-header-bg: #23272d;
+                --table-border: #363b42;
+                --disabled-bg: #3a3f47;
+                --tooltip-bg: #23272d;
+                --tooltip-shadow: 0 4px 16px rgba(0,0,0,0.6);
+            }
+        }
+        body { font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; }
+        header { background: var(--primary); color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+
         * { box-sizing: border-box; }
         
         body {
@@ -109,7 +139,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #ccc;
+            background: var(--disabled-bg);
             transition: background 0.3s;
             cursor: pointer;
         }
@@ -124,7 +154,7 @@
         }
 
         #scripture-ref {
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -138,9 +168,9 @@
             justify-content: space-between;
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border-light);
         }
-        
+
         button {
             background: var(--primary);
             color: white;
@@ -153,7 +183,7 @@
         }
         
         button:disabled {
-            background: #ccc;
+            background: var(--disabled-bg);
             cursor: not-allowed;
         }
         
@@ -178,7 +208,7 @@
         }
         .bible-chapter h3 {
             color: var(--primary);
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-light);
             padding-bottom: 8px;
         }
         .bible-verse {
@@ -186,23 +216,18 @@
         }
         .verse-num {
             font-size: 0.8em;
-            color: #999;
+            color: var(--text-faint);
             vertical-align: super;
             margin-right: 4px;
         }
         .bible-verse.has-commentary {
             cursor: pointer;
         }
-        .bible-verse.has-commentary.exact .verse-num {
+        .bible-verse.has-commentary .verse-num {
             text-decoration: underline;
             text-decoration-style: dotted;
             text-decoration-color: var(--primary);
             color: var(--primary);
-        }
-        .bible-verse.has-commentary.chapter-only .verse-num {
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-decoration-color: #bbb;
         }
         .bible-verse.has-commentary:focus {
             outline: 2px solid var(--primary);
@@ -213,7 +238,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            background: #eef5ff;
+            background: var(--hint-bg);
             border: 1px dashed var(--primary);
             border-radius: 8px;
             padding: 10px 12px;
@@ -234,11 +259,11 @@
         /* Tooltip Styles (Keep transparent/overlay) */
         .verse-tooltip {
             position: fixed;
-            background: white;
-            border: 1px solid #ddd;
+            background: var(--tooltip-bg);
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: var(--tooltip-shadow);
             z-index: 1000;
             max-width: 300px;
             max-height: 70vh;
@@ -289,11 +314,11 @@
             font-size: 0.95em;
         }
         /* Existing styles that are still relevant or not fully overridden */
-        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px; }
         .scripture-ref { font-weight: bold; color: var(--primary); font-size: 1.1em; display: block; margin-bottom: 10px; }
         h2 { margin: 0 0 15px 0; font-size: 1.4em; }
         .section-title { font-weight: bold; border-left: 4px solid var(--primary); padding-left: 10px; margin: 25px 0 10px 0; }
-        .verse-box { background: #eef5ff; border-radius: 8px; padding: 15px; font-style: italic; color: #444; margin-top: 20px; border: 1px dashed var(--primary); }
+        .verse-box { background: var(--hint-bg); border-radius: 8px; padding: 15px; font-style: italic; color: var(--text); margin-top: 20px; border: 1px dashed var(--primary); }
         /* Table styling for extracted tables inserted into content */
         #devotional-content table {
             width: 100%;
@@ -304,13 +329,13 @@
         }
         #devotional-content th,
         #devotional-content td {
-            border: 1px solid #e0e6ef;
+            border: 1px solid var(--table-border);
             padding: 8px 10px;
             vertical-align: top;
             text-align: left;
         }
         #devotional-content thead th {
-            background: #f7f9fc;
+            background: var(--table-header-bg);
             color: var(--text);
             font-weight: 600;
         }
@@ -334,7 +359,7 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行</h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行 <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.0</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
         <select id="jump-plan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
@@ -368,7 +393,7 @@
             <div class="panel-content">
                 <h2 style="color:var(--primary);">今日经文</h2>
                 <div id="full-scripture-content">
-                    <p style="color:#666;" id="bible-debug">Initializing UI...</p>
+                    <p style="color:var(--text-muted);" id="bible-debug">Initializing UI...</p>
                 </div>
             </div>
         </div>
@@ -386,9 +411,9 @@
                     <button id="next-btn" onclick="adjustDay(1)">下一日</button>
                 </div>
 
-                <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: #666; font-size: 0.85em; line-height: 1.6; border-top: 1px dashed #eee; margin-top: 30px; display: none;">
+                <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: var(--text-muted); font-size: 0.85em; line-height: 1.6; border-top: 1px dashed var(--border-light); margin-top: 30px; display: none;">
                 </footer>
-                <footer id="app-verse" style="text-align: center; padding: 16px 20px 24px 20px; color: #999; font-size: 0.8em; line-height: 1.7; font-style: italic;">
+                <footer id="app-verse" style="text-align: center; padding: 16px 20px 24px 20px; color: var(--text-faint); font-size: 0.8em; line-height: 1.7; font-style: italic;">
                     「我的神我的王啊，我要尊崇你！我要永永远远称颂你的名！我要天天称颂你，也要永永远远赞美你的名！」<br>——诗篇 145:1-2
                 </footer>
             </div>
@@ -664,11 +689,11 @@ const Reader = {
         const container = document.getElementById('full-scripture-content');
         if (!container) return;
         
-        container.innerHTML = '<div style="color:#666; padding:20px; text-align:center;">加载中...</div>';
-        
+        container.innerHTML = '<div style="color:var(--text-muted); padding:20px; text-align:center;">加载中...</div>';
+
         const parsed = this.parseScripture(scriptureStr);
         if (!parsed) {
-            container.innerHTML = `<div style="padding:20px; color:#666;">无法解析经文: ${scriptureStr}</div>`;
+            container.innerHTML = `<div style="padding:20px; color:var(--text-muted);">无法解析经文: ${scriptureStr}</div>`;
             return;
         }
         
@@ -706,12 +731,7 @@ const Reader = {
                         : null;
                     if (hit) {
                         anyCommentaryMarked = true;
-                        // 'verse' (tier1) and 'section' (chapter-array, verse
-                        // falls in that section's own range) are both precise
-                        // hits; only 'chapter' (nearest-section fallback) is
-                        // approximate — see resolveVerseCommentary.
-                        const sourceClass = (hit.source === 'verse' || hit.source === 'section') ? 'exact' : 'chapter-only';
-                        html += `<div class="bible-verse has-commentary ${sourceClass}" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="查看第${num}节释义">
+                        html += `<div class="bible-verse has-commentary" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="查看第${num}节释义">
                             <span class="verse-num">${num}</span>${text}
                         </div>`;
                     } else {
@@ -723,7 +743,7 @@ const Reader = {
 
                 html += `</div>`;
             } else {
-                 html += `<div style="color:#999; margin:10px 0;">(未找到第${c}章)</div>`;
+                 html += `<div style="color:var(--text-faint); margin:10px 0;">(未找到第${c}章)</div>`;
             }
         }
         
@@ -1129,15 +1149,14 @@ window.Reader = Reader;
         const end = m[3] ? parseInt(m[3], 10) : start;
         return { start, end };
     }
-    // Resolve a tapped verse to its commentary note, in priority order:
+    // Resolve a tapped verse to its commentary note. Only a direct hit
+    // counts — no "nearest section in this chapter" fallback, so a verse is
+    // only ever marked/openable when it has commentary of its own:
     //   1. tier1 exact hit (day-grain, one verse or short range)
     //   2. a chapter-section entry whose own range contains this verse
-    //      ("section" — chapters.json is now an array of pericope-level
-    //      entries per chapter, not one whole-chapter note; see CHAPTER_SPEC.md)
-    //   3. the chapter's nearest section, as a "this chapter has commentary
-    //      nearby" fallback ("chapter") — happens for verses that fall
-    //      between authored sections (e.g. a narrator transition line)
-    //   4. null
+    //      ("section" — chapters.json is an array of pericope-level entries
+    //      per chapter, not one whole-chapter note; see CHAPTER_SPEC.md)
+    //   3. null
     function resolveVerseCommentary(book, chapter, verse) {
         const exact = commentaryVerseIndex.get(`${book} ${chapter}:${verse}`);
         if (exact) return exact;
@@ -1146,24 +1165,20 @@ window.Reader = Reader;
         if (!sections || !sections.length) return null;
 
         const v = parseInt(verse, 10);
-        let nearest = null, nearestDist = Infinity;
         for (const section of sections) {
             const range = parseChapterSectionRange(section.reference);
-            if (!range) continue;
-            if (v >= range.start && v <= range.end) {
+            if (range && v >= range.start && v <= range.end) {
                 return { note: section, source: 'section' };
             }
-            const dist = v < range.start ? range.start - v : v - range.end;
-            if (dist < nearestDist) { nearestDist = dist; nearest = section; }
         }
-        return nearest ? { note: nearest, source: 'chapter' } : null;
+        return null;
     }
     // Build the tooltip content for a resolved commentary note. Every note
     // (tier1 or chapter-section) carries its own full `reference`; tier1's
     // already includes the book name ("创世记 9:12-13"), a chapter-section's
     // is chapter:verse only ("13:1-9") so it needs the book prefixed here.
     function buildCommentaryTooltipHtml(note, source, book) {
-        const label = source === 'verse' ? '逐节释义' : source === 'section' ? '逐段释义' : '逐章释义';
+        const label = source === 'verse' ? '逐节释义' : '逐段释义';
         const ref = source === 'verse' ? note.reference : `${book} ${note.reference}`;
         const body = (note.beats || []).map(b =>
             `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
@@ -1174,7 +1189,7 @@ window.Reader = Reader;
     // used at mark-time (index by data-book/data-chapter/data-verse rather
     // than a cached ref string — no per-element cache, see plan-eng-review;
     // resolveVerseCommentary is deterministic so this always finds the same
-    // note, including the correct nearest section for a "chapter" fallback).
+    // note.
     function openCommentaryTooltip(verseEl, x, y) {
         const book = verseEl.dataset.book;
         const chapter = verseEl.dataset.chapter;
@@ -1628,7 +1643,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v17'; // Bump version
+        const APP_SW_VERSION = 'v19'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))

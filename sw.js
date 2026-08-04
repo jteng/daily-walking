@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever the precache list or strategy changes.
-const CACHE_NAME = 'wwg-v12';
+const CACHE_NAME = 'wwg-v14';
 
 // Relative URLs so the SW works under any base path (e.g. GitHub Pages
 // serves this app from /daily-walking/, not the domain root).
