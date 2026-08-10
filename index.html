@@ -447,47 +447,48 @@ const Reader = {
         '犹': 65, '启': 66
     },
 
-    // Convert Chinese number string to Integer
+    // Convert Chinese number string to Integer. Recursive: after consuming
+    // a hundreds/tens/zero-marker digit group, the remainder is re-parsed
+    // by the same function rather than looked up as a single leftover key —
+    // a non-recursive version can't handle multi-character remainders like
+    // "零三" (the tail of "一百零三") or "廿八" (the tail of "一百廿八"),
+    // which previously silently resolved to 0 and broke any three-digit
+    // chapter reference of the form "百零X" or "百廿X" (e.g. Psalm 103, 128).
     chineseToArabic: function(cnNum) {
         if (!cnNum) return 0;
-        const map = {
-            '零': 0, '一': 1, '二': 2, '三': 3, '四': 4, 
-            '五': 5, '六': 6, '七': 7, '八': 8, '九': 9,
-            '十': 10, '廿': 20, '卅': 30, '百': 100
-        };
-        
-        let result = 0;
-        let temp = 0; 
-        
-        if (cnNum.startsWith('百')) return 100 + this.chineseToArabic(cnNum.substring(1));
-        
-        // Handle 廿, 卅 special chars
-        if (cnNum.startsWith('廿')) cnNum = "二十" + cnNum.substring(1);
-        if (cnNum.startsWith('卅')) cnNum = "三十" + cnNum.substring(1);
 
-        let total = 0;
-        // Check for hundred
+        // Normalize shorthand tens characters wherever they occur, not just
+        // at the very start of the string — they can appear after a hundreds
+        // digit has already been consumed (e.g. "一百廿八" -> hundreds "一百"
+        // leaves remainder "廿八").
+        cnNum = cnNum.replace(/廿/g, '二十').replace(/卅/g, '三十');
+
+        const map = {
+            '零': 0, '一': 1, '二': 2, '三': 3, '四': 4,
+            '五': 5, '六': 6, '七': 7, '八': 8, '九': 9
+        };
+
+        // Hundreds
         if (cnNum.indexOf('百') > -1) {
-            let parts = cnNum.split('百');
-            let hundreds = map[parts[0]] || 1; 
-            total += hundreds * 100;
-            cnNum = parts[1];
-            if (!cnNum) return total;
+            const parts = cnNum.split('百');
+            const hundreds = parts[0] ? (map[parts[0]] !== undefined ? map[parts[0]] : 1) : 1;
+            return hundreds * 100 + this.chineseToArabic(parts[1]);
         }
-        
-        // Handle 十
+
+        // A leading 零 after hundreds just means "no tens digit" — e.g. the
+        // "零三" tail of "一百零三" (103) means the units digit follows directly.
+        if (cnNum.startsWith('零')) {
+            return this.chineseToArabic(cnNum.substring(1));
+        }
+
+        // Tens
         if (cnNum.indexOf('十') > -1) {
-            let parts = cnNum.split('十');
-            let tens = parts[0] ? map[parts[0]] : 1; 
-            total += tens * 10;
-            cnNum = parts[1];
+            const parts = cnNum.split('十');
+            const tens = parts[0] ? map[parts[0]] : 1;
+            return tens * 10 + this.chineseToArabic(parts[1]);
         }
-        
-        if (cnNum) {
-            total += map[cnNum] || 0;
-        }
-        
-        return total;
+
+        return map[cnNum] || 0;
     },
 
     /**
