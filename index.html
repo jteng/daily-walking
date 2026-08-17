@@ -372,6 +372,11 @@
             <!-- Populated dynamically -->
         </select>
 
+        <!-- Bible version selector -->
+        <select id="jump-version" aria-label="选择圣经译本" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:110px;">
+            <!-- Populated dynamically from BIBLE_VERSIONS -->
+        </select>
+
         <!-- Mode Toggle -->
         <button id="mode-toggle" onclick="Reader.toggleMode()" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">📖</button>
     </div>
@@ -717,17 +722,29 @@ const Reader = {
         const fullBookName = (typeof getFullBookName === 'function') ? getFullBookName(parsed.bookName) : parsed.bookName;
         let anyCommentaryMarked = false;
 
+        const chapterHeaderLabel = (typeof getChapterHeaderLabel === 'function')
+            ? getChapterHeaderLabel(parsed.bookId, parsed.bookName)
+            : parsed.bookName;
+
         for (let c = parsed.startChapter; c <= parsed.endChapter; c++) {
             const chapterNode = bookNode.querySelector(`chapter[number="${c}"]`);
             if (chapterNode) {
+                const headerText = (typeof currentBibleVersion !== 'undefined' && currentBibleVersion !== 'cunpss')
+                    ? `${chapterHeaderLabel} ${c}`
+                    : `${parsed.bookName} 第${c}章`;
                 html += `<div class="bible-chapter">
-                    <h3>${parsed.bookName} 第${c}章</h3>`;
+                    <h3>${headerText}</h3>`;
 
                 const verses = chapterNode.querySelectorAll('verse');
                 verses.forEach(v => {
                     const num = v.getAttribute('number');
                     const text = v.textContent;
-                    const hit = (typeof resolveVerseCommentary === 'function' && commentaryVerseIndex)
+                    // The tap-to-view commentary is Chinese-only verse-by-verse
+                    // exegesis; skip marking/tooltips for it when reading an
+                    // English version so underlined verses don't promise a note
+                    // that would show up in the wrong language.
+                    const commentaryEnabled = (typeof currentBibleVersion === 'undefined' || currentBibleVersion === 'cunpss');
+                    const hit = (commentaryEnabled && typeof resolveVerseCommentary === 'function' && commentaryVerseIndex)
                         ? resolveVerseCommentary(fullBookName, c, num)
                         : null;
                     if (hit) {
@@ -870,26 +887,62 @@ window.Reader = Reader;
         }, 100);
     }
     
-    // Bible XML data
-    let bibleXML = null;
-    
-    // Load Bible XML for verse tooltips
+    // Available Bible versions. Book numbering (1-66) is identical across all
+    // three files, so getBookNumber()/getBookOrder() need no per-version logic
+    // — only the XML source file and display label change.
+    const BIBLE_VERSIONS = [
+        { id: 'cunpss', file: 'ChineseSimplifiedBible.xml', label: '和合本' },
+        { id: 'web', file: 'EnglishWEBBible.xml', label: 'WEB' },
+        { id: 'asv', file: 'EnglishASVBible.xml', label: 'ASV' }
+    ];
+    const DEFAULT_BIBLE_VERSION = 'cunpss';
+    let currentBibleVersion = localStorage.getItem('bibleVersion') || DEFAULT_BIBLE_VERSION;
+    if (!BIBLE_VERSIONS.some(v => v.id === currentBibleVersion)) currentBibleVersion = DEFAULT_BIBLE_VERSION;
+
+    // Bible XML data, cached per version so switching translations doesn't
+    // re-fetch one already loaded this session.
+    const bibleXMLCache = {};
+
+    // Load Bible XML (for the reading panel, verse tooltips, and the key-verse
+    // card) for the currently selected version.
     async function loadBibleXML() {
-        if (bibleXML) return bibleXML;
-        
+        if (bibleXMLCache[currentBibleVersion]) return bibleXMLCache[currentBibleVersion];
+
+        const version = BIBLE_VERSIONS.find(v => v.id === currentBibleVersion) || BIBLE_VERSIONS[0];
         try {
-            const response = await fetch('ChineseSimplifiedBible.xml');
+            const response = await fetch(version.file);
             const text = await response.text();
             const parser = new DOMParser();
-            bibleXML = parser.parseFromString(text, 'text/xml');
-            return bibleXML;
+            const xml = parser.parseFromString(text, 'text/xml');
+            bibleXMLCache[currentBibleVersion] = xml;
+            return xml;
         } catch (err) {
-            console.warn('Failed to load Bible XML:', err);
+            console.warn('Failed to load Bible XML:', version.file, err);
             return null;
         }
     }
     // Expose to window for Reader module
     window.loadBibleXML = loadBibleXML;
+
+    function populateVersionDropdown() {
+        const sel = el('jump-version');
+        if (!sel) return;
+        sel.innerHTML = BIBLE_VERSIONS.map(v =>
+            `<option value="${v.id}">${v.label}</option>`
+        ).join('');
+        sel.value = currentBibleVersion;
+        sel.addEventListener('change', () => {
+            currentBibleVersion = sel.value;
+            localStorage.setItem('bibleVersion', currentBibleVersion);
+            // Refresh anything currently showing Bible text: the reading
+            // panel, the day's key-verse card, and any open tooltip.
+            if (typeof hideVerseTooltip === 'function') hideVerseTooltip();
+            if (typeof renderDay === 'function') renderDay();
+            if (window.Reader && bibleData && bibleData[currentDayIndex]) {
+                window.Reader.renderBible(bibleData[currentDayIndex].scripture);
+            }
+        });
+    }
     
     // Map Chinese book abbreviations to book numbers (1-66)
     function getBookNumber(chineseAbbr) {
@@ -912,36 +965,37 @@ window.Reader = Reader;
         return bookMap[chineseAbbr] || null;
     }
     
-    // Get verse text from XML
-    async function getVerseText(bookAbbr, chapter, verseRange) {
+    // Look up verse text by book NUMBER (1-66, shared across all versions)
+    // from the currently selected version's XML. Shared by getVerseText()
+    // (abbr-keyed, used by tooltips) and getVerseTextFromReference() (full
+    // Chinese book name, used by the key-verse card).
+    async function getVerseTextByBookNumber(bookNum, chapter, verseRange, label) {
         const xml = await loadBibleXML();
         if (!xml) {
             console.warn('XML not loaded');
             return null;
         }
-        
-        const bookNum = getBookNumber(bookAbbr);
         if (!bookNum) {
-            console.warn(`Unknown book: ${bookAbbr}`);
+            console.warn(`Unknown book: ${label}`);
             return null;
         }
-        
+
         try {
             const bookNode = xml.querySelector(`book[number="${bookNum}"]`);
             if (!bookNode) {
-                console.warn(`Book not found: ${bookAbbr} (${bookNum})`);
+                console.warn(`Book not found: ${label} (${bookNum})`);
                 return null;
             }
-            
+
             const chapterNode = bookNode.querySelector(`chapter[number="${chapter}"]`);
             if (!chapterNode) {
-                console.warn(`Chapter not found: ${bookAbbr} ${chapter}`);
+                console.warn(`Chapter not found: ${label} ${chapter}`);
                 return null;
             }
-            
+
             // Handle verse ranges like "1-2"
-            if (verseRange.includes('-')) {
-                const [start, end] = verseRange.split('-').map(v => parseInt(v));
+            if (String(verseRange).includes('-')) {
+                const [start, end] = String(verseRange).split('-').map(v => parseInt(v));
                 let verses = [];
                 for (let i = start; i <= end; i++) {
                     const verseNode = chapterNode.querySelector(`verse[number="${i}"]`);
@@ -949,23 +1003,76 @@ window.Reader = Reader;
                         verses.push(verseNode.textContent.trim());
                     }
                 }
-                const result = verses.join(' ');
-                console.log(`✓ ${bookAbbr}${chapter}:${verseRange} = ${result.substring(0, 30)}...`);
-                return result;
+                return verses.join(' ');
             } else {
                 const verseNode = chapterNode.querySelector(`verse[number="${verseRange}"]`);
                 if (!verseNode) {
-                    console.warn(`Verse not found: ${bookAbbr} ${chapter}:${verseRange}`);
+                    console.warn(`Verse not found: ${label} ${chapter}:${verseRange}`);
                     return null;
                 }
-                const result = verseNode.textContent.trim();
-                console.log(`✓ ${bookAbbr}${chapter}:${verseRange} = ${result.substring(0, 30)}...`);
-                return result;
+                return verseNode.textContent.trim();
             }
         } catch (err) {
-            console.warn('Error fetching verse:', bookAbbr, chapter, verseRange, err);
+            console.warn('Error fetching verse:', label, chapter, verseRange, err);
             return null;
         }
+    }
+
+    // Get verse text from XML (Chinese abbreviation form, e.g. "创")
+    async function getVerseText(bookAbbr, chapter, verseRange) {
+        const bookNum = getBookNumber(bookAbbr);
+        return getVerseTextByBookNumber(bookNum, chapter, verseRange, bookAbbr);
+    }
+
+    // verse_parts references embed the full Chinese book name, e.g.
+    // "创世记 1:27" or "创世记 1:27-28" — used to re-resolve the key-verse
+    // card's text against whichever version is currently selected.
+    const BOOK_FULL_NAME_TO_NUMBER = {
+        '创世记':1,'出埃及记':2,'利未记':3,'民数记':4,'申命记':5,
+        '约书亚记':6,'士师记':7,'路得记':8,'撒母耳记上':9,'撒母耳记下':10,
+        '列王纪上':11,'列王纪下':12,'历代志上':13,'历代志下':14,'以斯拉记':15,
+        '尼希米记':16,'以斯帖记':17,'约伯记':18,'诗篇':19,'箴言':20,
+        '传道书':21,'雅歌':22,'以赛亚书':23,'耶利米书':24,'耶利米哀歌':25,
+        '以西结书':26,'但以理书':27,'何西阿书':28,'约珥书':29,'阿摩司书':30,
+        '俄巴底亚书':31,'约拿书':32,'弥迦书':33,'那鸿书':34,'哈巴谷书':35,
+        '西番雅书':36,'哈该书':37,'撒迦利亚书':38,'玛拉基书':39,
+        '马太福音':40,'马可福音':41,'路加福音':42,'约翰福音':43,'使徒行传':44,
+        '罗马书':45,'哥林多前书':46,'哥林多后书':47,'加拉太书':48,'以弗所书':49,
+        '腓立比书':50,'歌罗西书':51,'帖撒罗尼迦前书':52,'帖撒罗尼迦后书':53,'提摩太前书':54,
+        '提摩太后书':55,'提多书':56,'腓利门书':57,'希伯来书':58,'雅各书':59,
+        '彼得前书':60,'彼得后书':61,'约翰一书':62,'约翰二书':63,'约翰三书':64,
+        '犹大书':65,'启示录':66
+    };
+
+    // English book names by number (1-66), used only for the Bible-panel
+    // chapter header when an English version is selected.
+    const ENGLISH_BOOK_NAMES = [
+        'Genesis','Exodus','Leviticus','Numbers','Deuteronomy',
+        'Joshua','Judges','Ruth','1 Samuel','2 Samuel',
+        '1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra',
+        'Nehemiah','Esther','Job','Psalms','Proverbs',
+        'Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations',
+        'Ezekiel','Daniel','Hosea','Joel','Amos',
+        'Obadiah','Jonah','Micah','Nahum','Habakkuk',
+        'Zephaniah','Haggai','Zechariah','Malachi',
+        'Matthew','Mark','Luke','John','Acts',
+        'Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians',
+        'Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy',
+        '2 Timothy','Titus','Philemon','Hebrews','James',
+        '1 Peter','2 Peter','1 John','2 John','3 John',
+        'Jude','Revelation'
+    ];
+
+    function getChapterHeaderLabel(bookId, fallbackAbbr) {
+        return ENGLISH_BOOK_NAMES[bookId - 1] || fallbackAbbr;
+    }
+
+    async function getVerseTextFromReference(reference) {
+        const m = /^(.+?)\s+(\d+):(\d+(?:-\d+)?)$/.exec((reference || '').trim());
+        if (!m) return null;
+        const [, fullName, chapter, verseRange] = m;
+        const bookNum = BOOK_FULL_NAME_TO_NUMBER[fullName];
+        return getVerseTextByBookNumber(bookNum, chapter, verseRange, fullName);
     }
     
     // Add verse references to content (now works for all days since content is normalized)
@@ -1081,6 +1188,9 @@ window.Reader = Reader;
     let baseData = null;
     let plansManifest = [];
     let currentPlanId = localStorage.getItem('planId') || 'original';
+    // Bumped on every renderDay() key-verse render; guards against a stale
+    // async version-lookup response landing after the user has moved on.
+    let renderToken = 0;
     // Tier 1 verse commentary: an object keyed by verse reference
     // (e.g. "创世记 1:27"), each value { reference, verse_text, beats: [[lead, body], ...] }.
     // Loaded once; days whose highlighted verse has no note simply show no card.
@@ -1478,21 +1588,29 @@ window.Reader = Reader;
             }
         }
 
-        // Display verse text if available, otherwise just show the reference
+        // Display verse text if available, otherwise just show the reference.
+        // `data.verse_parts`/`data.verse_text` are pre-baked from the 和合本
+        // (cunpss) XML at build time, so they're shown immediately as-is when
+        // that's the selected version. For any other version, re-resolve each
+        // reference against the selected version's XML asynchronously — the
+        // renderToken guard drops the response if the user has since changed
+        // day or version again before it lands.
         const verseEl = el('key-verse');
         if (verseEl) {
+            renderToken++;
+            const myToken = renderToken;
             let verseHtml = '';
             if (data.verse_parts && data.verse_parts.length > 0) {
                 // Display each verse part with its individual reference
-                verseHtml = data.verse_parts.map(part => 
-                    `<div style="margin-bottom: 12px;"><strong>${part.reference}</strong><br>${part.text}</div>`
+                verseHtml = data.verse_parts.map(part =>
+                    `<div style="margin-bottom: 12px;" data-ref="${part.reference}"><strong>${part.reference}</strong><br><span class="key-verse-text">${part.text}</span></div>`
                 ).join('');
             } else if (data.verse_text) {
-                verseHtml = `<strong>${data.verse}</strong><br>${data.verse_text}`;
+                verseHtml = `<strong>${data.verse}</strong><br><span class="key-verse-text" data-ref="${data.verse || ''}">${data.verse_text}</span>`;
             } else {
                 verseHtml = data.verse || '';
             }
-            
+
             // Commentary now lives in the Bible panel itself (tap a marked
             // verse), not as a fixed card here — see Reader.renderBible /
             // initCommentaryTapHandler. That surface works for every plan
@@ -1503,6 +1621,17 @@ window.Reader = Reader;
                     <strong style="color:var(--primary); display:block; margin-bottom:8px;">今日金句：</strong>
                     ${verseHtml}
                 </div>`;
+
+                if (currentBibleVersion !== DEFAULT_BIBLE_VERSION) {
+                    verseEl.querySelectorAll('[data-ref]').forEach(async (partEl) => {
+                        const ref = partEl.getAttribute('data-ref');
+                        if (!ref) return;
+                        const text = await getVerseTextFromReference(ref);
+                        if (myToken !== renderToken || !text) return;
+                        const textSpan = partEl.querySelector('.key-verse-text');
+                        if (textSpan) textSpan.textContent = text;
+                    });
+                }
             } else {
                 verseEl.innerHTML = '';
             }
@@ -1630,6 +1759,7 @@ window.Reader = Reader;
                     currentPlanId = plansManifest[0] ? plansManifest[0].id : 'original';
                 }
                 populatePlanDropdown();
+                populateVersionDropdown();
                 return loadPlan(currentPlanId);
             })
             .catch(err => {
