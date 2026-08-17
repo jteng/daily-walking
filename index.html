@@ -888,10 +888,12 @@ window.Reader = Reader;
     }
     
     // Available Bible versions. Book numbering (1-66) is identical across all
-    // three files, so getBookNumber()/getBookOrder() need no per-version logic
-    // — only the XML source file and display label change.
+    // files, so getBookNumber()/getBookOrder() need no per-version logic —
+    // only the XML source file and display label change.
     const BIBLE_VERSIONS = [
         { id: 'cunpss', file: 'ChineseSimplifiedBible.xml', label: '和合本' },
+        { id: 'niv', file: 'EnglishNIVBible.xml', label: 'NIV' },
+        { id: 'esv', file: 'EnglishESVBible.xml', label: 'ESV' },
         { id: 'web', file: 'EnglishWEBBible.xml', label: 'WEB' },
         { id: 'asv', file: 'EnglishASVBible.xml', label: 'ASV' }
     ];
