@@ -32,6 +32,8 @@
             --disabled-bg: #ccc;
             --tooltip-bg: #ffffff;
             --tooltip-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --success: #2f9e58;
+            --warn: #c8791a;
         }
         /* Dark mode: same layout, just a night-friendly palette. Follows the
            OS/browser setting (no in-app toggle) via prefers-color-scheme. */
@@ -52,6 +54,8 @@
                 --disabled-bg: #3a3f47;
                 --tooltip-bg: #23272d;
                 --tooltip-shadow: 0 4px 16px rgba(0,0,0,0.6);
+                --success: #49c274;
+                --warn: #e0a955;
             }
         }
         body { font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; }
@@ -353,7 +357,173 @@
             color: inherit;
             position: relative;
         }
-        
+
+        /* ---- Memorize (背诵) feature ---- */
+        .memorize-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 16px;
+            height: 16px;
+            padding: 0 4px;
+            border-radius: 999px;
+            background: #e0522c;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 16px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .memorize-add-btn {
+            display: inline-block;
+            margin-top: 8px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.82em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .memorize-add-btn.added {
+            background: var(--hint-bg);
+            color: var(--primary);
+            cursor: default;
+        }
+        .memorize-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 2000;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        @media (min-width: 600px) {
+            .memorize-overlay { align-items: center; }
+        }
+        .memorize-sheet {
+            background: var(--card-bg);
+            color: var(--text);
+            width: 100%;
+            max-width: 480px;
+            max-height: 88vh;
+            border-radius: 16px 16px 0 0;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 600px) {
+            .memorize-sheet { border-radius: 16px; max-height: 80vh; }
+        }
+        .memorize-header {
+            position: sticky;
+            top: 0;
+            background: var(--primary);
+            color: #fff;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            z-index: 1;
+        }
+        .memorize-header h3 { margin: 0; font-size: 16px; }
+        .memorize-close, .memorize-back {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0 4px;
+            flex-shrink: 0;
+        }
+        .memorize-body { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+        .memorize-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .memorize-stat-tile {
+            background: var(--hint-bg);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+        .memorize-stat-tile .n { font-size: 20px; font-weight: 700; }
+        .memorize-stat-tile .n.accent { color: var(--primary); }
+        .memorize-stat-tile .n.done { color: var(--success); }
+        .memorize-stat-tile .l { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
+        .memorize-ladder { background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 12px; padding: 10px 14px; }
+        .memorize-ladder-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+        .memorize-ladder-row + .memorize-ladder-row { border-top: 1px solid var(--border-light); }
+        .memorize-ladder-label { font-size: 12px; color: var(--text-muted); width: 60px; flex-shrink: 0; }
+        .memorize-ladder-track { flex: 1; height: 6px; background: var(--border-light); border-radius: 999px; overflow: hidden; }
+        .memorize-ladder-fill { height: 100%; border-radius: 999px; }
+        .memorize-ladder-count { font-size: 12px; color: var(--text-faint); width: 18px; text-align: right; }
+        .memorize-box-chip {
+            width: 24px; height: 24px; border-radius: 7px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11.5px; font-weight: 700; flex-shrink: 0;
+        }
+        .memorize-box-chip.box-1, .memorize-box-chip.box-2 { background: var(--hint-bg); color: var(--warn); }
+        .memorize-box-chip.box-3 { background: var(--border-light); color: var(--text-muted); }
+        .memorize-box-chip.box-4, .memorize-box-chip.box-5 { background: var(--hint-bg); color: var(--success); }
+        .memorize-ladder-fill.box-1, .memorize-ladder-fill.box-2 { background: var(--warn); }
+        .memorize-ladder-fill.box-3 { background: var(--text-faint); }
+        .memorize-ladder-fill.box-4, .memorize-ladder-fill.box-5 { background: var(--success); }
+        .memorize-cta {
+            background: var(--primary); color: #fff; border: none; border-radius: 12px;
+            padding: 13px 16px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%;
+        }
+        .memorize-cta:disabled { background: var(--disabled-bg); color: var(--text-faint); cursor: default; }
+        .memorize-empty { color: var(--text-muted); font-size: 13.5px; text-align: center; padding: 12px 0; }
+        .memorize-verse-list { display: flex; flex-direction: column; gap: 8px; }
+        .memorize-verse-row {
+            background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 10px;
+            padding: 10px 12px; display: flex; align-items: center; gap: 10px;
+        }
+        .memorize-verse-meta { flex: 1; min-width: 0; }
+        .memorize-verse-ref { font-size: 13.5px; font-weight: 600; }
+        .memorize-verse-due { font-size: 11.5px; margin-top: 1px; }
+        .memorize-verse-due.due { color: var(--warn); font-weight: 600; }
+        .memorize-verse-due.future { color: var(--text-faint); }
+        .memorize-verse-due.mastered { color: var(--success); font-weight: 600; }
+        .memorize-progress-track { height: 3px; background: var(--border-light); flex-shrink: 0; }
+        .memorize-progress-fill { height: 100%; background: var(--primary); transition: width 0.3s ease; }
+        .memorize-flash-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px 20px; }
+        .memorize-flashcard {
+            width: 100%; max-width: 320px; background: var(--card-bg); border: 1px solid var(--border-light);
+            border-radius: 16px; box-shadow: var(--shadow); padding: 28px 22px; text-align: center;
+            min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+        }
+        .memorize-box-tag { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+        .memorize-box-tag.box-1, .memorize-box-tag.box-2 { background: var(--hint-bg); color: var(--warn); }
+        .memorize-box-tag.box-3 { background: var(--border-light); color: var(--text-muted); }
+        .memorize-box-tag.box-4, .memorize-box-tag.box-5 { background: var(--hint-bg); color: var(--success); }
+        .memorize-ref-display { font-size: 20px; font-weight: 600; line-height: 1.5; }
+        .memorize-reveal-btn {
+            background: var(--hint-bg); border: 1px solid var(--border); color: var(--primary);
+            border-radius: 10px; padding: 9px 18px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+        }
+        .memorize-verse-text-display { font-size: 16px; line-height: 1.8; }
+        .memorize-grade-bar { flex-shrink: 0; display: flex; gap: 10px; padding: 14px 16px calc(16px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--border-light); }
+        .memorize-grade-btn {
+            flex: 1; border: none; border-radius: 12px; padding: 12px 8px; font-size: 14px; font-weight: 700;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+        }
+        .memorize-grade-btn[disabled] { opacity: 0.35; cursor: default; }
+        .memorize-grade-btn .sub { font-size: 10.5px; font-weight: 500; opacity: 0.8; }
+        .memorize-grade-btn.forgot { background: var(--hint-bg); color: var(--warn); }
+        .memorize-grade-btn.remember { background: var(--hint-bg); color: var(--success); }
+        .memorize-done { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px 24px; gap: 12px; }
+        .memorize-done .emoji { font-size: 40px; }
+        .memorize-done h2 { margin: 0; font-size: 18px; }
+        .memorize-done p { margin: 0; color: var(--text-muted); font-size: 13.5px; }
+        .memorize-done .memorize-cta { max-width: 200px; margin-top: 8px; }
+
     </style>
 </head>
 <body>
@@ -379,6 +549,9 @@
 
         <!-- Mode Toggle -->
         <button id="mode-toggle" onclick="Reader.toggleMode()" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">📖</button>
+
+        <!-- Memorize (背诵) -->
+        <button id="memorize-btn" onclick="openMemorizeOverlay()" aria-label="背诵" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white; position: relative;">🧠<span id="memorize-badge" class="memorize-badge" style="display:none;">0</span></button>
     </div>
     <div id="week-day-info" style="font-size:15px; font-weight:500; color:#666; margin-top:4px;"></div>
     
@@ -423,10 +596,14 @@
                 </footer>
             </div>
         </div>
-        
+
     </div>
 </div>
 
+<!-- Memorize (背诵) overlay -->
+<div id="memorize-overlay" class="memorize-overlay">
+    <div class="memorize-sheet" id="memorize-sheet"></div>
+</div>
 
 <script>
 /**
@@ -1501,6 +1678,247 @@ window.Reader = Reader;
     function setDisabled(id, v){ const e = el(id); if(e) e.disabled = v; else console.warn('Missing element:', id); }
 
 
+    // ---- Memorize (背诵): Leitner-box spaced repetition over today's key
+    // verses. Deck lives in localStorage (same pattern as planId/savedDay),
+    // no backend needed. Boxes 1-5 map to review intervals of 1/3/7/14/30
+    // days; a correct recall moves a verse up a box, a miss resets it to
+    // box 1.
+    const MEMORIZE_KEY = 'memoryVerses';
+    const MEMORIZE_INTERVALS = { 1: 1, 2: 3, 3: 7, 4: 14, 5: 30 };
+    const MEMORIZE_LABELS = { 1: '1天', 2: '3天', 3: '7天', 4: '14天', 5: '30天' };
+
+    let memorizeQueue = [];
+    let memorizeQIndex = 0;
+    let memorizeRevealed = false;
+    let memorizeSession = { remembered: 0, forgot: 0 };
+
+    function escapeHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function loadMemoryDeck() {
+        try {
+            const raw = localStorage.getItem(MEMORIZE_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+    }
+    function saveMemoryDeck(deck) {
+        localStorage.setItem(MEMORIZE_KEY, JSON.stringify(deck));
+    }
+    function memoryDaysFromNow(n) {
+        const d = new Date();
+        d.setHours(0, 0, 0, 0);
+        d.setDate(d.getDate() + n);
+        return d.getTime();
+    }
+    function isMemoryVerseDue(item) { return item.next <= Date.now(); }
+    function memoryHasVerse(ref) { return loadMemoryDeck().some(v => v.ref === ref); }
+
+    function addToMemoryDeck(ref, text) {
+        if (!ref || !text) return;
+        const deck = loadMemoryDeck();
+        if (deck.some(v => v.ref === ref)) return;
+        deck.unshift({ ref: ref, text: text, box: 1, next: memoryDaysFromNow(0), added: Date.now() });
+        saveMemoryDeck(deck);
+        updateMemorizeBadge();
+    }
+
+    function updateMemorizeBadge() {
+        const badge = el('memorize-badge');
+        if (!badge) return;
+        const n = loadMemoryDeck().filter(isMemoryVerseDue).length;
+        badge.textContent = n > 9 ? '9+' : String(n);
+        badge.style.display = n > 0 ? 'flex' : 'none';
+    }
+
+    // Renders the "＋ 加入背诵" button shown next to each key verse on the
+    // devotional panel. Ref/text are carried on the button's own dataset
+    // (rather than read from sibling DOM) so it works the same whether the
+    // verse came as a single block or one of several `verse_parts`.
+    function buildMemorizeAddBtn(ref, text) {
+        if (!ref || !text) return '';
+        const added = memoryHasVerse(ref);
+        return `<button type="button" class="memorize-add-btn${added ? ' added' : ''}" data-memorize-ref="${escapeHtml(ref)}" data-memorize-text="${escapeHtml(text)}" ${added ? 'disabled' : ''}>${added ? '✓ 已加入背诵' : '＋ 加入背诵'}</button>`;
+    }
+
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.memorize-add-btn');
+        if (!btn || btn.disabled) return;
+        const ref = btn.getAttribute('data-memorize-ref');
+        const text = btn.getAttribute('data-memorize-text');
+        if (!ref || !text) return;
+        addToMemoryDeck(ref, text);
+        btn.textContent = '✓ 已加入背诵';
+        btn.classList.add('added');
+        btn.disabled = true;
+    });
+
+    function memorizeRelativeDue(item) {
+        if (item.box === 5 && item.next - Date.now() > 20 * 86400000) return { text: '已掌握', cls: 'mastered' };
+        if (isMemoryVerseDue(item)) return { text: '今天到期', cls: 'due' };
+        const days = Math.ceil((item.next - Date.now()) / 86400000);
+        return { text: days + '天后', cls: 'future' };
+    }
+
+    function openMemorizeOverlay() {
+        const overlay = el('memorize-overlay');
+        if (!overlay) return;
+        overlay.style.display = 'flex';
+        renderMemorizeDeck();
+    }
+    function closeMemorizeOverlay() {
+        const overlay = el('memorize-overlay');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    function renderMemorizeDeck() {
+        const sheet = el('memorize-sheet');
+        if (!sheet) return;
+        const deck = loadMemoryDeck();
+        const due = deck.filter(isMemoryVerseDue);
+        const mastered = deck.filter(v => v.box === 5).length;
+
+        const ladderRows = [1, 2, 3, 4, 5].map(b => {
+            const count = deck.filter(v => v.box === b).length;
+            const pct = deck.length ? Math.round(count / deck.length * 100) : 0;
+            return `<div class="memorize-ladder-row">
+                <div class="memorize-box-chip box-${b}">${b}</div>
+                <div class="memorize-ladder-label">${MEMORIZE_LABELS[b]}间隔</div>
+                <div class="memorize-ladder-track"><div class="memorize-ladder-fill box-${b}" style="width:${pct}%"></div></div>
+                <div class="memorize-ladder-count">${count}</div>
+            </div>`;
+        }).join('');
+
+        const rows = deck.slice().sort((a, b) => a.next - b.next).map(v => {
+            const rd = memorizeRelativeDue(v);
+            return `<div class="memorize-verse-row">
+                <div class="memorize-box-chip box-${v.box}">${v.box}</div>
+                <div class="memorize-verse-meta">
+                    <div class="memorize-verse-ref">${escapeHtml(v.ref)}</div>
+                    <div class="memorize-verse-due ${rd.cls}">${rd.text}</div>
+                </div>
+            </div>`;
+        }).join('');
+
+        sheet.innerHTML = `
+            <div class="memorize-header">
+                <h3>🧠 背诵</h3>
+                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="关闭">&times;</button>
+            </div>
+            <div class="memorize-body">
+                <div class="memorize-stats-row">
+                    <div class="memorize-stat-tile"><div class="n">${deck.length}</div><div class="l">全部</div></div>
+                    <div class="memorize-stat-tile"><div class="n accent">${due.length}</div><div class="l">待复习</div></div>
+                    <div class="memorize-stat-tile"><div class="n done">${mastered}</div><div class="l">已掌握</div></div>
+                </div>
+                ${deck.length ? `<div class="memorize-ladder">${ladderRows}</div>` : ''}
+                <button type="button" class="memorize-cta" id="memorize-start-btn" ${due.length ? '' : 'disabled'}>${due.length ? `开始复习（${due.length}）` : (deck.length ? '今日已复习完毕 ✓' : '暂无经文')}</button>
+                ${deck.length ? '' : '<p class="memorize-empty">还没有背诵经文。在「今日金句」旁点击「＋ 加入背诵」开始吧。</p>'}
+                ${deck.length ? `<div class="memorize-verse-list">${rows}</div>` : ''}
+            </div>
+        `;
+
+        const startBtn = el('memorize-start-btn');
+        if (startBtn && due.length) startBtn.addEventListener('click', startMemorizeReview);
+        const closeBtn = el('memorize-close-btn');
+        if (closeBtn) closeBtn.addEventListener('click', closeMemorizeOverlay);
+    }
+
+    function startMemorizeReview() {
+        memorizeQueue = loadMemoryDeck().filter(isMemoryVerseDue);
+        memorizeQIndex = 0;
+        memorizeRevealed = false;
+        memorizeSession = { remembered: 0, forgot: 0 };
+        renderMemorizeReview();
+    }
+
+    function renderMemorizeReview() {
+        const sheet = el('memorize-sheet');
+        if (!sheet) return;
+        if (memorizeQIndex >= memorizeQueue.length) { renderMemorizeDone(); return; }
+        const item = memorizeQueue[memorizeQIndex];
+        const pct = Math.round(memorizeQIndex / memorizeQueue.length * 100);
+
+        sheet.innerHTML = `
+            <div class="memorize-header">
+                <button type="button" class="memorize-back" id="memorize-back-btn" aria-label="返回">‹</button>
+                <h3>复习中 ${memorizeQIndex + 1} / ${memorizeQueue.length}</h3>
+                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="关闭">&times;</button>
+            </div>
+            <div class="memorize-progress-track"><div class="memorize-progress-fill" style="width:${pct}%"></div></div>
+            <div class="memorize-flash-area">
+                <div class="memorize-flashcard">
+                    <div class="memorize-box-tag box-${item.box}">阶梯 ${item.box} · ${MEMORIZE_LABELS[item.box]}</div>
+                    <div class="memorize-ref-display">${escapeHtml(item.ref)}</div>
+                    ${memorizeRevealed
+                        ? `<div class="memorize-verse-text-display">${escapeHtml(item.text)}</div>`
+                        : `<button type="button" class="memorize-reveal-btn" id="memorize-reveal-btn">显示经文</button>`}
+                </div>
+            </div>
+            <div class="memorize-grade-bar">
+                <button type="button" class="memorize-grade-btn forgot" id="memorize-forgot-btn" ${memorizeRevealed ? '' : 'disabled'}>😵 还没记熟<span class="sub">回到阶梯 1</span></button>
+                <button type="button" class="memorize-grade-btn remember" id="memorize-remember-btn" ${memorizeRevealed ? '' : 'disabled'}>✅ 我记得<span class="sub">升到阶梯 ${Math.min(item.box + 1, 5)}</span></button>
+            </div>
+        `;
+
+        el('memorize-back-btn').addEventListener('click', renderMemorizeDeck);
+        el('memorize-close-btn').addEventListener('click', closeMemorizeOverlay);
+        const revealBtn = el('memorize-reveal-btn');
+        if (revealBtn) revealBtn.addEventListener('click', () => { memorizeRevealed = true; renderMemorizeReview(); });
+        if (memorizeRevealed) {
+            el('memorize-forgot-btn').addEventListener('click', () => gradeMemoryReview(item, false));
+            el('memorize-remember-btn').addEventListener('click', () => gradeMemoryReview(item, true));
+        }
+    }
+
+    function gradeMemoryReview(item, remembered) {
+        const deck = loadMemoryDeck();
+        const target = deck.find(v => v.ref === item.ref);
+        if (target) {
+            target.box = remembered ? Math.min(target.box + 1, 5) : 1;
+            target.next = memoryDaysFromNow(MEMORIZE_INTERVALS[target.box]);
+            saveMemoryDeck(deck);
+        }
+        if (remembered) memorizeSession.remembered++; else memorizeSession.forgot++;
+        updateMemorizeBadge();
+        memorizeQIndex++;
+        memorizeRevealed = false;
+        renderMemorizeReview();
+    }
+
+    function renderMemorizeDone() {
+        const sheet = el('memorize-sheet');
+        if (!sheet) return;
+        sheet.innerHTML = `
+            <div class="memorize-header">
+                <button type="button" class="memorize-back" id="memorize-back-btn" aria-label="返回">‹</button>
+                <h3>复习中</h3>
+                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="关闭">&times;</button>
+            </div>
+            <div class="memorize-done">
+                <div class="emoji">🎉</div>
+                <h2>今日背诵已完成</h2>
+                <p>记得 ${memorizeSession.remembered} 节 · 还需加强 ${memorizeSession.forgot} 节</p>
+                <button type="button" class="memorize-cta" id="memorize-done-btn">返回首页</button>
+            </div>
+        `;
+        el('memorize-back-btn').addEventListener('click', renderMemorizeDeck);
+        el('memorize-close-btn').addEventListener('click', closeMemorizeOverlay);
+        el('memorize-done-btn').addEventListener('click', renderMemorizeDeck);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateMemorizeBadge();
+        const overlay = el('memorize-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeMemorizeOverlay(); });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.style.display !== 'none') closeMemorizeOverlay();
+            });
+        }
+    });
+
+
     // Populate chapter dropdown based on chapter index
     function populateChapterDropdown() {
         const chapterSelect = document.getElementById('jump-chapter');
@@ -1605,10 +2023,10 @@ window.Reader = Reader;
             if (data.verse_parts && data.verse_parts.length > 0) {
                 // Display each verse part with its individual reference
                 verseHtml = data.verse_parts.map(part =>
-                    `<div style="margin-bottom: 12px;" data-ref="${part.reference}"><strong>${part.reference}</strong><br><span class="key-verse-text">${part.text}</span></div>`
+                    `<div style="margin-bottom: 12px;" data-ref="${part.reference}"><strong>${part.reference}</strong><br><span class="key-verse-text">${part.text}</span>${buildMemorizeAddBtn(part.reference, part.text)}</div>`
                 ).join('');
             } else if (data.verse_text) {
-                verseHtml = `<strong>${data.verse}</strong><br><span class="key-verse-text" data-ref="${data.verse || ''}">${data.verse_text}</span>`;
+                verseHtml = `<div data-ref="${data.verse || ''}"><strong>${data.verse}</strong><br><span class="key-verse-text">${data.verse_text}</span>${buildMemorizeAddBtn(data.verse, data.verse_text)}</div>`;
             } else {
                 verseHtml = data.verse || '';
             }
@@ -1632,6 +2050,8 @@ window.Reader = Reader;
                         if (myToken !== renderToken || !text) return;
                         const textSpan = partEl.querySelector('.key-verse-text');
                         if (textSpan) textSpan.textContent = text;
+                        const addBtn = partEl.querySelector('.memorize-add-btn');
+                        if (addBtn && !addBtn.disabled) addBtn.setAttribute('data-memorize-text', text);
                     });
                 }
             } else {
@@ -1776,7 +2196,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v19'; // Bump version
+        const APP_SW_VERSION = 'v20'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
