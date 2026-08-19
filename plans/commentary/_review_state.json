@@ -774,6 +774,106 @@
       "status": "ok",
       "reviewed_at": "2026-08-18",
       "note": ""
+    },
+    "弥迦书 6:8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "彼得前书 2:9": {
+      "status": "flagged",
+      "reviewed_at": "2026-08-18",
+      "note": "SYSTEMIC DATA BUG (not a commentary content issue): commentary_status.py's load_worklist() (the original TIER1_SPEC.md drafting pipeline) takes `reference` from only the day's FIRST verse_parts entry, but joins ALL verse_parts' text into `verse_text`. For days with multiple highlighted verses this produces a verse_text that doesn't match the stated reference. This entry (day 345, 彼前一至五章) is the worst case: reference says '彼得前书 2:9' but verse_text concatenates 2:9 + 3:20-21 (Noah's ark/baptism) + 5:7 (cast your cares) -- three unrelated passages spanning chapters 2, 3, and 5, shown to readers under a single-verse label. Full list of the 24 affected tier1 days (from bibleData.json verse_parts): day 241 但以理书4:2(+4:3, adjacent-minor), day 269 玛拉基书2:15-16(+3:10, different topic-moderate), day 272 太4:7(+4:10, adjacent-minor), day 273 太6:33(+6:34, adjacent-minor), day 288 路5:31-32(+6:35, different chapter-minor), day 295 路24:5-6(+24:48-49, same chapter-minor), day 296 约1:1-4(+1:12,+3:16, spans ch1-3-MODERATE), day 298 约8:12(+8:31-32, same chapter-minor), day 300 约14:6(+13:34-35, out of order-minor), day 303 徒4:12(+4:32, same chapter-moderate), day 305 徒8:1(+8:4,+8:7,+8:8, continuous narrative-minor), day 307 徒13:38(+13:39, adjacent-minor), day 311 徒28:30(+28:31, adjacent-minor), day 312 罗3:23(+3:24, adjacent-minor), day 314 罗8:26(+8:32, same chapter-minor), day 315 罗9:3(+10:9, spans ch9-10-MODERATE), day 316 罗12:1-2(+15:1-2, spans ch12-15-SEVERE), day 317 林前1:25(+1:27-29, adjacent-minor), day 318 林前6:12(+6:20, same chapter-minor), day 319 林前10:23(+10:24,+10:31, same chapter-minor), day 328 加5:22-23(+6:8-10, adjacent chapters-minor), day 332 帖前4:3(+5:16-18, spans ch4-5-moderate), day 342 来9:12(+9:14,+10:10,+10:14, spans ch9-10-MODERATE), day 345 彼前2:9(+3:20-21,+5:7, spans ch2-3-5-SEVERE, this entry). This is outside review_apply.py's fix mechanism (which only patches `beats`, not `verse_text`/`reference`) -- needs either regenerating verse_text to match only the stated reference verse, or a product decision to keep multi-verse context with an expanded reference label. Recommend prioritizing the 4 SEVERE/MODERATE-with-wide-gaps cases (315, 316, 342, 345) first."
+    },
+    "彼得后书 3:9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "提多书 1:15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "提摩太前书 1:15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "提摩太后书 4:7-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 12:23-24": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 15:22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 16:7": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 20:17": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 24:6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 28:6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 3:10": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记上 7:12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记下 12:7": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记下 18:33": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记下 19:14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记下 1:26": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记下 22:2-3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "撒母耳记下 7:16": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
     }
   },
   "chapters": {

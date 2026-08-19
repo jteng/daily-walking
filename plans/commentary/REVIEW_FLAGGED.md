@@ -1,0 +1,15 @@
+# Flagged for go/no-go review
+
+Entries the review pass was not confident enough to auto-fix — genuine theological debate, or a claim the reviewer couldn't resolve on its own. See REVIEW_SPEC.md.
+
+## tier1: 彼得前书 2:9
+
+- **Voice:** MacArthur + R.C. Sproul
+- **Note:** SYSTEMIC DATA BUG (not a commentary content issue): commentary_status.py's load_worklist() (the original TIER1_SPEC.md drafting pipeline) takes `reference` from only the day's FIRST verse_parts entry, but joins ALL verse_parts' text into `verse_text`. For days with multiple highlighted verses this produces a verse_text that doesn't match the stated reference. This entry (day 345, 彼前一至五章) is the worst case: reference says '彼得前书 2:9' but verse_text concatenates 2:9 + 3:20-21 (Noah's ark/baptism) + 5:7 (cast your cares) -- three unrelated passages spanning chapters 2, 3, and 5, shown to readers under a single-verse label. Full list of the 24 affected tier1 days (from bibleData.json verse_parts): day 241 但以理书4:2(+4:3, adjacent-minor), day 269 玛拉基书2:15-16(+3:10, different topic-moderate), day 272 太4:7(+4:10, adjacent-minor), day 273 太6:33(+6:34, adjacent-minor), day 288 路5:31-32(+6:35, different chapter-minor), day 295 路24:5-6(+24:48-49, same chapter-minor), day 296 约1:1-4(+1:12,+3:16, spans ch1-3-MODERATE), day 298 约8:12(+8:31-32, same chapter-minor), day 300 约14:6(+13:34-35, out of order-minor), day 303 徒4:12(+4:32, same chapter-moderate), day 305 徒8:1(+8:4,+8:7,+8:8, continuous narrative-minor), day 307 徒13:38(+13:39, adjacent-minor), day 311 徒28:30(+28:31, adjacent-minor), day 312 罗3:23(+3:24, adjacent-minor), day 314 罗8:26(+8:32, same chapter-minor), day 315 罗9:3(+10:9, spans ch9-10-MODERATE), day 316 罗12:1-2(+15:1-2, spans ch12-15-SEVERE), day 317 林前1:25(+1:27-29, adjacent-minor), day 318 林前6:12(+6:20, same chapter-minor), day 319 林前10:23(+10:24,+10:31, same chapter-minor), day 328 加5:22-23(+6:8-10, adjacent chapters-minor), day 332 帖前4:3(+5:16-18, spans ch4-5-moderate), day 342 来9:12(+9:14,+10:10,+10:14, spans ch9-10-MODERATE), day 345 彼前2:9(+3:20-21,+5:7, spans ch2-3-5-SEVERE, this entry). This is outside review_apply.py's fix mechanism (which only patches `beats`, not `verse_text`/`reference`) -- needs either regenerating verse_text to match only the stated reference verse, or a product decision to keep multi-verse context with an expanded reference label. Recommend prioritizing the 4 SEVERE/MODERATE-with-wide-gaps cases (315, 316, 342, 345) first.
+
+- **信徒的四重身份。** 彼得写信给分散受苦的信徒,为坚固他们,先郑重宣告他们在基督里的身份。他一连用四个旧约中原属以色列的尊贵称号,加在这群平凡、受逼迫的信徒身上——提醒他们:无论环境多难,你们在神眼中是何等尊贵。
+- **四个尊贵的称号。** 「被拣选的族类、有君尊的祭司、圣洁的国度、属神的子民。」被拣选——出于神的主权之爱;有君尊的祭司——可以直接亲近神、并为人代求;圣洁的国度——分别归神;属神的子民——有归属、有身份。这不是靠他们挣来的,而是神白白赐予的身份。
+- **「宣扬……美德」。** 这尊贵身份带着使命:「要叫你们宣扬那召你们出黑暗入奇妙光明者的美德。」蒙拣选不是为了自己享受特权,而是为了向世界宣扬神的美德。我们的存在,是要作神恩典的活广告——用生命和言语,传扬那位把我们从黑暗领进光明的主。
+- **「出黑暗入奇妙光明」。** 「召你们出黑暗入奇妙光明。」这句话浓缩了每个信徒的经历:从罪与死的黑暗,被召进基督救恩的奇妙光明。这转变不是我们自己挣脱的,而是神「召」出来的。记住自己从何处被救出来,就有了宣扬他美德、并在受苦中站立的动力。
+- **默想。** 在受苦、被轻看、自觉平凡的时候,你是否忘了自己在基督里的身份?彼得提醒你:你是被拣选的、有君尊的祭司、属神的子民——何等尊贵!而这身份带着使命:宣扬那召你出黑暗入光明之主的美德。今天,你的生命,是否在向周围的人「宣扬」他的美德?
+
