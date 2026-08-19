@@ -1,0 +1,86 @@
+{
+  "tier1": {
+    "以弗所书 2:8-9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以斯帖记 4:14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以斯帖记 7:3-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以斯帖记 9:22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以斯拉记 3:12-13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以斯拉记 6:22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以斯拉记 9:6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 11:19": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 14:14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 18:32": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 24:16": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 28:17": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 29:3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 36:26": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "以西结书 37:14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    }
+  },
+  "chapters": {
+    "罗马书 1|1:19-23": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-18",
+      "note": "collapsed general revelation's purpose (self-disclosure, meant to elicit worship) into a claim that its function IS condemnatory; MacArthur and 唐崇荣 both frame inexcusability as the *result* of suppressing revelation, not revelation's built-in telos. Fixed by hand 2026-08-18, recorded here retroactively."
+    }
+  }
+}
