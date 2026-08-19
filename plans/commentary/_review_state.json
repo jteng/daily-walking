@@ -474,6 +474,106 @@
       "status": "ok",
       "reviewed_at": "2026-08-18",
       "note": ""
+    },
+    "创世记 50:19-20": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "创世记 9:12-13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 10:3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 11:44-45": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 17:11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 19:18": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 1:9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 23:3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 26:12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "利未记 4:2": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-18",
+      "note": "Beat 4 quoted \"洗净我们一切的罪\" and cited it as 约一7 (John 1:7) — but that quote is 1 John 1:7 (约壹一7); John 1:7 is about John the Baptist bearing witness to the light, unrelated content. Mechanical book-mismatch, corrected the citation."
+    },
+    "加拉太书 5:22-23": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志上 11:1": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志上 16:34": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志上 22:9-10": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志上 25:1": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志上 29:14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志上 4:10": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志下 12:12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志下 14:11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
+    },
+    "历代志下 20:17": {
+      "status": "ok",
+      "reviewed_at": "2026-08-18",
+      "note": ""
     }
   },
   "chapters": {
