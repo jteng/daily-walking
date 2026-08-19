@@ -1536,10 +1536,25 @@ window.Reader = Reader;
             }
         });
 
-        // Tooltip content isn't itself focusable, so any blur of the
-        // triggering verse means the user tabbed away from it — close.
+        // Close on keyboard Tab-away from the triggering verse — Tab doesn't
+        // fire a 'click', so the outside-click listener (buildEnhancedContent,
+        // above) can't catch it; this is focusout's only job here.
+        //
+        // Tooltip content (plain <p>/<strong>, no focusable elements) isn't
+        // itself focusable, so clicking inside it to select/copy text *also*
+        // blurs the triggering verse and fires this same focusout — that used
+        // to close the tooltip unconditionally, closing it the instant a
+        // reader tried to select its text. relatedTarget distinguishes the
+        // two: a real Tab-away sets it to the next focused element; a click
+        // on non-focusable content (inside the tooltip, or anywhere else)
+        // leaves it null. Only close on a genuine relatedTarget outside the
+        // tooltip — the null case is left to the outside-click listener,
+        // which already correctly ignores clicks inside .verse-tooltip.
         container.addEventListener('focusout', (e) => {
-            if (e.target.closest('.bible-verse.has-commentary')) hideVerseTooltip();
+            if (!e.target.closest('.bible-verse.has-commentary')) return;
+            if (e.relatedTarget && !e.relatedTarget.closest('.verse-tooltip')) {
+                hideVerseTooltip();
+            }
         });
     }
     window.initCommentaryTapHandler = initCommentaryTapHandler;
