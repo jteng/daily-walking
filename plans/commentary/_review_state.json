@@ -7956,6 +7956,106 @@
       "status": "fixed",
       "reviewed_at": "2026-08-19",
       "note": "Beat 1's direct quote paraphrased \"寻找牧放羊群的草场\" as \"寻找羊群的草场\" and \"又宽阔又平静\" as \"又宽阔又静谧又平安\", drifting from the verse_text/source XML wording. Corrected both quoted phrases (in beat 1's lead, body, and beat 2's lead) to match the actual verse text."
+    },
+    "历代志上 5|5:1-2": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 5|5:18-20": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 5|5:25-26": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 6|6:31-32": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 6|6:54-57": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 7|7:20-21": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 7|7:22-23": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 8|8:28": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 8|8:33": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 9|9:1": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 9|9:2-3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 9|9:19": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-19",
+      "note": "Beat 1's direct quote altered the verse text: \"都管理使用之工，并守会幕的门……又把守营门\" became \"都管理使用之事，看守会幕的门……把守营门\" (工→事, 并守→看守, dropped 又). Confirmed against source XML and corrected the quote to match; also updated beat 2's lead to match the corrected wording."
+    },
+    "历代志上 10|10:4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 10|10:11-12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 10|10:13-14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 11|11:4-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 11|11:9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 11|11:18-19": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 12|12:17-18": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
+    },
+    "历代志上 12|12:22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-19",
+      "note": ""
     }
   }
 }
