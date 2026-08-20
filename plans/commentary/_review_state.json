@@ -12256,6 +12256,106 @@
       "status": "fixed",
       "reviewed_at": "2026-08-20",
       "note": "beat 1 quoted/discussed v19-22 (\"你必要杀戮恶人...我切切地恨恶他们\"), entirely outside this section's own range (23-24) and its verse_text field. Replaced with content actually in range, split across v23 and v24, and reworded the meditation to match."
+    },
+    "诗篇 140|140:6-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 140|140:9-13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 141|141:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 141|141:5-10": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 142|142:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 142|142:5-7": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 143|143:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 143|143:5-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 143|143:9-12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 144|144:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 144|144:5-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 144|144:12-15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 145|145:1-7": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 145|145:8-13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 145|145:14-21": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 146|146:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 146|146:5-10": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 147|147:1-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 147|147:7-11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 147|147:12-20": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
     }
   }
 }
