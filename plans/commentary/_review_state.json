@@ -13556,6 +13556,106 @@
       "status": "fixed",
       "reviewed_at": "2026-08-20",
       "note": "beat 2 was entirely v15 (\"斧岂可向用斧砍木的自夸呢？...好比杖举起那非木的人\"), completely outside this section's own range (5-14) and verse_text field (v15 belongs to the next section). Replaced with content actually in range (v13b-14, Assyria's boast of conquering nations effortlessly) and reworded the 默想 to match."
+    },
+    "以赛亚书 14|14:16-23": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 14|14:24-27": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 14|14:28-32": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 15|15:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 15|15:5-9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 16|16:1-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 16|16:6-12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 16|16:13-14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 17|17:1-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 17|17:7-11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 17|17:12-14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 18|18:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 18|18:5-7": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 19|19:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 19|19:11-15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 19|19:19-22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 19|19:23-25": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 20|20:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 20|20:5-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 21|21:1-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
     }
   }
 }
