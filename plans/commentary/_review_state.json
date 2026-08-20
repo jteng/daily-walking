@@ -12456,6 +12456,106 @@
       "status": "ok",
       "reviewed_at": "2026-08-20",
       "note": ""
+    },
+    "箴言 5|5:1-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 5|5:7-14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 5|5:20-23": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 6|6:1-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 6|6:6-11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 6|6:16-19": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 6|6:20-24": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 6|6:27-29": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 7|7:1-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 7|7:6-13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 7|7:14-20": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 7|7:21-27": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 8|8:1-11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 8|8:12-21": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 8|8:22-31": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 8|8:32-36": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 9|9:1-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 9|9:7-12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 9|9:13-18": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 5|5:15-19": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-20",
+      "note": "beat 2 lead ran past v19 into v20 (\"我儿，你为何恋慕淫妇？为何抱外女的胸怀？\"), which is outside this section's own range (15-19) and duplicates the next section's (5:20-23) opening line verbatim. Trimmed the lead back to end at v19; body was unaffected."
     }
   }
 }
