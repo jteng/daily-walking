@@ -12556,6 +12556,106 @@
       "status": "fixed",
       "reviewed_at": "2026-08-20",
       "note": "beat 2 lead ran past v19 into v20 (\"我儿，你为何恋慕淫妇？为何抱外女的胸怀？\"), which is outside this section's own range (15-19) and duplicates the next section's (5:20-23) opening line verbatim. Trimmed the lead back to end at v19; body was unaffected."
+    },
+    "箴言 10|10:4-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 10|10:11-12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 10|10:19": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 10|10:22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 11|11:1": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 11|11:13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 11|11:24-25": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 11|11:30": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 12|12:1": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 12|12:15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 12|12:18": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 12|12:25": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 13|13:12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 13|13:20": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 13|13:22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 13|13:24": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 14|14:12": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 14|14:26-27": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 14|14:29": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "箴言 14|14:31": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
     }
   }
 }
