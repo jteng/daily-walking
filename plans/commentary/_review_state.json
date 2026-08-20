@@ -11156,6 +11156,106 @@
       "status": "ok",
       "reviewed_at": "2026-08-20",
       "note": ""
+    },
+    "诗篇 68|68:17-19": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-20",
+      "note": "Beat 2's lead ran on past this section's own range (17-19) into verse 20's \"神是为我们施行诸般救恩的神；人能脱离死亡是在乎主耶和华\", which belongs to the next verse. Trimmed the lead back to end at v19 (\"是应当称颂的！\"); body was unaffected since it doesn't depend on the v20 clause."
+    },
+    "诗篇 68|68:24-27": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 68|68:32-35": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 69|69:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 69|69:7-9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 69|69:13-18": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 69|69:19-21": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 69|69:30-36": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 70|70:1-3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 70|70:4-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 71|71:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 71|71:5-9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 71|71:14-18": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-20",
+      "note": "Beat 1's lead quoted v16 as \"我单要提说你的，就是你独一的公义\" but the actual verse (and verse_text field) reads \"我单要提说你的公义\" — the \"，就是你独一的\" clause was an unsourced addition. Removed it."
+    },
+    "诗篇 71|71:19-24": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 72|72:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 72|72:5-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 72|72:9-11": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 72|72:12-14": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 72|72:17-20": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "诗篇 73|73:1-3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
     }
   }
 }
