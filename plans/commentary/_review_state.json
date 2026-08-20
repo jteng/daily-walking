@@ -13451,6 +13451,111 @@
       "status": "fixed",
       "reviewed_at": "2026-08-20",
       "note": "beat 2 ran past v23 into v24 (\"他们的根必像朽物...藐视以色列圣者的言语\"), which belongs to the next section (5:24-30), not this section's own range (18-23) or verse_text field. Trimmed the lead back to end at v23 and reworded the body accordingly."
+    },
+    "以赛亚书 8|8:11-15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 8|8:16-22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 9|9:1-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 9|9:6-7": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 9|9:8-17": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 9|9:18-21": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 10|10:1-4": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 10|10:20-23": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 10|10:24-27": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 11|11:1-5": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 11|11:6-9": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 11|11:10-16": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 12|12:1-3": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 12|12:4-6": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 13|13:1-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 13|13:9-13": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 13|13:14-18": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 13|13:19-22": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 14|14:1-8": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 14|14:12-15": {
+      "status": "ok",
+      "reviewed_at": "2026-08-20",
+      "note": ""
+    },
+    "以赛亚书 10|10:5-14": {
+      "status": "fixed",
+      "reviewed_at": "2026-08-20",
+      "note": "beat 2 was entirely v15 (\"斧岂可向用斧砍木的自夸呢？...好比杖举起那非木的人\"), completely outside this section's own range (5-14) and verse_text field (v15 belongs to the next section). Replaced with content actually in range (v13b-14, Assyria's boast of conquering nations effortlessly) and reworded the 默想 to match."
     }
   }
 }
