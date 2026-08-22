@@ -529,47 +529,50 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;">每天与主同行 <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.0</span></h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.0</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
-        <select id="jump-plan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
+        <select id="jump-plan" data-i18n-aria="selectPlan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
             <!-- Populated dynamically -->
         </select>
 
         <!-- Chapter selector -->
-        <select id="jump-chapter" aria-label="选择章节" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
-            <option value="">选择章节...</option>
+        <select id="jump-chapter" data-i18n-aria="selectChapter" aria-label="选择章节" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
+            <option value="" data-i18n="selectChapterPlaceholder">选择章节...</option>
             <!-- Populated dynamically -->
         </select>
 
         <!-- Bible version selector -->
-        <select id="jump-version" aria-label="选择圣经译本" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:110px;">
+        <select id="jump-version" data-i18n-aria="selectVersion" aria-label="选择圣经译本" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:110px;">
             <!-- Populated dynamically from BIBLE_VERSIONS -->
         </select>
 
         <!-- Mode Toggle -->
         <button id="mode-toggle" onclick="Reader.toggleMode()" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">📖</button>
 
+        <!-- Language Toggle (中文/EN) -->
+        <button id="lang-toggle" onclick="toggleContentLanguage()" data-i18n="langToggleLabel" data-i18n-aria="langToggleAria" aria-label="切换为英文" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">EN</button>
+
         <!-- Memorize (背诵) -->
-        <button id="memorize-btn" onclick="openMemorizeOverlay()" aria-label="背诵" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white; position: relative;">🧠<span id="memorize-badge" class="memorize-badge" style="display:none;">0</span></button>
+        <button id="memorize-btn" onclick="openMemorizeOverlay()" data-i18n-aria="memorizeBtnLabel" aria-label="背诵" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white; position: relative;">🧠<span id="memorize-badge" class="memorize-badge" style="display:none;">0</span></button>
     </div>
     <div id="week-day-info" style="font-size:15px; font-weight:500; color:#666; margin-top:4px;"></div>
-    
+
     <!-- Reader Navigation Dots (outside panels) -->
     <div class="reader-nav" id="reader-nav">
         <div class="nav-dot active" data-panel="0" onclick="Reader.goToPanel(0)"></div>
         <div class="nav-dot" data-panel="1" onclick="Reader.goToPanel(1)"></div>
     </div>
 </header>
-<div id="loading" style="text-align:center; padding:20px; display:none;">加载中...</div>
+<div id="loading" data-i18n="loading" style="text-align:center; padding:20px; display:none;">加载中...</div>
 
 <div class="reader-container">
     <div class="reader-track" id="reader-track">
-        
+
         <!-- PANEL 1: BIBLE TEXT -->
         <div class="reader-panel" id="bible-panel">
             <div class="panel-content">
-                <h2 style="color:var(--primary);">今日经文</h2>
+                <h2 data-i18n="todayScripture" style="color:var(--primary);">今日经文</h2>
                 <div id="full-scripture-content">
                     <p style="color:var(--text-muted);" id="bible-debug">Initializing UI...</p>
                 </div>
@@ -583,10 +586,10 @@
                 <h2 id="day-title"></h2>
                 <div id="devotional-content"></div>
                 <div id="key-verse"></div>
-                
+
                 <div class="nav-buttons">
-                    <button id="prev-btn" onclick="adjustDay(-1)">上一日</button>
-                    <button id="next-btn" onclick="adjustDay(1)">下一日</button>
+                    <button id="prev-btn" data-i18n="prevDay" onclick="adjustDay(-1)">上一日</button>
+                    <button id="next-btn" data-i18n="nextDay" onclick="adjustDay(1)">下一日</button>
                 </div>
 
                 <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: var(--text-muted); font-size: 0.85em; line-height: 1.6; border-top: 1px dashed var(--border-light); margin-top: 30px; display: none;">
@@ -606,6 +609,139 @@
 </div>
 
 <script>
+// Content-language state (UI chrome + devotional/commentary text) — independent
+// from currentBibleVersion (raw scripture translation, declared further down
+// near BIBLE_VERSIONS), though toggleContentLanguage() sets a sensible default
+// for both. let/const declared here are visible in the second <script> block
+// too (classic scripts in one document share a global lexical scope), same as
+// how currentBibleVersion is already read from inside Reader below.
+let currentContentLanguage = localStorage.getItem('contentLanguage') || 'zh';
+// Set once the user manually picks a Bible version via the dropdown, so the
+// language toggle stops overriding their choice for the rest of the session.
+let bibleVersionManuallySet = false;
+
+// UI chrome strings, keyed by feature area; each leaf is {zh, en}. Look these
+// up with t(key, params) rather than reading the table directly.
+const I18N = {
+    appTitle: { zh: '每天与主同行', en: 'Daily Walk With The Lord' },
+    selectPlan: { zh: '选择读经计划', en: 'Select reading plan' },
+    selectChapter: { zh: '选择章节', en: 'Select chapter' },
+    selectChapterPlaceholder: { zh: '选择章节...', en: 'Select chapter...' },
+    selectVersion: { zh: '选择圣经译本', en: 'Select Bible version' },
+    memorizeBtnLabel: { zh: '背诵', en: 'Memorize' },
+    loading: { zh: '加载中...', en: 'Loading...' },
+    todayScripture: { zh: '今日经文', en: 'Today’s Scripture' },
+    prevDay: { zh: '上一日', en: 'Previous' },
+    nextDay: { zh: '下一日', en: 'Next' },
+    cannotParseScripture: { zh: '无法解析经文: {ref}', en: 'Could not parse scripture reference: {ref}' },
+    cannotLoadXML: { zh: '无法加载圣经数据XML', en: 'Could not load Bible XML data' },
+    bookNotFound: { zh: '未找到书卷 ID: {id} ({name})', en: 'Book not found: ID {id} ({name})' },
+    chapterNotFound: { zh: '(未找到第{c}章)', en: '(Chapter {c} not found)' },
+    noScriptureContent: { zh: '未找到经文内容', en: 'No scripture content found' },
+    viewVerseCommentary: { zh: '查看第{num}节释义', en: 'View commentary for verse {num}' },
+    commentaryHint: { zh: '点击带下划线的经节查看释义', en: 'Tap an underlined verse to view its commentary' },
+    closeHint: { zh: '关闭提示', en: 'Close hint' },
+    verseNoteLabel: { zh: '逐节释义', en: 'Verse note' },
+    sectionNoteLabel: { zh: '逐段释义', en: 'Passage note' },
+    todaysKeyVerse: { zh: '今日金句：', en: 'Today’s Key Verse:' },
+    noDataFound: { zh: '未找到数据', en: 'No data found' },
+    runExtractorFirst: { zh: '请先运行提取器生成 bibleData.json，然后刷新页面。', en: 'Please run the extractor to generate bibleData.json, then refresh the page.' },
+    networkError: { zh: '网络错误：{status}', en: 'Network error: {status}' },
+    cannotLoadData: { zh: '无法加载数据: {msg}', en: 'Failed to load data: {msg}' },
+    langToggleLabel: { zh: 'EN', en: '中' },
+    langToggleAria: { zh: '切换为英文', en: 'Switch to Chinese' },
+    // Memorize (flashcard) feature
+    memorizeOverlayTitle: { zh: '🧠 背诵', en: '🧠 Memorize' },
+    close: { zh: '关闭', en: 'Close' },
+    back: { zh: '返回', en: 'Back' },
+    statAll: { zh: '全部', en: 'All' },
+    statDue: { zh: '待复习', en: 'Due' },
+    statMastered: { zh: '已掌握', en: 'Mastered' },
+    dueToday: { zh: '今天到期', en: 'Due today' },
+    daysUntil: { zh: '{n}天后', en: 'In {n} days' },
+    startReview: { zh: '开始复习（{n}）', en: 'Start Review ({n})' },
+    allReviewedToday: { zh: '今日已复习完毕 ✓', en: 'All reviewed today ✓' },
+    noVersesYet: { zh: '暂无经文', en: 'No verses yet' },
+    emptyStateMsg: { zh: '还没有背诵经文。在「今日金句」旁点击「＋ 加入背诵」开始吧。', en: 'No memory verses yet. Tap “+ Add to Memorize” next to “Today’s Key Verse” to get started.' },
+    addToMemorize: { zh: '＋ 加入背诵', en: '+ Add to Memorize' },
+    addedToMemorize: { zh: '✓ 已加入背诵', en: '✓ Added to Memorize' },
+    intervalLabel: { zh: '{label}间隔', en: '{label} interval' },
+    boxTag: { zh: '阶梯 {box} · {label}', en: 'Box {box} · {label}' },
+    reviewingProgress: { zh: '复习中 {i} / {total}', en: 'Reviewing {i} / {total}' },
+    reviewingLabel: { zh: '复习中', en: 'Reviewing' },
+    revealAnswer: { zh: '显示经文', en: 'Show verse' },
+    gradeForgotMain: { zh: '😵 还没记熟', en: '😵 Not yet' },
+    gradeForgotSub: { zh: '回到阶梯 1', en: 'Back to Box 1' },
+    gradeRememberedMain: { zh: '✅ 我记得', en: '✅ I remember' },
+    gradeRememberedSub: { zh: '升到阶梯 {n}', en: 'Up to Box {n}' },
+    doneTitle: { zh: '今日背诵已完成', en: 'Memorization complete for today' },
+    doneSummary: { zh: '记得 {r} 节 · 还需加强 {f} 节', en: 'Remembered {r} · Need review {f}' },
+    returnHome: { zh: '返回首页', en: 'Return home' }
+};
+// Memorize-box interval labels (e.g. "3天" / "3 days"), keyed by language then box number.
+const MEMORIZE_INTERVAL_LABELS = {
+    zh: { 1: '1天', 2: '3天', 3: '7天', 4: '14天', 5: '30天' },
+    en: { 1: '1 day', 2: '3 days', 3: '7 days', 4: '14 days', 5: '30 days' }
+};
+
+// Look up a UI string for the current content language and interpolate any
+// {placeholder} tokens from params. Falls back to zh, then the raw key, so a
+// typo or missing entry never renders as "undefined".
+function t(key, params) {
+    const entry = I18N[key];
+    let str = entry ? (entry[currentContentLanguage] || entry.zh) : key;
+    if (params) {
+        Object.keys(params).forEach(k => {
+            str = str.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
+        });
+    }
+    return str;
+}
+
+// Re-render every element carrying data-i18n / data-i18n-aria, and anything
+// else that only needs a plain text/attribute swap (not a full data re-render
+// like renderDay). Called once on load and again on every language toggle.
+function applyStaticI18n() {
+    document.querySelectorAll('[data-i18n]').forEach(elx => {
+        elx.textContent = t(elx.getAttribute('data-i18n'));
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(elx => {
+        elx.setAttribute('aria-label', t(elx.getAttribute('data-i18n-aria')));
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(elx => {
+        elx.setAttribute('placeholder', t(elx.getAttribute('data-i18n-placeholder')));
+    });
+    document.documentElement.lang = currentContentLanguage === 'en' ? 'en' : 'zh-CN';
+}
+
+// The combined language toggle: switches UI chrome + devotional/commentary
+// content, and — unless the user has manually picked a Bible version this
+// session — also switches the Bible-version dropdown to a language-matching
+// default (ESV for English, 和合本 for Chinese) via the existing version
+// dropdown/switch machinery, so a first-time English reader doesn't land on
+// English devotional prose quoting 和合本.
+function toggleContentLanguage() {
+    currentContentLanguage = currentContentLanguage === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('contentLanguage', currentContentLanguage);
+    applyStaticI18n();
+    if (typeof refreshPlanDropdownLabels === 'function') refreshPlanDropdownLabels();
+
+    if (!bibleVersionManuallySet && typeof currentBibleVersion !== 'undefined') {
+        const targetVersion = currentContentLanguage === 'en' ? 'esv' : 'cunpss';
+        if (currentBibleVersion !== targetVersion) {
+            currentBibleVersion = targetVersion;
+            localStorage.setItem('bibleVersion', currentBibleVersion);
+            const sel = document.getElementById('jump-version');
+            if (sel) sel.value = currentBibleVersion;
+        }
+    }
+
+    if (typeof hideVerseTooltip === 'function') hideVerseTooltip();
+    if (typeof buildCommentaryIndex === 'function') { commentaryVerseIndex = null; buildCommentaryIndex(); }
+    if (typeof renderDay === 'function') renderDay();
+}
+window.toggleContentLanguage = toggleContentLanguage;
+
 /**
  * Swipeable Bible Reader Logic
  * Handles scripture parsing, XML fetching, and Swipe UI management.
@@ -872,25 +1008,25 @@ const Reader = {
         const container = document.getElementById('full-scripture-content');
         if (!container) return;
         
-        container.innerHTML = '<div style="color:var(--text-muted); padding:20px; text-align:center;">加载中...</div>';
+        container.innerHTML = `<div style="color:var(--text-muted); padding:20px; text-align:center;">${t('loading')}</div>`;
 
         const parsed = this.parseScripture(scriptureStr);
         if (!parsed) {
-            container.innerHTML = `<div style="padding:20px; color:var(--text-muted);">无法解析经文: ${scriptureStr}</div>`;
+            container.innerHTML = `<div style="padding:20px; color:var(--text-muted);">${t('cannotParseScripture', { ref: scriptureStr })}</div>`;
             return;
         }
-        
-        const xml = await window.loadBibleXML(); 
+
+        const xml = await window.loadBibleXML();
         if (!xml) {
-            container.innerHTML = '<div style="color:red;">无法加载圣经数据XML</div>';
+            container.innerHTML = `<div style="color:red;">${t('cannotLoadXML')}</div>`;
             return;
         }
-        
+
         let html = '';
         const bookNode = xml.querySelector(`book[number="${parsed.bookId}"]`);
-        
+
         if (!bookNode) {
-            container.innerHTML = `<div style="color:red;">未找到书卷 ID: ${parsed.bookId} (${parsed.bookName})</div>`;
+            container.innerHTML = `<div style="color:red;">${t('bookNotFound', { id: parsed.bookId, name: parsed.bookName })}</div>`;
             return;
         }
         
@@ -916,17 +1052,20 @@ const Reader = {
                 verses.forEach(v => {
                     const num = v.getAttribute('number');
                     const text = v.textContent;
-                    // The tap-to-view commentary is Chinese-only verse-by-verse
-                    // exegesis; skip marking/tooltips for it when reading an
-                    // English version so underlined verses don't promise a note
-                    // that would show up in the wrong language.
-                    const commentaryEnabled = (typeof currentBibleVersion === 'undefined' || currentBibleVersion === 'cunpss');
-                    const hit = (commentaryEnabled && typeof resolveVerseCommentary === 'function' && commentaryVerseIndex)
+                    // The tap-to-view commentary is exegesis text, drafted in
+                    // Chinese with an English translation (beats_en) filling in
+                    // over time. In Chinese content-language mode, any hit
+                    // marks the verse (existing beats). In English mode, only
+                    // a hit whose note actually carries beats_en marks it — an
+                    // untranslated chapter just shows no marker, rather than a
+                    // marker that opens to Chinese text.
+                    const hit = (typeof resolveVerseCommentary === 'function' && commentaryVerseIndex)
                         ? resolveVerseCommentary(fullBookName, c, num)
                         : null;
-                    if (hit) {
+                    const hitUsable = hit && (currentContentLanguage !== 'en' || (hit.note.beats_en && hit.note.beats_en.length));
+                    if (hitUsable) {
                         anyCommentaryMarked = true;
-                        html += `<div class="bible-verse has-commentary" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="查看第${num}节释义">
+                        html += `<div class="bible-verse has-commentary" data-book="${fullBookName}" data-chapter="${c}" data-verse="${num}" tabindex="0" role="button" aria-label="${t('viewVerseCommentary', { num })}">
                             <span class="verse-num">${num}</span>${text}
                         </div>`;
                     } else {
@@ -938,17 +1077,17 @@ const Reader = {
 
                 html += `</div>`;
             } else {
-                 html += `<div style="color:var(--text-faint); margin:10px 0;">(未找到第${c}章)</div>`;
+                 html += `<div style="color:var(--text-faint); margin:10px 0;">${t('chapterNotFound', { c })}</div>`;
             }
         }
-        
+
         // First-time discoverability nudge: coverage is still sparse, so a
         // subtle dotted underline alone may go unnoticed. Shows once, ever.
         const hintHtml = (anyCommentaryMarked && !localStorage.getItem('commentaryHintSeen') && typeof buildCommentaryHintHtml === 'function')
             ? buildCommentaryHintHtml()
             : '';
 
-        container.innerHTML = hintHtml + (html || '<div>未找到经文内容</div>');
+        container.innerHTML = hintHtml + (html || `<div>${t('noScriptureContent')}</div>`);
     }
 };
 
@@ -1112,6 +1251,7 @@ window.Reader = Reader;
         sel.value = currentBibleVersion;
         sel.addEventListener('change', () => {
             currentBibleVersion = sel.value;
+            bibleVersionManuallySet = true; // stop the language toggle from overriding this choice
             localStorage.setItem('bibleVersion', currentBibleVersion);
             // Refresh anything currently showing Bible text: the reading
             // panel, the day's key-verse card, and any open tooltip.
@@ -1245,6 +1385,29 @@ window.Reader = Reader;
     function getChapterHeaderLabel(bookId, fallbackAbbr) {
         return ENGLISH_BOOK_NAMES[bookId - 1] || fallbackAbbr;
     }
+
+    // Translate the day_label field ("第 116 / 365 天") to "Day 116 / 365" for
+    // display. day_label itself must stay untouched everywhere else — plan
+    // overlays (see loadPlan) key their merge off this exact string, so this
+    // is a pure display-only transform, never written back into the data.
+    function translateDayLabel(label) {
+        const m = /^第\s*(\d+)\s*\/\s*(\d+)\s*天$/.exec((label || '').trim());
+        return m ? `Day ${m[1]} / ${m[2]}` : label;
+    }
+
+    // Translate a full-Chinese-name reference ("创世记 1:27" or "创世记 1:27-28")
+    // to its English display form ("Genesis 1:27") for commentary tooltips and
+    // the key-verse card's scripture_en/verse_en labels. Display-only — the
+    // underlying reference strings that drive lookups/parsing are untouched.
+    function translateReferenceToEnglish(reference) {
+        const m = /^(.+?)\s+(\d+:\d+(?:-\d+)?)$/.exec((reference || '').trim());
+        if (!m) return null;
+        const [, fullName, rest] = m;
+        const bookNum = BOOK_FULL_NAME_TO_NUMBER[fullName];
+        const englishName = bookNum ? ENGLISH_BOOK_NAMES[bookNum - 1] : null;
+        return englishName ? `${englishName} ${rest}` : null;
+    }
+    window.translateReferenceToEnglish = translateReferenceToEnglish;
 
     async function getVerseTextFromReference(reference) {
         const m = /^(.+?)\s+(\d+):(\d+(?:-\d+)?)$/.exec((reference || '').trim());
@@ -1468,9 +1631,18 @@ window.Reader = Reader;
     // already includes the book name ("创世记 9:12-13"), a chapter-section's
     // is chapter:verse only ("13:1-9") so it needs the book prefixed here.
     function buildCommentaryTooltipHtml(note, source, book) {
-        const label = source === 'verse' ? '逐节释义' : '逐段释义';
-        const ref = source === 'verse' ? note.reference : `${book} ${note.reference}`;
-        const body = (note.beats || []).map(b =>
+        const label = t(source === 'verse' ? 'verseNoteLabel' : 'sectionNoteLabel');
+        const zhRef = source === 'verse' ? note.reference : `${book} ${note.reference}`;
+        const ref = (currentContentLanguage === 'en' && typeof translateReferenceToEnglish === 'function')
+            ? (translateReferenceToEnglish(zhRef) || zhRef)
+            : zhRef;
+        // beats_en fills in per-chapter over time; fall back to Chinese beats
+        // only when not in English mode (the caller already filters out
+        // English-mode hits with no beats_en before this is ever invoked).
+        const beats = (currentContentLanguage === 'en' && note.beats_en && note.beats_en.length)
+            ? note.beats_en
+            : note.beats;
+        const body = (beats || []).map(b =>
             `<p><strong>${b[0] || ''}</strong>${b[1] || ''}</p>`
         ).join('');
         return `<span class="verse-tooltip-ref">${label} · ${ref}</span>${body}`;
@@ -1496,8 +1668,8 @@ window.Reader = Reader;
     // or automatically once the reader successfully opens a tooltip.
     function buildCommentaryHintHtml() {
         return `<div class="commentary-hint" id="commentary-hint">
-            <span>点击带下划线的经节查看释义</span>
-            <button type="button" class="commentary-hint-dismiss" aria-label="关闭提示">&times;</button>
+            <span>${t('commentaryHint')}</span>
+            <button type="button" class="commentary-hint-dismiss" aria-label="${t('closeHint')}">&times;</button>
         </div>`;
     }
     function dismissCommentaryHint() {
@@ -1700,7 +1872,10 @@ window.Reader = Reader;
     // box 1.
     const MEMORIZE_KEY = 'memoryVerses';
     const MEMORIZE_INTERVALS = { 1: 1, 2: 3, 3: 7, 4: 14, 5: 30 };
-    const MEMORIZE_LABELS = { 1: '1天', 2: '3天', 3: '7天', 4: '14天', 5: '30天' };
+    // Language-aware interval labels — see MEMORIZE_INTERVAL_LABELS near the top of the file.
+    function memorizeLabel(box) {
+        return MEMORIZE_INTERVAL_LABELS[currentContentLanguage][box];
+    }
 
     let memorizeQueue = [];
     let memorizeQIndex = 0;
@@ -1753,7 +1928,7 @@ window.Reader = Reader;
     function buildMemorizeAddBtn(ref, text) {
         if (!ref || !text) return '';
         const added = memoryHasVerse(ref);
-        return `<button type="button" class="memorize-add-btn${added ? ' added' : ''}" data-memorize-ref="${escapeHtml(ref)}" data-memorize-text="${escapeHtml(text)}" ${added ? 'disabled' : ''}>${added ? '✓ 已加入背诵' : '＋ 加入背诵'}</button>`;
+        return `<button type="button" class="memorize-add-btn${added ? ' added' : ''}" data-memorize-ref="${escapeHtml(ref)}" data-memorize-text="${escapeHtml(text)}" ${added ? 'disabled' : ''}>${added ? t('addedToMemorize') : t('addToMemorize')}</button>`;
     }
 
     document.addEventListener('click', (e) => {
@@ -1763,16 +1938,16 @@ window.Reader = Reader;
         const text = btn.getAttribute('data-memorize-text');
         if (!ref || !text) return;
         addToMemoryDeck(ref, text);
-        btn.textContent = '✓ 已加入背诵';
+        btn.textContent = t('addedToMemorize');
         btn.classList.add('added');
         btn.disabled = true;
     });
 
     function memorizeRelativeDue(item) {
-        if (item.box === 5 && item.next - Date.now() > 20 * 86400000) return { text: '已掌握', cls: 'mastered' };
-        if (isMemoryVerseDue(item)) return { text: '今天到期', cls: 'due' };
+        if (item.box === 5 && item.next - Date.now() > 20 * 86400000) return { text: t('statMastered'), cls: 'mastered' };
+        if (isMemoryVerseDue(item)) return { text: t('dueToday'), cls: 'due' };
         const days = Math.ceil((item.next - Date.now()) / 86400000);
-        return { text: days + '天后', cls: 'future' };
+        return { text: t('daysUntil', { n: days }), cls: 'future' };
     }
 
     function openMemorizeOverlay() {
@@ -1798,7 +1973,7 @@ window.Reader = Reader;
             const pct = deck.length ? Math.round(count / deck.length * 100) : 0;
             return `<div class="memorize-ladder-row">
                 <div class="memorize-box-chip box-${b}">${b}</div>
-                <div class="memorize-ladder-label">${MEMORIZE_LABELS[b]}间隔</div>
+                <div class="memorize-ladder-label">${t('intervalLabel', { label: memorizeLabel(b) })}</div>
                 <div class="memorize-ladder-track"><div class="memorize-ladder-fill box-${b}" style="width:${pct}%"></div></div>
                 <div class="memorize-ladder-count">${count}</div>
             </div>`;
@@ -1817,18 +1992,18 @@ window.Reader = Reader;
 
         sheet.innerHTML = `
             <div class="memorize-header">
-                <h3>🧠 背诵</h3>
-                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="关闭">&times;</button>
+                <h3>${t('memorizeOverlayTitle')}</h3>
+                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="${t('close')}">&times;</button>
             </div>
             <div class="memorize-body">
                 <div class="memorize-stats-row">
-                    <div class="memorize-stat-tile"><div class="n">${deck.length}</div><div class="l">全部</div></div>
-                    <div class="memorize-stat-tile"><div class="n accent">${due.length}</div><div class="l">待复习</div></div>
-                    <div class="memorize-stat-tile"><div class="n done">${mastered}</div><div class="l">已掌握</div></div>
+                    <div class="memorize-stat-tile"><div class="n">${deck.length}</div><div class="l">${t('statAll')}</div></div>
+                    <div class="memorize-stat-tile"><div class="n accent">${due.length}</div><div class="l">${t('statDue')}</div></div>
+                    <div class="memorize-stat-tile"><div class="n done">${mastered}</div><div class="l">${t('statMastered')}</div></div>
                 </div>
                 ${deck.length ? `<div class="memorize-ladder">${ladderRows}</div>` : ''}
-                <button type="button" class="memorize-cta" id="memorize-start-btn" ${due.length ? '' : 'disabled'}>${due.length ? `开始复习（${due.length}）` : (deck.length ? '今日已复习完毕 ✓' : '暂无经文')}</button>
-                ${deck.length ? '' : '<p class="memorize-empty">还没有背诵经文。在「今日金句」旁点击「＋ 加入背诵」开始吧。</p>'}
+                <button type="button" class="memorize-cta" id="memorize-start-btn" ${due.length ? '' : 'disabled'}>${due.length ? t('startReview', { n: due.length }) : (deck.length ? t('allReviewedToday') : t('noVersesYet'))}</button>
+                ${deck.length ? '' : `<p class="memorize-empty">${t('emptyStateMsg')}</p>`}
                 ${deck.length ? `<div class="memorize-verse-list">${rows}</div>` : ''}
             </div>
         `;
@@ -1856,23 +2031,23 @@ window.Reader = Reader;
 
         sheet.innerHTML = `
             <div class="memorize-header">
-                <button type="button" class="memorize-back" id="memorize-back-btn" aria-label="返回">‹</button>
-                <h3>复习中 ${memorizeQIndex + 1} / ${memorizeQueue.length}</h3>
-                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="关闭">&times;</button>
+                <button type="button" class="memorize-back" id="memorize-back-btn" aria-label="${t('back')}">‹</button>
+                <h3>${t('reviewingProgress', { i: memorizeQIndex + 1, total: memorizeQueue.length })}</h3>
+                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="${t('close')}">&times;</button>
             </div>
             <div class="memorize-progress-track"><div class="memorize-progress-fill" style="width:${pct}%"></div></div>
             <div class="memorize-flash-area">
                 <div class="memorize-flashcard">
-                    <div class="memorize-box-tag box-${item.box}">阶梯 ${item.box} · ${MEMORIZE_LABELS[item.box]}</div>
+                    <div class="memorize-box-tag box-${item.box}">${t('boxTag', { box: item.box, label: memorizeLabel(item.box) })}</div>
                     <div class="memorize-ref-display">${escapeHtml(item.ref)}</div>
                     ${memorizeRevealed
                         ? `<div class="memorize-verse-text-display">${escapeHtml(item.text)}</div>`
-                        : `<button type="button" class="memorize-reveal-btn" id="memorize-reveal-btn">显示经文</button>`}
+                        : `<button type="button" class="memorize-reveal-btn" id="memorize-reveal-btn">${t('revealAnswer')}</button>`}
                 </div>
             </div>
             <div class="memorize-grade-bar">
-                <button type="button" class="memorize-grade-btn forgot" id="memorize-forgot-btn" ${memorizeRevealed ? '' : 'disabled'}>😵 还没记熟<span class="sub">回到阶梯 1</span></button>
-                <button type="button" class="memorize-grade-btn remember" id="memorize-remember-btn" ${memorizeRevealed ? '' : 'disabled'}>✅ 我记得<span class="sub">升到阶梯 ${Math.min(item.box + 1, 5)}</span></button>
+                <button type="button" class="memorize-grade-btn forgot" id="memorize-forgot-btn" ${memorizeRevealed ? '' : 'disabled'}>${t('gradeForgotMain')}<span class="sub">${t('gradeForgotSub')}</span></button>
+                <button type="button" class="memorize-grade-btn remember" id="memorize-remember-btn" ${memorizeRevealed ? '' : 'disabled'}>${t('gradeRememberedMain')}<span class="sub">${t('gradeRememberedSub', { n: Math.min(item.box + 1, 5) })}</span></button>
             </div>
         `;
 
@@ -1906,15 +2081,15 @@ window.Reader = Reader;
         if (!sheet) return;
         sheet.innerHTML = `
             <div class="memorize-header">
-                <button type="button" class="memorize-back" id="memorize-back-btn" aria-label="返回">‹</button>
-                <h3>复习中</h3>
-                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="关闭">&times;</button>
+                <button type="button" class="memorize-back" id="memorize-back-btn" aria-label="${t('back')}">‹</button>
+                <h3>${t('reviewingLabel')}</h3>
+                <button type="button" class="memorize-close" id="memorize-close-btn" aria-label="${t('close')}">&times;</button>
             </div>
             <div class="memorize-done">
                 <div class="emoji">🎉</div>
-                <h2>今日背诵已完成</h2>
-                <p>记得 ${memorizeSession.remembered} 节 · 还需加强 ${memorizeSession.forgot} 节</p>
-                <button type="button" class="memorize-cta" id="memorize-done-btn">返回首页</button>
+                <h2>${t('doneTitle')}</h2>
+                <p>${t('doneSummary', { r: memorizeSession.remembered, f: memorizeSession.forgot })}</p>
+                <button type="button" class="memorize-cta" id="memorize-done-btn">${t('returnHome')}</button>
             </div>
         `;
         el('memorize-back-btn').addEventListener('click', renderMemorizeDeck);
@@ -1939,7 +2114,7 @@ window.Reader = Reader;
         const chapterSelect = document.getElementById('jump-chapter');
         if (!chapterSelect || chapterIndex.length === 0) return;
         
-        chapterSelect.innerHTML = '<option value="">选择章节...</option>';
+        chapterSelect.innerHTML = `<option value="" data-i18n="selectChapterPlaceholder">${t('selectChapterPlaceholder')}</option>`;
         
         chapterIndex.forEach(item => {
             const option = document.createElement('option');
@@ -1989,8 +2164,8 @@ window.Reader = Reader;
         if (typeof hideVerseTooltip === 'function') hideVerseTooltip();
 
         if (!bibleData || bibleData.length === 0) {
-            setText('day-title', '未找到数据');
-            setText('devotional-content', '请先运行提取器生成 bibleData.json，然后刷新页面。');
+            setText('day-title', t('noDataFound'));
+            setText('devotional-content', t('runExtractorFirst'));
 
             setText('scripture', '');
             setText('key-verse', '');
@@ -2004,22 +2179,30 @@ window.Reader = Reader;
         if (currentDayIndex >= bibleData.length) currentDayIndex = bibleData.length - 1;
 
         const data = bibleData[currentDayIndex];
-        
+
+        // English fields (_en) fill in per-day over time; a day not yet
+        // translated falls back to the Chinese original rather than showing
+        // blank content, even while currentContentLanguage is 'en'.
+        const useEn = currentContentLanguage === 'en';
+
         // Display week and day number for debugging
         // Use label from JSON which matches user preference "Day X / 365"
-        setText('week-day-info', data.day_label || '');
-        
-        setText('scripture', data.scripture || '');
-        setText('day-title', data.title || '');
+        setText('week-day-info', useEn ? translateDayLabel(data.day_label) : (data.day_label || ''));
+        const displayScripture = (useEn && data.scripture_en) || data.scripture || '';
+        const displayTitle = (useEn && data.title_en) || data.title || '';
+        const displayContent = (useEn && data.content_en) || data.content || '';
+
+        setText('scripture', displayScripture);
+        setText('day-title', displayTitle);
 
         // allow HTML in content if present (tables, lists, paragraphs), otherwise plain text
         const contentEl = el('devotional-content');
         if (contentEl) {
             // Check for common HTML tags to decide whether to render as HTML
-            if (data.content && /\<\/?(table|tr|td|th|div|p|ol|ul|li|dl|dt|dd|blockquote|br|b|i|strong|em|h[1-6])/i.test(data.content)) {
-                contentEl.innerHTML = data.content;
+            if (displayContent && /\<\/?(table|tr|td|th|div|p|ol|ul|li|dl|dt|dd|blockquote|br|b|i|strong|em|h[1-6])/i.test(displayContent)) {
+                contentEl.innerHTML = displayContent;
             } else {
-                contentEl.innerText = data.content || '';
+                contentEl.innerText = displayContent;
             }
         }
 
@@ -2034,14 +2217,22 @@ window.Reader = Reader;
         if (verseEl) {
             renderToken++;
             const myToken = renderToken;
+            // Reference labels (e.g. "创世记 1:27") are display-translated via
+            // translateReferenceToEnglish when in English mode — the data-ref
+            // attribute keeps the original Chinese reference, since that's
+            // what getVerseTextFromReference (below) parses against
+            // BOOK_FULL_NAME_TO_NUMBER.
+            const refLabel = (ref) => (useEn && typeof translateReferenceToEnglish === 'function')
+                ? (translateReferenceToEnglish(ref) || ref)
+                : ref;
             let verseHtml = '';
             if (data.verse_parts && data.verse_parts.length > 0) {
                 // Display each verse part with its individual reference
                 verseHtml = data.verse_parts.map(part =>
-                    `<div style="margin-bottom: 12px;" data-ref="${part.reference}"><strong>${part.reference}</strong><br><span class="key-verse-text">${part.text}</span>${buildMemorizeAddBtn(part.reference, part.text)}</div>`
+                    `<div style="margin-bottom: 12px;" data-ref="${part.reference}"><strong>${refLabel(part.reference)}</strong><br><span class="key-verse-text">${part.text}</span>${buildMemorizeAddBtn(part.reference, part.text)}</div>`
                 ).join('');
             } else if (data.verse_text) {
-                verseHtml = `<div data-ref="${data.verse || ''}"><strong>${data.verse}</strong><br><span class="key-verse-text">${data.verse_text}</span>${buildMemorizeAddBtn(data.verse, data.verse_text)}</div>`;
+                verseHtml = `<div data-ref="${data.verse || ''}"><strong>${refLabel(data.verse)}</strong><br><span class="key-verse-text">${data.verse_text}</span>${buildMemorizeAddBtn(data.verse, data.verse_text)}</div>`;
             } else {
                 verseHtml = data.verse || '';
             }
@@ -2053,7 +2244,7 @@ window.Reader = Reader;
             // so unlike the old card there's no currentPlanId gating needed.
             if (verseHtml) {
                 verseEl.innerHTML = `<div class="verse-box" style="margin-top:0; margin-bottom:20px;">
-                    <strong style="color:var(--primary); display:block; margin-bottom:8px;">今日金句：</strong>
+                    <strong style="color:var(--primary); display:block; margin-bottom:8px;">${t('todaysKeyVerse')}</strong>
                     ${verseHtml}
                 </div>`;
 
@@ -2106,7 +2297,7 @@ window.Reader = Reader;
     async function fetchBaseData() {
         if (baseData) return baseData;
         const r = await fetch('bibleData.json', { cache: 'no-store' });
-        if (!r.ok) throw new Error('网络错误：' + r.status);
+        if (!r.ok) throw new Error(t('networkError', { status: r.status }));
         const json = await r.json();
         if (Array.isArray(json)) baseData = json;
         else if (Array.isArray(json.data)) baseData = json.data;
@@ -2166,6 +2357,13 @@ window.Reader = Reader;
         renderDay();
     }
 
+    // Plan names (e.g. "纵览版 · 圣经纵览") are manifest data, not UI chrome —
+    // each plan carries its own optional name_en, falling back to the
+    // Chinese name if a plan hasn't been given an English one yet.
+    function planDisplayName(p) {
+        return (currentContentLanguage === 'en' && p.name_en) ? p.name_en : p.name;
+    }
+
     // Populate the plan selector from the manifest and wire switching.
     function populatePlanDropdown() {
         const sel = document.getElementById('jump-plan');
@@ -2174,11 +2372,22 @@ window.Reader = Reader;
         plansManifest.forEach(p => {
             const opt = document.createElement('option');
             opt.value = p.id;
-            opt.textContent = p.name;
+            opt.textContent = planDisplayName(p);
             sel.appendChild(opt);
         });
         sel.value = currentPlanId;
         sel.addEventListener('change', () => { loadPlan(sel.value); });
+    }
+
+    // Re-render just the option labels (not the listener/value) after a
+    // language toggle, so switching languages doesn't need a full reload.
+    function refreshPlanDropdownLabels() {
+        const sel = document.getElementById('jump-plan');
+        if (!sel || !plansManifest) return;
+        Array.from(sel.options).forEach(opt => {
+            const p = plansManifest.find(pl => pl.id === opt.value);
+            if (p) opt.textContent = planDisplayName(p);
+        });
     }
 
     // Load the plan manifest, then the active plan's data, after DOM is ready.
@@ -2202,16 +2411,17 @@ window.Reader = Reader;
             .catch(err => {
                 console.warn('无法加载数据:', err);
                 const debugEl = document.getElementById('full-scripture-content');
-                if (debugEl) debugEl.innerHTML = '<p style="color:red">无法加载数据: ' + err.message + '</p>';
+                if (debugEl) debugEl.innerHTML = `<p style="color:red">${t('cannotLoadData', { msg: err.message })}</p>`;
                 bibleData = [];
                 renderDay();
             });
+        applyStaticI18n();
     });
 
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v20'; // Bump version
+        const APP_SW_VERSION = 'v21'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))

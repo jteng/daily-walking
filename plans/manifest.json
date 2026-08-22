@@ -3,6 +3,7 @@
     {
       "id": "original",
       "name": "纵览版 · 圣经纵览",
+      "name_en": "Survey Edition",
       "file": "bibleData.json",
       "overlay": false,
       "credit": ""
@@ -10,6 +11,7 @@
     {
       "id": "devotional",
       "name": "默想版 · 灵修默想",
+      "name_en": "Meditation Edition",
       "file": "plans/devotional.json",
       "overlay": true,
       "credit": ""
