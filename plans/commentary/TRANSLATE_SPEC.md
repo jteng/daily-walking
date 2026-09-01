@@ -57,15 +57,14 @@ still untranslated — 515 chapters remaining of 1189 total chapter-entries).
 
 1. `python3 scripts/translate_status.py` — see how many chapters remain,
    current book, upcoming books.
-2. `python3 scripts/translate_status.py --next 15` — prints the next 15
+2. `python3 scripts/translate_status.py --next 30` — prints the next 30
    untranslated chapters' full content (every section's reference,
    verse_text, voice, and Chinese beats to translate), possibly spanning
-   a book boundary. 15 is a batch-size choice for pacing, not a hard
+   a book boundary. 30 is a batch-size choice for pacing (raised from an
+   original 15 at the user's explicit request on 2026-09-01), not a hard
    limit — a firing may stop partway through if usage runs low; that's
    fine, the resume guarantee below makes an over- or under-shoot
-   harmless. Do not increase this above ~20 per firing without the user's
-   say-so — the batch size is deliberately conservative to pace token
-   spend across firings.
+   harmless. Do not increase this further without the user's say-so.
 3. For each chapter, for each section: translate `beats` -> `beats_en`
    per house style above, preserving the exact `reference`.
 4. **Persist in sub-chunks of ~3 chapters** (matches the granularity of
