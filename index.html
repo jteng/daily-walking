@@ -529,7 +529,7 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.2</span></h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.3</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
         <select id="jump-plan" data-i18n-aria="selectPlan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
@@ -594,8 +594,7 @@
 
                 <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: var(--text-muted); font-size: 0.85em; line-height: 1.6; border-top: 1px dashed var(--border-light); margin-top: 30px; display: none;">
                 </footer>
-                <footer id="app-verse" style="text-align: center; padding: 16px 20px 24px 20px; color: var(--text-faint); font-size: 0.8em; line-height: 1.7; font-style: italic;">
-                    「我的神我的王啊，我要尊崇你！我要永永远远称颂你的名！我要天天称颂你，也要永永远远赞美你的名！」<br>——诗篇 145:1-2
+                <footer id="app-verse" data-i18n-html="appVerseFooter" style="text-align: center; padding: 16px 20px 24px 20px; color: var(--text-faint); font-size: 0.8em; line-height: 1.7; font-style: italic;">
                 </footer>
             </div>
         </div>
@@ -676,7 +675,11 @@ const I18N = {
     gradeRememberedSub: { zh: '升到阶梯 {n}', en: 'Up to Box {n}' },
     doneTitle: { zh: '今日背诵已完成', en: 'Memorization complete for today' },
     doneSummary: { zh: '记得 {r} 节 · 还需加强 {f} 节', en: 'Remembered {r} · Need review {f}' },
-    returnHome: { zh: '返回首页', en: 'Return home' }
+    returnHome: { zh: '返回首页', en: 'Return home' },
+    appVerseFooter: {
+        zh: '「我的神我的王啊，我要尊崇你！我要永永远远称颂你的名！我要天天称颂你，也要永永远远赞美你的名！」<br>——诗篇 145:1-2',
+        en: '“I will extol you, my God and King, and bless your name forever and ever. Every day I will bless you, and praise your name forever and ever.”<br>—Psalm 145:1-2'
+    }
 };
 // Memorize-box interval labels (e.g. "3天" / "3 days"), keyed by language then box number.
 const MEMORIZE_INTERVAL_LABELS = {
@@ -710,6 +713,9 @@ function applyStaticI18n() {
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(elx => {
         elx.setAttribute('placeholder', t(elx.getAttribute('data-i18n-placeholder')));
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(elx => {
+        elx.innerHTML = t(elx.getAttribute('data-i18n-html'));
     });
     document.documentElement.lang = currentContentLanguage === 'en' ? 'en' : 'zh-CN';
 }
