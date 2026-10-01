@@ -529,7 +529,7 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.5</span></h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.6</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
         <select id="jump-plan" data-i18n-aria="selectPlan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
@@ -1837,12 +1837,32 @@ window.Reader = Reader;
         
         bibleData.forEach((entry, idx) => {
             const scripture = entry.scripture || '';
+
+            // Special case: the one day combining 2 John + 3 John + Jude
+            // doesn't fit the generic "single book + chapter range" shape
+            // the regex below assumes — it mis-splits into a garbled book
+            // token ("约翰贰书、约翰") plus a mangled remainder. Sort it
+            // right after 1 John (order 62) and before Revelation (66),
+            // in 2 John's nominal slot (63), with the whole label intact.
+            if (scripture === '约翰贰书、约翰三书、犹大书') {
+                chapterIndex.push({
+                    index: idx,
+                    book: scripture,
+                    bookFull: scripture,
+                    bookOrder: 63,
+                    chapterPart: '',
+                    scripture: scripture,
+                    dayLabel: entry.day_label
+                });
+                return;
+            }
+
             // Extract book name (everything before numbers/章/篇)
             const match = scripture.match(/^([^一二三四五六七八九十廿卅\d]+)/);
             if (match) {
                 const book = match[1].trim();
                 const chapterPart = scripture.substring(book.length).trim();
-                
+
                 chapterIndex.push({
                     index: idx,
                     book: book,
