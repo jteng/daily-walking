@@ -529,7 +529,7 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.4</span></h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.5</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
         <select id="jump-plan" data-i18n-aria="selectPlan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
@@ -768,7 +768,7 @@ const Reader = {
         '罗': 45, '林前': 46, '林后': 47, '加': 48, '弗': 49,
         '腓': 50, '西': 51, '帖前': 52, '帖后': 53, '提前': 54,
         '提后': 55, '多': 56, '门': 57, '来': 58, '雅': 59,
-        '彼前': 60, '彼后': 61, '约一': 62, '约二': 63, '约三': 64,
+        '彼前': 60, '彼后': 61, '约一': 62, '约壹': 62, '约二': 63, '约三': 64,
         '犹': 65, '启': 66
     },
 
@@ -1285,7 +1285,7 @@ window.Reader = Reader;
             '罗': 45, '林前': 46, '林后': 47, '加': 48, '弗': 49,
             '腓': 50, '西': 51, '帖前': 52, '帖后': 53, '提前': 54,
             '提后': 55, '多': 56, '门': 57, '来': 58, '雅': 59,
-            '彼前': 60, '彼后': 61, '约一': 62, '约二': 63, '约三': 64,
+            '彼前': 60, '彼后': 61, '约一': 62, '约壹': 62, '约二': 63, '约三': 64,
             '犹': 65, '启': 66
         };
         return bookMap[chineseAbbr] || null;
@@ -1795,7 +1795,7 @@ window.Reader = Reader;
             '罗': 45, '林前': 46, '林后': 47, '加': 48, '弗': 49,
             '腓': 50, '西': 51, '帖前': 52, '帖后': 53, '提前': 54,
             '提后': 55, '多': 56, '门': 57, '来': 58, '雅': 59,
-            '彼前': 60, '彼后': 61, '约一': 62, '约二': 63, '约三': 64,
+            '彼前': 60, '彼后': 61, '约一': 62, '约壹': 62, '约二': 63, '约三': 64,
             '犹': 65, '启': 66
         };
         return bookOrder[abbr] || 999;
@@ -1824,7 +1824,7 @@ window.Reader = Reader;
             '帖前': '帖撒罗尼迦前书', '帖后': '帖撒罗尼迦后书',
             '提前': '提摩太前书', '提后': '提摩太后书', '多': '提多书',
             '门': '腓利门书', '来': '希伯来书', '雅': '雅各书',
-            '彼前': '彼得前书', '彼后': '彼得后书', '约一': '约翰一书',
+            '彼前': '彼得前书', '彼后': '彼得后书', '约一': '约翰一书', '约壹': '约翰一书',
             '约二': '约翰二书', '约三': '约翰三书', '犹': '犹大书',
             '启': '启示录'
         };
