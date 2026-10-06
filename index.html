@@ -529,7 +529,7 @@
 <body>
 
 <header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.6</span></h1>
+    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.7</span></h1>
     <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
         <!-- Plan selector -->
         <select id="jump-plan" data-i18n-aria="selectPlan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
@@ -1940,6 +1940,71 @@ window.Reader = Reader;
         updateMemorizeBadge();
     }
 
+    // Parse a memorize-deck ref ("哥林多前书 10:23" or "哥林多前书 10:23-24")
+    // into its book/chapter/verse-range parts, for the adjacent-verse
+    // migration below. Mirrors the equivalent Python parser used to merge
+    // verse_parts in bibleData.json/devotional.json.
+    function parseMemoryRef(ref) {
+        const m = /^(.+?)\s+(\d+):(\d+)(?:-(\d+))?$/.exec(ref || '');
+        if (!m) return null;
+        return { book: m[1], chap: parseInt(m[2], 10), v1: parseInt(m[3], 10), v2: m[4] ? parseInt(m[4], 10) : parseInt(m[3], 10) };
+    }
+
+    // One-time-per-load migration: a devotional day's key verse used to be
+    // split into separate verse_parts for each individual verse (e.g.
+    // "哥林多前书 10:23" + "哥林多前书 10:24"), each with its own "+ Add to
+    // Memorize" button — so a verse pair someone saved before that data
+    // was merged into a single "10:23-24" entry sits in their deck as two
+    // separate cards. Detect any such adjacent-verse pairs still in the
+    // saved deck and merge them into one card, keeping the more-advanced
+    // (higher box) card's box/next schedule. No-op once nothing adjacent
+    // remains, so safe to run on every load.
+    function migrateMergeAdjacentMemoryVerses() {
+        const deck = loadMemoryDeck();
+        if (deck.length < 2) return;
+
+        const unparsable = deck.filter(item => !parseMemoryRef(item.ref));
+        const parsed = deck.map(item => ({ item, ref: parseMemoryRef(item.ref) })).filter(p => p.ref);
+
+        const groups = new Map();
+        parsed.forEach(p => {
+            const key = p.ref.book + '|' + p.ref.chap;
+            if (!groups.has(key)) groups.set(key, []);
+            groups.get(key).push(p);
+        });
+
+        let changed = false;
+        const result = [];
+
+        groups.forEach(group => {
+            group.sort((a, b) => a.ref.v1 - b.ref.v1);
+            let current = group[0];
+            for (let i = 1; i < group.length; i++) {
+                const next = group[i];
+                if (next.ref.v1 === current.ref.v2 + 1) {
+                    const winner = (next.item.box > current.item.box) ? next.item : current.item;
+                    current = {
+                        item: {
+                            ref: `${current.ref.book} ${current.ref.chap}:${current.ref.v1}-${next.ref.v2}`,
+                            text: current.item.text + next.item.text,
+                            box: winner.box,
+                            next: winner.next,
+                            added: Math.min(current.item.added, next.item.added)
+                        },
+                        ref: { book: current.ref.book, chap: current.ref.chap, v1: current.ref.v1, v2: next.ref.v2 }
+                    };
+                    changed = true;
+                } else {
+                    result.push(current.item);
+                    current = next;
+                }
+            }
+            result.push(current.item);
+        });
+
+        if (changed) saveMemoryDeck(result.concat(unparsable));
+    }
+
     function updateMemorizeBadge() {
         const badge = el('memorize-badge');
         if (!badge) return;
@@ -2125,6 +2190,7 @@ window.Reader = Reader;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        migrateMergeAdjacentMemoryVerses();
         updateMemorizeBadge();
         const overlay = el('memorize-overlay');
         if (overlay) {
