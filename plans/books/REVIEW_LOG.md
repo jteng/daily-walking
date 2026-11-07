@@ -26,3 +26,13 @@ Each entry records an independent `theology-reviewer` pass (see WORKFLOW.md).
 | John 19 | 2026-11-07 | ready (after revision) | Must-fix: ESV 4:14 wording; Ps 22:1 punctuation. Should-fix: substitution stated plainly at 19:30 (penalty and wrath borne, Isa 53:5-6, 1:29); "hour" anticipated from 2:4, announced 12:23. *tetelestai* in 19:28, Zech 12:10 "look on me," exact 19:33/19:35 quotes. |
 | John 20 | 2026-11-07 | ready (after revision) | Must-fix: 10:3 quoted in order (zh) and to the right verse (en). Should-fix: women first at the empty tomb (all four Gospels); 20:22 weighed with 7:39, 16:7, Acts 1:4-5; Thomas gently rebuked; "my brothers" first in John. Carson's 20:31 reading aligned with 00; Domitian wording aligned; peace grounded in sin borne. |
 | John 21 | 2026-11-07 | ready (after revision) | Should-fix: patristic sources on Peter's death stated precisely (1 Clement, Tertullian, Eusebius/Origen); breakfast timing; ESV 1:42 wording. 12:33/18:32 and 13:36 links added. agapaō/phileō section confirmed sound. |
+
+## Application and Chinese-language reviews (first pass, all of John)
+
+| Chapters | Date | Reviewer | Verdict | Summary |
+|---|---|---|---|---|
+| John 00–10 | 2026-11-07 | application (Keller/Piper) | lands well; 02, 03, 07 after should-fix | 02 要点 recentered on Christ (the "hour," the cost he pays) instead of copying Mary; 02, 03, 07 meditations now start from grace (look and live; the will, not obedience-before-understanding). Repeated "other cistern" and "obey before you understand" questions replaced in 02, 05, 06, 07; 01, 04, 05, 06, 08, 09, 10 meditations grounded in being seen and found first. |
+| John 11–21 | 2026-11-07 | application (Keller/Piper) | lands well; 12, 18 after should-fix | 12 meditation grounded in Jesus as the grain of wheat; 18 in the Barabbas exchange and the cup drunk for us. 11 (Jesus wept), 13, 14, 15, 16, 17, 19, 20, 21 consider items applied; repetition across chapters reduced. |
+| John 00–07 | 2026-11-07 | Chinese (Stephen Tong lens) | 通顺可用 / 修改后可用 | Translationese and run-on sentences fixed; Jesus never called a 「东西」; 4:18 named as sin; 施洗约翰 disambiguated in 3:30; 修身养性, 积功德, 面子, 肺腑之言 used where they fit naturally. |
+| John 08–14 | 2026-11-07 | Chinese (Stephen Tong lens) | 修改后可用 | 该亚法 spelling unified; 8:58 *genesthai* contrast clarified (zh+en); 11:25 and 14:16 logic fixed (zh+en); 面子, religious pluralism and family rejection named where natural. |
+| John 15–21 | 2026-11-07 | Chinese (Stephen Tong lens) | 通顺可用 / 修改后可用 | 一语双关, 发出 (procession), 投靠主的全知, 孝道 at 19:26; family gatherings and ancestor rites named in the 18 meditation. |
