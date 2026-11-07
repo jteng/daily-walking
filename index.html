@@ -34,6 +34,8 @@
             --tooltip-shadow: 0 4px 12px rgba(0,0,0,0.15);
             --success: #2f9e58;
             --warn: #c8791a;
+            --pill-bg: #eef1f5;
+            --pill-bg-hover: #e4e8ee;
         }
         /* Dark mode: same layout, just a night-friendly palette. Follows the
            OS/browser setting (no in-app toggle) via prefers-color-scheme. */
@@ -56,6 +58,8 @@
                 --tooltip-shadow: 0 4px 16px rgba(0,0,0,0.6);
                 --success: #49c274;
                 --warn: #e0a955;
+                --pill-bg: #262a31;
+                --pill-bg-hover: #2f343c;
             }
         }
         body { font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 80px; }
@@ -524,45 +528,71 @@
         .memorize-done p { margin: 0; color: var(--text-muted); font-size: 13.5px; }
         .memorize-done .memorize-cta { max-width: 200px; margin-top: 8px; }
 
+        /* ---- Option B chrome: slim top bar, context pill, bottom bar, sheet ---- */
+        header.topbar { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 4px; padding: calc(8px + env(safe-area-inset-top, 0px)) max(10px, env(safe-area-inset-right, 0px)) 8px max(12px, env(safe-area-inset-left, 0px)); background: var(--card-bg); color: var(--text); border-bottom: 1px solid var(--border-light); box-shadow: none; text-align: left; }
+        .context-pill { flex: 1; min-width: 0; height: 42px; padding: 0 14px; border-radius: 21px; background: var(--pill-bg); color: var(--text); display: flex; align-items: center; gap: 8px; font-size: 14px; text-align: left; }
+        .context-pill:hover:not(:disabled) { opacity: 1; background: var(--pill-bg-hover); }
+        .pill-primary { font-weight: 700; white-space: nowrap; }
+        .pill-secondary { color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+        .pill-caret { margin-left: auto; flex-shrink: 0; color: var(--text-muted); }
+        .icon-btn { width: 44px; height: 44px; padding: 0; border-radius: 22px; background: transparent; color: var(--text); display: inline-flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+        .icon-btn:hover:not(:disabled) { opacity: 1; background: var(--pill-bg); }
+        .lang-btn { font-size: 15px; font-weight: 600; }
+        .icon-btn .memorize-badge { top: 4px; right: 2px; }
+        button:focus-visible, select:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+        .reader-container { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+        .bottombar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; display: flex; align-items: center; gap: 10px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--card-bg); border-top: 1px solid var(--border-light); }
+        .bottombar > .segmented { flex: 1; max-width: 420px; margin: 0 auto; }
+        .round-btn { width: 44px; height: 44px; padding: 0; border-radius: 22px; background: var(--card-bg); color: var(--text); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .round-btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .round-btn:disabled { background: var(--card-bg); color: var(--text-faint); border-color: var(--border-light); }
+        .segmented { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); background: var(--pill-bg); border-radius: 22px; padding: 3px; }
+        .segmented button { height: 38px; padding: 0 10px; border-radius: 19px; background: transparent; color: var(--text-muted); font-size: 14px; }
+        .segmented button:hover:not(:disabled) { opacity: 1; color: var(--text); }
+        .segmented button[aria-selected="true"], .segmented button[aria-checked="true"] { background: var(--card-bg); color: var(--text); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+        .segmented.small { border-radius: 12px; }
+        .segmented.small button { border-radius: 9px; height: 36px; }
+        .mode-classic .reader-nav { display: none; }
+
+        .sheet-backdrop { position: fixed; inset: 0; z-index: 190; background: rgba(15, 20, 30, 0.45); }
+        .sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 200; max-height: 88vh; overflow-y: auto; max-width: 560px; margin: 0 auto; background: var(--bg); color: var(--text); border-radius: 20px 20px 0 0; padding: 8px max(20px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 18px; box-shadow: 0 -8px 30px rgba(0,0,0,0.2); }
+        .sheet[hidden], .sheet-backdrop[hidden] { display: none; }
+        .sheet-handle { width: 40px; height: 5px; border-radius: 3px; background: var(--border); align-self: center; }
+        .sheet-head { display: flex; justify-content: space-between; align-items: center; margin-top: -4px; }
+        .sheet-head h2 { margin: 0; font-size: 18px; }
+        .sheet-group { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+        .sheet-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .sheet-label { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-muted); }
+        .sheet-select { height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 15px; width: 100%; }
+        .plan-cards { display: flex; flex-direction: column; gap: 8px; }
+        .plan-card { min-height: 58px; padding: 8px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; }
+        .plan-card:hover:not(:disabled) { opacity: 1; border-color: var(--primary); }
+        .plan-card[aria-pressed="true"] { border: 2px solid var(--primary); padding: 7px 13px; }
+        .plan-card-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .plan-card-name { font-size: 16px; font-weight: 600; }
+        .plan-card-desc { font-size: 12px; color: var(--text-muted); }
+        .plan-card-meta { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+        .plan-card[aria-pressed="true"] .plan-card-meta { color: var(--primary); font-weight: 600; }
+        .sheet-version { margin: 0; text-align: center; font-size: 12px; color: var(--text-faint); }
+        @media (prefers-reduced-motion: reduce) { .reader-track { transition: none; } }
+
     </style>
 </head>
 <body>
 
-<header>
-    <h1 id="app-title" style="margin: 5px 0; font-size: 1.2em;"><span data-i18n="appTitle">每天与主同行</span> <span id="app-version" style="font-size: 0.5em; font-weight: 400; color: #bbb; vertical-align: middle;">v1.1.8</span></h1>
-    <div style="margin-top:8px; display:flex; justify-content:center; gap:8px; align-items:center; flex-wrap:wrap;">
-        <!-- Plan selector -->
-        <select id="jump-plan" data-i18n-aria="selectPlan" aria-label="选择读经计划" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
-            <!-- Populated dynamically -->
-        </select>
-
-        <!-- Chapter selector -->
-        <select id="jump-chapter" data-i18n-aria="selectChapter" aria-label="选择章节" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:150px;">
-            <option value="" data-i18n="selectChapterPlaceholder">选择章节...</option>
-            <!-- Populated dynamically -->
-        </select>
-
-        <!-- Bible version selector -->
-        <select id="jump-version" data-i18n-aria="selectVersion" aria-label="选择圣经译本" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd; background:white; font-size:14px; min-width:110px;">
-            <!-- Populated dynamically from BIBLE_VERSIONS -->
-        </select>
-
-        <!-- Mode Toggle -->
-        <button id="mode-toggle" onclick="Reader.toggleMode()" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">📖</button>
-
-        <!-- Language Toggle (中文/EN) -->
-        <button id="lang-toggle" onclick="toggleContentLanguage()" data-i18n="langToggleLabel" data-i18n-aria="langToggleAria" aria-label="切换为英文" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white;">EN</button>
-
-        <!-- Memorize (背诵) -->
-        <button id="memorize-btn" onclick="openMemorizeOverlay()" data-i18n-aria="memorizeBtnLabel" aria-label="背诵" style="padding: 6px 12px; font-size: 14px; background: white; color: var(--primary); border: 1px solid white; position: relative;">🧠<span id="memorize-badge" class="memorize-badge" style="display:none;">0</span></button>
-    </div>
-    <div id="week-day-info" style="font-size:15px; font-weight:500; color:#666; margin-top:4px;"></div>
-
-    <!-- Reader Navigation Dots (outside panels) -->
-    <div class="reader-nav" id="reader-nav">
-        <div class="nav-dot active" data-panel="0" onclick="Reader.goToPanel(0)"></div>
-        <div class="nav-dot" data-panel="1" onclick="Reader.goToPanel(1)"></div>
-    </div>
+<header class="topbar">
+    <button type="button" id="context-pill" class="context-pill" onclick="openContextSheet()" aria-haspopup="dialog" aria-controls="context-sheet">
+        <span id="pill-primary" class="pill-primary"></span>
+        <span id="pill-secondary" class="pill-secondary"></span>
+        <svg class="pill-caret" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <button type="button" id="lang-toggle" class="icon-btn lang-btn" onclick="toggleContentLanguage()" data-i18n="langToggleLabel" data-i18n-aria="langToggleAria" aria-label="切换为英文">EN</button>
+    <button type="button" id="memorize-btn" class="icon-btn" onclick="openMemorizeOverlay()" data-i18n-aria="memorizeBtnLabel" aria-label="背诵">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
+        <span id="memorize-badge" class="memorize-badge" style="display:none;">0</span>
+    </button>
+    <span id="week-day-info" hidden></span>
 </header>
 <div id="loading" data-i18n="loading" style="text-align:center; padding:20px; display:none;">加载中...</div>
 
@@ -587,10 +617,6 @@
                 <div id="devotional-content"></div>
                 <div id="key-verse"></div>
 
-                <div class="nav-buttons">
-                    <button id="prev-btn" data-i18n="prevDay" onclick="adjustDay(-1)">上一日</button>
-                    <button id="next-btn" data-i18n="nextDay" onclick="adjustDay(1)">下一日</button>
-                </div>
 
                 <footer id="plan-credit" style="text-align: center; padding: 20px 20px 0 20px; color: var(--text-muted); font-size: 0.85em; line-height: 1.6; border-top: 1px dashed var(--border-light); margin-top: 30px; display: none;">
                 </footer>
@@ -601,6 +627,55 @@
 
     </div>
 </div>
+
+<nav class="bottombar" aria-label="阅读导航">
+    <button type="button" id="prev-btn" class="round-btn" onclick="adjustDay(-1)" data-i18n-aria="prevDay" aria-label="上一日">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="segmented" role="tablist">
+        <button type="button" role="tab" id="seg-bible" aria-selected="false" onclick="showReaderPanel(0)" data-i18n="segBible">经文</button>
+        <button type="button" role="tab" id="seg-devo" aria-selected="true" onclick="showReaderPanel(1)" data-i18n="segDevotional">灵修</button>
+    </div>
+    <button type="button" id="next-btn" class="round-btn primary" onclick="adjustDay(1)" data-i18n-aria="nextDay" aria-label="下一日">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+</nav>
+
+<div id="context-sheet-backdrop" class="sheet-backdrop" hidden onclick="closeContextSheet()"></div>
+<section id="context-sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head">
+        <h2 id="sheet-title" data-i18n="sheetTitle">阅读设置</h2>
+        <button type="button" class="icon-btn" onclick="closeContextSheet()" data-i18n-aria="close" aria-label="关闭">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+    </div>
+    <div class="sheet-group">
+        <h3 class="sheet-label" data-i18n="selectPlan">读经计划</h3>
+        <div id="plan-cards" class="plan-cards"></div>
+        <select id="jump-plan" hidden aria-hidden="true" tabindex="-1"></select>
+    </div>
+    <div class="sheet-group">
+        <label class="sheet-label" for="jump-chapter" data-i18n="selectChapter">跳到章节</label>
+        <select id="jump-chapter" class="sheet-select" data-i18n-aria="selectChapter" aria-label="选择章节">
+            <option value="" data-i18n="selectChapterPlaceholder">选择章节...</option>
+        </select>
+    </div>
+    <div class="sheet-row">
+        <div class="sheet-group">
+            <label class="sheet-label" for="jump-version" data-i18n="versionLabel">译本</label>
+            <select id="jump-version" class="sheet-select" data-i18n-aria="selectVersion" aria-label="选择圣经译本"></select>
+        </div>
+        <div class="sheet-group">
+            <span class="sheet-label" id="lang-label" data-i18n="languageLabel">语言</span>
+            <div class="segmented small" role="radiogroup" aria-labelledby="lang-label">
+                <button type="button" role="radio" id="lang-zh" onclick="setContentLanguage('zh')">中文</button>
+                <button type="button" role="radio" id="lang-en" onclick="setContentLanguage('en')">EN</button>
+            </div>
+        </div>
+    </div>
+    <p class="sheet-version" id="app-version">v1.2.0</p>
+</section>
 
 <!-- Memorize (背诵) overlay -->
 <div id="memorize-overlay" class="memorize-overlay">
@@ -623,11 +698,17 @@ let bibleVersionManuallySet = false;
 // up with t(key, params) rather than reading the table directly.
 const I18N = {
     appTitle: { zh: '每天与主同行', en: 'Daily Walk With The Lord' },
-    selectPlan: { zh: '选择读经计划', en: 'Select reading plan' },
-    selectChapter: { zh: '选择章节', en: 'Select chapter' },
+    selectPlan: { zh: '读经计划', en: 'Reading plan' },
+    selectChapter: { zh: '跳到章节', en: 'Jump to chapter' },
     selectChapterPlaceholder: { zh: '选择章节...', en: 'Select chapter...' },
     selectVersion: { zh: '选择圣经译本', en: 'Select Bible version' },
     memorizeBtnLabel: { zh: '背诵', en: 'Memorize' },
+    segBible: { zh: '经文', en: 'Scripture' },
+    segDevotional: { zh: '灵修', en: 'Devotional' },
+    sheetTitle: { zh: '阅读设置', en: 'Reading options' },
+    versionLabel: { zh: '译本', en: 'Version' },
+    languageLabel: { zh: '语言', en: 'Language' },
+    dayShort: { zh: '第 {n} 天', en: 'Day {n}' },
     loading: { zh: '加载中...', en: 'Loading...' },
     todayScripture: { zh: '今日经文', en: 'Today’s Scripture' },
     prevDay: { zh: '上一日', en: 'Previous' },
@@ -746,8 +827,72 @@ function toggleContentLanguage() {
     if (typeof hideVerseTooltip === 'function') hideVerseTooltip();
     if (typeof buildCommentaryIndex === 'function') { commentaryVerseIndex = null; buildCommentaryIndex(); }
     if (typeof renderDay === 'function') renderDay();
+    updateLanguageRadios();
+    if (typeof renderPlanCards === 'function') renderPlanCards();
 }
 window.toggleContentLanguage = toggleContentLanguage;
+
+function setContentLanguage(lang) {
+    if (lang !== currentContentLanguage) toggleContentLanguage();
+    else updateLanguageRadios();
+}
+window.setContentLanguage = setContentLanguage;
+
+function updateLanguageRadios() {
+    const zh = document.getElementById('lang-zh');
+    const en = document.getElementById('lang-en');
+    if (zh) zh.setAttribute('aria-checked', String(currentContentLanguage === 'zh'));
+    if (en) en.setAttribute('aria-checked', String(currentContentLanguage === 'en'));
+}
+
+// ---- Context sheet (plan / chapter / version / language) ----
+let sheetReturnFocus = null;
+function openContextSheet() {
+    const sheet = document.getElementById('context-sheet');
+    const backdrop = document.getElementById('context-sheet-backdrop');
+    if (!sheet) return;
+    sheetReturnFocus = document.activeElement;
+    updateLanguageRadios();
+    if (typeof renderPlanCards === 'function') renderPlanCards();
+    sheet.hidden = false;
+    if (backdrop) backdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+    const current = sheet.querySelector('.plan-card[aria-pressed="true"]') || sheet.querySelector('button');
+    if (current) current.focus();
+}
+function closeContextSheet() {
+    const sheet = document.getElementById('context-sheet');
+    const backdrop = document.getElementById('context-sheet-backdrop');
+    if (!sheet || sheet.hidden) return;
+    sheet.hidden = true;
+    if (backdrop) backdrop.hidden = true;
+    document.body.style.overflow = '';
+    if (sheetReturnFocus && sheetReturnFocus.focus) sheetReturnFocus.focus();
+}
+window.openContextSheet = openContextSheet;
+window.closeContextSheet = closeContextSheet;
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeContextSheet();
+});
+
+// ---- 经文 / 灵修 segmented control ----
+// Classic mode shows only the devotional; choosing 经文 switches to the
+// two-panel swipe mode so the Bible text is reachable.
+function showReaderPanel(index) {
+    if (!window.Reader) return;
+    if (index === 0 && window.Reader.mode === 'classic') window.Reader.toggleMode();
+    window.Reader.goToPanel(index);
+}
+window.showReaderPanel = showReaderPanel;
+
+function updateReaderSegments() {
+    if (!window.Reader) return;
+    const active = window.Reader.mode === 'classic' ? 1 : (window.Reader.currentPanel || 0);
+    const b = document.getElementById('seg-bible');
+    const d = document.getElementById('seg-devo');
+    if (b) b.setAttribute('aria-selected', String(active === 0));
+    if (d) d.setAttribute('aria-selected', String(active === 1));
+}
 
 /**
  * Swipeable Bible Reader Logic
@@ -904,10 +1049,8 @@ const Reader = {
         this.mode = localStorage.getItem('readerMode') || 'classic';
         if (this.mode === 'classic') {
             document.body.classList.add('mode-classic');
-            document.getElementById('mode-toggle').innerText = '📑'; // Icon for Classic
-        } else {
-            document.getElementById('mode-toggle').innerText = '📖'; // Icon for Swipe
         }
+        if (window.updateReaderSegments) window.updateReaderSegments();
 
         // Touch handling
         let startX = 0;
@@ -981,16 +1124,15 @@ const Reader = {
         if (this.mode === 'swipe') {
             this.mode = 'classic';
             document.body.classList.add('mode-classic');
-            document.getElementById('mode-toggle').innerText = '📑';
             // In classic mode, we just see devotional (panel 1 in DOM, effectively)
         } else {
             this.mode = 'swipe';
             document.body.classList.remove('mode-classic');
-            document.getElementById('mode-toggle').innerText = '📖';
             // Switch back to Bible Panel (0) by default when returning to swipe mode
             this.goToPanel(0);
         }
         localStorage.setItem('readerMode', this.mode);
+        if (window.updateReaderSegments) window.updateReaderSegments();
     },
     
     // Switch panels
@@ -1008,6 +1150,7 @@ const Reader = {
             if (i === index) dot.classList.add('active');
             else dot.classList.remove('active');
         });
+        if (window.updateReaderSegments) window.updateReaderSegments();
     },
     
     // Render Bible Text
@@ -1748,6 +1891,15 @@ window.Reader = Reader;
         const diff = Math.floor((now.setHours(0,0,0,0) - start.setHours(0,0,0,0)) / msPerDay);
         return diff >= 0 ? diff : 0;
     }
+    // Standalone plans (e.g. Book Study) have their own entry list, so each
+    // keeps its own saved position; the daily plans share 'savedDay'.
+    function savedDayKey(planId) {
+        const plan = (typeof plansManifest !== 'undefined' && plansManifest.find(p => p.id === planId)) || null;
+        return plan && plan.standalone ? `savedDay:${plan.id}` : 'savedDay';
+    }
+    function saveCurrentDay() {
+        try { localStorage.setItem(savedDayKey(currentPlanId), currentDayIndex); } catch (e) {}
+    }
     const saved = localStorage.getItem('savedDay');
     let currentDayIndex;
     if (saved !== null) {
@@ -2214,7 +2366,9 @@ window.Reader = Reader;
             const option = document.createElement('option');
             option.value = item.index;
             const entry = bibleData[item.index];
-            const label = (useEn && entry && entry.scripture_en) ? entry.scripture_en : `${item.bookFull} ${item.chapterPart}`;
+            const label = (entry && entry.toc)
+                ? ((useEn && entry.toc_en) || entry.toc)
+                : ((useEn && entry && entry.scripture_en) ? entry.scripture_en : `${item.bookFull} ${item.chapterPart}`);
             option.textContent = `${chapterSpanHasCommentary(item) ? '★ ' : ''}${label}`;
             chapterSelect.appendChild(option);
         });
@@ -2243,8 +2397,10 @@ window.Reader = Reader;
                 const idx = parseInt(jchapter.value, 10);
                 if (!isNaN(idx) && idx >= 0) {
                     currentDayIndex = idx;
-                    localStorage.setItem('savedDay', currentDayIndex);
+                    saveCurrentDay();
                     renderDay();
+                    renderPlanCards();
+                    closeContextSheet();
                     // Reset chapter selector for next use
                     jchapter.value = '';
                 }
@@ -2283,8 +2439,10 @@ window.Reader = Reader;
 
         // Display week and day number for debugging
         // Use label from JSON which matches user preference "Day X / 365"
-        setText('week-day-info', useEn ? translateDayLabel(data.day_label) : (data.day_label || ''));
-        const displayScripture = (useEn && data.scripture_en) || data.scripture || '';
+        const dayLabel = useEn ? (data.day_label_en || translateDayLabel(data.day_label)) : (data.day_label || '');
+        setText('week-day-info', dayLabel);
+        updateContextPill(data, useEn);
+        const displayScripture = data.toc ? ((useEn && data.toc_en) || data.toc) : ((useEn && data.scripture_en) || data.scripture || '');
         const displayTitle = (useEn && data.title_en) || data.title || '';
         const displayContent = (useEn && data.content_en) || data.content || '';
 
@@ -2374,11 +2532,29 @@ window.Reader = Reader;
             ids.forEach(id => console.warn(id, !!document.getElementById(id)));
         }
 
-        localStorage.setItem('savedDay', currentDayIndex);
+        saveCurrentDay();
         window.scrollTo(0,0);
         
         // Add verse tooltips immediately (no delay for better mobile responsiveness)
         enhanceVerseReferences();
+    }
+
+    // The top-bar pill: where you are (bold) + plan and passage (muted).
+    function updateContextPill(data, useEn) {
+        const plan = plansManifest.find(p => p.id === currentPlanId);
+        const planShort = plan ? ((useEn && plan.short_en) || plan.short || planDisplayName(plan)) : '';
+        let primary;
+        if (data.toc) {
+            primary = (useEn && data.toc_en) || data.toc;
+        } else {
+            const m = /^第\s*(\d+)/.exec(data.day_label || '');
+            primary = m ? t('dayShort', { n: m[1] }) : (data.day_label || '');
+        }
+        const passage = data.toc ? '' : ((useEn && data.scripture_en) || data.scripture || '');
+        setText('pill-primary', primary);
+        setText('pill-secondary', [planShort, passage].filter(Boolean).join(' · '));
+        const pill = el('context-pill');
+        if (pill) pill.setAttribute('aria-label', [primary, planShort, passage].filter(Boolean).join('，'));
     }
 
     function adjustDay(step) {
@@ -2404,10 +2580,19 @@ window.Reader = Reader;
     // Load a plan by id: start from the base data, then (for overlay plans)
     // replace any day whose day_label appears in the plan file. Day index is
     // preserved so switching plans keeps the reader on the same day.
+    let loadedDayKey = null;
     async function loadPlan(planId) {
         const plan = plansManifest.find(p => p.id === planId) || plansManifest[0];
         currentPlanId = plan ? plan.id : 'original';
         localStorage.setItem('planId', currentPlanId);
+        // Switching between a daily plan and a standalone plan: restore the
+        // position saved for the plan we're switching to.
+        const nextKey = savedDayKey(currentPlanId);
+        if (nextKey !== loadedDayKey) {
+            const s = localStorage.getItem(nextKey);
+            currentDayIndex = s !== null ? (parseInt(s, 10) || 0) : 0;
+            loadedDayKey = nextKey;
+        }
 
         const base = await fetchBaseData();
         await loadCommentary();
@@ -2415,7 +2600,17 @@ window.Reader = Reader;
         buildCommentaryIndex();
         bibleData = base;
 
-        if (plan && plan.overlay && plan.file) {
+        if (plan && plan.standalone && plan.file) {
+            try {
+                const r = await fetch(plan.file, { cache: 'no-store' });
+                if (!r.ok) throw new Error(t('networkError', { status: r.status }));
+                const pj = await r.json();
+                bibleData = Array.isArray(pj) ? pj : (pj.entries || []);
+            } catch (err) {
+                console.warn('无法加载计划内容, 回退到原版:', plan.file, err);
+                bibleData = base;
+            }
+        } else if (plan && plan.overlay && plan.file) {
             try {
                 const r = await fetch(plan.file, { cache: 'no-store' });
                 if (r.ok) {
@@ -2451,6 +2646,7 @@ window.Reader = Reader;
         }
 
         renderDay();
+        renderPlanCards();
     }
 
     // Plan names (e.g. "纵览版 · 圣经纵览") are manifest data, not UI chrome —
@@ -2461,7 +2657,40 @@ window.Reader = Reader;
     }
 
     // Populate the plan selector from the manifest and wire switching.
+    // Plan cards in the context sheet. The hidden #jump-plan select stays as
+    // the single source of the current choice for any older code paths.
+    function renderPlanCards() {
+        const box = document.getElementById('plan-cards');
+        if (!box) return;
+        const useEn = currentContentLanguage === 'en';
+        box.innerHTML = '';
+        plansManifest.forEach(p => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'plan-card';
+            btn.setAttribute('aria-pressed', String(p.id === currentPlanId));
+            const desc = (useEn && p.desc_en) || p.desc || '';
+            let meta = '';
+            if (p.id === currentPlanId && bibleData && bibleData[currentDayIndex]) {
+                const d = bibleData[currentDayIndex];
+                meta = d.toc ? ((useEn && d.toc_en) || d.toc) : (el('pill-primary') ? el('pill-primary').textContent : '');
+            }
+            btn.innerHTML = `<span class="plan-card-text"><span class="plan-card-name"></span><span class="plan-card-desc"></span></span><span class="plan-card-meta"></span>`;
+            btn.querySelector('.plan-card-name').textContent = (useEn && p.short_en) || p.short || planDisplayName(p);
+            btn.querySelector('.plan-card-desc').textContent = desc;
+            btn.querySelector('.plan-card-meta').textContent = meta;
+            btn.addEventListener('click', () => {
+                const sel = document.getElementById('jump-plan');
+                if (sel) sel.value = p.id;
+                if (p.id !== currentPlanId) loadPlan(p.id);
+                closeContextSheet();
+            });
+            box.appendChild(btn);
+        });
+    }
+
     function populatePlanDropdown() {
+        renderPlanCards();
         const sel = document.getElementById('jump-plan');
         if (!sel) return;
         sel.innerHTML = '';
@@ -2517,7 +2746,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v22'; // Bump version
+        const APP_SW_VERSION = 'v23'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
