@@ -36,6 +36,7 @@
             --warn: #c8791a;
             --pill-bg: #eef1f5;
             --pill-bg-hover: #e4e8ee;
+            --reading-scale: 1;
         }
         /* Dark mode: same layout, just a night-friendly palette. Follows the
            OS/browser setting (no in-app toggle) via prefers-color-scheme. */
@@ -279,7 +280,7 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.2s;
-            font-size: 0.9em;
+            font-size: calc(0.9rem * var(--reading-scale, 1));
             line-height: 1.5;
         }
 
@@ -574,6 +575,10 @@
         .plan-card-desc { font-size: 12px; color: var(--text-muted); }
         .plan-card-meta { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
         .plan-card[aria-pressed="true"] .plan-card-meta { color: var(--primary); font-weight: 600; }
+        /* Reading text size: everything inside the reading card is sized in em,
+           so scaling the card's base size scales the whole reading view. */
+        .panel-content { font-size: calc(1rem * var(--reading-scale, 1)); }
+        .size-picker button { padding: 0; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; line-height: 1; }
         .sheet-version { margin: 0; text-align: center; font-size: 12px; color: var(--text-faint); }
         .sheet { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
         button, select, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
@@ -678,6 +683,16 @@
             <option value="" data-i18n="selectChapterPlaceholder">选择章节...</option>
         </select>
     </div>
+    <div class="sheet-group">
+        <span class="sheet-label" id="size-label" data-i18n="textSizeLabel">字号</span>
+        <div class="segmented small size-picker" id="size-picker" role="radiogroup" aria-labelledby="size-label">
+            <button type="button" role="radio" data-scale-index="0" style="font-size:13px">A</button>
+            <button type="button" role="radio" data-scale-index="1" style="font-size:16px">A</button>
+            <button type="button" role="radio" data-scale-index="2" style="font-size:19px">A</button>
+            <button type="button" role="radio" data-scale-index="3" style="font-size:22px">A</button>
+            <button type="button" role="radio" data-scale-index="4" style="font-size:25px">A</button>
+        </div>
+    </div>
     <div class="sheet-row">
         <div class="sheet-group">
             <label class="sheet-label" for="jump-version" data-i18n="versionLabel">译本</label>
@@ -725,6 +740,12 @@ const I18N = {
     sheetTitle: { zh: '阅读设置', en: 'Reading options' },
     versionLabel: { zh: '译本', en: 'Version' },
     languageLabel: { zh: '语言', en: 'Language' },
+    textSizeLabel: { zh: '字号', en: 'Text size' },
+    textSize0: { zh: '较小', en: 'Smaller' },
+    textSize1: { zh: '标准', en: 'Default' },
+    textSize2: { zh: '大', en: 'Large' },
+    textSize3: { zh: '较大', en: 'Larger' },
+    textSize4: { zh: '特大', en: 'Largest' },
     dayShort: { zh: '第 {n} 天', en: 'Day {n}' },
     loading: { zh: '加载中...', en: 'Loading...' },
     todayScripture: { zh: '今日经文', en: 'Today’s Scripture' },
@@ -845,6 +866,7 @@ function toggleContentLanguage() {
     if (typeof buildCommentaryIndex === 'function') { commentaryVerseIndex = null; buildCommentaryIndex(); }
     if (typeof renderDay === 'function') renderDay();
     updateLanguageRadios();
+    applyReadingScale(getReadingScaleIndex());
     if (typeof renderPlanCards === 'function') renderPlanCards();
 }
 window.toggleContentLanguage = toggleContentLanguage;
@@ -861,6 +883,33 @@ function updateLanguageRadios() {
     if (zh) zh.setAttribute('aria-checked', String(currentContentLanguage === 'zh'));
     if (en) en.setAttribute('aria-checked', String(currentContentLanguage === 'en'));
 }
+
+// ---- Reading text size ----
+const READING_SCALES = [0.9, 1, 1.15, 1.3, 1.5];
+function getReadingScaleIndex() {
+    let i = 1;
+    try { const v = parseInt(localStorage.getItem('readingScaleIndex'), 10); if (!isNaN(v)) i = v; } catch (e) {}
+    return Math.min(Math.max(i, 0), READING_SCALES.length - 1);
+}
+function applyReadingScale(index) {
+    document.documentElement.style.setProperty('--reading-scale', READING_SCALES[index]);
+    document.querySelectorAll('#size-picker button').forEach(b => {
+        const i = parseInt(b.dataset.scaleIndex, 10);
+        b.setAttribute('aria-checked', String(i === index));
+        b.setAttribute('aria-label', t('textSize' + i));
+    });
+}
+function setReadingScale(index) {
+    try { localStorage.setItem('readingScaleIndex', String(index)); } catch (e) {}
+    applyReadingScale(index);
+}
+applyReadingScale(getReadingScaleIndex());
+document.addEventListener('DOMContentLoaded', () => {
+    applyReadingScale(getReadingScaleIndex());
+    document.querySelectorAll('#size-picker button').forEach(b => {
+        b.addEventListener('click', () => setReadingScale(parseInt(b.dataset.scaleIndex, 10)));
+    });
+});
 
 // ---- Context sheet (plan / chapter / version / language) ----
 let sheetReturnFocus = null;
