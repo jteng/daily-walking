@@ -48,6 +48,10 @@ make format-llm  # LLM-based formatting via Ollama (qwen2.5:1.5b, slower but ~95
   5. `apply_manual_fixes.py` — handcrafted corrections
   6. `add_verse_text_v2.py` — populate verse text from XML
 
+### Book Study plan
+- **plans/books/<book>/NN.md** — one authored chapter (Chinese + English), compiled by `scripts/build_book_plan.py` into `plans/books.json`
+- **Every chapter must be reviewed by the `theology-reviewer` agent** (`.claude/agents/theology-reviewer.md`, an independent Carson/Packer-style evangelical review) before it is published or merged. Follow `plans/books/WORKFLOW.md` and log the result in `plans/books/REVIEW_LOG.md`.
+
 ### Deployment
 - GitHub Actions (`.github/workflows/pages-deploy.yml`) auto-deploys the full repo to `gh-pages` on push to `main`.
 
