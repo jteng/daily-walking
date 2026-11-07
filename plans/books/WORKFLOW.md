@@ -29,20 +29,42 @@ Reformed-evangelical scholar in the tradition of D.A. Carson and J.I. Packer:
 doctrine, exegesis, facts, background, application, and Chinese/English
 parity. It never edits files.
 
-If the agent type isn't registered in the current session, start a
-general-purpose agent and tell it to read and follow
-`.claude/agents/theology-reviewer.md`.
+If an agent type isn't registered in the current session, start a
+general-purpose agent and tell it to read and follow the matching file in
+`.claude/agents/`.
 
-## 3. Revise
+## 3. Application and Chinese-language review (required)
 
-Apply every `must-fix` and `should-fix` finding to both languages. For a
+After the theology review passes, run two more independent reviewers on the
+chapter. They can run in parallel, and neither may be the agent that drafted
+the chapter.
+
+- **`application-reviewer`** (`.claude/agents/application-reviewer.md`):
+  pastoral review in the tradition of Tim Keller and John Piper. It reads the
+  overview, the 要点 / "The point" lines and the meditations, and checks that
+  the application is grace-driven rather than moralistic, centered on Christ,
+  aimed at God's glory, and reaches a real reader's heart and life.
+- **`chinese-reviewer`** (`.claude/agents/chinese-reviewer.md`): reviews the
+  `::zh` body for natural, fluent Chinese (no translationese), consistent
+  terms, fit with Chinese church life, and clear calls to repentance and
+  faith, with a Reformed evangelical lens in the tradition of Stephen Tong
+  (唐崇荣).
+
+Neither reviewer re-checks exegesis or quotations, and neither may change
+text inside Scripture quotation marks. If a change alters the meaning of a
+sentence, make the matching change in the other language.
+
+## 4. Revise
+
+Apply every `must-fix` and `should-fix` finding from all three reviewers to both languages. For a
 `consider` finding, apply it or note why not. If the revisions were large,
 run the reviewer again on the changed sections.
 
 Record the outcome in `plans/books/REVIEW_LOG.md`: chapter, date, verdict,
-and a one-line summary of what changed.
+and a one-line summary of what changed. Log each reviewer's pass as its own
+row, naming the reviewer (theology, application, Chinese).
 
-## 4. Build and publish
+## 5. Build and publish
 
 ```bash
 python scripts/build_book_plan.py   # regenerates plans/books.json
@@ -51,6 +73,6 @@ python scripts/build_book_plan.py   # regenerates plans/books.json
 Then commit the `.md` sources, `plans/books.json` and the review log entry
 together.
 
-The reviewer is a model applying these scholars' published positions, not the
-scholars themselves. Before the plan is shared widely, a human reviewer (a
+The reviewers are models applying these teachers' published emphases, not the
+people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
