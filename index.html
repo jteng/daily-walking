@@ -548,11 +548,11 @@
         .round-btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
         .round-btn:disabled { background: var(--card-bg); color: var(--text-faint); border-color: var(--border-light); }
         .segmented { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); background: var(--pill-bg); border-radius: 22px; padding: 3px; }
-        .segmented button { height: 38px; padding: 0 10px; border-radius: 19px; background: transparent; color: var(--text-muted); font-size: 14px; }
+        .segmented button { height: 40px; padding: 0 10px; border-radius: 19px; background: transparent; color: var(--text-muted); font-size: 14px; }
         .segmented button:hover:not(:disabled) { opacity: 1; color: var(--text); }
         .segmented button[aria-selected="true"], .segmented button[aria-checked="true"] { background: var(--card-bg); color: var(--text); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
         .segmented.small { border-radius: 12px; }
-        .segmented.small button { border-radius: 9px; height: 36px; }
+        .segmented.small button { border-radius: 9px; height: 42px; }
         .mode-classic .reader-nav { display: none; }
 
         .sheet-backdrop { position: fixed; inset: 0; z-index: 190; background: rgba(15, 20, 30, 0.45); }
@@ -564,7 +564,7 @@
         .sheet-group { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
         .sheet-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
         .sheet-label { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-muted); }
-        .sheet-select { height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 15px; width: 100%; }
+        .sheet-select { height: 48px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; width: 100%; } /* 16px stops iOS zooming in on focus */
         .plan-cards { display: flex; flex-direction: column; gap: 8px; }
         .plan-card { min-height: 58px; padding: 8px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; }
         .plan-card:hover:not(:disabled) { opacity: 1; border-color: var(--primary); }
@@ -575,6 +575,23 @@
         .plan-card-meta { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
         .plan-card[aria-pressed="true"] .plan-card-meta { color: var(--primary); font-weight: 600; }
         .sheet-version { margin: 0; text-align: center; font-size: 12px; color: var(--text-faint); }
+        .sheet { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+        button, select, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+        .memorize-add-btn { min-height: 40px; }
+        /* Small phones: give the text more width */
+        @media (max-width: 400px) {
+            .reader-panel { padding: 10px; }
+            .mode-classic #devotional-panel { padding: 10px; }
+            .panel-content { padding: 18px 16px; border-radius: 10px; }
+        }
+        /* Landscape phones / short screens: slimmer bars so more text shows */
+        @media (max-height: 500px) {
+            header.topbar { padding-top: calc(4px + env(safe-area-inset-top, 0px)); padding-bottom: 4px; }
+            .context-pill { height: 38px; }
+            .bottombar { padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); }
+            .reader-container { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+            .sheet { max-height: 94vh; }
+        }
         @media (prefers-reduced-motion: reduce) { .reader-track { transition: none; } }
 
     </style>
