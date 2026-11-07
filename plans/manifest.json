@@ -6,7 +6,11 @@
       "name_en": "Survey Edition",
       "file": "bibleData.json",
       "overlay": false,
-      "credit": ""
+      "credit": "",
+      "short": "纵览版",
+      "short_en": "Survey",
+      "desc": "365 天读完全本圣经",
+      "desc_en": "The whole Bible in 365 days"
     },
     {
       "id": "devotional",
@@ -14,6 +18,23 @@
       "name_en": "Meditation Edition",
       "file": "plans/devotional.json",
       "overlay": true,
+      "credit": "",
+      "short": "默想版",
+      "short_en": "Meditation",
+      "desc": "同一进度，灵修默想",
+      "desc_en": "Same schedule, devotional reflections"
+    },
+    {
+      "id": "books",
+      "name": "逐卷研读版 · 约翰福音",
+      "name_en": "Book Study · John",
+      "short": "逐卷研读",
+      "short_en": "Book Study",
+      "desc": "一天一章，深入一卷书",
+      "desc_en": "One chapter a day, one book in depth",
+      "file": "plans/books.json",
+      "overlay": false,
+      "standalone": true,
       "credit": ""
     }
   ]
