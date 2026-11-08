@@ -36,3 +36,12 @@ Each entry records an independent `theology-reviewer` pass (see WORKFLOW.md).
 | John 00–07 | 2026-11-07 | Chinese (Stephen Tong lens) | 通顺可用 / 修改后可用 | Translationese and run-on sentences fixed; Jesus never called a 「东西」; 4:18 named as sin; 施洗约翰 disambiguated in 3:30; 修身养性, 积功德, 面子, 肺腑之言 used where they fit naturally. |
 | John 08–14 | 2026-11-07 | Chinese (Stephen Tong lens) | 修改后可用 | 该亚法 spelling unified; 8:58 *genesthai* contrast clarified (zh+en); 11:25 and 14:16 logic fixed (zh+en); 面子, religious pluralism and family rejection named where natural. |
 | John 15–21 | 2026-11-07 | Chinese (Stephen Tong lens) | 通顺可用 / 修改后可用 | 一语双关, 发出 (procession), 投靠主的全知, 孝道 at 19:26; family gatherings and ancestor rites named in the 18 meditation. |
+
+## Acts
+
+| Chapter | Date | Reviewer | Verdict | Summary |
+|---|---|---|---|---|
+| Acts intro (00) | 2026-11-08 | theology | ready (after revision) | "Began" (1:1) hedged as one reading; Theophilus = "loved by God"; "chapter 29" reworded so the church doesn't seem to add to Scripture. |
+| Acts 1 | 2026-11-08 | theology | ready (after revision) | Must-fix: ESV Luke 3:16 wording. Should-fix: Paul as later apostle-eyewitness (1 Cor 9:1; 15:8); ascension "not only departure." Prov 16:33 and Scripture-grounded replacement of Judas noted. |
+| Acts 2 | 2026-11-08 | theology | ready (after revision) | Must-fix: Luke 20 audience is scribes; ESV Luke 3:16. Should-fix: guard against adoptionist reading of "made him Lord" (Rom 1:4; Phil 2:9-11); baptism views (Baptist, Reformed sign and seal, regeneration); Joel "afterward" interpreted, not altered; fire "may echo." |
+| Acts 3 | 2026-11-08 | theology | ready (after revision) | Should-fix: "first time in the temple" hedged (2 Sam 5:8); 3:23 warning added. "Restoring all things" limited to the prophets' scope, not universalism; Isa 43:25; Gen 12:3. |
