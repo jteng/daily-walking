@@ -73,6 +73,11 @@ python scripts/build_book_plan.py   # regenerates plans/books.json
 Then commit the `.md` sources, `plans/books.json` and the review log entry
 together.
 
+Same-book references can be written bare in the sources (「（3:3、5）」, "(3:3, 5)");
+the build adds the book name (「约3:3」, "John 3:3") so the app's verse tooltip
+recognizes them. A bare reference right after another book's reference in a
+list (「（林前9:1；15:8）」) keeps that book. Section headings are left as written.
+
 The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.

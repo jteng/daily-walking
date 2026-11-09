@@ -26,6 +26,9 @@ Body syntax (deliberately tiny): "## " heading -> section title, "> " lines
 -> blockquote, "- " lines -> bullet list, anything else -> paragraph.
 Blank lines separate blocks.
 
+Same-book references written bare ("（3:3）") get the book name added at build
+time (see verse_refs.py) so the app's verse tooltip recognizes them.
+
 Key-verse text is filled in from ChineseSimplifiedBible.xml so the key-verse
 card and memorize button work exactly as they do for the daily plans.
 
@@ -37,6 +40,9 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from verse_refs import add_book_to_body  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOKS_DIR = ROOT / 'plans' / 'books'
@@ -177,10 +183,10 @@ def build_book(bible, book_dir):
             'verse_en': '; '.join(p['reference_en'] for p in parts),
             'verse_parts': [{'reference': p['reference'], 'text': p['text']} for p in parts],
             'verse_text': ''.join(p['text'] for p in parts),
-            'content': md_to_html(bodies['zh']),
+            'content': md_to_html(add_book_to_body(bodies['zh'], book['abbr'], 'zh')),
         }
         if 'en' in bodies:
-            entry['content_en'] = md_to_html(bodies['en'])
+            entry['content_en'] = md_to_html(add_book_to_body(bodies['en'], book['name_en'], 'en'))
         entries.append(entry)
     return book, entries
 
