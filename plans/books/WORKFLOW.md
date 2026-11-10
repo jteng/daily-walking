@@ -91,6 +91,7 @@ pastor or seminary New Testament teacher) should still read it.
 
 **References and the build.**
 - A bare reference written right after another book's reference inherits that book (「（徒18:8；1:14）」 becomes 徒1:14). Put same-book references first in a list.
+- A full Chinese book name before a reference is shortened to its abbreviation at build time (「申命记2:14」 becomes 申2:14), because the tooltip only matches abbreviations. Writing full names in the sources is fine.
 - CUV and ESV versification can differ (e.g. Rom 16:23–24). Check the tooltip target.
 - Spell names and places as the CUV does (克劳第, 非罗罗古, 基利司布). Keep 该撒利亚 to match the Acts chapters.
 
