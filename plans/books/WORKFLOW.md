@@ -81,3 +81,61 @@ list (「（林前9:1；15:8）」) keeps that book. Section headings are left a
 The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
+
+## Lessons learned (John, Acts, Romans, 1 Corinthians)
+
+**Tools.**
+- `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
+- `python3 scripts/check_cuv_quotes.py plans/books/<book>/NN.md` lists 「」 text that is not verbatim CUV. Fix real misquotes. Remove the quote marks from glosses unless they mark a slogan or prayer.
+- The CUV uses 「－」 as its dash (「耶和华－你神」). Verses joined in one quote keep the CUV's own punctuation at the boundary.
+
+**References and the build.**
+- A bare reference written right after another book's reference inherits that book (「（徒18:8；1:14）」 becomes 徒1:14). Put same-book references first in a list.
+- CUV and ESV versification can differ (e.g. Rom 16:23–24). Check the tooltip target.
+- Spell names and places as the CUV does (克劳第, 非罗罗古, 基利司布). Keep 该撒利亚 to match the Acts chapters.
+
+**Chinese reviewer's recurring flags.** Avoid:
+- translationese: 两者, 两个字, 作为…, 以…的身份, 对…来说;
+- stacked 的, and several colons in one sentence;
+- English apposition and the serial comma (「A、B、和C」);
+- 它 chains, and ESV wording or English words inside ::zh;
+- quote marks on non-CUV words.
+
+Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德 with U+00B7.
+
+**Theology reviewer.**
+- Present debated readings as options. Label every side symmetrically and name representative scholars or traditions (Reformed / Arminian, Calvin / Wesleyan, Catholic Catechism references).
+- Mark Greek points as "many take…", not as settled fact.
+- State substitution and the ground of justification plainly. Guard the Trinity wherever the Son is said to submit.
+- Do not overstate history (temple prostitutes, "Caesar is Lord", Roman adoption). Check every ESV quotation against the XML.
+
+**Application reviewer.**
+- Every meditation ends on Christ and grace, not on a task.
+- Give the gospel ground before the command.
+- Speak to the reader who has failed, not only the one succeeding.
+- Avoid stock themes already used. Before drafting, list the meditation themes of the book so far and of the previous book.
+
+**Safeguarding wording.** Wherever forgiveness, submission, reconciliation, not suing, or "not avenging yourself" comes up, say:
+- reporting abuse or crime to the police or courts is right (Rom 13:4);
+- victims need not stay in danger or reconcile with someone unsafe;
+- forgiveness does not restore an offender's office or give him access to victims or children;
+- the church must not hide abuse to save face (「家丑不可外扬」).
+
+**Release.** When a book is complete:
+- add it to the Book Study description in `plans/manifest.json`;
+- bump the version (`index.html` `#app-version` and `APP_SW_VERSION`, `sw.js` `CACHE_NAME`);
+- run the tests and a headless check, then push;
+- ask the user before opening and merging the PR to `main`.
+
+**Meditation themes already used** (do not repeat):
+- *Romans:*
+  - ledger of sin; long-unbelieving family member; empty hands;
+  - presenting tongue, eyes and phone; rejoicing in God himself;
+  - hidden heart sins and confession; the fear list of 8:38–39; fear of not being elect;
+  - monuments of zeal; renqing / owing God; vengeance;
+  - honest taxes and putting on Christ; the weak/strong meal; prayer answered unexpectedly (Gethsemane);
+  - thanking unseen servants.
+- *1 Corinthians:*
+  - partisanship around leaders; status and education; praying for illumination;
+  - fruitless ministry; freedom from others' judgment; mourning over sin and the old leaven;
+  - money disputes among believers.

@@ -6,7 +6,8 @@ so at build time every bare chapter:verse gets the chapter's own book
 prefixed ("约3:3" / "John 3:3").
 
 Rules:
-- A reference already preceded by a book name is left alone.
+- A reference already preceded by a book name is left alone, except that a
+  full Chinese name is shortened to its abbreviation ("申命记2:14" -> "申2:14").
 - Inside parentheses, a bare reference that directly follows another
   book's reference in a list inherits that book, so "（林前9:1；15:8）"
   keeps 15:8 in 1 Corinthians; with other words between them ("Ps 41:9,
@@ -15,11 +16,30 @@ Rules:
 """
 import re
 
-ZH_ABBRS = sorted(
-    '创 出 利 民 申 书 士 得 撒上 撒下 王上 王下 代上 代下 拉 尼 斯 伯 诗 箴 传 歌 赛 耶 哀 '
-    '结 但 何 珥 摩 俄 拿 弥 鸿 哈 番 该 亚 玛 太 可 路 约 徒 罗 林前 林后 加 弗 腓 西 '
-    '帖前 帖后 提前 提后 多 门 来 雅 彼前 彼后 约一 约二 约三 犹 启'.split(),
-    key=len, reverse=True)
+ZH_ABBR_LIST = (
+    '创 出 利 民 申 书 士 得 撒上 撒下 王上 '
+    '王下 代上 代下 拉 尼 斯 伯 诗 箴 传 歌 '
+    '赛 耶 哀 结 但 何 珥 摩 俄 拿 弥 '
+    '鸿 哈 番 该 亚 玛 太 可 路 约 徒 '
+    '罗 林前 林后 加 弗 腓 西 帖前 帖后 提前 提后 '
+    '多 门 来 雅 彼前 彼后 约一 约二 约三 犹 启'
+).split()
+ZH_FULL_LIST = (
+    '创世记 出埃及记 利未记 民数记 申命记 约书亚记 士师记 路得记 '
+    '撒母耳记上 撒母耳记下 列王纪上 列王纪下 历代志上 历代志下 以斯拉记 尼希米记 '
+    '以斯帖记 约伯记 诗篇 箴言 传道书 雅歌 以赛亚书 耶利米书 '
+    '耶利米哀歌 以西结书 但以理书 何西阿书 约珥书 阿摩司书 俄巴底亚书 约拿书 '
+    '弥迦书 那鸿书 哈巴谷书 西番雅书 哈该书 撒迦利亚书 玛拉基书 马太福音 '
+    '马可福音 路加福音 约翰福音 使徒行传 罗马书 哥林多前书 哥林多后书 加拉太书 '
+    '以弗所书 腓立比书 歌罗西书 帖撒罗尼迦前书 帖撒罗尼迦后书 提摩太前书 提摩太后书 提多书 '
+    '腓利门书 希伯来书 雅各书 彼得前书 彼得后书 约翰一书 约翰二书 约翰三书 '
+    '犹大书 启示录'
+).split()
+# The app's tooltip only matches abbreviations, and a full name can be misread
+# as a different book ("哥林多前书15:3" as 书 = Joshua), so full names written
+# before a reference are shortened: "申命记2:14" -> "申2:14".
+ZH_FULL_TO_ABBR = dict(zip(ZH_FULL_LIST, ZH_ABBR_LIST))
+ZH_ABBRS = sorted(ZH_ABBR_LIST + ZH_FULL_LIST, key=len, reverse=True)
 
 EN_BOOKS = sorted([
     'Genesis', 'Gen', 'Exodus', 'Exod', 'Ex', 'Leviticus', 'Lev', 'Numbers', 'Num',
@@ -80,6 +100,12 @@ def add_book_to_refs(line, book_name, lang):
             continue
         named = _book_before(line, i, lang)
         if named:
+            abbr = ZH_FULL_TO_ABBR.get(named) if lang == 'zh' else None
+            if abbr:
+                out.append(line[last:i - len(named)])
+                out.append(abbr)
+                last = i
+                named = abbr
             if depth:
                 inherited = named
             continue
