@@ -145,4 +145,6 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - children's success as an idol (望子成龙); feeling too unworthy for the Lord's Supper, eating alone at church;
   - "only useful people matter" and feeling superfluous in the body.
   - loving the hardest person (read 13:4-7 with my name, then with Jesus'); words that once built me up, and "your sins are forgiven" as the source of speech.
+  - grief and regret at a believer's death, from "if" (15:19) to "but in fact" (15:20); looking back over the whole letter, ending in a written prayer (Maranatha).
+- Non-biblical chapter:verse references (e.g. 《十二使徒遗训》10:6) are linked by the build as same-book references. Write them as 第十章 / "chapter 10" or with a period (10.6).
 - *Note:* chs. 7, 10, 11 and 12 all resolve on "I am not lacking / unworthy / superfluous"; vary the shape of later meditations.
