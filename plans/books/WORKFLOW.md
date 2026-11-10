@@ -142,3 +142,6 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - fruitless ministry; freedom from others' judgment; mourning over sin and the old leaven;
   - money disputes among believers; pressure to marry (催婚) and worth when single or divorced;
   - being "right" without love, and being known by God; a church reaching people unlike itself.
+  - children's success as an idol (望子成龙); feeling too unworthy for the Lord's Supper, eating alone at church;
+  - "only useful people matter" and feeling superfluous in the body.
+- *Note:* chs. 7, 10, 11 and 12 all resolve on "I am not lacking / unworthy / superfluous"; vary the shape of later meditations.
