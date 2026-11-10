@@ -30,6 +30,12 @@ def test_english_bare_reference_and_ranges():
     assert add_book_to_refs('(cf. 20:23) and (3:15–16)', 'Acts', 'en') == '(cf. Acts 20:23) and (Acts 3:15–16)'
 
 
-def test_full_chinese_book_name_is_unchanged():
-    assert add_book_to_refs('有解经家联想到申命记2:14，', '约', 'zh') == '有解经家联想到申命记2:14，'
-    assert add_book_to_refs('（诗篇41:9；69:9）', '约', 'zh') == '（诗篇41:9；诗篇69:9）'
+def test_full_chinese_book_name_is_shortened_to_abbreviation():
+    assert add_book_to_refs('有解经家联想到申命记2:14，', '约', 'zh') == '有解经家联想到申2:14，'
+    assert add_book_to_refs('（诗篇41:9；69:9）', '约', 'zh') == '（诗41:9；诗69:9）'
+    assert add_book_to_refs('哥林多前书15:3', '约', 'zh') == '林前15:3'
+    assert add_book_to_refs('约翰一书1:9', '约', 'zh') == '约一1:9'
+
+
+def test_full_name_without_reference_is_unchanged():
+    assert add_book_to_refs('约翰福音第五章', '约', 'zh') == '约翰福音第五章'
