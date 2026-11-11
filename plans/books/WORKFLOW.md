@@ -66,6 +66,26 @@ row, naming the reviewer (theology, application, Chinese).
 
 ## 5. Build and publish
 
+Hand this step to the `book-publisher` agent (`.claude/agents/book-publisher.md`).
+It runs on Sonnet and does only mechanical work: the quote check, the build,
+the tests, appending the review-log rows you give it, and the commit. It never
+edits chapter content, and it stops on any flagged quote or failure.
+
+**Model choice.** Drafting and all three reviewers stay on Opus. A blind A/B test
+on 2026-11-11 compared the two models on pre-review drafts of John 10, Acts 5
+and Acts 7, scoring each review against the fixes the original reviews made:
+
+| Role | Opus | Sonnet |
+|---|---|---|
+| Theology | 19/21 | 13/21 |
+| Application | 7/8 | 5/8 |
+| Chinese | 12/14 | 9/14 |
+
+Sonnet also reported three wrong ESV quotations as verified. That is why
+Sonnet is limited to the mechanical steps.
+
+What the publish step runs:
+
 ```bash
 python scripts/build_book_plan.py   # regenerates plans/books.json
 ```
@@ -82,7 +102,7 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
-## Lessons learned (John, Acts, Romans, 1 Corinthians)
+## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians)
 
 **Tools.**
 - `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
@@ -123,6 +143,8 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
 - forgiveness does not restore an offender's office or give him access to victims or children;
 - the church must not hide abuse to save face (「家丑不可外扬」).
 
+**Batches.** The build reads every `.md` in the book folder. When publishing one batch while later drafts sit in the same folder, move the unreviewed drafts out (e.g. to a scratch folder) for the publish step and put them back afterwards; never move files while a reviewer is reading them.
+
 **Release.** When a book is complete:
 - add it to the Book Study description in `plans/manifest.json`;
 - bump the version (`index.html` `#app-version` and `APP_SW_VERSION`, `sw.js` `CACHE_NAME`);
@@ -148,3 +170,11 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - grief and regret at a believer's death, from "if" (15:19) to "but in fact" (15:20); looking back over the whole letter, ending in a written prayer (Maranatha).
 - Non-biblical chapter:verse references (e.g. 《十二使徒遗训》10:6) are linked by the build as same-book references. Write them as 第十章 / "chapter 10" or with a period (10.6).
 - *Note:* chs. 7, 10, 11 and 12 all resolve on "I am not lacking / unworthy / superfluous"; vary the shape of later meditations.
+- *2 Corinthians:*
+  - the curated image and fear of losing face (cracked jar); despair beyond strength and not wanting to trouble others (with a crisis-help line);
+  - welcoming back a repentant brother / the one who fell (elder brother, best robe); slow change, inspecting myself vs beholding Christ;
+  - aging, fear of becoming a burden (拖累儿女), caring for parents and dementia (ends in a written prayer); labels from the past vs new creation;
+  - a heart narrowed by church hurt (lament, safety, rumors); worldly vs godly grief, self-punishment, Peter by the fire;
+  - fear of not having enough, giving in poverty; motives for giving (face, bargaining, guilt) ending on 9:15;
+  - comparison and the Lord's commendation; divided devotion and "another Jesus" as a protector-deity;
+  - living with a thorn that is not removed; self-examination toward assurance, ending on the benediction (13:14).
