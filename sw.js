@@ -1,5 +1,5 @@
 // Bump CACHE_NAME whenever the precache list or strategy changes.
-const CACHE_NAME = 'wwg-v34';
+const CACHE_NAME = 'wwg-v36';
 
 // Relative URLs so the SW works under any base path (e.g. GitHub Pages
 // serves this app from /daily-walking/, not the domain root).
@@ -18,7 +18,10 @@ const OFFLINE_URLS = [
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(OFFLINE_URLS))
+    // cache: 'reload' skips the browser's HTTP cache so a new version
+    // precaches fresh files, not ones GitHub Pages cached for 10 minutes.
+    caches.open(CACHE_NAME).then(cache =>
+      cache.addAll(OFFLINE_URLS.map(u => new Request(u, { cache: 'reload' }))))
   );
 });
 
@@ -60,7 +63,28 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // For navigation and other assets: cache-first, then network, and cache
+  // The page itself (navigations and index.html): network-first, so a new
+  // release shows the next time the app is opened instead of after a second
+  // restart. Falls back to the cached page when offline.
+  if (request.mode === 'navigate' || url.pathname.endsWith('/index.html')) {
+    event.respondWith(
+      fetch(request, { cache: 'no-cache' }).then(resp => {
+        if (resp.ok) {
+          // Store under both the requested URL ('./' or './index.html') so the
+          // offline fallback always finds the newest page.
+          const a = resp.clone(), b = resp.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, a);
+            cache.put('./index.html', b);
+          });
+        }
+        return resp;
+      }).catch(() => caches.match(request).then(c => c || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // For other assets: cache-first, then network, and cache
   // whatever we fetch so the app (incl. the large Bible XML and icons) works
   // fully offline after the first visit.
   event.respondWith(

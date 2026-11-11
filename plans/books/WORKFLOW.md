@@ -91,6 +91,8 @@ pastor or seminary New Testament teacher) should still read it.
 
 **References and the build.**
 - A bare reference written right after another book's reference inherits that book (「（徒18:8；1:14）」 becomes 徒1:14). Put same-book references first in a list.
+- A full Chinese book name before a reference is shortened to its abbreviation at build time (「申命记2:14」 becomes 申2:14), because the tooltip only matches abbreviations. Writing full names in the sources is fine.
+- A bare reference right after a character that is also a book abbreviation is read as that book: 「记得11:11」 becomes Ruth (得), 「多5:3」 Titus. Put a non-abbreviation word before bare references (「保罗在11:11说」).
 - CUV and ESV versification can differ (e.g. Rom 16:23–24). Check the tooltip target.
 - Spell names and places as the CUV does (克劳第, 非罗罗古, 基利司布). Keep 该撒利亚 to match the Acts chapters.
 
@@ -138,4 +140,11 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
 - *1 Corinthians:*
   - partisanship around leaders; status and education; praying for illumination;
   - fruitless ministry; freedom from others' judgment; mourning over sin and the old leaven;
-  - money disputes among believers.
+  - money disputes among believers; pressure to marry (催婚) and worth when single or divorced;
+  - being "right" without love, and being known by God; a church reaching people unlike itself.
+  - children's success as an idol (望子成龙); feeling too unworthy for the Lord's Supper, eating alone at church;
+  - "only useful people matter" and feeling superfluous in the body.
+  - loving the hardest person (read 13:4-7 with my name, then with Jesus'); words that once built me up, and "your sins are forgiven" as the source of speech.
+  - grief and regret at a believer's death, from "if" (15:19) to "but in fact" (15:20); looking back over the whole letter, ending in a written prayer (Maranatha).
+- Non-biblical chapter:verse references (e.g. 《十二使徒遗训》10:6) are linked by the build as same-book references. Write them as 第十章 / "chapter 10" or with a period (10.6).
+- *Note:* chs. 7, 10, 11 and 12 all resolve on "I am not lacking / unworthy / superfluous"; vary the shape of later meditations.
