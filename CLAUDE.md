@@ -51,6 +51,7 @@ make format-llm  # LLM-based formatting via Ollama (qwen2.5:1.5b, slower but ~95
 ### Book Study plan
 - **plans/books/<book>/NN.md** — one authored chapter (Chinese + English), compiled by `scripts/build_book_plan.py` into `plans/books.json`
 - **Every chapter must pass three independent reviewer agents before it is published or merged:** `theology-reviewer` (Carson/Packer-style exegesis and doctrine), then `application-reviewer` (Keller/Piper-style: grace-driven, Christ-centered application) and `chinese-reviewer` (natural Chinese and fit with Chinese church life, in the tradition of Stephen Tong). Agent files are in `.claude/agents/`. Follow `plans/books/WORKFLOW.md` and log each pass in `plans/books/REVIEW_LOG.md`.
+- Drafting and the three reviewers run on Opus. The mechanical publish step (quote check, build, tests, review-log rows, commit) goes to the `book-publisher` agent, which runs on Sonnet and never edits chapter content.
 
 ### Deployment
 - GitHub Actions (`.github/workflows/pages-deploy.yml`) auto-deploys the full repo to `gh-pages` on push to `main`.

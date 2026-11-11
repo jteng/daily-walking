@@ -66,6 +66,26 @@ row, naming the reviewer (theology, application, Chinese).
 
 ## 5. Build and publish
 
+Hand this step to the `book-publisher` agent (`.claude/agents/book-publisher.md`).
+It runs on Sonnet and does only mechanical work: the quote check, the build,
+the tests, appending the review-log rows you give it, and the commit. It never
+edits chapter content, and it stops on any flagged quote or failure.
+
+**Model choice.** Drafting and all three reviewers stay on Opus. A blind A/B test
+on 2026-11-11 compared the two models on pre-review drafts of John 10, Acts 5
+and Acts 7, scoring each review against the fixes the original reviews made:
+
+| Role | Opus | Sonnet |
+|---|---|---|
+| Theology | 19/21 | 13/21 |
+| Application | 7/8 | 5/8 |
+| Chinese | 12/14 | 9/14 |
+
+Sonnet also reported three wrong ESV quotations as verified. That is why
+Sonnet is limited to the mechanical steps.
+
+What the publish step runs:
+
 ```bash
 python scripts/build_book_plan.py   # regenerates plans/books.json
 ```
