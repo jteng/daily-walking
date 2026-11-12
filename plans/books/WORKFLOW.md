@@ -187,4 +187,5 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - a hard life and "every spiritual blessing" (Paul praising in chains, to the praise of his glory); praying for circumstances vs praying for eyes to know God, God's own inheritance;
   - dividing walls in the church (language congregations, generations, politics), praying together before the Father; knowing Christ's love as doctrine only, coming back at once after falling again;
   - speaking the truth in love vs keeping quiet to save face (以和为贵) or bluntness; what I fill my emptiness with at night (phone, drink), filled by Christ's Spirit;
-  - the "evil day" and its accusing voices, standing in God's own armor (Isa 59), Christ's victory.
+  - the "evil day" as a returning temptation fought alone by willpower, standing in God's own armor (Isa 59), "It is written" (3:12), telling others and praying together.
+- *Retired frames:* the accusing inner voice ("you'll never change", quoted accusations) has been used in Romans 6, Romans 8, 2 Corinthians and Ephesians 3; the phone as an image in Romans 12 and Ephesians 5. Do not use them again.
