@@ -91,7 +91,24 @@ def md_to_html(src):
             if lines[0].startswith('## '):
                 out.append(f'<div class="section-title">{inline(lines[0][3:].strip())}</div>')
                 lines = lines[1:]
-            out.append(f'<p>{inline(" ".join(lines))}</p>')
+            # A paragraph followed directly by "- " lines (no blank line
+            # between) is a paragraph plus a list, not one long paragraph.
+            para, items = [], []
+            for l in lines:
+                if l.startswith('- '):
+                    if para:
+                        out.append(f'<p>{inline(" ".join(para))}</p>')
+                        para = []
+                    items.append(f'<li>{inline(l[2:].strip())}</li>')
+                else:
+                    if items:
+                        out.append(f'<ul>{"".join(items)}</ul>')
+                        items = []
+                    para.append(l)
+            if para:
+                out.append(f'<p>{inline(" ".join(para))}</p>')
+            if items:
+                out.append(f'<ul>{"".join(items)}</ul>')
     return '\n'.join(out)
 
 
