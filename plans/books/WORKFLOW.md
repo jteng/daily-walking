@@ -102,7 +102,7 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
-## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians)
+## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians)
 
 **Tools.**
 - `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
@@ -113,8 +113,11 @@ pastor or seminary New Testament teacher) should still read it.
 - A bare reference written right after another book's reference inherits that book (「（徒18:8；1:14）」 becomes 徒1:14). Put same-book references first in a list.
 - A full Chinese book name before a reference is shortened to its abbreviation at build time (「申命记2:14」 becomes 申2:14), because the tooltip only matches abbreviations. Writing full names in the sources is fine.
 - A bare reference right after a character that is also a book abbreviation is read as that book: 「记得11:11」 becomes Ruth (得), 「多5:3」 Titus. Put a non-abbreviation word before bare references (「保罗在11:11说」).
+- The tooltip only knows the app's abbreviations: write 1 John as 约一, not 约壹. A bare reference right after another book's reference (「创1:1……1:18」) is read as that book; write 「本章18节」.
 - CUV and ESV versification can differ (e.g. Rom 16:23–24). Check the tooltip target.
 - Spell names and places as the CUV does (克劳第, 非罗罗古, 基利司布). Keep 该撒利亚 to match the Acts chapters.
+
+**Lists.** A "- " list may follow its lead-in line directly (no blank line); the build splits the block into a paragraph and a list. Before 2026-11-12 such lists were rendered inline as " - " text.
 
 **Chinese reviewer's recurring flags.** Avoid:
 - translationese: 两者, 两个字, 作为…, 以…的身份, 对…来说;
@@ -194,4 +197,10 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - feeling shortchanged (吃亏) and scorekeeping, Christ the one with the right to say "why me";
   - belonging nowhere (overseas, a lost job title), heavenly citizenship and the transformed body;
   - worries turned into written requests with thanksgiving, the garrison of peace.
-- *Retired frames:* the accusing inner voice ("you'll never change", quoted accusations) has been used in Romans 6, Romans 8, 2 Corinthians and Ephesians 3; the phone as an image in Romans 12 and Ephesians 5; 吃亏 in 1 Corinthians 6, Galatians 6 and Philippians 2; sleeplessness as the opening of a meditation in Romans 8 and Philippians 4. Do not use them again.
+- *Colossians:*
+  - the ordinary person who brought the gospel (Epaphras) and kept praying, Christ who intercedes more surely (with a line for a messenger who later harmed me);
+  - "how large is Jesus in my mind": the lab, office, kitchen and news as if they had nothing to do with him, all things "for him" (1:16-17), ending on reconciliation;
+  - the restless search for "something more" (the next conference, method, breakthrough), "filled in him" (2:10) as rest;
+  - a hidden, unseen life (caregiving, a back kitchen, hidden bitterness), "Christ who is your life" (3:3-4);
+  - past conversations about faith with an unbeliever (silence, arguing, not listening), asking someone to pray, Christ's patience with me as an outsider, "Grace be with you" (4:18).
+- *Retired frames:* the accusing inner voice ("you'll never change", quoted accusations) has been used in Romans 6, Romans 8, 2 Corinthians and Ephesians 3; the phone as an image in Romans 12 and Ephesians 5; 吃亏 in 1 Corinthians 6, Galatians 6 and Philippians 2; sleeplessness as the opening of a meditation in Romans 8 and Philippians 4; Jesus as a helper or protector-deity for my plans (2 Corinthians 11), with exam and interview examples (2 Corinthians 11, Ephesians 1); the inner circle / standing outside looking in (1 Corinthians 11–12, Philippians 3, Colossians 2); ending a meditation on "filled" (Colossians 00 and 02). Do not use them again.
