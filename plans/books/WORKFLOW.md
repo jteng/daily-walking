@@ -102,7 +102,7 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
-## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians)
+## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians)
 
 **Tools.**
 - `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
@@ -178,3 +178,8 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - fear of not having enough, giving in poverty; motives for giving (face, bargaining, guilt) ending on 9:15;
   - comparison and the Lord's commendation; divided devotion and "another Jesus" as a protector-deity;
   - living with a thorn that is not removed; self-examination toward assurance, ending on the benediction (13:14).
+- *Galatians:*
+  - "Christ plus..." as my ticket, ending on 5:1 freedom; regret over hidden or wasted years and a past opposing Christ (set apart before birth);
+  - wearing different masks before different groups (Peter at Antioch), going back to the table; feeling cursed (bad fate, 八字, feng shui, "generational curses"), Christ became a curse;
+  - relating to God as an employee with a performance review, a father who only checked grades vs Abba; the need to win in group-chat quarrels (5:26), apologizing;
+  - weariness in long doing good, letting others carry part of the load, the cross as God's harvest.
