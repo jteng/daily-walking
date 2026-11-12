@@ -149,7 +149,7 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
 - add it to the Book Study description in `plans/manifest.json`;
 - bump the version (`index.html` `#app-version` and `APP_SW_VERSION`, `sw.js` `CACHE_NAME`);
 - run the tests and a headless check, then push;
-- ask the user before opening and merging the PR to `main`.
+- open the PR to `main` and merge it without asking, once every chapter has passed all three reviews, the build and tests pass, and the push succeeded (if a check fails or the merge is blocked, stop and report instead of forcing it).
 
 **Meditation themes already used** (do not repeat):
 - *Romans:*
