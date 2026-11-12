@@ -102,7 +102,7 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
-## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians)
+## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians)
 
 **Tools.**
 - `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
@@ -183,3 +183,9 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - wearing different masks before different groups (Peter at Antioch), going back to the table; feeling cursed (bad fate, 八字, feng shui, "generational curses"), Christ became a curse;
   - relating to God as an employee with a performance review, a father who only checked grades vs Abba; the need to win in group-chat quarrels (5:26), apologizing;
   - weariness in long doing good, letting others carry part of the load, the cross as God's harvest.
+- *Ephesians:*
+  - a hard life and "every spiritual blessing" (Paul praising in chains, to the praise of his glory); praying for circumstances vs praying for eyes to know God, God's own inheritance;
+  - dividing walls in the church (language congregations, generations, politics), praying together before the Father; knowing Christ's love as doctrine only, coming back at once after falling again;
+  - speaking the truth in love vs keeping quiet to save face (以和为贵) or bluntness; what I fill my emptiness with at night (phone, drink), filled by Christ's Spirit;
+  - the "evil day" as a returning temptation fought alone by willpower, standing in God's own armor (Isa 59), "It is written" (3:12), telling others and praying together.
+- *Retired frames:* the accusing inner voice ("you'll never change", quoted accusations) has been used in Romans 6, Romans 8, 2 Corinthians and Ephesians 3; the phone as an image in Romans 12 and Ephesians 5. Do not use them again.
