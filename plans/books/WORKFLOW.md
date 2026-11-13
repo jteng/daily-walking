@@ -102,7 +102,7 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
-## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians)
+## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians, 2 Thessalonians)
 
 **Tools.**
 - `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
@@ -210,5 +210,10 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - faith shaken by suffering and hidden for shame, Jesus praying for Peter, the Lord who establishes the heart (3:3, 13);
   - comforting a grieving friend "with these words": words for Martha, tears with Mary, then "Lazarus, come out" (4:18; John 11);
   - fear of the day of the Lord and of being left behind, for the reader unsure they belong to Christ too, "he died for us" and "he will surely do it" (5:9-10, 24).
-- *Watch in later books:* Jesus weeping at Lazarus's tomb (John 11:35) is now in Acts 8, 1 Corinthians 15 and 1 Thessalonians 4; 「这就够了」 / "that is enough" (1 Thessalonians 2) is close to the retired "filled" ending. Use the CUV spelling 克劳第 for Claudius, and in Chinese 古德恩, 加芬, 终止论/延续论, 三分说/二分说.
+- *2 Thessalonians:*
+  - being "in the know" about end-time claims and timetables, waiting for a person not a date (2:1, 2:16);
+  - a list of abandoned good resolves, fulfilled "by his power" for his name's glory and according to grace (1:11-12);
+  - loving the truth vs what I want to hear, the truth about myself I keep refusing to hear, "if the Son sets you free" (2:10; John 8:36);
+  - writing off a fellow believer as an enemy, the risen Lord's "go and tell my brothers" (Matt 28:10; Heb 2:11), grace "with you all" (3:18).
+- *Watch in later books:* Jesus weeping at Lazarus's tomb (John 11:35) is now in Acts 8, 1 Corinthians 15 and 1 Thessalonians 4; 「这就够了」 / "that is enough" (1 Thessalonians 2) is close to the retired "filled" ending. "The Lord is faithful" endings are now in 1 Thessalonians 5 (5:24) and 2 Thessalonians (3:3); Romans 5:10 "while we were enemies" and "at least pray for them" are in Romans 12. Write 推罗 (CUV), not 泰尔, for Tyre, and 《威斯敏斯德信条》 with book-title marks. Use the CUV spelling 克劳第 for Claudius, and in Chinese 古德恩, 加芬, 终止论/延续论, 三分说/二分说.
 - *Retired frames:* the accusing inner voice ("you'll never change", quoted accusations) has been used in Romans 6, Romans 8, 2 Corinthians and Ephesians 3; the phone as an image in Romans 12 and Ephesians 5; 吃亏 in 1 Corinthians 6, Galatians 6 and Philippians 2; sleeplessness as the opening of a meditation in Romans 8 and Philippians 4; Jesus as a helper or protector-deity for my plans (2 Corinthians 11), with exam and interview examples (2 Corinthians 11, Ephesians 1); the inner circle / standing outside looking in (1 Corinthians 11–12, Philippians 3, Colossians 2); ending a meditation on "filled" (Colossians 00 and 02). Do not use them again.
