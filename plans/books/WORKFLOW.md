@@ -102,7 +102,7 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
-## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians, 2 Thessalonians)
+## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians, 2 Thessalonians, 1 Timothy)
 
 **Tools.**
 - `python3 scripts/bible_lookup.py 46:7:1,2` prints CUV | ESV for verses; use it before quoting anything.
@@ -215,5 +215,13 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
   - a list of abandoned good resolves, fulfilled "by his power" for his name's glory and according to grace (1:11-12);
   - loving the truth vs what I want to hear, the truth about myself I keep refusing to hear, "if the Son sets you free" (2:10; John 8:36);
   - writing off a fellow believer as an enemy, the risen Lord's "go and tell my brothers" (Matt 28:10; Heb 2:11), grace "with you all" (3:18).
-- *Watch in later books:* Jesus weeping at Lazarus's tomb (John 11:35) is now in Acts 8, 1 Corinthians 15 and 1 Thessalonians 4; 「这就够了」 / "that is enough" (1 Thessalonians 2) is close to the retired "filled" ending. "The Lord is faithful" endings are now in 1 Thessalonians 5 (5:24) and 2 Thessalonians (3:3); Romans 5:10 "while we were enemies" and "at least pray for them" are in Romans 12. Write 推罗 (CUV), not 泰尔, for Tyre, and 《威斯敏斯德信条》 with book-title marks. Use the CUV spelling 克劳第 for Claudius, and in Chinese 古德恩, 加芬, 终止论/延续论, 三分说/二分说.
+- *1 Timothy:*
+  - staying in a hard place when the trusted leader moves on (Timothy left at Ephesus), Christ who could have come down from the cross and stayed, with a word for one who already left;
+  - the shape of my testimony: Christ's perfect patience, not my improvement (1:16), for the "too ordinary" and the "too dark" past, ending on the 1:17 doxology;
+  - 找关系 / needing a go-between or a gift before God will hear, the one Mediator who is himself the gift, sent by "God our Savior" (2:3-6);
+  - godliness as a checklist of habits vs the person in the 3:16 hymn, reading the six lines and choosing one;
+  - being despised for youth / despising the young out of seniority, Christ despised in Nazareth (Mark 6:3; Isa 53:3), progress as his work;
+  - the lonely widow whose prayer feels empty, Anna waiting and seeing Christ (Luke 2:36-38), Jesus making a home for his mother (John 19:26-27; Ps 68:6);
+  - the number that keeps moving (salary, savings, flat), Christ who went out with nothing (John 19:23-24), God my portion (Ps 73:25-26; Heb 13:5).
+- *Watch in later books:* Pastoral Letters: keep the 3:16 variant note (CUV 「神」 vs earliest "who") and complementarian/egalitarian labels as worded in 1 Timothy 2; "comparison" meditations are now in 2 Corinthians 10, so avoid reunion-comparison scenes. Jesus weeping at Lazarus's tomb (John 11:35) is now in Acts 8, 1 Corinthians 15 and 1 Thessalonians 4; 「这就够了」 / "that is enough" (1 Thessalonians 2) is close to the retired "filled" ending. "The Lord is faithful" endings are now in 1 Thessalonians 5 (5:24) and 2 Thessalonians (3:3); Romans 5:10 "while we were enemies" and "at least pray for them" are in Romans 12. Write 推罗 (CUV), not 泰尔, for Tyre, and 《威斯敏斯德信条》 with book-title marks. Use the CUV spelling 克劳第 for Claudius, and in Chinese 古德恩, 加芬, 终止论/延续论, 三分说/二分说.
 - *Retired frames:* the accusing inner voice ("you'll never change", quoted accusations) has been used in Romans 6, Romans 8, 2 Corinthians and Ephesians 3; the phone as an image in Romans 12 and Ephesians 5; 吃亏 in 1 Corinthians 6, Galatians 6 and Philippians 2; sleeplessness as the opening of a meditation in Romans 8 and Philippians 4; Jesus as a helper or protector-deity for my plans (2 Corinthians 11), with exam and interview examples (2 Corinthians 11, Ephesians 1); the inner circle / standing outside looking in (1 Corinthians 11–12, Philippians 3, Colossians 2); ending a meditation on "filled" (Colossians 00 and 02). Do not use them again.
