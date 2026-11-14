@@ -1,0 +1,102 @@
+// Bump CACHE_NAME whenever the precache list or strategy changes.
+const CACHE_NAME = 'wwg-v45';
+
+// Relative URLs so the SW works under any base path (e.g. GitHub Pages
+// serves this app from /daily-walking/, not the domain root).
+const OFFLINE_URLS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './bibleData.json',
+  './plans/manifest.json',
+  './plans/devotional.json',
+  './plans/books.json',
+  './plans/commentary/tier1.json',
+  './plans/commentary/chapters.json'
+];
+
+self.addEventListener('install', event => {
+  self.skipWaiting();
+  event.waitUntil(
+    // cache: 'reload' skips the browser's HTTP cache so a new version
+    // precaches fresh files, not ones GitHub Pages cached for 10 minutes.
+    caches.open(CACHE_NAME).then(cache =>
+      cache.addAll(OFFLINE_URLS.map(u => new Request(u, { cache: 'reload' }))))
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    (async () => {
+      // cleanup old caches
+      const keys = await caches.keys();
+      await Promise.all(
+        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+      );
+      await self.clients.claim();
+    })()
+  );
+});
+
+// Network-first for the JSON data file, cache-first (with runtime caching)
+// for everything else same-origin.
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+
+  // Only handle same-origin GET requests
+  if (url.origin !== location.origin || request.method !== 'GET') return;
+
+  // For JSON data files (base data + reading plans), try network first then
+  // fall back to cache so plan content stays fresh but works offline.
+  if (url.pathname.endsWith('/bibleData.json') || url.pathname.endsWith('/bibleData_with_tables.json') ||
+      url.pathname.endsWith('/plans/manifest.json') || url.pathname.endsWith('/plans/devotional.json') || url.pathname.endsWith('/plans/books.json') ||
+      url.pathname.endsWith('/plans/commentary/tier1.json') ||
+      url.pathname.endsWith('/plans/commentary/chapters.json')) {
+    event.respondWith(
+      fetch(request).then(resp => {
+        const copy = resp.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        return resp;
+      }).catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // The page itself (navigations and index.html): network-first, so a new
+  // release shows the next time the app is opened instead of after a second
+  // restart. Falls back to the cached page when offline.
+  if (request.mode === 'navigate' || url.pathname.endsWith('/index.html')) {
+    event.respondWith(
+      fetch(request, { cache: 'no-cache' }).then(resp => {
+        if (resp.ok) {
+          // Store under both the requested URL ('./' or './index.html') so the
+          // offline fallback always finds the newest page.
+          const a = resp.clone(), b = resp.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, a);
+            cache.put('./index.html', b);
+          });
+        }
+        return resp;
+      }).catch(() => caches.match(request).then(c => c || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // For other assets: cache-first, then network, and cache
+  // whatever we fetch so the app (incl. the large Bible XML and icons) works
+  // fully offline after the first visit.
+  event.respondWith(
+    caches.match(request).then(cached => {
+      if (cached) return cached;
+      return fetch(request).then(resp => {
+        if (resp.ok) {
+          const copy = resp.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        }
+        return resp;
+      }).catch(() => caches.match('./index.html'));
+    })
+  );
+});
