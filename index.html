@@ -706,7 +706,7 @@
             </div>
         </div>
     </div>
-    <p class="sheet-version" id="app-version">v2.22.0</p>
+    <p class="sheet-version" id="app-version">v2.22.1</p>
 </section>
 
 <!-- Memorize (背诵) overlay -->
@@ -841,7 +841,100 @@ function applyStaticI18n() {
 // new language (see versionForLanguage): a reader who picked NIV gets NIV
 // back on switching to English; otherwise the language default (ESV for
 // English, 和合本 for Chinese).
+// ---- Keep the reading position across a language toggle ----
+// The toggle re-renders the whole day, which would otherwise jump to the
+// top of the Bible panel. Before re-rendering we note what is at the top of
+// the screen: on the Bible panel, the verse (chapter + verse number, which
+// match across versions); on the plan panel, the content block, counted as
+// "section N, block K" from the Book Study section titles (the Chinese and
+// English bodies share the same sections) or, without sections, as a
+// proportion of the blocks. Afterwards we scroll back to the matching spot.
+function readingTopY() {
+    const bar = document.querySelector('header.topbar');
+    return bar ? Math.max(0, bar.getBoundingClientRect().bottom) : 0;
+}
+function firstBlockBelow(blocks, topY) {
+    for (let i = 0; i < blocks.length; i++) {
+        const r = blocks[i].getBoundingClientRect();
+        if (r.bottom > topY) return { i, frac: r.height ? Math.min(Math.max((topY - r.top) / r.height, 0), 1) : 0 };
+    }
+    return null;
+}
+function captureReadingAnchor() {
+    const swipe = window.Reader && window.Reader.mode !== 'classic';
+    const panel = swipe ? (window.Reader.currentPanel || 0) : 1;
+    const anchor = { panel, scrollY: window.scrollY };
+    if (window.scrollY < 5) return anchor;
+    const topY = readingTopY();
+    if (panel === 0) {
+        const verses = Array.from(document.querySelectorAll('#full-scripture-content .bible-verse'));
+        const hit = firstBlockBelow(verses, topY);
+        if (hit && verses[hit.i].getBoundingClientRect().top <= topY + 40) {
+            const v = verses[hit.i];
+            const chapters = Array.from(document.querySelectorAll('#full-scripture-content .bible-chapter'));
+            const numEl = v.querySelector('.verse-num');
+            anchor.verse = {
+                chapterIdx: chapters.indexOf(v.closest('.bible-chapter')),
+                num: parseInt(numEl ? numEl.textContent : '', 10),
+                frac: hit.frac
+            };
+        }
+    } else {
+        const content = document.getElementById('devotional-content');
+        const blocks = content ? Array.from(content.children) : [];
+        const hit = firstBlockBelow(blocks, topY);
+        if (hit && blocks.length > 1 && blocks[hit.i].getBoundingClientRect().top <= topY + 40) {
+            let section = -1, sectionStart = 0;
+            for (let j = 0; j <= hit.i; j++) {
+                if (blocks[j].classList.contains('section-title')) { section++; sectionStart = j; }
+            }
+            anchor.block = { i: hit.i, n: blocks.length, section, offset: hit.i - sectionStart, frac: hit.frac };
+        }
+    }
+    return anchor;
+}
+function restoreReadingAnchor(anchor) {
+    const topY = readingTopY();
+    const scrollToEl = (elx, frac) => {
+        const r = elx.getBoundingClientRect();
+        window.scrollTo(0, Math.max(0, window.scrollY + r.top - topY + (frac || 0) * r.height));
+    };
+    if (anchor.verse) {
+        const chapters = document.querySelectorAll('#full-scripture-content .bible-chapter');
+        const ch = chapters[anchor.verse.chapterIdx];
+        if (ch) {
+            let best = null;
+            ch.querySelectorAll('.bible-verse').forEach(v => {
+                const numEl = v.querySelector('.verse-num');
+                const n = parseInt(numEl ? numEl.textContent : '', 10);
+                if (!isNaN(n) && n <= anchor.verse.num) best = v;
+            });
+            if (best) { scrollToEl(best, anchor.verse.frac); return; }
+        }
+    } else if (anchor.block) {
+        const content = document.getElementById('devotional-content');
+        const blocks = content ? Array.from(content.children) : [];
+        if (blocks.length) {
+            const titles = [];
+            blocks.forEach((b, j) => { if (b.classList.contains('section-title')) titles.push(j); });
+            let target;
+            const a = anchor.block;
+            if (a.section >= 0 && a.section < titles.length) {
+                const start = titles[a.section];
+                const end = a.section + 1 < titles.length ? titles[a.section + 1] - 1 : blocks.length - 1;
+                target = Math.min(start + a.offset, end);
+            } else {
+                target = Math.round(a.i / Math.max(a.n - 1, 1) * (blocks.length - 1));
+            }
+            scrollToEl(blocks[Math.min(Math.max(target, 0), blocks.length - 1)], a.frac);
+            return;
+        }
+    }
+    window.scrollTo(0, anchor.scrollY < 5 ? 0 : anchor.scrollY);
+}
+
 function toggleContentLanguage() {
+    const readingAnchor = captureReadingAnchor();
     currentContentLanguage = currentContentLanguage === 'zh' ? 'en' : 'zh';
     localStorage.setItem('contentLanguage', currentContentLanguage);
     applyStaticI18n();
@@ -864,6 +957,16 @@ function toggleContentLanguage() {
     updateLanguageRadios();
     applyReadingScale(getReadingScaleIndex());
     if (typeof renderPlanCards === 'function') renderPlanCards();
+
+    // renderDay resets to the Bible panel at the top; go back to the panel
+    // the reader was on, then (once the async Bible render has landed)
+    // scroll back to the matching verse or block.
+    if (window.Reader && window.Reader.mode !== 'classic' && readingAnchor.panel !== 0) {
+        window.Reader.goToPanel(readingAnchor.panel);
+    }
+    Promise.resolve(window.Reader && window.Reader.lastRender).catch(() => {}).then(() => {
+        requestAnimationFrame(() => restoreReadingAnchor(readingAnchor));
+    });
 }
 window.toggleContentLanguage = toggleContentLanguage;
 
@@ -2650,7 +2753,9 @@ window.Reader = Reader;
         setDisabled('next-btn', currentDayIndex === bibleData.length - 1);
         if (window.Reader) {
             window.Reader.goToPanel(0);
-            window.Reader.renderBible(data.scripture);
+            // Kept so the language toggle can wait for the async Bible
+            // render before restoring the reading position.
+            window.Reader.lastRender = window.Reader.renderBible(data.scripture);
         }
         } catch (err) {
             console.error('renderDay failed:', err);
@@ -2873,7 +2978,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v49'; // Bump version
+        const APP_SW_VERSION = 'v50'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
