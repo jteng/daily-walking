@@ -706,7 +706,7 @@
             </div>
         </div>
     </div>
-    <p class="sheet-version" id="app-version">v2.22.1</p>
+    <p class="sheet-version" id="app-version">v2.22.2</p>
 </section>
 
 <!-- Memorize (背诵) overlay -->
@@ -2602,6 +2602,20 @@ window.Reader = Reader;
             option.textContent = `${chapterSpanHasCommentary(item) ? '★ ' : ''}${label}`;
             chapterSelect.appendChild(option);
         });
+        syncChapterDropdown();
+    }
+    // Keep the dropdown showing the day being read, so opening it starts at
+    // the current chapter instead of the top of the list. The index may be
+    // sorted by book order, so match the day exactly, else the nearest
+    // earlier day that has an entry.
+    function syncChapterDropdown() {
+        const chapterSelect = document.getElementById('jump-chapter');
+        if (!chapterSelect || chapterIndex.length === 0) return;
+        let best = null;
+        chapterIndex.forEach(item => {
+            if (item.index <= currentDayIndex && (best === null || item.index > best.index)) best = item;
+        });
+        chapterSelect.value = best ? String(best.index) : '';
     }
     // A dropdown entry covers a whole reading day's span, which may be
     // several chapters (e.g. "六至九章") — mark it if any chapter in that
@@ -2631,8 +2645,6 @@ window.Reader = Reader;
                     renderDay();
                     renderPlanCards();
                     closeContextSheet();
-                    // Reset chapter selector for next use
-                    jchapter.value = '';
                 }
             });
         }
@@ -2765,6 +2777,7 @@ window.Reader = Reader;
         }
 
         saveCurrentDay();
+        syncChapterDropdown();
         window.scrollTo(0,0);
         
         // Add verse tooltips immediately (no delay for better mobile responsiveness)
@@ -2978,7 +2991,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v50'; // Bump version
+        const APP_SW_VERSION = 'v51'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
