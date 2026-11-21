@@ -706,7 +706,7 @@
             </div>
         </div>
     </div>
-    <p class="sheet-version" id="app-version">v2.20.0</p>
+    <p class="sheet-version" id="app-version">v2.21.0</p>
 </section>
 
 <!-- Memorize (背诵) overlay -->
@@ -722,9 +722,6 @@
 // too (classic scripts in one document share a global lexical scope), same as
 // how currentBibleVersion is already read from inside Reader below.
 let currentContentLanguage = localStorage.getItem('contentLanguage') || 'zh';
-// Set once the user manually picks a Bible version via the dropdown, so the
-// language toggle stops overriding their choice for the rest of the session.
-let bibleVersionManuallySet = false;
 
 // UI chrome strings, keyed by feature area; each leaf is {zh, en}. Look these
 // up with t(key, params) rather than reading the table directly.
@@ -840,11 +837,10 @@ function applyStaticI18n() {
 }
 
 // The combined language toggle: switches UI chrome + devotional/commentary
-// content, and — unless the user has manually picked a Bible version this
-// session — also switches the Bible-version dropdown to a language-matching
-// default (ESV for English, 和合本 for Chinese) via the existing version
-// dropdown/switch machinery, so a first-time English reader doesn't land on
-// English devotional prose quoting 和合本.
+// content, and also switches the Bible version to the one last used in the
+// new language (see versionForLanguage): a reader who picked NIV gets NIV
+// back on switching to English; otherwise the language default (ESV for
+// English, 和合本 for Chinese).
 function toggleContentLanguage() {
     currentContentLanguage = currentContentLanguage === 'zh' ? 'en' : 'zh';
     localStorage.setItem('contentLanguage', currentContentLanguage);
@@ -852,8 +848,8 @@ function toggleContentLanguage() {
     if (typeof refreshPlanDropdownLabels === 'function') refreshPlanDropdownLabels();
     if (typeof populateChapterDropdown === 'function') populateChapterDropdown();
 
-    if (!bibleVersionManuallySet && typeof currentBibleVersion !== 'undefined') {
-        const targetVersion = currentContentLanguage === 'en' ? 'esv' : 'cunpss';
+    if (typeof versionForLanguage === 'function') {
+        const targetVersion = versionForLanguage(currentContentLanguage);
         if (currentBibleVersion !== targetVersion) {
             currentBibleVersion = targetVersion;
             localStorage.setItem('bibleVersion', currentBibleVersion);
@@ -1423,15 +1419,35 @@ window.Reader = Reader;
     // files, so getBookNumber()/getBookOrder() need no per-version logic —
     // only the XML source file and display label change.
     const BIBLE_VERSIONS = [
-        { id: 'cunpss', file: 'ChineseSimplifiedBible.xml', label: '和合本' },
-        { id: 'niv', file: 'EnglishNIVBible.xml', label: 'NIV' },
-        { id: 'esv', file: 'EnglishESVBible.xml', label: 'ESV' },
-        { id: 'web', file: 'EnglishWEBBible.xml', label: 'WEB' },
-        { id: 'asv', file: 'EnglishASVBible.xml', label: 'ASV' }
+        { id: 'cunpss', lang: 'zh', file: 'ChineseSimplifiedBible.xml', label: '和合本' },
+        { id: 'niv', lang: 'en', file: 'EnglishNIVBible.xml', label: 'NIV' },
+        { id: 'esv', lang: 'en', file: 'EnglishESVBible.xml', label: 'ESV' },
+        { id: 'web', lang: 'en', file: 'EnglishWEBBible.xml', label: 'WEB' },
+        { id: 'asv', lang: 'en', file: 'EnglishASVBible.xml', label: 'ASV' }
     ];
     const DEFAULT_BIBLE_VERSION = 'cunpss';
+    // Default version per content language, used by the language toggle until
+    // the reader picks a version in that language.
+    const DEFAULT_VERSION_BY_LANG = { zh: 'cunpss', en: 'esv' };
     let currentBibleVersion = localStorage.getItem('bibleVersion') || DEFAULT_BIBLE_VERSION;
     if (!BIBLE_VERSIONS.some(v => v.id === currentBibleVersion)) currentBibleVersion = DEFAULT_BIBLE_VERSION;
+
+    // The last version the reader picked in each language is remembered under
+    // 'bibleVersion.<lang>', so the language toggle returns to it.
+    function rememberVersionForLanguage(id) {
+        const v = BIBLE_VERSIONS.find(x => x.id === id);
+        if (v) localStorage.setItem('bibleVersion.' + v.lang, id);
+    }
+    function versionForLanguage(lang) {
+        const saved = localStorage.getItem('bibleVersion.' + lang);
+        if (BIBLE_VERSIONS.some(v => v.id === saved && v.lang === lang)) return saved;
+        return DEFAULT_VERSION_BY_LANG[lang] || DEFAULT_BIBLE_VERSION;
+    }
+    window.versionForLanguage = versionForLanguage;
+    // Existing readers: seed the memory from the version they already use.
+    if (!localStorage.getItem('bibleVersion.' + (BIBLE_VERSIONS.find(v => v.id === currentBibleVersion) || {}).lang)) {
+        rememberVersionForLanguage(currentBibleVersion);
+    }
 
     // Bible XML data, cached per version so switching translations doesn't
     // re-fetch one already loaded this session.
@@ -1467,8 +1483,8 @@ window.Reader = Reader;
         sel.value = currentBibleVersion;
         sel.addEventListener('change', () => {
             currentBibleVersion = sel.value;
-            bibleVersionManuallySet = true; // stop the language toggle from overriding this choice
             localStorage.setItem('bibleVersion', currentBibleVersion);
+            rememberVersionForLanguage(currentBibleVersion);
             // Refresh anything currently showing Bible text: the reading
             // panel, the day's key-verse card, and any open tooltip.
             if (typeof hideVerseTooltip === 'function') hideVerseTooltip();
@@ -2857,7 +2873,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v47'; // Bump version
+        const APP_SW_VERSION = 'v48'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
