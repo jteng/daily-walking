@@ -5,14 +5,16 @@ User request: run the Book Study workflow for Revelation, **stop after chapters 
 Shared drafting brief (framework, names, meditation assignments): `plans/books/_revelation_resume/revelation_brief.md`
 Book-wide name forms: 约翰·华尔伏 (Walvoord), 《司可福串注圣经》, 毕尔 (Beale), 包衡 (Bauckham), 大卫·奥尼 (Aune), 肯尼斯·詹特里 (Gentry), 乔治·赖德, 安东尼·胡克玛, 威廉·亨德里克森, 罗兰·贝特纳（Loraine Boettner）. Osborne: pick one (00 has 葛兰·奥斯本, 02 has 格兰特·奥斯本) — use 格兰特·奥斯本 everywhere.
 
-## Status per file (as of commit 9a5cc6f)
+## Status per file (updated this session)
 
 | File | Theology | Application | Chinese |
 |---|---|---|---|
-| 00 | passed (review + recheck, all applied) | done, applied (commit 0cca22a) | done: no must-fix, 7 should-fix (`rev00_chinese.md`); applying |
-| 01 | review done (`plans/books/_revelation_resume/rev01_theology.md`); drafter was applying fixes and was **cut off mid-edit** — diff committed in 9a5cc6f; finish applying, then theology recheck | — | — |
-| 02, 03 | review done (summary below); **not yet applied** | — | — |
-| 04, 05 | review done (`plans/books/_revelation_resume/rev0405_theology.md`); drafter **cut off mid-edit** — partial diff committed; finish applying, then recheck | — | — |
+| 00 | passed | passed, applied | passed, applied (`rev00_chinese.md`) — DONE |
+| 01 | passed (recheck `rev01_recheck.md`, R1+C2 applied) | running → `rev01_application.md` | running → `rev01_chinese.md` |
+| 02, 03 | fixes applied; recheck running → `rev0203_recheck.md` | — | — |
+| 04, 05 | passed (recheck `rev0405_recheck.md`) | running → `rev0405_application.md` | running → `rev0405_chinese.md` |
+
+If a review report file exists but its fixes are not applied, apply it (both languages). Sizes: 01 ~40 KB, 02/03 ~40 KB, 04/05 ~38 KB (accepted; further cuts would drop whole points). Note for app reviewers: 02 meditation also quotes 1:5 「他爱我们」 like 00.
 
 Then: application + Chinese reviews for 01-05; apply; book-publisher (quote check, build, tests, REVIEW_LOG rows per reviewer, commit, push); add Revelation 00-05 meditation themes to WORKFLOW.md; delete this file; ask user about merging.
 
