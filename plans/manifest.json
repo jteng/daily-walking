@@ -9,8 +9,8 @@
       "credit": "",
       "short": "纵览版",
       "short_en": "Survey",
-      "desc": "365 天读完全本圣经",
-      "desc_en": "The whole Bible in 365 days"
+      "desc": "365 天读完全本圣经，每日附背景与神学导读",
+      "desc_en": "The whole Bible in 365 days, with daily background and theology notes"
     },
     {
       "id": "devotional",
@@ -21,8 +21,8 @@
       "credit": "",
       "short": "默想版",
       "short_en": "Meditation",
-      "desc": "同一进度，灵修默想",
-      "desc_en": "Same schedule, devotional reflections"
+      "desc": "同样 365 天读完全本圣经，每日附灵修默想",
+      "desc_en": "The same 365-day reading of the whole Bible, with daily devotional reflections"
     },
     {
       "id": "books",
