@@ -149,7 +149,6 @@ Write 「这个词」, not 「这个字」, for a Greek word. Use 马丁·路德
 **Batches.** The build reads every `.md` in the book folder. When publishing one batch while later drafts sit in the same folder, move the unreviewed drafts out (e.g. to a scratch folder) for the publish step and put them back afterwards; never move files while a reviewer is reading them. Better: build in a temporary `git worktree` of HEAD with the unreviewed drafts deleted there, copy its `plans/books.json` back, and commit only `books.json` and the review log (used for Hebrews 6-10).
 
 **Release.** When a book is complete:
-- add it to the Book Study description in `plans/manifest.json`;
 - bump the version (`index.html` `#app-version` and `APP_SW_VERSION`, `sw.js` `CACHE_NAME`);
 - run the tests and a headless check, then push;
 - open the PR to `main` and merge it without asking, once every chapter has passed all three reviews, the build and tests pass, and the push succeeded (if a check fails or the merge is blocked, stop and report instead of forcing it).
