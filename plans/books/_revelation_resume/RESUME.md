@@ -9,12 +9,14 @@ Book-wide name forms: 约翰·华尔伏 (Walvoord), 《司可福串注圣经》,
 
 | File | Theology | Application | Chinese |
 |---|---|---|---|
-| 00 | passed (review + recheck, all applied) | done: lands well after should-fix — **NOT yet applied** (see below) | **interrupted by usage limit; rerun** |
+| 00 | passed (review + recheck, all applied) | done, applied (commit 0cca22a) | done: no must-fix, 7 should-fix (`rev00_chinese.md`); applying |
 | 01 | review done (`plans/books/_revelation_resume/rev01_theology.md`); drafter was applying fixes and was **cut off mid-edit** — diff committed in 9a5cc6f; finish applying, then theology recheck | — | — |
 | 02, 03 | review done (summary below); **not yet applied** | — | — |
 | 04, 05 | review done (`plans/books/_revelation_resume/rev0405_theology.md`); drafter **cut off mid-edit** — partial diff committed; finish applying, then recheck | — | — |
 
 Then: application + Chinese reviews for 01-05; apply; book-publisher (quote check, build, tests, REVIEW_LOG rows per reviewer, commit, push); add Revelation 00-05 meditation themes to WORKFLOW.md; delete this file; ask user about merging.
+
+Cross-chapter from 00 Chinese review: 04 uses 图密善 → change to 多米田; 02/03 first mention of Osborne must be full 格兰特·奥斯本.
 
 ## Revelation 00 application review — to apply (should-fix 1 + consider 2-6)
 1. Meditation pivot/ending too close to 2 Thessalonians 00 ("not a chart/date but a person", "the Lord who loves us"). Paragraph 2: replace 「幔子拉开，先显出来的不是一张图表，而是一个人。」 with zh 「那时众人一同听见的第一句话，是「耶稣基督的启示」（1:1）。幔子拉开，先听见的是一句称颂：约翰刚问完安，就忍不住说：「他爱我们，用自己的血使我们脱离罪恶……」（1:5-6）」 / en "And the first words those gathered hearers heard were 'the revelation of Jesus Christ' (1:1). When the curtain is drawn back, the first thing heard is praise: John has barely finished his greeting before he breaks out, 'To him who loves us and has freed us from our sins by his blood…' (1:5–6)." Last paragraph: drop the "chart on the wall" phrase and the repeated 1:5 clause; zh 「那卷叫外婆害怕了三十多年的书，最后落在的不是一只兽，而是耶稣亲口报出自己的名字。在一切的号声和碗以先，他已经在那里。晨星升起的时候，夜还没有完全过去，可是看见它的人已经知道：天要亮了。先升起来的，是他。」 / en "The book that frightened Grandma for more than thirty years does not end on a beast; it ends with Jesus speaking his own name. Before every trumpet and every bowl, he is already there. When the morning star rises the night is not yet over, but whoever sees it knows the day is coming. He is the one who rises first."
