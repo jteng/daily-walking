@@ -26,3 +26,6 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - Meditation names now: 06 老陈, 07 老刘, 08 李阿姨, 09 老郑, 12 秀兰 (rename: 21 keeps 秀兰), 13 小陈 (rename + new scenario), 14 郑妈妈 (clashes with 09 老郑: rename 14), 15 黄弟兄, 22 小周. No surname may repeat.
 - 20.md: apply rev1415_theology.md S4 (use 「有条件不朽论（又称灭绝论）」 and point to ch. 14 and 2 Thess 1).
 - 13 meditation must change scenario (11 has the false-inspection-report scene).
+- 18.md (with its app/Chinese revision): add rev1617_theology.md S6 idealist bullet (Hendriksen) to the Babylon recap.
+- 13.md (with its app/Chinese revision): check rev1617_theology.md C12.
+- 17 renamed 陈姊妹 → 方姊妹; 16 uses 小雅. Used names: 陈(06), 刘(07), 李(08), 郑(09), 黄(15), 方(17), 小雅(16), 周(22), 秀兰(21).

@@ -153,3 +153,22 @@ Total ≈ 6.2-6.5 KB, which brings the file to about 34.5-35 KB.
 - Language parity is close throughout. The only zh/en difference in a quotation is 10:8 「小书卷」 vs "the scroll", which F7 explains.
 
 **Verdict line:** 10.md ready; 11.md ready after must-fix items (F1, with the F2/F3 labels and F10 cuts applied).
+
+## Applied (reviser)
+
+- F1: applied to 11 (zh/en); named Chilton only (Gentry's view of the witnesses unchecked) and dropped the Peter-and-Paul clause, as the report allows.
+- F2a: 将来两位个别的先知 / "Two individual prophets in the future"; the 42-month label replaced via F3. F2b: tie-back sentence added at the 11:1-2 lean, shortened to save space (the eclectic gloss points to the Introduction).
+- F3: futurist bullet widened with Ladd (zh/en); optional first/second-half clause left out.
+- F4: teleō bullet replaced with the 11:7 / 15:1 wording; cross clause dropped so 14 owns 「成了」.
+- F5: "It is finished" in 10's meditation replaced with the Col 2:2 text (zh/en); still ends on the oath.
+- F6: Heb 1:4 guard added to the Beale bullet (en quotes "superior to angels" only, for size).
+- F7: same-scroll bullet now names Bauckham and Beale and adds the 10:8 *biblion* note.
+- F8: added to 10:5-7 §3, unnamed ("some interpreters"), as Bauckham's page was not confirmed.
+- F9: both pointers now read "the Introduction and chapters 6 and 8".
+- F10: all nine cuts applied; further cuts for size in 11: shortened quotes of 11:1-2, 11:5-6, 11:12, 11:13, 11:16-17, dropped 11:18 quote, Luke 21:24, Ezek 37:11, Isa 1:10, Exod 25:22, Mal 4:5, the early-date aside, and 2 Cor 6:9 in the meditation. In 10, Hab 2:3 and Matt 4:4 cut to absorb the additions.
+- C1: Mark 13:20 dropped from the Bauckham bullet. C2: 参但12:4 / cf. Dan 12:4 added. C3: closing line replaced; Dan 4:34 parallel and a named representative not added (unverified, size).
+- C4: world-city bullet now "e.g. Beale"; Gentry named beside Walvoord for Jerusalem. C5: Lam 2:8 clause added.
+- C6: 4:5 baseline, 16:18-21, first temple (586 BC) added; 2 Macc 2.4-8 and the KJV 11:17 clause not added (size).
+- C7: not applied; the current hedge is adequate and the file is at its size limit.
+- Names: 陈姊妹 / Sister Chen -> 林姊妹 / Sister Lin (10); 小刘 / Xiao Liu -> 小吴 / Xiao Wu (11). The inspector scenario in 11 is kept.
+- Sizes: 10 = 35.9 KB, 11 = 36.0 KB. check_cuv_quotes flags only meditation dialogue; build OK; 37 tests passed; plans/books.json restored.

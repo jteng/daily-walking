@@ -118,3 +118,25 @@ Verified and sound as written: Babylon as Rome (Bauckham, Beale, Osborne); apost
 - 17: the prostitute/Bride parallel and Babylon as a counterfeit of the New Jerusalem. The five Babylon views are labelled symmetrically with named representatives, and the papal reading is put in its historical setting with respect toward Catholics. The emperor counts are accurate and the disagreement is admitted. Election is the ground of not following the beast (17:8; 13:8). The 17:14 note on the CUV's supplied verb is accurate. 17:17 is handled with Gen 50:20 and Acts 4:27-28, without making God the author of evil. The meditation's "two ledgers" and its ending on 17:14, "called and chosen" before "faithful", are grace-grounded and fit the assignment.
 
 **Verdict: 16.md ready after must-fix items; 17.md ready after must-fix items (with the S7 cuts).**
+
+## Applied (reviser)
+
+- M1 applied: 16 meditation ending replaced (cup drunk dry, John 18:11, Matt 26:53, Xiaoya's "Yes" to 16:7), zh and en.
+- M2 applied: 17 meditation para 2 keeps both readings of John's wonder, zh and en.
+- M3 applied: en "Five of whom have fallen, one is".
+- M4 applied: en 16:21 now "cursed God for the plague of the hail".
+- S1 applied: 16:17-21 point names the Son/Lamb as the one who bore judgment, zh and en.
+- S2 applied: Volf biography corrected, zh and en.
+- S3 applied in 17 (Tacitus/Suetonius for "not dead, will return" and the Parthian-backed pretender; Sibylline Oracles 4-5 for eastern armies/return from the dead; Bauckham named) and carried into 16:12 point 2; 13.md not touched (out of scope, see C12).
+- S4 applied: Rom 8:30; 1 Pet 2:9, with the "many note" hedge.
+- S5 applied: Luther 1520 stated exactly, zh and en.
+- S6 applied in 17 only (John Walvoord named, full name, in rebuilt-city bullet); the 18.md idealist bullet not applied: 18.md out of this reviser's scope.
+- S7 applied: all six cuts (17:15-18 point 4 cut with the comfort line moved to 17:12-14 point 1; parallel bullets condensed; 4 Ezra and Beale sentences cut; 17:7-11 point 1 shortened; "of one mind" merged; hotel staging trimmed), plus small extra trims (Nahum, Nebuchadnezzar, Jer 51:13 sentence, outline, two 要点 lines, meditation).
+- C1 applied (祷告完了不久 / Shortly afterward). C2 applied (Zech 12:11 as mourning; Kline etymology not added, for length). C3 applied (en "brings them together").
+- C4 applied (line cut from 16 meditation). C5 applied (holy love; defies him). C6: kept as a supporting line, not expanded.
+- C7 applied (泰尔（推罗）). C8 applied (hedged, zh and en). C9 applied (Robert Thomas / 罗伯特·托马斯 added). C10 applied (marked as this study's reading).
+- C11 applied (Rom 13:4; 1 Tim 5:3 care for the widows; prosperity speaker "假借神的名" / "borrowing God's name").
+- C12 not applied: 13.md is out of scope. C13: checked; 16's body does not repeat 15's Mount of Olives wording.
+- Names: 17's 陈姊妹 / Sister Chen renamed 方姊妹 / Sister Fang (陈 used elsewhere); 16's 小雅 is unique; no 老X names in either file.
+- Extra 16 trims for length: frogs/magicians sentence, bowls-trumpets sentence, gospel bullet in 16:5-7, meditation para 1 and 5 (the reopening of ch. 16 now only in the ending).
+- Sizes: 16.md 35.7 KB, 17.md 35.9 KB. check_cuv_quotes: 16 clean; 17 only the slogan 家丑不可外扬. Build + pytest: 37 passed; books.json restored.
