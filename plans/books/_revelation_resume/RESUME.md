@@ -7,23 +7,22 @@ Brief for drafters: `revelation_brief.md` (this folder). Review reports are save
 
 Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply (reviser agent) → application + chinese reviewers in parallel → apply → log rows.
 
-## Status (2026-11-26, after usage-limit pause)
+## Status (2026-11-26 16:50 UTC, after second usage-limit pause)
 | Files | Draft | Theology | Application | Chinese |
 |---|---|---|---|---|
-| 06-07 | done | running → rev0607_theology.md | — | — |
-| 08-09 | done | running → rev0809_theology.md | — | — |
-| 10-11 | done | running → rev1011_theology.md | — | — |
-| 12-13 | done | running → rev1213_theology.md | — | — |
-| 14-15 | done | running → rev1415_theology.md | — | — |
-| 16-17 | done | running → rev1617_theology.md | — | — |
-| 18-19 | done | running → rev1819_theology.md | — | — |
-| 20 | done | ready after must-fix (rev20_theology.md); reviser applying | — | — |
-| 21-22 | done | running → rev2122_theology.md | — | — |
+| 06-07 | done | passed, applied | running → rev0607_application.md | report done (rev0607_chinese.md), not applied |
+| 08-09 | done | passed, applied | running → rev0809_application.md | running → rev0809_chinese.md |
+| 10-11 | done | passed (rev1011_theology.md); reviser applying | — | — |
+| 12-13 | done | passed after must-fix (rev1213_theology.md); not applied | — | — |
+| 14-15 | done | passed, applied | — | — |
+| 16-17 | done | passed (rev1617_theology.md); reviser applying | — | — |
+| 18-19 | done | passed (rev1819_theology.md); reviser applying | — | — |
+| 20 | done | passed, applied | report done; reviser applying app + Chinese | report done; reviser applying |
+| 21-22 | done | passed (rev2122_theology.md); reviser applying | — | — |
 
-If a report exists without an "## Applied (reviser)" section, its fixes are not applied yet.
+If a report has no "## Applied (reviser)" section, its fixes are not applied yet.
 
-## Cross-chapter fixes still to do (give to application reviewers / revisers)
-- Meditation character names repeat: 老陈 in 06 and 09; 刘 in 07 (老刘) and 14 (刘妈妈); 陈弟兄 in 15. Rename so no surname repeats across 06-22 (check 10-13, 16-19 too).
-- Recapitulation question: set out once in 06; 08 and 15 should point back (theology reviewers asked to rule).
-- 08 said "leans idealist": must match 00's eclectic reading.
-- 13 meditation (falsified inspection reports) duplicated 11's inspector scenario; 12's 秀兰 also in 21; 16 ended by the sea of glass like 15; 10 and 14 both build on John 19:30 (prefer 14). Theology reviewers of 10-11, 12-13, 16-17 asked to give replacements.
+## Cross-chapter fixes still to do
+- Meditation names now: 06 老陈, 07 老刘, 08 李阿姨, 09 老郑, 12 秀兰 (rename: 21 keeps 秀兰), 13 小陈 (rename + new scenario), 14 郑妈妈 (clashes with 09 老郑: rename 14), 15 黄弟兄, 22 小周. No surname may repeat.
+- 20.md: apply rev1415_theology.md S4 (use 「有条件不朽论（又称灭绝论）」 and point to ch. 14 and 2 Thess 1).
+- 13 meditation must change scenario (11 has the false-inspection-report scene).
