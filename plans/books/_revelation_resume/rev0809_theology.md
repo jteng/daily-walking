@@ -152,3 +152,23 @@ See the attribution table. Reword the third bullet as given there. This keeps Be
 ## Verdict
 - **08.md:** ready after must-fix items (M1, M2, M3)
 - **09.md:** ready after must-fix items (M4, M5), plus the S1 gospel line and the 老陈 → 老周 rename
+
+## Applied (reviser)
+- M1 (08): structure point replaced with the pointer to ch. 6 plus the two trumpet-specific points (zh/en); the zh pointer is plain prose (no 「」 on the 06 heading, which the quote checker flagged).
+- M2 (08): idealist-leaning sentence replaced with the eclectic wording (zh/en).
+- M3 (08): §8:1-2 point 4 close replaced with both views (Bauckham/Osborne vs Beale); §8:7-12 point 2 softened ("many take this as leaving room to turn"); its 要点 / The point changed to "there is still time to turn".
+- M4 (09): 396 years, Elliott, 11th-century Euphrates crossing, single-article note (hedged "许多释经者认为" / "many note").
+- M5 (09): purpose sentence replaced with the hedged two-view wording; bowls bullet folded into one clause (16:9, 11).
+- S1 (09): 1 Pet 2:24 substitution line added (CUV/ESV verbatim).
+- S2 (09 §9:13-19 point 1): hedged and referenced (6:10; 8:3-5).
+- S3 (08 meditation): "the text does not say what the incense is, but the whole NT tells us…" inserted before Christ's mediation.
+- S4/C2 (08): Beale bullet reworded per the attribution table; label changed to 「和末了的审判相连」 / "Tied to the last judgment".
+- S5 (09): preterist bullet names Chilton and Gentry; zh uses 大卫·齐尔顿 (not 奇尔顿) to match 17.md, without the English parenthetical.
+- S6 (08 §8:13 point 3): third woe hedged (11:14; cf. 12:12).
+- S7 (09): abyss limited to Luke and Revelation; Rom 10:7 added as the realm of the dead.
+- S8 cuts: 08: Tobit, point 5 merged into point 4 (Rom 12:19), Hosea, point 4 first sentence; 09: Joel 2:5, Pilgrim's Progress, helicopter, bowls bullet, Ten Commandments shortened, closing paragraph folded. Extra 09 cuts to reach size: Isa 8:7 quote, Ps 68:17, Dan 5:23 quote, Joel sentence in §9:1-6 point 3, Sodom/lake-of-fire/serpent sentence, 21:8/22:15 clause, intro reminder shortened. 09 meditation now ends on the prayer and then Mark 1:15.
+- Rename: 09 老陈 / Lao Chen became 老郑 / Lao Zheng, not 老周, because 22.md already uses 小周 / Xiao Zhou (Zheng is unused in Revelation).
+- C1, C3, C5, C6, C7 (hedged Apollo note, naming Aune and Beale), C9 (cf. Heb 9:23-24): applied.
+- C4: Goshen sentence removed from 08, not moved: 09 §9:1-6 point 4 already gives the exemption with 9:4, 7:3 and Exod 8:23.
+- C8: not applied. Bullet 1 already gives the perfect-tense grammar, and the file had no room.
+- Final sizes: 08 35.3 KB, 09 35.9 KB. check_cuv_quotes flags only the intended prayer (08) and slogan (09). Build OK, 37 tests passed, books.json restored.
