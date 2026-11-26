@@ -84,3 +84,11 @@ The chapter is grace-shaped from start to finish. In the millennium section the 
 ## Verdict per file
 
 - plans/books/revelation/20.md: **lands well after should-fix items**
+
+## Applied (reviser)
+- S1 applied (zh/en): protagonist now an unnamed elderly brother and deacon; the preacher's "film" sentence carried for forty years; pronouns changed throughout; per Chinese review #18 the trigger is reading/hearing Rev 20 preached rather than funeral services.
+- S2 applied (zh/en): the fourteen-year-old was also pressed by school, adults and the campaign; merged with Chinese #17 as 「不能、也不必替自己开脱」 / "cannot and need not excuse".
+- C1 applied (zh/en): last paragraph replaced; the Judge and owner of the book are the same Lamb; loop closed on "next time he reads 'books were opened'" (not a funeral, see S1).
+- C2 applied: Col 2:14 sentence deleted in both languages; para. 2 now ends on John 5:24.
+- C3 applied (zh/en): Shape of the Chapter ends on the Father giving judgment to the Son, the Lamb slain for sinners (John 5:22).
+- Size cuts (both languages): Alford remark, apostles/elders alternative, Acts 17:31, Hab 2:14, "three enemies" line, John 12:31, Bauckham vindication sentence, 22:3 throne sentence, duplicate "beloved city" line in the dispensational bullet, and the "both views agree" line after the 20:12 list (its point stays in 20:12 point 3 and the 要点). Final size ~36.4 KB.

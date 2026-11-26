@@ -123,3 +123,21 @@
 
 ## 结论
 - /home/user/daily-walking/plans/books/revelation/20.md：**修改后可用**
+
+## Applied (reviser)
+- 1 applied: 「第20章接着讲撒但（就是那龙）的结局」; EN unchanged.
+- 2 applied: 「照和合本的译法……（毕尔也这样读）。英文标准版则……」; EN reworded so Beale attaches to the reading.
+- 3 applied as suggested; EN aligned ("so they take this to describe… an earthly millennial kingdom"); the "beloved city = Jerusalem" sentence merged into the bullet ("Christ reigning on David's throne in Jerusalem") since 20:9 point 3 already gives that view.
+- 4 applied, then reduced per coordinator (rev1415_theology S4) to a pointer: 「有条件不朽论（又称灭绝论；见本研读第14章和帖撒罗尼迦后书第1章）」 / EN to match; Stott parenthesis removed.
+- 5 applied (zh/en), including 「同时发生的一件事」 / "one event happening together" and "so they hold".
+- 6 applied (zh/en), 它 replaced by 撒但; John 12:31 sentence later cut for size.
+- 7 applied (zh/en).
+- 8 applied: 「捆住它的只是一位天使，差遣天使的神更是远比它大」 / EN "the God who sends the angel is far greater still".
+- 9 applied (zh/en "expressly called 'the first resurrection'").
+- 10 applied in a shortened form: 「胡克玛读作死后灵魂的生命，部分原因正在于此」 (EN to match).
+- 11, 12 applied (12 removes 「」 from 祭司); EN adjusted.
+- 13 applied: 大多; added 「所以今天就当悔改，投靠基督」 / "so turn to Christ today".
+- 14, 15 (all three items), 16 applied; EN 20:12 and 20:14 lines adjusted to match.
+- 17 applied: 不能、也不必……开脱; 「这不是说……」; John 5:22 sentence restructured; Col 2:14 deleted (zh/en).
+- 18 applied: 「今天就可以悔改」; 「这样做不是要赚得……；你可以来，是因为……」; 「就当……认错、弥补」 (EN "should"; still followed by "not the price"); funeral-service trigger changed to 「每次读到、或听人讲到启示录第20章」.
+- Quote check: only the preacher's spoken sentence is flagged (direct speech, kept in 「」).
