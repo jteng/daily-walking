@@ -98,3 +98,17 @@ Note: 07's "slain outside the city" (paragraph 3) can stay if 06-C1 removes Heb 
 
 - plans/books/revelation/06.md: lands well after should-fix items
 - plans/books/revelation/07.md: lands well after should-fix items
+
+## Applied (reviser)
+
+- 06-S1 applied: 老陈 → 老冯 / Mr. Chen → Lao Feng throughout.
+- 06-S2 applied: crisis-line paragraph inserted after the police sentence (zh/en); zh 「流的血」 → 「流了血」 for flow.
+- 06-C1 applied: Heb 13:12 replaced by Luke 23:30 turn; kept 「我从躲藏的地方出来」 rather than 「藏身之处」 so it does not clash with Ps 32:7's own phrase.
+- 06-C2 applied: riverside question inserted; 「那一张脸」 adapted to 「神的面」 to match the Chinese-review wording now in the text.
+- 06-C3 applied: factory → small renovation company.
+- 07-S1 applied: promise conditioned on coming to the Lamb; kept the "not time… but God himself" sentence (now 「亲自来擦」, no unconditional 「为他们」).
+- 07-S2 applied: son's words framed as anger and real hurt; kept the existing "shepherd died for the son too / may come and trust him" invitation.
+- 07-S3 applied: 老刘 → 老宋 / Lao Liu → Lao Song.
+- 07-C1 applied: rest sentence replaced with 7:16 "hunger no more" (CUV/ESV verbatim).
+- 07-C2 applied: one-sentence turn to the reader's own grief.
+- Checks: check_cuv_quotes flags only spoken words (dialogue); build ok; 37 tests pass. Sizes 37.6 KB / 37.8 KB (slightly over 36 KB because of the added should-fix text).
