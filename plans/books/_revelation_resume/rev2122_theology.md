@@ -178,3 +178,27 @@ C9. **21.md 21:27 point 4** ends 「名字写在上面的根据，是羔羊为�
 - Chinese/English parity is good throughout. The only gaps are trivial: 22:1 is quoted as v. 1 in zh and vv. 1-2 in en, and the Zech 14:11 ESV note appears only in en, which is appropriate.
 
 Verdict: 21.md ready after must-fix items; 22.md ready after must-fix items.
+
+## Applied (reviser)
+
+- M1 applied: 18:16 now 「金子、宝石，和珍珠」 (zh; en already correct).
+- M2 applied (zh/en): "God and the Lamb" plainly two, singular pronouns, one throne, one worship, one God, not two gods.
+- M3 applied (zh/en): oldest MSS (Sinaiticus, Alexandrinus) vs most later MSS / KJV; "look alike in Greek" kept.
+- S1 applied: one-people reading hedged, dispensational view named (华尔伏 / Walvoord, short form after the full name in point 1).
+- S2 applied: Osborne (奥斯本, full name at 21:8) for "both"; Beale reworded as stressing people/presence on a real new earth.
+- S3 applied: Isa 54:11 quoted verbatim (CUV/ESV), placed after the 21:19-20 sentence so the bare refs keep their book.
+- S4 applied: difference from the Pure Land stated (Isaiah/Ezekiel imagery, God and the Lamb at the centre, free grace not reciting a name); hymn sentence shortened.
+- S5 applied: Root of David now matches 05 (Davidic Messiah-King, Isa 11:1, 10; Mark 12:35-37 as "some also see").
+- S6 applied: WCF 1.6 (1646) given in full as the Reformed confession, no 「」 in zh; "church has long confessed" removed.
+- S7 applied: 1:17 and 2:8 noted; Jesus takes all three pairs (build confirms 启1:17 / 启2:8).
+- S8 applied: tree of life "open to all God's people (see 22:14)".
+- S9 applied: Latin ligno/libro slip added, Metzger hedge kept.
+- C1 applied: "with the saints" reading added. C2 applied: "as many read it" in the meditation; the 22:12-17 point line no longer assumes reading 1 either.
+- C3 applied: Beale and Grant Osborne named for reading 1; reading 2 left unnamed as you advised.
+- C4 applied: Ezekiel's nine temple chapters (written 以西结书第40至48章 / "Ezekiel chapters 40–48" so the build does not link them).
+- C5 applied: father → God, joined to the covenant promise of verse 3 (zh 「本章3节」 to avoid inheriting 撒下).
+- C6 not applied: optional, and space was short.
+- C7 applied: 「本乎恩，也因着信」 / "by grace through faith" at 22:12. C8 applied: Heb 1:2 in the 22:18-21 point line.
+- C9 applied via cut 21-c (pointer to chapter 20 only).
+- Cuts 21 a-h and 22 a-g applied. They saved less than estimated, so more was cut: the 21 shape bullets, kainos, Patmos, 20:14, Rom 8:21 gloss, Exod 40:34-35, John 8:12, the sign/reality sentence, the Davidic-house sentence, the 21:16 numbers condensed, three point lines; the 22 bookend sentence, the end of the 22:17 point, two point lines. Exod 33:20 / Num 6:25 now appear only in 22's meditation.
+- Final sizes: 21.md 35.9 KB, 22.md 36.2 KB. check_cuv_quotes flags only the scenario speech and hymn title. build + pytest: 37 passed; books.json restored.
