@@ -64,3 +64,10 @@ Totals: should-fix 1, consider 5.
 ## One-line verdicts
 - plans/books/revelation/21.md: lands well after should-fix items
 - plans/books/revelation/22.md: lands well
+
+## Applied (reviser)
+- A1 applied: 21 meditation para 3 rewritten as suggested (21:7 + 2 Cor 6:18 Father for Xiulan, 21:3 God himself, free grace without the thirst/water pivot), zh and en.
+- A2 applied: lament clause after the honest sentence (诗篇里不少祷告… / "many of the psalms are prayers just that honest").
+- A3 applied: opening quote now cites 21:23 only; ending is 「在羔羊的光中行走（21:24）；「在那里原没有黑夜」（21:25）」, the jasper/gold sentence and Matt 27:45 kept.
+- A4 applied, merged with Chinese should-fix 5: she does not invite her parents alone, the Spirit says "Come" first (zh and en).
+- A5, A6: no change required; noted (elderly-woman figure and benediction framing left as is).

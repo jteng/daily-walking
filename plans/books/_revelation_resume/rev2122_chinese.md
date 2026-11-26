@@ -129,3 +129,19 @@
 
 - /home/user/daily-walking/plans/books/revelation/21.md：修改后可用
 - /home/user/daily-walking/plans/books/revelation/22.md：修改后可用
+
+## Applied (reviser)
+- Should-fix 1 applied: all 00篇 → 导读 (21:9-21; 22:6, 22:8-9, 22:16, 22:18-21 ×2); English "(00)" removed, "the introduction" kept.
+- Should-fix 2 (21:5 语病) and 3 (21:22 对…来说 → 在犹太人心目中) applied.
+- Should-fix 4 applied: 干渴 → 枯干 at both points; English already "dryness".
+- Should-fix 5 applied, combined with application A4 (父母 sentence rewritten; English matched).
+- Should-fix 6 applied: works as fruit and evidence, not ground, zh and en.
+- Should-fix 7 applied: 首尾呼应，把整卷书连成一体; English "bookends".
+- Consider 1-4, 6-9 applied as suggested.
+- Consider 5: rewording applied; ancestor-rites addition not applied (file length, and it would sharpen the 21:8 warning on believers under family pressure just before the Peter comfort).
+- Consider 10 (臭皮囊) applied, with English.
+- Consider 11 applied via application A3 (opening 21:25 quote dropped, ending kept on 21:25).
+- Consider 12-15 applied (incl. 西奈 → 西乃抄本).
+- Consider 16 applied in zh (第311节; 明说, sentence split, 藉着所谓); English WCF quotation left verbatim ("new revelations of the Spirit") since it is a direct quote.
+- Consider 17 applied: English added for 冈德里, 穆欧, 格哈德, 麦慈格 (kept 麦慈格; 麦子格 unverified).
+- The free-water overlap note: resolved by application A1 in 21.
