@@ -110,3 +110,20 @@ The doctrine is sound throughout. The four millennial views are labelled symmetr
 - The Scofield note on Ezekiel 38 is correctly reported, and date-setting is warned against.
 - In the meditation, substitution is stated plainly ("on the cross bore God's judgment for sinners"). Heidelberg Q52 is accurately summarized. The gospel is offered to the unsure reader (John 3:18, 5:24). Making amends is explicitly "not the price". The meditation ends on 21:27 and grace, as assigned.
 - Chinese/English parity is good; I found no claim present in one body and missing from the other.
+
+## Applied (reviser)
+
+- M1 applied (zh/en): full CUV/ESV 20:4 quotation; CUV two groups (Beale) vs ESV one group described two ways.
+- M2 applied (zh/en): 20:8 = 16:14, 19:19 very close; shared "gather" + articular *ton polemon*, see ch. 19.
+- S1 applied (zh/en): postmillennial reading of 20:3 as the gospel's growing triumph added.
+- S2 applied (zh/en): Heb 8:12 (CUV/ESV verbatim) added after "God saw what her father suffered"; removed the second 「可是」 in zh.
+- S3 applied (zh/en): "amillennialists such as Hoekema, the Reformed confessions, and some historic premillennialists".
+- C1 applied (zh/en): "many interpreters hold" they sit on the thrones; apostles / 24 elders named as alternative.
+- C2 applied (zh/en): premillennial reply (came to life after beheading) and Hoekema's reading as partly an answer.
+- C3 applied (zh/en): parenthesis that the Greek has no verb in 20:10; amillennial "simultaneous" reading.
+- C4 applied (zh/en): "resurrection of the just and the unjust as one event (John 5:28-29 'an hour is coming'; Acts 24:15)".
+- C5 applied (zh/en): God made the subject of Col 2:14.
+- C6 not applied: optional; space (file had to be cut to ~36 KB).
+- C7 not applied: left for the application reviewer, as the report suggests.
+- Also: removed English "came to life" from ::zh (20:4-6 point 2); Rev 20:12 named explicitly after Heb 8:12 in the meditation.
+- Cuts for size (both languages): shorter chapter-shape bullets; 20:1-3 quote shortened to 20:1-2; two 要点 lines (20:1-3, 20:7-10) dropped; Col 2:15, Matt 13:31, Dan 7:22 and Dan 12:1 quotations, Matt 16:27 / Rev 22:12 refs, Dan 7:9 quote reduced to ref, redundant closing sentences in 20:6, 20:7-8, 20:11, 20:14 removed; common-ground and Gog/Magog sentences tightened. Size ~37 KB -> 36.3 KB (after additions).
