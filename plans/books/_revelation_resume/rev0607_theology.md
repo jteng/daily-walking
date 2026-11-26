@@ -157,3 +157,27 @@ Do not cut the safeguarding lines in the meditation (gambling help, police, the 
 ## Summary counts
 - 06: must-fix 1, should-fix 3, consider 5
 - 07: must-fix 1, should-fix 4, consider 5
+
+## Applied (reviser)
+- 06-M1: applied (zh/en); sixth seal now "onset of wrath" on the sequential reading, final judgment on recapitulation.
+- 06-S1: applied; oil-and-wine given as options (deep roots / irony), limited famine kept.
+- 06-S2: applied; wrath of the One on the throne and the Lamb named, Lamb bore God's wrath against sin, 2 Cor 5:21 kept.
+- 06-S3: applied; "城门外（来13:12）" / "outside the city gate (Heb 13:12)".
+- 06-C1: applied; Ladd added as historic premillennial holder of the gospel view.
+- 06-C2: not applied; 6:11 variant omitted for length (optional).
+- 06-C3: applied by deleting the Pax Romana sentence (cut 3), so the gloss is gone.
+- 06-C4: no change, as the report says none is required.
+- 06-C5: applied; Ps 32:7 CUV/ESV quoted in the closing prayer.
+- 06 cuts: 1-5 applied; also dropped the "Come is addressed to the rider" line, the "slay one another" sentence, shortened the martyrs-only bullet and the OT imagery list.
+- 07-M1: applied; 要点 rewritten as the report gives it.
+- 07-S1: applied; en uses ESV "going out to the four winds of heaven" with the Hebrew note; zh adds 原文也可译作往天的四方去 (unquoted).
+- 07-S2: applied; Ezek 37:3 CUV/ESV, cf. Zech 4:5.
+- 07-S3: applied; hedged wording, Gal 6:16 and Jas 1:1 named as debated (en "the real circumcision" per ESV Phil 3:3).
+- 07-S4: applied; Jewish-remnant bullet (Gentry; non-dispensational remnant), "several views".
+- 07-C1: applied; "第5章说过 / As chapter 5 noted", "有时 / sometimes".
+- 07-C2: applied; naos = heavenly sanctuary (11:19; 15:5), merged into the JW bullet.
+- 07-C3: applied; preterist AD 66-70 line, and 1:9 "also with the article".
+- 07-C4: applied; faith clause added for the son.
+- 07-C5: applied; en now ESV "the ones coming out of the great tribulation".
+- 07 cuts: 1-6 applied; also dropped the "standing before the throne" bullet, the Rom 11:26 quote repeat, the present-participle note, the Isa 4:6 quotation and a duplicated Gen 15:5 paraphrase.
+- Final sizes: 06 35,781 B; 07 35,967 B. check_cuv_quotes: only meditation speech flagged. Build OK, pytest 37 passed; books.json restored.
