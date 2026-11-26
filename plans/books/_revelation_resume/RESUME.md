@@ -29,3 +29,4 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - 18.md (with its app/Chinese revision): add rev1617_theology.md S6 idealist bullet (Hendriksen) to the Babylon recap.
 - 13.md (with its app/Chinese revision): check rev1617_theology.md C12.
 - 17 renamed 陈姊妹 → 方姊妹; 16 uses 小雅. Used names: 陈(06), 刘(07), 李(08), 郑(09), 黄(15), 方(17), 小雅(16), 周(22), 秀兰(21).
+- More names: 林(10), 吴(11), 赵(14, from 郑).
