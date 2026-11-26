@@ -32,3 +32,4 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - More names: 林(10), 吴(11), 赵(14, from 郑).
 - 06 now 老冯, 07 now 老宋 (application review).
 - 21-22: application report done (rev2122_application.md); apply with Chinese report.
+- 12 now 素珍; 13 now 小杜 (restaurant manager, 财神 bowing — note 02 used a 拜财神 example at Pergamum).

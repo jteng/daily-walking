@@ -197,3 +197,23 @@ Paragraph 5 (prayer and Luke 12:32 ending): keep. Change 「我却常常为了�
 
 - 12.md: 2 must-fix, 6 should-fix, 4 consider. Verdict: ready after must-fix items.
 - 13.md: 3 must-fix, 5 should-fix, 4 consider. Verdict: ready after must-fix items.
+
+## Applied (reviser)
+
+- M12-1 applied: 秀兰 → 素珍 / Suzhen throughout (new name).
+- M12-2 applied (zh, and en "Greek verb ... (*eblēthē*)").
+- S12-1 applied in 12 (points back to 11:2-3); 13's cross-reference changed to 11:2-3 (S13-5).
+- S12-2, S12-3, S12-4, S12-6 applied as worded (S12-3 replaces the later Jude 9 clause so it is not repeated).
+- S12-5 applied, except the bedside line is reported, not a quoted inner voice ("feels unfit to ask God for someone else's life"), because quoted accusing inner voices are a retired frame in WORKFLOW.
+- C12-1 applied (overview carries the 12:18 / KJV note; point 4 deleted); English says "verse 18 in the Chinese Union Version" because "Revelation 12:18" fails test_en_own_book_references_exist (ESV has no 12:18).
+- C12-2 (a) and (b) applied; C12-3 applied as a parenthesis after John 16:8.
+- C12-4 (a)-(e) applied; also cut the Isa 27:1 sea-monster bullet, 1 Pet 5:8-9 sentence and the 12:13-17 要点 for length. 12.md: 37.6 → 36.1 KB.
+- M13-1 applied with the 财神 opening-rite scenario as drafted, but surname 杜 (小杜 / Xiao Du), not 郑, since 09 has 老郑; supervisor's words in zh given after a colon without 「」 (not CUV). Paragraph 3 and the Luke 12:32 prayer kept; ending stays on Christ refusing the kingdoms (Luke 4:6-8).
+- M13-2 applied (PCUSA 1903, symmetric clause on those who keep the original wording).
+- M13-3 (a) and (b) applied.
+- S13-1 applied, with the short guard 「而且模仿得永远不像」 / "the imitation is never a likeness".
+- S13-2, S13-3, S13-4 applied (second "many interpreters" in the hand/forehead bullet reworded to avoid repetition).
+- C13-1 applied ("built", 参看导读); C13-2 applied (book title, 1956).
+- C13-3 not applied: added length, and the spelling note is not needed for the argument here.
+- C13-4 (a)-(f) applied (pastors note folded into the end of 13:13 point 2). Further length cuts: overview bullets, Isa 27:1 sea sentence, Dan 7:25 clause, 11:7, 11:5, 5:9, 2:7, Matt 7:15, 22:4, 17:9, the "later date / type" Nero sentence, the 21:17 "human measurement" sentence, Smyrna's poverty in 13:17, and the 13:5-10 and 13:11-15 要点. 13.md: 39.2 → 36.7 KB.
+- Checks: check_cuv_quotes clean on both; build and 37 tests pass; plans/books.json restored.
