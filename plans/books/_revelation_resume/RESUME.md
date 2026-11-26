@@ -14,9 +14,9 @@ Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply
 | 08-09 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 10-11 | done | passed (rev1011_theology.md); reviser applying | — | — |
 | 12-13 | done | passed after must-fix (rev1213_theology.md); not applied | — | — |
-| 14-15 | done | passed, applied | — | — |
+| 14-15 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 16-17 | done | passed (rev1617_theology.md); reviser applying | — | — |
-| 18-19 | done | passed (rev1819_theology.md); reviser applying | — | — |
+| 18-19 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 20 | done | passed, applied | passed, applied (recheck: lands well; optional consider not applied) | passed, applied — CHAPTER COMPLETE |
 | 21-22 | done | passed (rev2122_theology.md); reviser applying | — | — |
 
@@ -33,3 +33,4 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - 06 now 老冯, 07 now 老宋 (application review).
 - 21-22: application report done (rev2122_application.md); apply with Chinese report.
 - 12 now 素珍; 13 now 小杜 (restaurant manager, 财神 bowing — note 02 used a 拜财神 example at Pergamum).
+- Edwards: Revelation uses 约拿单·爱德华兹 (00, 14, 20).

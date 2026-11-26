@@ -86,3 +86,14 @@ Totals: 3 should-fix, 7 consider.
 
 ## Retired-frame check
 Neither file uses a retired frame: no phone image, no sleeplessness opening, no accusing inner voice, no 吃亏, no "filled" ending, no inner circle, no door or "shut out" ending, no morning-star or keys ending. 14's closing on 「成了」 and 15's on a 15:4 recital are new for Revelation.
+
+## Applied (reviser)
+- 14 S1: applied; 郑妈妈 → 赵妈妈, Mother Zheng → Mother Zhao (all four mentions each).
+- 14 C1: applied (zh 「什么职分也没有写」 / en "no title after her name at all"); supersedes Chinese C9's 执事 rewrite.
+- 14 C2: applied (14:3-4; 5:9 "bought", price paid in full) in zh and en.
+- 14 C3: applied (「我站在门边」 / "Standing by the door").
+- 14 C4: applied in zh and en (belonging to the Lamb, 14:1, as the deeper reason).
+- 15 S1: applied, zh lightly adjusted to avoid repeating 「诗篇里」 after Chinese C24 (「这样的哀歌，诗篇里还有许多」); Job 42:6 quoted verbatim CUV/ESV.
+- 15 S2: applied (daughter in the Lord's hands, Mark 10:16) in zh and en.
+- 15 C1: applied, but kept the theology review's hedge ("the closing part", "roughly Psalms 115–118"); Mishnah and 哈利路 dropped.
+- 15 C2, C3 and the 14 note on 「成了」: no change to 14/15 (notes for 16 and 21 reviewers).

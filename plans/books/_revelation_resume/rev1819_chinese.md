@@ -134,3 +134,10 @@
 - 19章：「天使不敢领受的敬拜，羔羊理当领受，因为他是神。」「那用一句话创造世界的道，也要用一句话审判世界。」「施行审判的，正是那位曾经为罪人流血的。」
 - 19:21 的处理很好：先严肃（「不应该轻描淡写，也不应该带着幸灾乐祸的心去读」），再转到 22:17 的邀请，福音有迫切感。
 - 19章默想：借来的衣服、不敢夹菜，写出了面子和羞耻的处境；「这个筵席是从邀请开始的，不是从检查开始的」；「一件不必还的衣服」和借衣服的开头前后呼应；结尾「写请帖的那一位，他的名字就叫诚信真实」收得很好。
+
+## Applied (reviser)
+- 18 S1 applied (duplicate deleted). S2 applied (天平里称过). S3 applied, all three (the third also in en: "If you are yourself the one being squeezed"). S4 applied (split into three sentences, with the application C1 line added). S5 applied (「」 for the boss's line and 行业就是这样; the theology reviser's “” undone; check_cuv_quotes flags them as speech, which is acceptable).
+- 18 C1 applied. C2 applied (这两种读法; en "Both readings"). C3 applied (请留意). C4 applied. C5 applied (成全自己的骄傲). C6: book title moved, Chinese first; 英文标准版 kept, as in 01, 05, 10 and 12. C7 applied, all four (周末来公司; 礼拜堂; 才配作他的民, with en "before we may be his people"; 不叫他们人口，也不叫他们成本).
+- 19 S1 applied in zh/en (guest or food). S2 applied (亲自、有形有体地再来, 参徒1:11; en "see Acts 1:11"). S3 applied. S4 applied. S5 applied, merged with the application S3 sentence.
+- 19 C1 applied (神的被动语态). C2 applied (quote marks removed from 赐; 最要紧的一个词). C3 applied in zh/en. C4 applied in zh/en (no "chapter 00"). C5 applied (English name dropped in zh). C6 applied (从两个角度看同一群人; 新约只在这里出现的「哈利路亚」; en heading kept).
+- New ::zh wording (recap bullets, the fear-of-replacement lines, the meeting line, the Cana ending, the parable lines) was checked against the Chinese guidance: no 对…来说, 两者, 它 chains or stacked 的.

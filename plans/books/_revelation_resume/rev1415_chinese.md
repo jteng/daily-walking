@@ -148,3 +148,21 @@
 ## 一行结论
 - `/home/user/daily-walking/plans/books/revelation/14.md`：修改后可用
 - `/home/user/daily-walking/plans/books/revelation/15.md`：修改后可用
+
+## Applied (reviser)
+- S1: applied (「他的工作走在前面，我们的工作才跟在后面」); EN unchanged.
+- S2: applied in zh and en ("until the plagues are finished").
+- S3: applied (「以色列人出兵打仗时的洁净规矩」); EN "holy war" kept.
+- S4: applied, including 「先知常用的说法」.
+- S5: applied as proposed.
+- S6: applied with 赵妈妈 / Mother Zhao instead of 孙妈妈 (coordinator's choice, from the application report).
+- S7: applied as proposed.
+- S8: applied; EN now quotes "the winepress was trodden outside the city" to match.
+- C1, C2, C3, C4 (both parts), C6 (EN "unconscious sleep" to match), C8, C10 (EN direct speech to match), C11, C12 (with 约一1:9 / 1 John 1:9 in zh and en), C13 (EN "All this rests on the One...") : applied.
+- C5: not applied; 16's meditation anchors on the Gethsemane cup (Mark 14:36) and 15 already uses that night, so adding it to 14 adds a third Passion-night echo; it also needed theology sign-off.
+- C7: not applied; a bare 「（1:13）」 right after 「（但7:13）」 in the same sentence is read as Daniel 1:13 by the build, so 启1:13 stays.
+- C9: 「我们这间」 applied; the 执事 rewrite superseded by application C1 (no title at all).
+- C14: not applied (only 14/15 may be edited); 14 keeps 乔纳森·爱德华兹 (as in 2 Thess 1); 20's 约拿单·爱德华兹 should be aligned by its reviser.
+- C15-C22, C24, C25: applied; C25's Hallel wording replaced by application C1 (「一组赞美诗篇的后半部分，大约是诗篇第115到118篇」, no English word in ::zh).
+- C23: applied, reworded to avoid a "door not yet shut" image (retired door endings; 15:8 is about entering, not a door): 「今天七碗还没有倒尽，人还可以投靠羔羊；「现在正是悦纳的时候」（林后6:2）」, with matching EN.
+- Checks: check_cuv_quotes flags only speech and sayings (赵妈妈是谁？, 人过留名，雁过留声, 我这四十年……, 弟兄，要用赞美来胜过！); build and 37 tests pass; books.json restored. Sizes: 14 = 36.5 KB, 15 = 34.2 KB.

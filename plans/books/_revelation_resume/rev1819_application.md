@@ -90,3 +90,16 @@ Retired frames checked: no accusing inner voice, no phone, no 吃亏, no sleeple
 
 - plans/books/revelation/18.md: lands well after should-fix items
 - plans/books/revelation/19.md: lands well after should-fix items
+
+## Applied (reviser)
+- S1 applied (duplicate sentence deleted in 18 zh).
+- S2 applied in zh/en: the fear-of-being-replaced motive added after the boss's line; the "report the real hours" step replaced by lightening the young man's load and saying 「这个数字，我们做不到。」 at the meeting.
+- S3 applied in zh/en (19: his fault the opposite of hers; the king means to clothe the one who comes empty-handed), merged with Chinese S5.
+- C1 applied in zh/en (God remembers, 18:5; the cross as judgment on this sin), within the split sentence from Chinese S4.
+- C2 applied in zh/en (harps and wedding songs fall silent, the Lamb's feast begins), with the sentence reordered so it does not end on 可是.
+- C3 applied in zh/en (「可是在说「出来」以前，神先叫了一声：「我的民哪」。」).
+- C4 applied by way of C5 and C6 (no separate edit).
+- C5 applied in zh/en ("an invitation, not a checklist").
+- C6 applied in zh/en (Cana: quietly spared the family's shame, John 2:9-10; ends in joy, 19:7, with the Bridegroom called Faithful and True).
+- Also: 18's recap now lists 17's five views as bullets, with the idealist/Hendriksen bullet (rev1617_theology S6) after the rebuilt-city bullet. Cuts for length: in 18, the 18:2 desolation point, 1 Tim 1:10, the historians' clause and Matt 23:35; in 19, the Passover Hallel clause, the 4:10 sentence, Matt 8:11, and a shorter 6:2 sentence.
+- Sizes: 18.md 36.1 KB, 19.md 36.2 KB. check_cuv_quotes: 19 clean; 18 flags only the spoken lines/slogans 你不干，有的是人干 / 行业就是这样 / 这个数字，我们做不到. Build OK; pytest 37 passed; books.json restored.
