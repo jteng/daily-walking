@@ -132,3 +132,19 @@ Checked against: 00.md, 06.md, 14.md, 16.md, 17.md (draft), 20.md (draft), the b
 - Both files agree with 00 (structure 17:1-19:10 / 19:11-20:15), 06 (white horse), 14 (14:8 prophetic aorist) and 16 (one final battle offered as a possibility).
 
 Verdict: 18.md ready after must-fix items; 19.md ready after must-fix items.
+
+## Applied (reviser)
+- M-18-1: applied in zh/en (paragraphs 3-5: "神却不是这样看人"; sin named, repent and trust in Christ, forgiven; 1 Pet 3:18 substitution clause). 1 Pet 3:18 kept: 1 Peter 03 used a different clause ("to bring us to God") and theme.
+- M-19-1: applied (blood shed on the cross, 1:5; 5:9, as the pledge), zh/en.
+- M-19-2: applied (Gog imagery only 19:17-18 and 20:8-9), zh/en.
+- S-18-1: applied (one-sentence pointer plus Walvoord as "one addition"; unity reasons 17:18/18:10, 17:4/18:16, 17:12/18:10 in one clause), zh/en.
+- S-18-2: applied (Jer 51:9 as background, Babel hedged), zh/en.
+- S-19-1: applied (00 meditation "touched on"; Lamb worshiped with the one on the throne, 5:8-14), zh/en.
+- S-19-2: applied (华腓德/B. B. Warfield and Chilton, "chiefly"), zh/en.
+- S-19-3: applied (labelled as a reading; Walvoord's distinction added), zh/en.
+- C-18-1: applied (LXX Ezek 27:13). C-18-2: applied (following Meredith Kline). C-18-3: not applied, to save space. C-18-4: applied (Dan 5:27).
+- C-19-1: applied (Walvoord + Osborne; G. B. Caird after 乔治·凯尔德). C-19-2: applied (2:10, 13). C-19-3: applied. C-19-4: applied (1 John 1:1). C-19-5: applied (the Lamb shed his blood for her coldness and lies), reworded so the subject is "she", not "the saints".
+- Quote check: boss's words now in “ ” instead of 「」; also “行业就是这样”.
+- Cuts 18: all four applied (Babylon bullets, cargo bullets, 18:1-3 point 3 last line, meditation examples 3 → 2), and also: lament bullets merged, 18:3 bullets merged, minor trims in 18:1, 18:7-8, 18:11, 18:16, 18:23.
+- Cuts 19: all six applied (Hos 2:19 / 2 Cor 11:2 / Matt 22:2; 25:10 dropped; "testimony of Jesus" readings dropped; Hallel/Mark 14:26 shortened; names merged and the gloss dropped; 19:17-21 point 4 merged into point 3; shape bullets shortened), and also: Ezek 1:1 and Isa 25:6 dropped, rod/winepress bullet reduced to references, 19:2, 19:3, 19:4, 19:8, 19:20 and meditation trims.
+- Final sizes: 18.md 35,836 bytes; 19.md 35,784 bytes. check_cuv_quotes clean on both; build OK; pytest 37 passed; plans/books.json restored.
