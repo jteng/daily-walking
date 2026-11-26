@@ -146,3 +146,18 @@
 - 09 §9:20-21：偶像一段写到「财神、算命和风水」，又写到「贪婪」，贴近华人处境，也没有生硬插入。
 - 09 默想：老郑的应酬、回扣、多年不说话的弟弟，是华人职场和家庭里常见的情形。「有点像庙里的许愿……悔改不是还愿」清楚地把悔改和民间宗教的交换心态分开，这是本章最有力的一笔，应当保留。罪说得清楚（回扣、拖延悔改），代赎写得明白（彼前2:24），呼召也有迫切感（可1:15）。
 - 两章人名与全书一致：约翰·华尔伏、毕尔、包衡、格兰特·奥斯本（08首次用全名）、大卫·奥尼、肯尼斯·詹特里、威廉·亨德里克森、大卫·齐尔顿、哈尔·林赛、多米田、理想派、本研读、释经者。默想人物李阿姨、老郑在启示录其他章没有重复。
+
+## Applied (reviser)
+- 08 S1, S2: applied (S2 en: "The two readings take this differently:").
+- 08 C1-C4, C7, C9: applied as suggested (zh only).
+- 08 C5: applied; en "through them God carries out his work in history".
+- 08 C6: applied; en "lead his people out in a new exodus".
+- 08 C8: applied; en "turn Bible reading into a guessing game".
+- 08 C10: applied (没有记下来, 要用血洁净, 那位弟兄 / en "A brother's fluent prayer", 带到主面前, 开口说一句); 「蒙纪念」 moot, the sentence was removed by application #1.
+- 09 S1: applied, zh+en ("Sin promises pleasure but yields torment and, in the end, death (cf. Rom 6:23)").
+- 09 S2, S4: applied (en S4 "The sins of verse 20 break...").
+- 09 S3: applied as 「主论到推雅推喇那自称是先知的耶洗别」 (closer to CUV 2:20); en "said of Jezebel, who called herself a prophetess in Thyatira".
+- 09 C1, C2 (both), C3, C6: applied.
+- 09 C4: applied, but 「这两个王」 instead of 「两者」 (translationese list); en "But they are not equals: even the key of the pit is given by God."
+- 09 C5: applied (split, 「也不出神所定的时候」); en split to match.
+- 09 C7: applied 「请不要一个人扛着。」; en "Please do not carry this alone."

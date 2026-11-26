@@ -194,3 +194,38 @@
 ## 结论
 - /home/user/daily-walking/plans/books/revelation/06.md：修改后可用
 - /home/user/daily-walking/plans/books/revelation/07.md：修改后可用
+
+---
+
+## Recheck（应用审阅后新增的默想文字）
+
+只复查两篇默想。新加的文字大体自然：06 河边的自问（「我们各人也有自己的河边」）、危机热线一段、路23:30 的结尾；07 读者自己的哀伤、儿子「有气，也有……苦」、向全家发出的邀请，都写得好。需要修改的有三处。
+
+### 06.md
+
+**should-fix 1. 危机热线一段插入后，「他」「你」指代混乱**
+- 位置：默想第4段，「……请今天就告诉一个人……不是要你再拿自己的命去还。如果他已经说过一次「再也不赌了」，又跌倒了……」
+- 问题：前面刚对读者说「你」，紧接着的「他」读者会一时不知指谁；话题也从生命危机突然跳回戒赌。
+- 建议改写：把「如果他已经说过一次……」改为「如果老冯已经说过一次「再也不赌了」，又跌倒了，羔羊的血并没有因此失效，他仍然可以今天再回来。」并把这一句移到危机热线那几句之前（紧接「应当报警。」之后），让对老冯的话说完，再转向读者。
+- EN: no meaning change; reorder the English the same way if it has the same pronoun jump.
+
+**should-fix 2. 结尾路23:30 一句语序别扭**
+- 位置：默想末段，「这句话，主耶稣早就说过，是在他背着十字架出城的路上（路23:30）。」
+- 问题：先说「早就说过」，再用「是在……」补出地点，是英文追加从句的语序。
+- 建议改写：「主耶稣走向十字架的时候，在出城的路上就引用过这句话（路23:30）。」
+- EN: no meaning change ("quoted" rather than "said", matching 6:16-17 §3 which says he quoted Hosea).
+
+### 07.md
+
+**should-fix 3. 同一段两次引用「不再饥，不再渴」**
+- 位置：默想第3段，「……经上却说，他们「不再饥，不再渴」，现在牧养他的，是宝座中的羔羊。」
+- 问题：本段前面已经引用7:16全句，这里再引一次显得重复，节奏也拖。
+- 建议改写：「他一辈子舍不得吃，好一点的饭菜都省下来，把钱寄回家；在那里，他再也不用省了。现在牧养他的，是宝座中的羔羊。」
+- EN: drop the second quotation of 7:16 in this paragraph ("there he need never go without again").
+
+consider（可改可不改）：
+- 07 末段「这个应许是给一切投靠羔羊的人的」连用两个「的」，可改为「这个应许属于一切投靠羔羊的人」。
+
+### Recheck 结论
+- /home/user/daily-walking/plans/books/revelation/06.md：修改后可用（should-fix 2）
+- /home/user/daily-walking/plans/books/revelation/07.md：修改后可用（should-fix 1，consider 1）

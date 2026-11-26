@@ -135,3 +135,11 @@ en:
 - Surnames in 06-22 meditations: Chen appears three times (06 Mr. Chen, 13 Xiao Chen, 17 Sister Chen), Liu twice (07 Lao Liu, 11 Xiao Liu), and Xiulan twice (12 Sister Xiulan, 21 Xiulan). 08's Li and 09's Zheng are otherwise unique (14's 郑妈妈 is being renamed). Worth varying 12/21 and one or two of the Chens when those chapters are reviewed.
 - Closing prayers: 06, 09, 11 and 13. See 09 consider #2.
 - Slain-Lamb-at-the-center-of-the-throne closes: 05 and 06 (and 08 before fix #1).
+
+## Applied (reviser)
+- 08 #1 should-fix: applied (doxology and slain-Lamb close replaced with the given incense, Christ the fragrant offering and Auntie Li's prayer in the smoke), zh+en.
+- 08 #2 consider: applied at end of paragraph 2 (zh "天使用同一个香炉……", "在心里为楼下那位邻居"; en matched).
+- 08 #3 consider: applied, with "带到主面前" / "to the Lord" (per Chinese C10).
+- 09 #1 consider: applied after 「这颗新心的代价……」, zh+en.
+- 09 #2 consider: applied option (b): prayer dropped, confession merged into the final Mark 1:15 line, zh+en.
+- 09 #3 consider: applied (zh 「连我这样一再说『以后再说』的人的罪，也在其中」).

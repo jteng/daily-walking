@@ -10,8 +10,8 @@ Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply
 ## Status (2026-11-26 16:50 UTC, after second usage-limit pause)
 | Files | Draft | Theology | Application | Chinese |
 |---|---|---|---|---|
-| 06-07 | done | passed, applied | running → rev0607_application.md | report done (rev0607_chinese.md), not applied |
-| 08-09 | done | passed, applied | running → rev0809_application.md | running → rev0809_chinese.md |
+| 06-07 | done | passed, applied | passed, applied | passed, applied (recheck applied) — COMPLETE |
+| 08-09 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 10-11 | done | passed (rev1011_theology.md); reviser applying | — | — |
 | 12-13 | done | passed after must-fix (rev1213_theology.md); not applied | — | — |
 | 14-15 | done | passed, applied | — | — |
@@ -31,3 +31,4 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - 17 renamed 陈姊妹 → 方姊妹; 16 uses 小雅. Used names: 陈(06), 刘(07), 李(08), 郑(09), 黄(15), 方(17), 小雅(16), 周(22), 秀兰(21).
 - More names: 林(10), 吴(11), 赵(14, from 郑).
 - 06 now 老冯, 07 now 老宋 (application review).
+- 21-22: application report done (rev2122_application.md); apply with Chinese report.
