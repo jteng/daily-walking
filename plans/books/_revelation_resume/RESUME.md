@@ -7,15 +7,22 @@ Brief for drafters: `revelation_brief.md` (this folder). Review reports are save
 
 Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply (reviser agent) → application + chinese reviewers in parallel → apply → log rows.
 
-## Status
+## Status (2026-11-26, after usage-limit pause)
 | Files | Draft | Theology | Application | Chinese |
 |---|---|---|---|---|
-| 06-07 | — | — | — | — |
-| 08-09 | — | — | — | — |
-| 10-11 | — | — | — | — |
-| 12-13 | — | — | — | — |
-| 14-15 | — | — | — | — |
-| 16-17 | — | — | — | — |
-| 18-19 | — | — | — | — |
-| 20 | — | — | — | — |
-| 21-22 | — | — | — | — |
+| 06-07 | done | running → rev0607_theology.md | — | — |
+| 08-09 | done | running → rev0809_theology.md | — | — |
+| 10-11 | finishing | — | — | — |
+| 12-13 | finishing | — | — | — |
+| 14-15 | done | running → rev1415_theology.md | — | — |
+| 16-17 | finishing | — | — | — |
+| 18-19 | done | running → rev1819_theology.md | — | — |
+| 20 | done | ready after must-fix (rev20_theology.md); reviser applying | — | — |
+| 21-22 | done | running → rev2122_theology.md | — | — |
+
+If a report exists without an "## Applied (reviser)" section, its fixes are not applied yet.
+
+## Cross-chapter fixes still to do (give to application reviewers / revisers)
+- Meditation character names repeat: 老陈 in 06 and 09; 刘 in 07 (老刘) and 14 (刘妈妈); 陈弟兄 in 15. Rename so no surname repeats across 06-22 (check 10-13, 16-19 too).
+- Recapitulation question: set out once in 06; 08 and 15 should point back (theology reviewers asked to rule).
+- 08 said "leans idealist": must match 00's eclectic reading.
