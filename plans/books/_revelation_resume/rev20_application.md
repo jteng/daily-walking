@@ -92,3 +92,21 @@ The chapter is grace-shaped from start to finish. In the millennium section the 
 - C2 applied: Col 2:14 sentence deleted in both languages; para. 2 now ends on John 5:24.
 - C3 applied (zh/en): Shape of the Chapter ends on the Father giving judgment to the Son, the Lamb slain for sinners (John 5:22).
 - Size cuts (both languages): Alford remark, apostles/elders alternative, Acts 17:31, Hab 2:14, "three enemies" line, John 12:31, Bauckham vindication sentence, 22:3 throne sentence, duplicate "beloved city" line in the dispensational bullet, and the "both views agree" line after the 20:12 list (its point stays in 20:12 point 3 and the 要点). Final size ~36.4 KB.
+
+---
+
+## Recheck
+
+Rechecked: the 默想 / Meditation (both languages) and all four 要点 / The point lines. Date: 2026-11-26.
+
+**Verdict: lands well.** No should-fix items remain.
+
+- **S1 resolved.** The protagonist is now an unnamed elderly deacon. The preacher's "film" sentence, carried for forty years, is the root of his fear. That separates this meditation clearly from 12 (accusation) and 19 (unworthiness).
+- **S2 resolved.** The child is now shown as pressured by school, adults and the campaign, and the sin is still not excused (「不能、也不必替自己开脱」).
+- **C1 applied.** The ending now rests on the Son who judges and the owner of the book being the same Lamb, "judged in his place". It closes on 21:27 and grace, and no longer echoes 17's ledger pivot.
+- **C2 applied.** Col 2:14 is removed, and para. 2 now ends on John 5:24.
+- **The 要点 lines are unchanged and still sound.** Both are gospel-shaped and balanced.
+
+Optional polish (consider only; mainly for the Chinese reviewer): in the 默想's second paragraph, two 「可是」 come close together, in 「可是那一幕也不是全部」 and 「可是对在基督里的人」. The pronouns in 「他不再向他追讨」 are also ambiguous. Suggested wording:
+- zh: 「然而对在基督里的人，神也说过：……（来8:12）。这不是说全知的神会忘记，而是神不再向他追讨。」
+- en: no change needed ("it means he will not hold it against him" reads clearly in context).

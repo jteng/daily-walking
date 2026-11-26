@@ -17,7 +17,7 @@ Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply
 | 14-15 | done | passed, applied | — | — |
 | 16-17 | done | passed (rev1617_theology.md); reviser applying | — | — |
 | 18-19 | done | passed (rev1819_theology.md); reviser applying | — | — |
-| 20 | done | passed, applied | report done; reviser applying app + Chinese | report done; reviser applying |
+| 20 | done | passed, applied | passed, applied (recheck: lands well; optional consider not applied) | passed, applied — CHAPTER COMPLETE |
 | 21-22 | done | passed (rev2122_theology.md); reviser applying | — | — |
 
 If a report has no "## Applied (reviser)" section, its fixes are not applied yet.
