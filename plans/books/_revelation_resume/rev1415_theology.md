@@ -192,3 +192,27 @@ Quotes: every CUV/ESV quotation checked with scripts/bible_lookup.py. check_cuv_
   - 14:1-5 agrees with 07 on the 144,000 and points back without repeating;
   - 14:11 agrees with 2 Thess 01 (names, term, majority/minority framing);
   - the four-approach framing and the names agree with 00/06.
+
+## Applied (reviser)
+- M1 (15 meditation): applied in zh/en; song named for the Lamb's salvation; Mishnah/Hallel hedged (115-118 after the meal, Mark does not say); 哈利路 left without quote marks (not CUV).
+- M2 (15:6 variant): applied as given in zh/en (stone = strong witnesses and critical text; CUV/most translations linen).
+- M3 (14:11): applied; 14:11 of human worshipers, 20:10 of devil/beast/false prophet, 20:15 same lake.
+- S1 (14 SDA): applied as a separate short paragraph; quote marks dropped from 三天使的信息 (label, not CUV); echo sentence shortened to "许多释经者也看见这个回音" for size.
+- S2 (14:20 passive): applied in zh/en.
+- S3 (14:6-11 point line): applied with 5:9 ground; no cup imagery.
+- S4: 14 part applied (kept as Revelation treatment, trimmed); 20.md part not applied here (reviser restricted to 14/15; pass to the 20 reviser).
+- S5 (14 cuts): all of (a)-(f) applied; for (d) deleted the Nebuchadnezzar sentence and the "第18章才描写" repeat. Extra cuts for size: 144,000 pointer shortened, Bauckham firstfruits and "beast deceives by lies" sentences, 耶稣真道 note, "heaven tells John to write" sentence, gravestone 安息主怀 line, Bauckham attribution in 14:11 close, duplicate 5:9 sentence there (now in the point line), harvest/firstfruits duplicate, 14:8 Babylon quote in 14:4 replaced by refs (14:8; 17:2), "gospel logic" clause at 14:20 (kept in point line).
+- S6 (15:1 point 3): replaced with the given pointer to 导读/第6章 plus bowl-specific parallels.
+- S7 (15:7 bowls): applied; zh keeps CUV's 金炉 wording for 5:8 (unquoted).
+- S8 (Exod 15:11): bullet added first; Bauckham sentence softened (大部分在唱 / sings at length).
+- C1: applied (Beale only; Joel 2:32 quoted CUV/ESV verbatim).
+- C2: applied in en (nai / "Blessed indeed").
+- C3: applied (one clause, land of Israel length).
+- C4: applied (正是曾在城门外为我们受苦的那一位, Heb 13:12).
+- C5: applied (hosios, LXX Deut 32:4).
+- C6: applied (神回答了约伯 / God answered Job).
+- C7: aligned on 今年复活节 / this Easter.
+- C8: applied (替我们担当了神的审判，死了，又复活了).
+- Renames: 14 刘妈妈 -> 郑妈妈 (Mother Zheng); 15 陈弟兄 -> 黄弟兄 (Brother Huang). 宋 avoided in 15 ("Brother Song" in a chapter about songs) and 何 avoided ("Brother He" reads as a pronoun).
+- Sizes: 14.md 37.8 -> 35.8 KB; 15.md 31.6 -> 33.1 KB (additions only; no cuts needed).
+- Checks: check_cuv_quotes flags only 郑妈妈是谁？, 人过留名，雁过留声, 弟兄，要用赞美来胜过！ (spoken lines/proverb, kept); build OK; pytest 37 passed; plans/books.json restored.
