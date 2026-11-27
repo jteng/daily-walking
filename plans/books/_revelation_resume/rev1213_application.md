@@ -124,3 +124,11 @@ Paragraph 5 (prayer and Luke 12:32): keep. 「求你在我的额上写你的名�
 ## Summary count
 - 12.md: 2 should-fix, 3 consider. Lands well after should-fix items.
 - 13.md: 2 should-fix (A13-1 is a scenario rewrite), 2 consider. Needs rework (scenario only).
+
+## Applied (reviser)
+- A12-1 applied (charges read before the bench; accuser's place empty, 12:8, in P2 and P4; no 案卷 left), zh and en.
+- A12-2 applied (word to the man/relative, to a reader under pressure now, three marriage cases split into short sentences), zh and en.
+- C12-a applied (多年来第一次又对人说出; the friend kept the confidence). C12-b applied (eagle's-wings clause at 12:17). C12-c applied (诸天可以快乐，素珍也可以).
+- A13-1 applied with the 宗教信仰 form scene, but the character renamed 小何 / Xiao He (杜 is in the used-name list); P3 kept; P5 rewritten as prose, not a prayer (11 ends in one), still ending on Christ refusing the kingdoms and Luke 12:32.
+- A13-2 applied (额上已经有羔羊的名, 14:1). C13-a applied (endurance because the beast's days are measured by God). C13-b: no change needed (form scene used).
+- Also from RESUME: rev1617_theology C12 applied (Nero bullet now "not dead, will return", later "back from the dead"). Small cuts for size: Elijah sentence at 12:6, one Israel/church summary line, 13:3 transliterations, P115 detail.

@@ -163,3 +163,14 @@ I did not touch anything inside the CUV quotations. I checked names against WORK
   - 「心里算的不是六百六十六，而是房贷和孩子的学费」这句很好。
   - 去年替老板点香这个细节，照顾到了曾经失败的读者。
   - 整个故事把拜财神清楚地看作敬拜别神，没有把它淡化成风俗。
+
+## Applied (reviser)
+- C12-S1, C12-S3 applied; C12-S2 applied to the A12-1 wording (并不是那些罪状是假的，而是……).
+- C12-C1 to C12-C6 applied (12:18 sentence, 十二星, 长处/提醒我们, 圣母蒙召升天节, 则进一步教导, 最伤人的地方, 为主舍命 with matching en).
+- C12-C7: 卷宗/案卷 moot (A12-1 removed both); long marriage sentence split; the extra "bring the file today" sentence not added, since A12-2 now limits the verdict to 已经认过的罪.
+- C13-S1 to C13-S5 applied (full names with en, 奥古斯都, 米迦勒 question, Romans 13 two-sided wording with en, 13:10 variant).
+- C13-S6 applied, adapted to the new scene (始终甘心归属兽、至死不肯回头; 涂抹 from the book of life; kingdom not a prize for those who think they stand), zh and en.
+- C13-C1 moot (scene replaced; timeline now 交表的前一天是周四 / 第二天). C13-C2 to C13-C6 applied (交易 → en "made the same offer"; Vespasian wording with en; ESV named once, en too).
+- C13-C7 applied except the optional Chinese-church example (added, then cut to keep the file near 36 KB).
+- C13-C8 applied (colon, 约好, Nero spelling, 有力证据); prayer duplication resolved by replacing the closing prayer with prose.
+- Sizes: 12.md 36.8 KB, 13.md 37.0 KB. check_cuv_quotes clean on both; build + pytest 37 passed; books.json restored.

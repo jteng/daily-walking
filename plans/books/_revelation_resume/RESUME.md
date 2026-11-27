@@ -35,3 +35,4 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - 12 now 素珍; 13 now 小杜 (restaurant manager, 财神 bowing — note 02 used a 拜财神 example at Pergamum).
 - Edwards: Revelation uses 约拿单·爱德华兹 (00, 14, 20).
 - Chilton = 大卫·齐尔顿 (09, 11, 17, 19). WORKFLOW names to add: 大卫·齐尔顿, 埃利奥特, 希坡律陀. 13's meditation must not end in a written prayer (11 does).
+- 13 now 小何 (job form 宗教信仰 line); rechecks of 13 meditation running.
