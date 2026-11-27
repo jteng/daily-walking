@@ -132,3 +132,22 @@ Paragraph 5 (prayer and Luke 12:32): keep. 「求你在我的额上写你的名�
 - A13-1 applied with the 宗教信仰 form scene, but the character renamed 小何 / Xiao He (杜 is in the used-name list); P3 kept; P5 rewritten as prose, not a prayer (11 ends in one), still ending on Christ refusing the kingdoms and Luke 12:32.
 - A13-2 applied (额上已经有羔羊的名, 14:1). C13-a applied (endurance because the beast's days are measured by God). C13-b: no change needed (form scene used).
 - Also from RESUME: rev1617_theology C12 applied (Nero bullet now "not dead, will return", later "back from the dead"). Small cuts for size: Elijah sentence at 12:6, one Israel/church summary line, 13:3 transliterations, P115 detail.
+
+## Recheck (after reviser applied this report)
+
+Scope: 13's meditation and both 要点 / The point lines; a brief look at 12's meditation.
+
+**13.md: lands well.** No should-fix items remain.
+- The job-form scene is in place, and nothing from 02's 财神 scene or 00's chip-hunting grandson remains. 小何 / Xiao He appears in no other chapter.
+- Grace comes before action: Luke 4:6-8 and John 19:15 come first, then 13:8. The group does not decide for her. The 14:9-11 guard is kept, and the line on bent knees is kept.
+- The prose ending is on the Father who gives the kingdom (Luke 12:32) and not on the reader's courage: 「父却不用我们拿什么去换」 lands well.
+- The 13:16-18 要点 now carries the indicative (14:1). The 13:1-4 要点 is fine.
+- One consider (optional clarity): 「主耶稣的国从来不是赏给自以为站得稳的人的；屈过膝、又被他的血带回来的人，他也照样白白地赐给。」 Because of 「照样」 / "just as freely", it reads as if the kingdom is also given to the self-confident. Suggested wording:
+  - zh: 「主耶稣的国从来不是赏给自以为站得稳的人的，而是白白赐下的；屈过膝、又被他的血带回来的人，也在其中。」
+  - en: "The Lord Jesus' kingdom was never a prize for those who think they stand firm; it is a free gift, and those who bent the knee and have been brought back by his blood receive it too."
+
+**12.md: lands well.** A12-1, A12-2, C12-a and C12-c are applied as worded.
+- The empty accuser's seat replaces the case-file image, so 12 no longer overlaps with 20.
+- The safeguarding lines are complete, including the man or relative who pressured her and a reader facing that pressure now. The sister keeps the confidence.
+- No quoted accusing inner voice is used.
+- No should-fix items remain.

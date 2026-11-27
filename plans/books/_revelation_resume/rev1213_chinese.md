@@ -174,3 +174,24 @@ I did not touch anything inside the CUV quotations. I checked names against WORK
 - C13-C7 applied except the optional Chinese-church example (added, then cut to keep the file near 36 KB).
 - C13-C8 applied (colon, 约好, Nero spelling, 有力证据); prayer duplication resolved by replacing the closing prayer with prose.
 - Sizes: 12.md 36.8 KB, 13.md 37.0 KB. check_cuv_quotes clean on both; build + pytest 37 passed; books.json restored.
+
+---
+
+## Recheck (13.md 默想, rewritten: 小何 and the 宗教信仰 line)
+
+**Verdict: 13.md 默想 修改后可用** (3 small should-fix; each is a one-line change). The scene is very true to life. A teaching post (编制), a contract renewed every year, a mother's pressure, and the advice that everyone writes 「无」 are all things Chinese readers will recognise at once. 「兽只是要人把额上的那个名擦掉，换上一个「无」字」 and 「兽拿饭碗来换人额上的名；父却不用我们拿什么去换」 are strong; please keep both. The earlier timeline problem is gone.
+
+**R13-S1. A clumsy clause: 「考上了时那份高兴」.**
+- 位置：第1段。原句：「想到父母逢人就说女儿考上了时那份高兴」
+- 建议改写：「想到父母逢人就说女儿考上了编制，脸上那份高兴」
+- EN: no change in meaning.
+
+**R13-S2. 「赏给……的人的」 ends with a doubled 的.**
+- 位置：第4段末。原句：「主耶稣的国从来不是赏给自以为站得稳的人的；屈过膝、又被他的血带回来的人，他也照样白白地赐给。」
+- 建议改写：「主耶稣从来不是把国赏给自以为站得稳的人；屈过膝、又被他的血带回来的人，他也照样白白地赐给。」
+- EN: no change in meaning.
+
+**R13-S3. 「她不知道结果会怎样」 repeats the opening of the last paragraph.**
+- 位置：第4段中间是「她不知道结果会怎样。」，第5段一开头又说「小何不知道这个编制最后能不能保住。」
+- 建议：删去第4段的「她不知道结果会怎样。」，只留第5段那一句。
+- EN: delete the matching sentence in paragraph 4 ("She does not know how it will turn out." or its equivalent) and keep the opening of paragraph 5.
