@@ -179,3 +179,16 @@ Reviewer: chinese-reviewer. Date: 2026-11-26. Theology review already applied; C
 ## 每个文件一行结论
 - /home/user/daily-walking/plans/books/revelation/10.md：修改后可用
 - /home/user/daily-walking/plans/books/revelation/11.md：修改后可用
+
+## Applied (reviser)
+- 10-S1: applied in the key point and the meditation close (EN aligned: "The angel swears by the God who made heaven and earth").
+- 10-S2: applied (starts from 和合本; EN adds "like the Chinese Union Version").
+- 10-S3, 10-S4: applied.
+- 10-C1 to C7: applied (C5 EN: "a people from all the nations").
+- 10-C8: 「心里的苦」 and 「把这些罪都带到主面前承认……收拾好」 applied (EN aligned); 「用完她了」 removed by the application rewrite.
+- 10-C9: applied; the long 10:6-7 quote replaced by two short CUV excerpts within the rewritten close; 本章脉络 末句 changed.
+- 11-S1, S2, S3: applied.
+- 11-S4: applied, merged with application S1 (EN aligned).
+- 11-C1: applied in zh and EN (short names after first mention; also 亨德里克森). Not done: adding 大卫·奇尔顿, 埃利奥特, 希坡律陀 to the WORKFLOW name list (reviser edits only 10/11; for the caller).
+- 11-C2 to C10: applied, incl. optional 「入土为安」 line (C6) and the full 11:13 quote with "second half" (C7, EN aligned); C8 expanded in zh and EN.
+- Size: 10.md 36.7 KB; 11.md 38.1 KB (the application additions; trimmed the chapter-shape bullet and EN S1 wording).

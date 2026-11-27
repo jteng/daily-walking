@@ -91,3 +91,12 @@ Names: 林 (10) and 吴 (11) are not used by any other Revelation meditation (06
 ## Per-file verdict
 - 10.md: lands well after should-fix items
 - 11.md: lands well after should-fix items
+
+## Applied (reviser)
+- 10 S1(a)(b)(c): applied (doubt that the stories are "just for kids"; pastor/rest relief valve replaced; ending on Christ, not the seventh trumpet); (c) reworded so the angel, not God, swears by the Creator (Chinese 10-S1).
+- 10 C1: applied (apology to the boy, after confession).
+- 10 C2: applied at the end of the "today's church" point.
+- 11 S1: applied, merged with Chinese 11-S4 (grace first, then telling the company and whoever needs to know; not earning a clean record).
+- 11 C1: applied (Ezek 37:11 verified; church's own quarrel, confession and reconciliation; prayer-for-opponents task dropped).
+- 11 C2: applied.
+- 11 C3: no change in 11 (prayer kept); note for 13: do not end in a written prayer.

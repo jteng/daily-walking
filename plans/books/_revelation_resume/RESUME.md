@@ -12,7 +12,7 @@ Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply
 |---|---|---|---|---|
 | 06-07 | done | passed, applied | passed, applied | passed, applied (recheck applied) — COMPLETE |
 | 08-09 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
-| 10-11 | done | passed (rev1011_theology.md); reviser applying | — | — |
+| 10-11 | done | passed, applied | passed, applied | passed, applied — COMPLETE (11 is 38 KB) |
 | 12-13 | done | passed after must-fix (rev1213_theology.md); not applied | — | — |
 | 14-15 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 16-17 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
@@ -34,3 +34,4 @@ If a report has no "## Applied (reviser)" section, its fixes are not applied yet
 - 21-22: application report done (rev2122_application.md); apply with Chinese report.
 - 12 now 素珍; 13 now 小杜 (restaurant manager, 财神 bowing — note 02 used a 拜财神 example at Pergamum).
 - Edwards: Revelation uses 约拿单·爱德华兹 (00, 14, 20).
+- Chilton = 大卫·齐尔顿 (09, 11, 17, 19). WORKFLOW names to add: 大卫·齐尔顿, 埃利奥特, 希坡律陀. 13's meditation must not end in a written prayer (11 does).
