@@ -600,6 +600,39 @@
         @media (prefers-reduced-motion: reduce) { .reader-track { transition: none; } }
 
     </style>
+<!-- Usage stats (GoatCounter): counts only; no cookies, no personal data.
+     Dashboard: https://daily-walking.goatcounter.com (set GC_CODE to '' to turn off). -->
+<script>
+(function () {
+    var GC_CODE = 'daily-walking';
+    var queue = [], seen = {};
+    function ready() { return window.goatcounter && typeof window.goatcounter.count === 'function'; }
+    function flush() { if (!ready()) return; while (queue.length) window.goatcounter.count(queue.shift()); }
+    // Count an event once per page load. Calls made before count.js has
+    // loaded (or while offline, when it never loads) wait in the queue.
+    window.dwTrack = function (path, title) {
+        if (!GC_CODE || seen[path]) return;
+        seen[path] = true;
+        queue.push({ path: path, title: title || path, event: true });
+        flush();
+    };
+    if (!GC_CODE) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://gc.zgo.at/count.js';
+    s.setAttribute('data-goatcounter', 'https://' + GC_CODE + '.goatcounter.com/count');
+    s.onload = flush;
+    document.head.appendChild(s);
+
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+    var plan = 'original', lang = 'zh';
+    try { plan = localStorage.getItem('planId') || 'original'; lang = localStorage.getItem('contentLanguage') || 'zh'; } catch (e) {}
+    window.dwTrack('open/' + (standalone ? 'app' : 'browser'), standalone ? 'Opened: installed app' : 'Opened: browser');
+    window.dwTrack('open/plan/' + plan, 'Opened with plan: ' + plan);
+    window.dwTrack('open/lang/' + lang, 'Opened in language: ' + lang);
+    window.addEventListener('appinstalled', function () { window.dwTrack('install', 'Installed to home screen'); });
+})();
+</script>
 </head>
 <body>
 
@@ -706,7 +739,8 @@
             </div>
         </div>
     </div>
-    <p class="sheet-version" id="app-version">v2.27.0</p>
+    <p class="sheet-version" data-i18n="statsNote">本应用用 GoatCounter 统计阅读次数：不用 cookie，不收集个人信息。</p>
+    <p class="sheet-version" id="app-version">v2.28.0</p>
 </section>
 
 <!-- Memorize (背诵) overlay -->
@@ -736,6 +770,7 @@ const I18N = {
     segDevotional: { zh: '灵修', en: 'Devotional' },
     sheetTitle: { zh: '阅读设置', en: 'Reading options' },
     versionLabel: { zh: '译本', en: 'Version' },
+    statsNote: { zh: '本应用用 GoatCounter 统计阅读次数：不用 cookie，不收集个人信息。', en: 'Reading counts are measured with GoatCounter: no cookies, no personal information.' },
     languageLabel: { zh: '语言', en: 'Language' },
     textSizeLabel: { zh: '字号', en: 'Text size' },
     textSize0: { zh: '较小', en: 'Smaller' },
@@ -2650,6 +2685,21 @@ window.Reader = Reader;
         }
     });
 
+    // Usage stats: one GoatCounter event per item read (see dwTrack in <head>).
+    function trackRead(data) {
+        try {
+            if (typeof window.dwTrack !== 'function' || !data) return;
+            if (data.book !== undefined && data.chapter !== undefined) {
+                const label = data.day_label_en || data.day_label || '';
+                const slug = (label.split('·')[0] || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                window.dwTrack(`read/${currentPlanId}/${data.book}-${slug || 'book'}/${data.chapter}`, `Read: ${label}`);
+            } else {
+                const n = currentDayIndex + 1;
+                window.dwTrack(`read/${currentPlanId}/day-${n}`, `Read: ${currentPlanId} day ${n}`);
+            }
+        } catch (e) {}
+    }
+
     function renderDay() {
         try {
         // Any open commentary/verse tooltip is anchored to a verse on the day
@@ -2673,6 +2723,7 @@ window.Reader = Reader;
         if (currentDayIndex >= bibleData.length) currentDayIndex = bibleData.length - 1;
 
         const data = bibleData[currentDayIndex];
+        trackRead(data);
 
         // English fields (_en) fill in per-day over time; a day not yet
         // translated falls back to the Chinese original rather than showing
@@ -2991,7 +3042,7 @@ window.Reader = Reader;
     // 注册 Service Worker
     if ('serviceWorker' in navigator) {
         // version string appended to service worker URL to force reload when we change the file
-        const APP_SW_VERSION = 'v56'; // Bump version
+        const APP_SW_VERSION = 'v57'; // Bump version
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(`sw.js?${APP_SW_VERSION}`)
               .then(reg => console.log('sw registered:', reg.scope))
