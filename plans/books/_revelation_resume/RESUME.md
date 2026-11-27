@@ -13,7 +13,7 @@ Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply
 | 06-07 | done | passed, applied | passed, applied | passed, applied (recheck applied) — COMPLETE |
 | 08-09 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 10-11 | done | passed, applied | passed, applied | passed, applied — COMPLETE (11 is 38 KB) |
-| 12-13 | done | passed after must-fix (rev1213_theology.md); not applied | — | — |
+| 12-13 | done | passed, applied | passed, applied (recheck: lands well) | passed, applied (recheck applied) — COMPLETE |
 | 14-15 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 16-17 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 18-19 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
