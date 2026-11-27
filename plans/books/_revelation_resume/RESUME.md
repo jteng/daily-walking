@@ -15,7 +15,7 @@ Pipeline per pair: draft (general-purpose, Opus) → theology-reviewer → apply
 | 10-11 | done | passed (rev1011_theology.md); reviser applying | — | — |
 | 12-13 | done | passed after must-fix (rev1213_theology.md); not applied | — | — |
 | 14-15 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
-| 16-17 | done | passed (rev1617_theology.md); reviser applying | — | — |
+| 16-17 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 18-19 | done | passed, applied | passed, applied | passed, applied — COMPLETE |
 | 20 | done | passed, applied | passed, applied (recheck: lands well; optional consider not applied) | passed, applied — CHAPTER COMPLETE |
 | 21-22 | done | passed, applied | passed, applied | passed, applied — COMPLETE |

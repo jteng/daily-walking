@@ -197,3 +197,13 @@
 
 - /home/user/daily-walking/plans/books/revelation/16.md：修改后可用
 - /home/user/daily-walking/plans/books/revelation/17.md：修改后可用
+
+## Applied (reviser)
+- 16-1 applied (古列). 16-2 applied (约翰·华尔伏; EN John Walvoord). 16-3 applied. 16-4 applied, EN reworded to match ("God is angry because he is holy and because he loves"; "being killed").
+- 16-5 applied (「可是老实说」; 「我本来也该喝」, the application reviewer's wording, same 该 sense). 16-6 applied (zh and EN).
+- 16-7, 16-8 (simpler option; EN matched), 16-9, 16-10, 16-11, 16-12 applied. 16-13 applied, EN matched.
+- 16-14: sword sentence cut. For the roommate, application C3 used instead (「可是有一位替我承担了」); not 「他也愿意替你喝」, which keeps the full gospel for the last paragraph and avoids an atonement-extent claim.
+- 17-1 to 17-5 applied; for 17-3 EN reordered too, and for 17-4 EN confession sentence added.
+- 17-6 to 17-13 applied, including the Luther half-sentence on justification (EN too), 参13:3 (EN "see 13:3"), and the 17:16 rewording (EN matched).
+- 17-14: duplicate John sentence deleted and 荒场 subject fixed (「巴比伦要在「一时之间」成为荒场」); final sentence 「得胜的是羔羊，也是同着他的人。」. The "两本账" fixes are moot because application S2 removed that paragraph.
+- Checks: check_cuv_quotes flags only the slogan 「家丑不可外扬」 (intended). Build OK, 37 tests pass, books.json restored. Sizes: 16 = 36.0 KB, 17 = 36.3 KB.

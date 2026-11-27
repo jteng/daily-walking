@@ -93,3 +93,15 @@ Names: 小雅 (16) and 方姊妹 (17) clash with no other chapter. Both endings 
 ## Counts
 - 16.md: 1 should-fix, 5 consider. Verdict: lands well after should-fix items.
 - 17.md: 1 should-fix, 3 consider. Verdict: lands well after should-fix items.
+
+## Applied (reviser)
+- S1 applied: phone replaced by a closed Bible in 16 paras 1 and 5 (zh/en).
+- S2 applied as option B: "two ledgers"/book-of-life paragraph deleted; last paragraph rewritten per option B, so 17 ends on 17:14 and being with the Lamb (option A not used, to avoid another Passion scene after 14-16 and 18, per C5).
+- C1 applied (fear of looking narrow to her roommate).
+- C2 applied, with 「我本来也该喝」.
+- C3 applied (「可是有一位替我承担了」).
+- C4 applied (repeated Peter's sword sentence cut; opening per C4).
+- C5 no change needed (variety note).
+- C6 applied (my golden cup question).
+- C7 applied in the short form for option B (「真正叫人希奇的，是这位羔羊」).
+- C8 no change needed.
