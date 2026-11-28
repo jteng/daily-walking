@@ -102,6 +102,44 @@ The reviewers are models applying these teachers' published emphases, not the
 people themselves. Before the plan is shared widely, a human reviewer (a
 pastor or seminary New Testament teacher) should still read it.
 
+## 6. Planning and pacing a whole book
+
+Lessons from Revelation 6-22, where 17 chapters were drafted and reviewed at
+once: about 10 Opus agents running in parallel hit the 5-hour usage limit three
+times. Parallel drafters, unable to see each other's work, also repeated
+meditation surnames, scenes and endings, and fixing that took extra review
+rounds. Running everything in parallel does not lower total usage; it only
+spends it faster.
+
+**Plan the book first.** Before drafting, write a book brief (in a temporary
+`plans/books/_<book>_resume/` folder) with:
+- the shared interpretive framework, name forms and debated points by chapter;
+- a meditation assignment for every chapter: scene, theme, pivot text and
+  ending, checked against the used lists below;
+- one running list of meditation character names and scenes, which every
+  drafter and reviser reads before writing and adds to after;
+- a status table (draft / theology / application / Chinese per chapter) and
+  next steps, so a later session can resume.
+
+**Work in batches of about four chapters.** Two drafters write two chapters
+each. While one batch is in review, draft the next, so about three to five
+agents run at a time. Each batch's drafters read the finished meditations of
+the batches before them.
+
+**Publish each batch when it clears all three reviews** (book-publisher:
+quote check, build, tests, log rows, commit), so an interruption costs at most
+one batch. Keep unreviewed drafts out of the published build (see *Batches*
+below). Commit work in progress often; the cloud container can be reclaimed.
+
+**Agents write reports to files.** Reviewers write their full report to the
+resume folder and reply with a verdict and counts only; revisers append an
+"Applied (reviser)" section. This keeps the coordinating session's context
+small over a long run.
+
+**If the usage limit hits,** stopped agents can be resumed with a message once
+it resets; the resume notes say which reports are not yet applied. Delete the
+resume folder before the release commit.
+
 ## Lessons learned (John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians, 2 Thessalonians, 1 Timothy, 2 Timothy, Titus, Philemon, Hebrews, James, 1 Peter, 2 Peter, 1 John, 2 John, 3 John, Jude, Revelation)
 
 **Tools.**
